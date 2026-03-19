@@ -30,9 +30,12 @@ node SME-Group/take-screenshots.js
 
 ## Brand & Design Tokens
 
-- **Fonts:** Source Serif 4 (headings), Source Sans 3 (body) in HTML; Calibri in DOCX
+- **Fonts (Interactive Pitch):** Source Serif 4 (headings), Inter with `font-feature-settings: 'cv01','cv02','ss01'` (body), JetBrains Mono (data/mono)
+- **Fonts (Static docs):** Source Serif 4 (headings), Source Sans 3 (body); Calibri in DOCX
+- **Type scale:** 1.25 Major Third ratio with 12 CSS tokens (`--text-3xs` through `--text-5xl`). Never use hardcoded `font-size` values — always use a `--text-*` token
 - **Client-facing accent:** `#7A7AE6` (purple)
 - **Internal docs accent:** `#c0392b` (red) — visually distinguishes internal from client-facing
+- **Layout:** Single `--content-w: 960px` column for interactive pitch. No breakout widths (causes asymmetry with sidebar)
 - **CSS print essentials:** `print-color-adjust: exact`, `-webkit-print-color-adjust: exact` for background colors
 
 ## Key Conventions
@@ -41,3 +44,12 @@ node SME-Group/take-screenshots.js
 - **3-tier proposals:** Small anchor / Mid recommended / Large enterprise
 - **Language:** Client-facing in English; internal docs and one-pagers in Argentine Spanish
 - **Document pairs:** Each client has a client-facing proposal + internal breakdown with cost/hour/profitability analysis
+
+## Interactive Pitch Patterns (Taylor Group)
+
+- **Scroll animations:** IntersectionObserver with low thresholds (0.05–0.15) for early triggers. Never use threshold > 0.2
+- **Scroll-reveal text:** Groups `.scroll-reveal` paragraphs per section into one continuous word stream. Uses scroll position, not IntersectionObserver
+- **Expand/collapse:** Always use `max-height` + `opacity` CSS transitions (never `display:none/block`) for animatable expand/collapse
+- **Sidebar nav tracking:** Scroll-based `offsetTop` comparison, not IntersectionObserver (fails on tall sections)
+- **Card hover effects:** `translateY(-2px)` + elevated `box-shadow`. Gradient top borders via `::after` pseudo-elements (not `border-image`, which breaks `border-radius`)
+- **CBE diagram:** CSS animated flow phases that double as navigation for expandable content panels below
