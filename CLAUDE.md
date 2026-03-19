@@ -41,7 +41,8 @@ node SME-Group/take-screenshots.js
 ## Key Conventions
 
 - **Pricing:** Value-based, project fees only. Never expose hourly rates in client-facing documents
-- **3-tier proposals:** Small anchor / Mid recommended / Large enterprise
+- **Proposal structure:** Phase-based options (e.g., INTAKE alone vs. INTAKE + DISCOVERY bundle). 2-option pricing preferred over 3-tier when options map to distinct phases
+- **Bibliography:** All client-facing statistics must have verified sources. Source tracking in `proposal-2.0/bibliography/Sources-Interactive-Pitch.md`
 - **Language:** Client-facing in English; internal docs and one-pagers in Argentine Spanish
 - **Document pairs:** Each client has a client-facing proposal + internal breakdown with cost/hour/profitability analysis
 
