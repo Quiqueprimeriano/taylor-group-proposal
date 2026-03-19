@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Review — SME Group Proposal | TransformAZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --bg: #f4f3f0;
+    --bg-white: #ffffff;
+    --accent: #7A7AE6;
+    --accent-light: #ebebfa;
+    --accent-dark: #5a5abf;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+    --red: #b53d3d;
+    --red-light: #fdeaea;
+    --border: #e0ddd6;
+    --border-light: #edeae4;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+  }
+
+  .page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    box-shadow: 0 1px 40px rgba(0,0,0,0.06);
+  }
+
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--space-md, 24px);
+  }
+
+  /* ── COVER ──────────────────────────── */
+  .cover {
+    padding: 80px 64px 64px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .cover::before {
+    content: '?';
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    font-size: 16rem;
+    color: var(--accent);
+    opacity: 0.04;
+    font-family: var(--font-serif);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .cover-inner { max-width: 600px; position: relative; z-index: 1; }
+
+  .cover-logo {
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 80px;
+  }
+  .cover-logo .light { font-weight: 300; color: var(--text); }
+  .cover-logo .bold { font-weight: 700; color: var(--accent); }
+
+  .cover-rule {
+    width: 56px; height: 4px; background: var(--accent);
+    border: none; margin: 0 0 32px; border-radius: 2px;
+  }
+
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .cover-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 56px;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px 24px;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  .cover-meta dt {
+    font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.08em; padding-top: 3px;
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: var(--red-light);
+    color: var(--red);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-top: 40px;
+  }
+
+  /* ── TOC ─────────────────────────────── */
+  .toc { padding: 56px 0 32px; }
+  .toc h2 {
+    font-family: var(--font-sans); font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); font-weight: 600; margin-bottom: 20px;
+  }
+  .toc-list { list-style: none; border-top: 2px solid var(--text); }
+  .toc-list li {
+    display: flex; align-items: baseline;
+    padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem;
+  }
+  .toc-num {
+    font-weight: 700; color: var(--accent); width: 28px;
+    flex-shrink: 0; font-size: 0.8rem;
+  }
+  .toc-title { font-family: var(--font-serif); }
+
+  /* ── SECTIONS ───────────────────────── */
+  .section {
+    padding: 56px 0 36px;
+    border-top: 1px solid var(--border-light);
+  }
+  .section:first-of-type { border-top: none; }
+
+  .section-number {
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); display: block; margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem; font-weight: 600; line-height: 1.2;
+    padding-bottom: 14px; border-bottom: 3px solid var(--text);
+    margin-bottom: 28px; position: relative;
+  }
+  h2::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 48px; height: 3px; background: var(--accent);
+  }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem; font-weight: 600; line-height: 1.25;
+    margin-top: 36px; margin-bottom: 12px;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 0.88rem; font-weight: 700;
+    margin-top: 24px; margin-bottom: 8px;
+  }
+
+  p { margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+
+  ul, ol { padding-left: 1.25rem; margin-bottom: 14px; }
+  li { margin-bottom: 7px; }
+  li::marker { color: var(--accent); }
+
+  /* ── VERDICT BOXES ──────────────────── */
+  .verdict {
+    padding: 20px 24px;
+    border-radius: 6px;
+    margin: 20px 0;
+    border-left: 4px solid;
+    font-size: 0.95rem;
+  }
+  .verdict p { margin-bottom: 8px; }
+  .verdict p:last-child { margin-bottom: 0; }
+  .verdict-label {
+    font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 8px; display: block;
+  }
+
+  .verdict--good {
+    background: var(--green-light);
+    border-color: var(--green);
+  }
+  .verdict--good .verdict-label { color: var(--green); }
+
+  .verdict--warn {
+    background: var(--amber-light);
+    border-color: var(--amber);
+  }
+  .verdict--warn .verdict-label { color: var(--amber); }
+
+  .verdict--risk {
+    background: var(--red-light);
+    border-color: var(--red);
+  }
+  .verdict--risk .verdict-label { color: var(--red); }
+
+  .verdict--neutral {
+    background: var(--accent-light);
+    border-color: var(--accent);
+  }
+  .verdict--neutral .verdict-label { color: var(--accent-dark); }
+
+  /* ── TABLES ─────────────────────────── */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 20px 0; font-size: 0.9rem;
+  }
+  thead th {
+    text-align: left; font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 12px 12px 12px 0;
+    border-bottom: 2px solid var(--text);
+  }
+  tbody td {
+    padding: 11px 12px 11px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .table-wrap {
+    background: #faf9f7;
+    border-radius: 6px;
+    padding: 4px 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+
+  /* ── QUOTE BLOCKS ──────────────────── */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 20px 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.92rem;
+  }
+  blockquote p { margin-bottom: 6px; font-style: italic; }
+  blockquote p:last-child { margin-bottom: 0; }
+
+  /* ── SUMMARY TABLE (final) ─────────── */
+  .summary-table td:first-child {
+    font-weight: 600; width: 180px;
+  }
+  .summary-table td:nth-child(2) {
+    width: 100px; text-align: center;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+  .status-badge--good { background: var(--green-light); color: var(--green); }
+  .status-badge--warn { background: var(--amber-light); color: var(--amber); }
+  .status-badge--risk { background: var(--red-light); color: var(--red); }
+
+  /* ── FOOTER ─────────────────────────── */
+  .footer {
+    text-align: center; padding: 20px 0 40px;
+    font-size: 0.7rem; color: var(--text-muted);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ── SOURCE TAG ─────────────────────── */
+  .source {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* ── PRINT ──────────────────────────── */
+  @media print {
+    @page { size: A4; margin: 18mm; }
+    html { font-size: 10.5pt; }
+    body { background: white; }
+    .page-wrapper { box-shadow: none; max-width: none; }
+    .cover { min-height: auto; padding: 30mm 0 20mm; page-break-after: page; }
+    .cover::before { display: none; }
+    .toc { page-break-after: page; }
+    .section { page-break-before: auto; }
+    #pricing-model { page-break-before: page; }
+    #total-investment { page-break-before: page; }
+    #content-review { page-break-before: page; }
+    #risk-points { page-break-before: page; }
+    #summary { page-break-before: page; }
+    table { page-break-inside: avoid; }
+    .verdict { page-break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; }
+    .verdict--good { background: #e8f5ee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .verdict--warn { background: #fdf5e6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .verdict--risk { background: #fdeaea !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .verdict--neutral { background: #ebebfa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    blockquote { background: #ebebfa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .table-wrap { background: #faf9f7 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .status-badge--good { background: #e8f5ee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .status-badge--warn { background: #fdf5e6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .status-badge--risk { background: #fdeaea !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cover-badge { background: #fdeaea !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 15px; }
+    .cover { padding: 48px 20px 40px; min-height: auto; }
+    .cover h1 { font-size: 2rem; }
+    .content { padding: 0 16px; }
+    .cover-meta { grid-template-columns: 80px 1fr; }
+    .summary-table td:first-child { width: auto; }
+    .summary-table td:nth-child(2) { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <span class="light">transform</span><span class="bold">az</span>
+      </div>
+      <hr class="cover-rule">
+      <h1>Strategic Review<br>SME Group Proposal</h1>
+      <p class="cover-subtitle">Pricing, Methodology &amp; Commercial Analysis</p>
+      <dl class="cover-meta">
+        <dt>Document</dt>
+        <dd>Proposal Ref. TAZ-2026-SME-001</dd>
+        <dt>Prepared by</dt>
+        <dd>Internal — Strategy Advisory</dd>
+        <dt>Date</dt>
+        <dd>March 11, 2026</dd>
+        <dt>Status</dt>
+        <dd>For internal review only</dd>
+      </dl>
+      <span class="cover-badge">Internal &amp; Confidential</span>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- TOC -->
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol class="toc-list">
+        <li><span class="toc-num">1</span><span class="toc-title">Hourly Rate Analysis</span></li>
+        <li><span class="toc-num">2</span><span class="toc-title">Pricing Model</span></li>
+        <li><span class="toc-num">3</span><span class="toc-title">Total Investment</span></li>
+        <li><span class="toc-num">4</span><span class="toc-title">Engagement Structure</span></li>
+        <li><span class="toc-num">5</span><span class="toc-title">Proposal Content Review</span></li>
+        <li><span class="toc-num">6</span><span class="toc-title">Risk &amp; Watchpoints</span></li>
+        <li><span class="toc-num">7</span><span class="toc-title">Summary &amp; Recommendations</span></li>
+        <li><span class="toc-num">8</span><span class="toc-title">Sources</span></li>
+      </ol>
+    </nav>
+
+    <!-- ═══════════════════════════════════════
+         1. HOURLY RATE
+         ═══════════════════════════════════════ -->
+    <section id="hourly-rate" class="section">
+      <span class="section-number">Section 01</span>
+      <h2>Hourly Rate Analysis — £150/hr</h2>
+
+      <p>
+        The proposal quotes a rate of <strong>£150 per hour</strong>, applied uniformly across both phases. To assess whether this rate is correctly positioned, we benchmarked it against 2025-2026 UK consulting rate data across multiple segments.
+      </p>
+
+      <h3>UK Market Rate Benchmarks</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Segment</th>
+              <th>Hourly Rate (GBP)</th>
+              <th>Daily Rate (GBP)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Junior / Early-Career Consultant</td>
+              <td>£35 – £55</td>
+              <td>£250 – £400</td>
+            </tr>
+            <tr>
+              <td>Mid-Level / Experienced Independent</td>
+              <td>£55 – £165</td>
+              <td>£400 – £1,200</td>
+            </tr>
+            <tr>
+              <td>Senior Specialist / Boutique</td>
+              <td>£165 – £345</td>
+              <td>£1,200 – £2,500</td>
+            </tr>
+            <tr>
+              <td>Operations &amp; Transformation (SME)</td>
+              <td>£65 – £200</td>
+              <td>£500 – £1,500</td>
+            </tr>
+            <tr>
+              <td>Big 4 — Senior Consultant</td>
+              <td>~£190</td>
+              <td>~£1,500</td>
+            </tr>
+            <tr>
+              <td>Big 4 — Senior Manager</td>
+              <td>~£270</td>
+              <td>~£2,100</td>
+            </tr>
+            <tr>
+              <td><strong>TransformAZ (current)</strong></td>
+              <td><strong>£150</strong></td>
+              <td><strong>£1,050 – £1,200</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Sources: Business Accounting UK, YunoJuno 2025 Freelancer Rates Report, G-Cloud UK Government Data, Slideworks / GSA Federal Supply Schedule.</p>
+
+      <div class="verdict verdict--good">
+        <span class="verdict-label">What's working</span>
+        <p>£150/hr sits at the <strong>upper end of mid-level</strong> and the <strong>lower end of senior specialist</strong> — a comfortable position for a boutique consultancy. It's neither so low that it signals inexperience, nor so high that it triggers cost objections from an SME client.</p>
+      </div>
+
+      <div class="verdict verdict--warn">
+        <span class="verdict-label">Strategic concern</span>
+        <p>Exposing the hourly rate in the proposal body invites commodity comparison. The client may anchor on "£150/hr" and compare with freelancers at £50–£80/hr found on platforms like YunoJuno or Toptal. The rate is justified — but the <strong>framing</strong> puts it at risk of challenge.</p>
+        <p><strong>Recommendation:</strong> Move the hourly breakdown to an appendix or the Statement of Work. Present fees as project-based in the main proposal.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         2. PRICING MODEL
+         ═══════════════════════════════════════ -->
+    <section id="pricing-model" class="section">
+      <span class="section-number">Section 02</span>
+      <h2>Pricing Model — Hourly vs. Alternatives</h2>
+
+      <p>
+        The proposal uses an <strong>hourly billing model</strong> (hours × rate = fee). While the total is expressed as a fixed amount per phase, the underlying calculation is fully visible. Industry data shows this model is increasingly out of favour.
+      </p>
+
+      <h3>Industry Pricing Model Adoption</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Adoption</th>
+              <th>Earning Potential</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hourly Billing</td>
+              <td>29% of consultants</td>
+              <td>Lowest — caps at available hours</td>
+            </tr>
+            <tr>
+              <td>Daily Rate</td>
+              <td>Common in interim market</td>
+              <td>Low-Medium</td>
+            </tr>
+            <tr>
+              <td>Fixed / Project-Based</td>
+              <td>Growing — 44% offer productised services</td>
+              <td>Medium — rewards efficiency</td>
+            </tr>
+            <tr>
+              <td>Retainer</td>
+              <td>Common for ongoing advisory</td>
+              <td>Medium-High — predictable revenue</td>
+            </tr>
+            <tr>
+              <td>Value-Based</td>
+              <td>17.3% of consultants</td>
+              <td>Highest — 51% achieve £10K+ projects</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Sources: Consulting Success Fee Survey 2024, Deltek Consulting Pricing Report, Melisa Liberman Consulting Statistics 2025.</p>
+
+      <p>
+        A critical data point: <strong>73% of clients prefer value-based pricing</strong> tied to measurable outcomes. Yet only 17% of consultants offer it — and 39% say they've never tried it because they don't know how.
+      </p>
+
+      <div class="verdict verdict--risk">
+        <span class="verdict-label">Key issue</span>
+        <p>The current model shows <strong>hours × rate = fee</strong> in full detail. This shifts the client's evaluation from <em>"Is solving this problem worth £3,000?"</em> to <em>"Is this person worth £150 per hour?"</em> — a fundamentally harder question to answer yes to.</p>
+      </div>
+
+      <h3>Recommended Alternative</h3>
+      <p>Present fees as <strong>project-based</strong> with no hourly breakdown in the main document:</p>
+
+      <blockquote>
+        <p><strong>Phase 1 — Discovery &amp; Roadmap: £3,000</strong></p>
+        <p>Includes all diagnostic work, stakeholder sessions, and documented deliverables over a 2-week period.</p>
+      </blockquote>
+
+      <p>
+        The hourly detail can live in the Statement of Work or an appendix — available if requested, but not the anchor for the pricing conversation.
+      </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         3. TOTAL INVESTMENT
+         ═══════════════════════════════════════ -->
+    <section id="total-investment" class="section">
+      <span class="section-number">Section 03</span>
+      <h2>Total Investment — £9,000</h2>
+
+      <p>
+        The proposal prices the full engagement at <strong>£9,000 GBP</strong> (£3,000 Phase 1 + £6,000 Phase 2) for approximately 60 hours of senior consulting across 6 weeks.
+      </p>
+
+      <h3>Market Comparison</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Engagement Type</th>
+              <th>Typical Range (UK)</th>
+              <th>TransformAZ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Diagnostic &amp; Roadmap</td>
+              <td>£3,000 – £25,000</td>
+              <td>£3,000 (floor)</td>
+            </tr>
+            <tr>
+              <td>Implementation Sprint</td>
+              <td>£10,000 – £75,000</td>
+              <td>£6,000 (below floor)</td>
+            </tr>
+            <tr>
+              <td>Operational Advisory Retainer (monthly)</td>
+              <td>£2,000 – £6,000</td>
+              <td>Equivalent ~£6K/month</td>
+            </tr>
+            <tr>
+              <td>Full diagnostic + implementation (SME)</td>
+              <td>£15,000 – £50,000</td>
+              <td>£9,000 (well below)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Sources: Matt Haycox Consulting Pricing 2025, Asamby Consulting, Consultancy.uk SME Market Report.</p>
+
+      <div class="verdict verdict--warn">
+        <span class="verdict-label">Below market</span>
+        <p>The total engagement is priced at the <strong>floor of the market for discovery alone</strong>, and <strong>below market for execution</strong>. The scope described — process mapping, technology assessment, workflow automation, data integration, stakeholder validation, and a scalability playbook across two areas of transformation — would typically command £15,000–£30,000 from a boutique consultancy in the UK.</p>
+      </div>
+
+      <h3>The Underpricing Risk</h3>
+      <p>
+        UK SME research shows that <strong>49% of small businesses</strong> avoid consultants due to perceived over-inflated costs. However, underpricing creates an equal but less obvious problem: the client unconsciously assigns less value to the work, expects less rigour in delivery, and may not prioritise their own involvement — all of which degrade outcomes.
+      </p>
+
+      <h3>Possible Justifications</h3>
+      <ul>
+        <li><strong>Land-and-expand strategy:</strong> If the £9,000 engagement is designed to build trust for larger follow-on work, the pricing is defensible as a deliberate investment in the relationship.</li>
+        <li><strong>First formal engagement:</strong> For a new consultancy establishing its track record, competitive pricing reduces friction and builds case studies.</li>
+        <li><strong>Client sensitivity:</strong> If the specific client has signalled budget constraints, meeting them where they are can be strategically sound.</li>
+      </ul>
+
+      <div class="verdict verdict--neutral">
+        <span class="verdict-label">Recommendation</span>
+        <p>If pricing must stay at £9,000, consider <strong>tiered options</strong> (see Section 5) to anchor the base price against a higher alternative. If pricing flexibility exists, a total of <strong>£12,000–£15,000</strong> would be more aligned with market expectations and would not price out a typical SME.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         4. ENGAGEMENT STRUCTURE
+         ═══════════════════════════════════════ -->
+    <section id="engagement-structure" class="section">
+      <span class="section-number">Section 04</span>
+      <h2>Engagement Structure — 2-Phase Model</h2>
+
+      <h3>Phase Model Comparison</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Phases</th>
+              <th>Used by</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>This proposal</td>
+              <td>2 (Discovery + Execution)</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Standard consulting</td>
+              <td>4 (Discovery, Planning, Implement, Report)</td>
+              <td>Most mid-tier firms</td>
+            </tr>
+            <tr>
+              <td>Peter Block model</td>
+              <td>5 phases</td>
+              <td>Academic/training</td>
+            </tr>
+            <tr>
+              <td>9Lenses framework</td>
+              <td>7 phases</td>
+              <td>Enterprise consulting</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="verdict verdict--good">
+        <span class="verdict-label">What's working</span>
+        <p>A 2-phase model is <strong>valid and client-friendly</strong>. It reduces decision complexity and the "Phase 2 confirmed after Phase 1" gate is aligned with industry best practice. Selling discovery as a standalone paid engagement (not free) is specifically recommended by consulting advisors.</p>
+      </div>
+
+      <h3>Discovery-to-Execution Ratio</h3>
+      <p>Industry standard allocates <strong>10–15% of total project budget</strong> to discovery. The current proposal allocates 33%.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Industry Standard</th>
+              <th>This Proposal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Discovery % of total budget</td>
+              <td>10 – 15%</td>
+              <td>33%</td>
+            </tr>
+            <tr>
+              <td>Discovery % of total hours</td>
+              <td>10 – 15%</td>
+              <td>33%</td>
+            </tr>
+            <tr>
+              <td>Execution hours (2 transformation areas)</td>
+              <td>Variable</td>
+              <td>40 hours</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Sources: 8Allocate, Syndicode, SolveTech, The Visible Authority.</p>
+
+      <div class="verdict verdict--warn">
+        <span class="verdict-label">Imbalance</span>
+        <p>The client may perceive this as <em>"2 weeks of studying, only 4 weeks of doing"</em> — and question whether 40 hours is sufficient to execute a meaningful transformation across two complex operational areas. This is especially relevant because Phase 2 includes implementation, integration, procedures, validation, and a scalability playbook.</p>
+        <p><strong>Recommendation:</strong> Consider presenting Phase 2 with an <strong>estimated range</strong> (e.g., £6,000–£10,000) rather than a fixed fee, with final scope defined by Phase 1 findings.</p>
+      </div>
+
+      <h3>Missing Structural Elements</h3>
+      <ul>
+        <li><strong>Handover / closeout phase:</strong> What happens when the 40 hours end? The client will implicitly worry about this.</li>
+        <li><strong>Post-implementation support:</strong> Even a brief "2-week check-in period included" would add perceived value at minimal cost.</li>
+        <li><strong>Timeline visual:</strong> A simple week-by-week bar showing Phase 1 → Review Gate → Phase 2 would make the engagement more tangible.</li>
+      </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         5. PROPOSAL CONTENT REVIEW
+         ═══════════════════════════════════════ -->
+    <section id="content-review" class="section">
+      <span class="section-number">Section 05</span>
+      <h2>Proposal Content Review</h2>
+
+      <h3>Strengths</h3>
+
+      <div class="verdict verdict--good">
+        <span class="verdict-label">Strong elements</span>
+        <p><strong>Understanding Your Business</strong> is the standout section. It demonstrates genuine comprehension of the franchise model, the distinction between franchisor-mandated and back-office systems, and identifies two specific, defensible transformation areas. This level of specificity is the single strongest differentiator in consulting proposals.</p>
+      </div>
+
+      <ul>
+        <li><strong>Two focused transformation areas</strong> — avoids the "boil the ocean" trap that kills execution quality</li>
+        <li><strong>Concrete deliverables per phase</strong> — the client knows exactly what they receive</li>
+        <li><strong>Governance section</strong> — meeting cadence, reporting, and contact points signal operational maturity</li>
+        <li><strong>Personal signature from Fermín</strong> — research shows 60–80% of B2B decisions are made before formal contact; personal trust is critical</li>
+        <li><strong>Phase gate mechanism</strong> — "Phase 2 confirmed after Phase 1 review" reduces client risk perception</li>
+      </ul>
+
+      <h3>Gaps — What's Missing</h3>
+
+      <h4>A. No Quantification of the Client's Problem</h4>
+      <p>
+        The proposal describes <em>what</em> is wrong but never puts a number on it. Winning consulting proposals quantify the cost of inaction:
+      </p>
+      <blockquote>
+        <p>"If manual reconciliation consumes 20 hours/week at £25/hr of internal cost, that represents £26,000/year in direct personnel cost alone — before accounting for errors, reporting delays, and missed early-warning signals."</p>
+      </blockquote>
+      <p>
+        This type of framing anchors the fee as <strong>small relative to the problem</strong>. Without it, £9,000 is judged as an absolute number in a vacuum.
+      </p>
+
+      <h4>B. No ROI or Value Framing</h4>
+      <p>
+        The industry standard is for fees to represent <strong>10–20% of value delivered</strong>, with a target client ROI of <strong>5–10x</strong>. The proposal's value paragraph is generic:
+      </p>
+      <blockquote>
+        <p>"Compared to the ongoing operational cost of manual processes, misallocated resources, and delayed financial reporting, this represents a targeted investment in sustainable operational capacity."</p>
+      </blockquote>
+      <p>
+        This should be specific. If the transformation saves the client £50,000–£90,000 per year (realistic for automation of two manual workflows), then £9,000 represents a 5.5–10x ROI — an exceptional value proposition that should be stated explicitly.
+      </p>
+      <p class="source">Sources: Consulting Quest, Alan Weiss "Value-Based Fees", Precursive ROI Framework.</p>
+
+      <h4>C. No Case Studies or Proof Points</h4>
+      <p>
+        Winning proposals include inline mini case studies. Even if TransformAZ is a new entity, Fermín's prior experience can be referenced:
+      </p>
+      <blockquote>
+        <p>"In a similar engagement with a multi-brand retail group, we reduced reconciliation cycle time by 65% within the first 8 weeks."</p>
+      </blockquote>
+      <p>
+        Proposals with customised proof points consistently outperform generic submissions.
+      </p>
+
+      <h4>D. KPIs Are Directional, Not Targeted</h4>
+      <p>
+        The current KPIs describe <em>what</em> will be measured but not <em>what success looks like</em>. Adding estimated targets — even with a "to be validated in Phase 1" caveat — signals ambition and confidence:
+      </p>
+      <blockquote>
+        <p>"Response Time — Target: reduce from ~48hr average to &lt;12hr (to be validated during discovery)"</p>
+      </blockquote>
+
+      <h4>E. No Pricing Tiers</h4>
+      <p>
+        Best practice is to present <strong>3 pricing options</strong> (basic, standard, premium). Research shows:
+      </p>
+      <ul>
+        <li>73% of clients choose the middle option</li>
+        <li>Tiering increases average deal size by 20–30%</li>
+        <li>It gives the client a sense of control and reduces the "yes/no" decision to a "which one" decision</li>
+      </ul>
+
+      <h4>F. Payment Terms Absent</h4>
+      <p>
+        No mention of when payment is due. Standard structures include: 100% upfront per phase, or 50% at kickoff + 50% at delivery. This absence can cause awkward post-signature conversations and delays.
+      </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         6. RISK & WATCHPOINTS
+         ═══════════════════════════════════════ -->
+    <section id="risk-points" class="section">
+      <span class="section-number">Section 06</span>
+      <h2>Risk &amp; Watchpoints</h2>
+
+      <div class="verdict verdict--risk">
+        <span class="verdict-label">High risk — Scope creep in Phase 2</span>
+        <p>40 hours to implement automation, data integration, operating procedures, stakeholder validation, and a scalability playbook <strong>across two transformation areas</strong> is extremely tight. If reality is more complex than anticipated (and it usually is), the risk is either delivering partially or working unpaid hours — both of which damage the engagement.</p>
+        <p><strong>Mitigation:</strong> Add an explicit scope adjustment clause. If Phase 1 reveals that Phase 2 scope exceeds what 40 hours can deliver, the scope and fee are adjusted by mutual agreement before execution begins.</p>
+      </div>
+
+      <div class="verdict verdict--warn">
+        <span class="verdict-label">Medium risk — Client dependency</span>
+        <p>The "Client Involvement" section mentions timely provision of system access and documentation, but does not define what "timely" means. If the client takes 2 weeks to provide system access, does the timeline extend? Does the fee adjust?</p>
+        <p><strong>Mitigation:</strong> Add a clause specifying that delays in client-side provisioning will extend timelines proportionally, and that material delays (e.g., >5 business days) may require scope reassessment.</p>
+      </div>
+
+      <div class="verdict verdict--warn">
+        <span class="verdict-label">Medium risk — No exit or pivot clause</span>
+        <p>If, 10 hours into Phase 1, it becomes clear that the transformation areas are different from what was anticipated, there is no explicit mechanism to pivot. The proposal's scope is locked to "Compliance &amp; Repairs" and "Income Reconciliation" — what happens if the real opportunity is elsewhere?</p>
+        <p><strong>Mitigation:</strong> Add language noting that Phase 1 may refine or replace the initial transformation areas based on diagnostic findings, with client approval.</p>
+      </div>
+
+      <div class="verdict verdict--warn">
+        <span class="verdict-label">Competitive risk — No differentiation barrier</span>
+        <p>The proposal could be replicated by any competent consultant. There is no proprietary methodology, framework, or tool that creates a switching cost. Consider naming the methodology (e.g., "The TransformAZ Operating Model") or referencing proprietary diagnostic tools.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         7. SUMMARY & RECOMMENDATIONS
+         ═══════════════════════════════════════ -->
+    <section id="summary" class="section">
+      <span class="section-number">Section 07</span>
+      <h2>Summary &amp; Recommendations</h2>
+
+      <div class="table-wrap">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>Status</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hourly rate (£150)</td>
+              <td><span class="status-badge status-badge--good">Good</span></td>
+              <td>Rate is market-aligned. Stop exposing it in the main proposal; present as project fee.</td>
+            </tr>
+            <tr>
+              <td>Total investment (£9K)</td>
+              <td><span class="status-badge status-badge--warn">Review</span></td>
+              <td>Below market for the scope described. Consider £12–15K or add tiered options with a premium tier.</td>
+            </tr>
+            <tr>
+              <td>Pricing model</td>
+              <td><span class="status-badge status-badge--risk">Change</span></td>
+              <td>Switch from hourly breakdown to project-based fees. Move hourly detail to SOW/appendix.</td>
+            </tr>
+            <tr>
+              <td>Discovery/Execution ratio</td>
+              <td><span class="status-badge status-badge--warn">Review</span></td>
+              <td>33/67 is high on discovery. Consider Phase 2 as "scope TBD" with estimated range.</td>
+            </tr>
+            <tr>
+              <td>2-phase structure</td>
+              <td><span class="status-badge status-badge--good">Good</span></td>
+              <td>Valid and client-friendly. Add reference to handover/transition support.</td>
+            </tr>
+            <tr>
+              <td>Business understanding</td>
+              <td><span class="status-badge status-badge--good">Good</span></td>
+              <td>Strongest section. Demonstrates real comprehension of the client's model.</td>
+            </tr>
+            <tr>
+              <td>Value framing</td>
+              <td><span class="status-badge status-badge--risk">Change</span></td>
+              <td>Quantify the client's problem cost and project a concrete ROI (5–10x).</td>
+            </tr>
+            <tr>
+              <td>Case studies</td>
+              <td><span class="status-badge status-badge--risk">Missing</span></td>
+              <td>Add at least one proof point, even based on Fermín's prior experience.</td>
+            </tr>
+            <tr>
+              <td>Pricing tiers</td>
+              <td><span class="status-badge status-badge--warn">Missing</span></td>
+              <td>Present 3 options to anchor mid-tier and increase average deal size.</td>
+            </tr>
+            <tr>
+              <td>Payment terms</td>
+              <td><span class="status-badge status-badge--risk">Missing</span></td>
+              <td>Add to Terms section: payment schedule per phase.</td>
+            </tr>
+            <tr>
+              <td>Scope protection</td>
+              <td><span class="status-badge status-badge--warn">Weak</span></td>
+              <td>Add scope adjustment clause, client delay clause, and pivot mechanism.</td>
+            </tr>
+            <tr>
+              <td>Competitive moat</td>
+              <td><span class="status-badge status-badge--warn">Weak</span></td>
+              <td>Consider naming the methodology or referencing proprietary tools/frameworks.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Priority Actions (Ranked by Impact)</h3>
+      <ol>
+        <li><strong>Remove hourly rate from the proposal body</strong> — present as project fee; hourly detail in SOW only</li>
+        <li><strong>Add value quantification</strong> — frame the client's cost of inaction in £/year; position the fee as 10–20% of annual savings</li>
+        <li><strong>Add at least one case study or proof point</strong> — even a single data point dramatically increases credibility</li>
+        <li><strong>Introduce pricing tiers</strong> — base / standard / premium to change the decision from "yes/no" to "which one"</li>
+        <li><strong>Add payment terms and scope protection clauses</strong> — prevents post-sale friction and protects the engagement</li>
+        <li><strong>Consider increasing total fee to £12–15K</strong> — or present current pricing as the "base" tier in a 3-tier model</li>
+      </ol>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         8. SOURCES
+         ═══════════════════════════════════════ -->
+    <section id="sources" class="section">
+      <span class="section-number">Section 08</span>
+      <h2>Sources</h2>
+
+      <h4>Pricing &amp; Rate Data</h4>
+      <ul>
+        <li>Business Accounting UK — UK Consultant Hourly &amp; Daily Rates</li>
+        <li>YunoJuno — 2025 Freelancer Rates Report (Strategy Consulting)</li>
+        <li>UK Government G-Cloud Data — Big 4 Day Rates (Tom Moore analysis via LinkedIn)</li>
+        <li>Slideworks / GSA Federal Supply Schedule — McKinsey, BCG, Deloitte Rate Cards</li>
+        <li>Matt Haycox — UK Consulting Pricing by Function (2025)</li>
+      </ul>
+
+      <h4>Pricing Models &amp; Strategy</h4>
+      <ul>
+        <li>Consulting Success — Consulting Fees &amp; Pricing Models Survey</li>
+        <li>Deltek — Consulting Pricing Models Guide</li>
+        <li>Craft of Consulting — Pros &amp; Cons of Each Consulting Pricing Model</li>
+        <li>Atarim — Value-Based Pricing in Professional Services</li>
+        <li>Melisa Liberman — Consulting Statistics &amp; Benchmarks 2025</li>
+      </ul>
+
+      <h4>Engagement Structure</h4>
+      <ul>
+        <li>9Lenses — 7 Key Stages of a Consulting Project</li>
+        <li>Consulting Success — The Consulting Process</li>
+        <li>The Visible Authority — Why Every Firm Needs a Discovery Service</li>
+        <li>8Allocate — Discovery Phase Budget Allocation</li>
+        <li>Syndicode — Discovery Session Step-by-Step</li>
+      </ul>
+
+      <h4>SME Market &amp; Win Rates</h4>
+      <ul>
+        <li>Consultancy.uk — UK SMEs Spend £60B on Professional Services</li>
+        <li>Asamby Consulting — Small Business Consultant Cost Guide</li>
+        <li>Boutique Consulting Club — Win Rate Benchmarks</li>
+        <li>Flowcase — Proposal Win Rates 2025</li>
+        <li>Boldhaus — 5 Costly Consulting Proposal Mistakes</li>
+      </ul>
+
+      <h4>Value-Based Pricing</h4>
+      <ul>
+        <li>Alan Weiss — "Value-Based Fees" (Formula &amp; Framework)</li>
+        <li>Consulting Quest — Value-Based Pricing in Consulting</li>
+        <li>Precursive — Guide to Value-Based Pricing in Professional Services</li>
+      </ul>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      TransformAZ &middot; Internal Document &middot; March 2026
+    </footer>
+
+  </div>
+</div>
+
+</body>
+</html>

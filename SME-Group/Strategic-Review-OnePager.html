@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategic Review — One Pager | TransformAZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --accent: #7A7AE6;
+    --accent-light: #ebebfa;
+    --accent-dark: #5a5abf;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+    --red: #b53d3d;
+    --red-light: #fdeaea;
+    --border: #e0ddd6;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-sans: 'Source Sans 3', -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 15px; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: #f4f3f0;
+    line-height: 1.45;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: white;
+    padding: 28px 32px 24px;
+    box-shadow: 0 1px 40px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ──────────────────────── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    border-bottom: 3px solid var(--text);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .header::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 48px; height: 3px; background: var(--accent);
+  }
+  .logo {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+  }
+  .logo .light { font-weight: 300; }
+  .logo .bold { font-weight: 700; color: var(--accent); }
+  .header-title {
+    text-align: right;
+  }
+  .header-title h1 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  .header-title .sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── CONTEXT BAR ─────────────────── */
+  .context {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .context-card {
+    background: #faf9f7;
+    border-radius: 5px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .context-card .label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .context-card .value {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .context-card .note {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  /* ── SECTION TITLES ──────────────── */
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 14px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── FINDINGS GRID ───────────────── */
+  .findings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .finding {
+    padding: 8px 10px;
+    border-radius: 5px;
+    border-left: 3px solid;
+    font-size: 0.72rem;
+  }
+  .finding .title {
+    font-weight: 700;
+    font-size: 0.74rem;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .finding p { margin: 0; color: var(--text); }
+
+  .finding--good { background: var(--green-light); border-color: var(--green); }
+  .finding--good .title { color: var(--green); }
+  .finding--warn { background: var(--amber-light); border-color: var(--amber); }
+  .finding--warn .title { color: var(--amber); }
+  .finding--risk { background: var(--red-light); border-color: var(--red); }
+  .finding--risk .title { color: var(--red); }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.52rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 1px 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .badge--good { background: var(--green); color: white; }
+  .badge--warn { background: var(--amber); color: white; }
+  .badge--risk { background: var(--red); color: white; }
+
+  /* ── RECOMMENDATIONS TABLE ───────── */
+  .rec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.7rem;
+    margin: 6px 0;
+  }
+  .rec-table thead th {
+    text-align: left;
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    padding: 5px 6px 5px 0;
+    border-bottom: 2px solid var(--text);
+  }
+  .rec-table tbody td {
+    padding: 4px 6px 4px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .rec-table tbody tr:last-child td { border-bottom: none; }
+  .rec-table .num {
+    font-weight: 700;
+    color: var(--accent);
+    width: 18px;
+    text-align: center;
+  }
+
+  /* ── BOTTOM BAR ──────────────────── */
+  .bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  /* ── KEY TAKEAWAY ────────────────── */
+  .takeaway {
+    background: var(--text);
+    color: white;
+    border-radius: 5px;
+    padding: 10px 14px;
+    margin: 10px 0 6px;
+    font-size: 0.75rem;
+  }
+  .takeaway .label {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+  .takeaway strong { color: var(--accent-light); }
+
+  /* ── APPLIED TAG ─────────────────── */
+  .applied-note {
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    margin: 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .applied-note .check {
+    font-size: 1rem;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+
+  /* ── PRINT ───────────────────────── */
+  @page { size: A4; margin: 0; }
+
+  @media print {
+    html { font-size: 15px; }
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { box-shadow: none; min-height: auto; padding: 24px 28px 20px; }
+    .finding--good { background: #e8f5ee !important; }
+    .finding--warn { background: #fdf5e6 !important; }
+    .finding--risk { background: #fdeaea !important; }
+    .takeaway { background: #1a1a1a !important; color: white !important; }
+    .badge--good { background: #2a7d4f !important; }
+    .badge--warn { background: #9a6f1e !important; }
+    .badge--risk { background: #b53d3d !important; }
+    .context-card { background: #faf9f7 !important; }
+    .applied-note { background: #ebebfa !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <span class="light">transform</span><span class="bold">az</span>
+    </div>
+    <div class="header-title">
+      <h1>Proposal Review — SME Group</h1>
+      <div class="sub">Agust&iacute;n &rarr; Ferm&iacute;n &middot; March 2026</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
+    Ferm&iacute;n — revis&eacute; la propuesta que le mandaste a SME Group y te paso lo que encontr&eacute;. En resumen: <strong style="color: var(--text);">el trabajo de fondo es s&oacute;lido, pero le est&aacute;s dejando plata en la mesa por c&oacute;mo lo present&aacute;s.</strong> Abajo te dejo los n&uacute;meros, lo que est&aacute; bien, lo que cambiar&iacute;a, y por qu&eacute;.
+  </p>
+
+  <!-- CONTEXT -->
+  <div class="context">
+    <div class="context-card">
+      <div class="label">Lo que cotizaste</div>
+      <div class="value">&pound;9,000</div>
+      <div class="note">2 fases &middot; 60 hrs &middot; 6 semanas</div>
+    </div>
+    <div class="context-card">
+      <div class="label">Rate que mostr&aacute;s</div>
+      <div class="value">&pound;150/hr</div>
+      <div class="note">Visible en el cuerpo de la propuesta</div>
+    </div>
+    <div class="context-card">
+      <div class="label">Lo que cobra el mercado</div>
+      <div class="value">&pound;15K–30K</div>
+      <div class="note">Por el mismo scope en UK</div>
+    </div>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <h2>Lo que encontr&eacute;</h2>
+  <div class="findings">
+    <div class="finding finding--good">
+      <div class="title"><span class="badge badge--good">Bien</span> El rate est&aacute; bien posicionado</div>
+      <p>&pound;150/hr queda en el rango alto de mid-level y bajo de senior specialist. Para boutique consulting en UK est&aacute; correcto.</p>
+    </div>
+    <div class="finding finding--risk">
+      <div class="title"><span class="badge badge--risk">Problema</span> Pero lo est&aacute;s mostrando</div>
+      <p>Si el cliente ve horas &times; tarifa, compara contra freelancers a &pound;50-80/hr. La pregunta pasa de "vale la pena resolver esto?" a "vale esta persona &pound;150 la hora?"</p>
+    </div>
+    <div class="finding finding--warn">
+      <div class="title"><span class="badge badge--warn">Ojo</span> Est&aacute;s cobrando poco</div>
+      <p>&pound;9K es lo que cobran solo por el discovery. Diagnostic + implementation en UK va de &pound;15K a &pound;30K. Est&aacute;s regalando la ejecuci&oacute;n.</p>
+    </div>
+    <div class="finding finding--risk">
+      <div class="title"><span class="badge badge--risk">Falta</span> No cuantific&aacute;s el problema</div>
+      <p>Explic&aacute;s qu&eacute; est&aacute; mal pero nunca dec&iacute;s cu&aacute;nto les cuesta. Sin un n&uacute;mero en &pound;/a&ntilde;o, los &pound;9K se juzgan en el aire.</p>
+    </div>
+    <div class="finding finding--good">
+      <div class="title"><span class="badge badge--good">Bien</span> Entend&eacute;s el negocio</div>
+      <p>La secci&oacute;n de business understanding es lo mejor de la propuesta. Se nota que entend&eacute;s el modelo de franquicia y los dos &aacute;reas de transformaci&oacute;n.</p>
+    </div>
+    <div class="finding finding--warn">
+      <div class="title"><span class="badge badge--warn">Flojo</span> No te proteg&eacute;s</div>
+      <p>40 horas para 2 &aacute;reas de transformaci&oacute;n es muy justo. No hay cl&aacute;usula de ajuste de scope, ni de demoras del cliente, ni mecanismo de pivot.</p>
+    </div>
+    <div class="finding finding--risk">
+      <div class="title"><span class="badge badge--risk">Falta</span> Cero proof points</div>
+      <p>Ning&uacute;n caso de &eacute;xito previo. Un solo dato concreto ("redujimos el ciclo un 65%") cambia completamente la credibilidad.</p>
+    </div>
+    <div class="finding finding--warn">
+      <div class="title"><span class="badge badge--warn">Falta</span> Un solo precio</div>
+      <p>Precio &uacute;nico = decisi&oacute;n s&iacute;/no. Con 3 opciones el cliente elige cu&aacute;l, no si. El 73% elige la del medio y el deal size sube 20-30%.</p>
+    </div>
+  </div>
+
+  <!-- PRIORITY RECOMMENDATIONS -->
+  <h2>Qu&eacute; cambiar&iacute;a (por orden de impacto)</h2>
+  <table class="rec-table">
+    <thead>
+      <tr><th>#</th><th>Acci&oacute;n</th><th>Por qu&eacute;</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td><strong>Sac&aacute; el rate por hora de la propuesta</strong></td>
+        <td>Mostr&aacute; un fee por proyecto. El detalle de horas va en el SOW si lo piden. Cambia toda la conversaci&oacute;n.</td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td><strong>Ponel&eacute; un n&uacute;mero al problema del cliente</strong></td>
+        <td>"Esto les cuesta &pound;X por a&ntilde;o." Los &pound;9K pasan a ser el 10-20% de lo que ahorran. ROI de 5-10x.</td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td><strong>Agreg&aacute; aunque sea un caso previo</strong></td>
+        <td>Un solo dato concreto de experiencia anterior sube la credibilidad de la propuesta de forma desproporcionada.</td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td><strong>Arm&aacute; 3 opciones de precio</strong></td>
+        <td>B&aacute;sico / Recomendado / Premium. El cliente deja de pensar "contrato o no" y pasa a "cu&aacute;l elijo".</td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td><strong>Sum&aacute; t&eacute;rminos de pago y cl&aacute;usulas de scope</strong></td>
+        <td>Te protege de scope creep, demoras del cliente y cambios de direcci&oacute;n. Evita conversaciones inc&oacute;modas despu&eacute;s.</td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td><strong>Sub&iacute; a &pound;12-15K o us&aacute; los &pound;9K como opci&oacute;n base</strong></td>
+        <td>Est&aacute;s por debajo del piso del mercado. Si met&eacute;s una opci&oacute;n premium arriba, los &pound;9K se ven "razonables" en vez de "baratos".</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TAKEAWAY -->
+  <div class="takeaway">
+    <div class="label">En una l&iacute;nea</div>
+    El laburo que hac&eacute;s es bueno y se nota que <strong>entend&eacute;s al cliente</strong>. El tema no es lo que ofrec&eacute;s sino <strong>c&oacute;mo lo empaquetás</strong>. Con los mismos deliverables pero mejor framing comercial, esta propuesta deja de ser competitiva y pasa a ser dif&iacute;cil de rechazar.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="bottom">
+    <span>TransformAZ &middot; Interno</span>
+    <span>An&aacute;lisis completo: Proposal-Strategic-Review.html</span>
+    <span>Agust&iacute;n &middot; Marzo 2026</span>
+  </div>
+
+</div>
+
+</body>
+</html>

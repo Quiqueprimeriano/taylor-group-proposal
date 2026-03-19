@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting Frameworks Benchmark — TransformAZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --bg: #f4f3f0;
+    --bg-white: #ffffff;
+    --accent: #c0392b;
+    --accent-light: #fdeaea;
+    --accent-dark: #962d23;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+    --blue: #2c5282;
+    --blue-light: #e8f0fe;
+    --border: #e0ddd6;
+    --border-light: #edeae4;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  .page-wrapper {
+    max-width: 920px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    box-shadow: 0 1px 40px rgba(0,0,0,0.06);
+  }
+
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── COVER ──────────────────────────── */
+  .cover {
+    padding: 60px 48px 48px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .cover::before {
+    content: 'INTERNAL';
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    font-size: 5rem;
+    color: var(--accent);
+    opacity: 0.05;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+  .cover-inner { max-width: 600px; position: relative; z-index: 1; }
+  .cover-logo {
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 60px;
+  }
+  .cover-logo .light { font-weight: 300; color: var(--text); }
+  .cover-logo .bold { font-weight: 700; color: var(--accent); }
+  .cover-rule {
+    width: 56px; height: 4px; background: var(--accent);
+    border: none; margin: 0 0 28px; border-radius: 2px;
+  }
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .cover-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 8px 20px;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .cover-meta dt {
+    font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.08em; padding-top: 3px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 3px;
+    margin-top: 32px;
+    border: 1px solid var(--accent);
+  }
+
+  /* ── SECTIONS ───────────────────────── */
+  .section {
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--border-light);
+  }
+  .section:first-of-type { border-top: none; }
+  .section-number {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); display: block; margin-bottom: 6px;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem; font-weight: 600; line-height: 1.2;
+    padding-bottom: 12px; border-bottom: 3px solid var(--text);
+    margin-bottom: 24px; position: relative;
+  }
+  h2::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 48px; height: 3px; background: var(--accent);
+  }
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem; font-weight: 600; line-height: 1.25;
+    margin-top: 32px; margin-bottom: 10px;
+  }
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 0.82rem; font-weight: 700;
+    margin-top: 20px; margin-bottom: 6px;
+  }
+  p { margin-bottom: 12px; font-size: 0.92rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+  ul, ol { padding-left: 1.25rem; margin-bottom: 12px; font-size: 0.92rem; }
+  li { margin-bottom: 5px; }
+  li::marker { color: var(--accent); }
+
+  /* ── CALLOUT BOXES ──────────────────── */
+  .box {
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    border-left: 4px solid;
+    font-size: 0.88rem;
+  }
+  .box p { margin-bottom: 6px; }
+  .box p:last-child { margin-bottom: 0; }
+  .box-label {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 6px; display: block;
+  }
+  .box--red { background: var(--accent-light); border-color: var(--accent); }
+  .box--red .box-label { color: var(--accent); }
+  .box--green { background: var(--green-light); border-color: var(--green); }
+  .box--green .box-label { color: var(--green); }
+  .box--amber { background: var(--amber-light); border-color: var(--amber); }
+  .box--amber .box-label { color: var(--amber); }
+  .box--blue { background: var(--blue-light); border-color: var(--blue); }
+  .box--blue .box-label { color: var(--blue); }
+
+  /* ── TABLES ─────────────────────────── */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 16px 0; font-size: 0.82rem;
+  }
+  thead th {
+    text-align: left; font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 10px 10px 10px 0;
+    border-bottom: 2px solid var(--text);
+  }
+  tbody td {
+    padding: 9px 10px 9px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .table-wrap {
+    background: #faf9f7;
+    border-radius: 6px;
+    padding: 4px 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+
+  /* ── BLOCKQUOTE ─────────────────────── */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+  }
+  blockquote p { font-style: italic; margin-bottom: 4px; }
+  blockquote cite {
+    font-style: normal;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ── TOC ─────────────────────────────── */
+  .toc {
+    padding: 48px 0 32px;
+  }
+  .toc h2 { margin-bottom: 20px; }
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-number {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-width: 72px;
+  }
+  .toc-title { font-weight: 600; }
+
+  /* ── STAT GRID ─────────────────────── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  /* ── FOOTER ─────────────────────────── */
+  .footer {
+    text-align: center; padding: 20px 0 32px;
+    font-size: 0.65rem; color: var(--text-muted);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ── PAGE BREAKS ────────────────────── */
+  .page-break { page-break-before: always; }
+
+  /* ── PRINT ──────────────────────────── */
+  @page { size: A4; margin: 14mm 0 18mm 0; }
+  @page:first { margin: 0; }
+
+  @media print {
+    html { font-size: 9.5pt; }
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-wrapper { box-shadow: none; max-width: none; }
+    .cover { min-height: auto; padding: 50px 40px 40px; page-break-after: always; }
+    .cover::before { display: none; }
+    .page-break { page-break-before: always; }
+    .section { page-break-before: auto; }
+    table { page-break-inside: avoid; }
+    .box { page-break-inside: avoid; }
+    h2, h3, h4 { page-break-after: avoid; }
+    .content { padding: 0 40px; }
+
+    .box--red { background: #fdeaea !important; }
+    .box--green { background: #e8f5ee !important; }
+    .box--amber { background: #fdf5e6 !important; }
+    .box--blue { background: #e8f0fe !important; }
+    .table-wrap { background: #faf9f7 !important; }
+    blockquote { background: #fdeaea !important; }
+    .cover-badge { background: #fdeaea !important; border-color: #c0392b !important; color: #c0392b !important; }
+    .cover { border-bottom-color: #c0392b !important; }
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 14px; }
+    .cover { padding: 40px 20px 32px; min-height: auto; }
+    .cover h1 { font-size: 1.7rem; }
+    .content { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <span class="light">transform</span><span class="bold">az</span>
+      </div>
+      <hr class="cover-rule">
+      <h1>Consulting Frameworks<br>Benchmark</h1>
+      <p class="cover-subtitle">How Top Firms Structure Digital Transformation Programs</p>
+      <dl class="cover-meta">
+        <dt>Prepared by</dt>
+        <dd>TransformAZ</dd>
+        <dt>Date</dt>
+        <dd>March 2026</dd>
+        <dt>Classification</dt>
+        <dd>Internal Reference</dd>
+      </dl>
+      <span class="cover-badge">Internal Reference</span>
+    </div>
+  </header>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="content page-break">
+    <nav class="toc">
+      <h2>Table of Contents</h2>
+      <ul class="toc-list">
+        <li><span class="toc-number">01</span><span class="toc-title">McKinsey &mdash; The 4Ds Framework + 10 Success Factors</span></li>
+        <li><span class="toc-number">02</span><span class="toc-title">Deloitte &mdash; The Capability Hexagon</span></li>
+        <li><span class="toc-number">03</span><span class="toc-title">BCG &mdash; Digital Acceleration Index (DAI)</span></li>
+        <li><span class="toc-number">04</span><span class="toc-title">Accenture &mdash; Total Enterprise Reinvention</span></li>
+        <li><span class="toc-number">05</span><span class="toc-title">Industry Standard &mdash; People, Process, Technology, Data</span></li>
+        <li><span class="toc-number">06</span><span class="toc-title">TransformAZ Alignment &mdash; How Our Approach Maps</span></li>
+        <li><span class="toc-number">07</span><span class="toc-title">Key Takeaways &mdash; What This Means for Our Engagement</span></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- 01 — MCKINSEY -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">01 &mdash; McKinsey</span>
+      <h2>The 4Ds Framework + 10 Success Factors</h2>
+
+      <h3>What</h3>
+      <ul>
+        <li>4 phases: Discover, Design, Deliver, De-risk</li>
+        <li>6 assessment dimensions: Strategy, Process, Organization &amp; Talent, Technology &amp; Data, Risk &amp; Compliance, Partnerships &amp; Ecosystem</li>
+        <li>10 success factors that differentiate the 16% of transformations that fully succeed</li>
+      </ul>
+
+      <h3>How</h3>
+      <ul>
+        <li>Start with lighthouse projects &mdash; quick wins that demonstrate value and self-fund the transformation</li>
+        <li>Secure senior leadership buy-in first, then cascade through the organization</li>
+        <li>Design a new operating model, not just new tools</li>
+        <li>Adopt agile ways of working across the transformation program itself</li>
+        <li>Use the 6 dimensions as a diagnostic lens: assess each independently, then map interdependencies</li>
+      </ul>
+
+      <h3>Why It Works</h3>
+      <ul>
+        <li>Sequences initiatives for momentum &mdash; early wins build confidence and budget</li>
+        <li>The 10 success factors are empirically derived from analyzing hundreds of transformations</li>
+        <li>Balances ambition with pragmatism through the lighthouse approach</li>
+      </ul>
+
+      <div class="box box--red">
+        <span class="box-label">Key Statistic</span>
+        <p>Only 16% of digital transformations fully succeed. McKinsey's research shows that companies addressing all 10 success factors are 2.5x more likely to achieve transformation goals. 46% of executives say cultural change is the single biggest challenge.</p>
+      </div>
+
+      <h3>Relevance to Taylor Group</h3>
+      <ul>
+        <li>Taylor's transformation should start with lighthouse projects (asset tracking, email automation) that demonstrate value before scaling</li>
+        <li>The culture dimension is critical &mdash; 95 years of institutional culture requires a respect-first approach</li>
+        <li>The 6-dimension framework maps directly to our 5-pillar approach</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 02 — DELOITTE -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">02 &mdash; Deloitte</span>
+      <h2>The Capability Hexagon</h2>
+
+      <h3>What</h3>
+      <ul>
+        <li>6 dimensions per business capability: Mission, Insights, Processes, Technology, Talent, Governance</li>
+        <li>Each capability is assessed across all 6 dimensions to identify gaps</li>
+        <li>5 maturity levels: Ad-hoc &rarr; Repeatable &rarr; Defined &rarr; Managed &rarr; Optimized</li>
+        <li>The hexagon is a diagnostic and design tool &mdash; it visualizes where capabilities are strong and where they're weak</li>
+      </ul>
+
+      <h3>How</h3>
+      <ul>
+        <li>Map each business capability (e.g., "Asset Management," "Sales Operations") across all 6 dimensions</li>
+        <li>Identify dimension gaps: having great Technology but weak Processes or Governance means the tech won't be adopted</li>
+        <li>Don't implement technology without first closing gaps in Talent, Process, and Governance</li>
+        <li>Use the 5 maturity levels to set realistic targets &mdash; you don't go from Ad-hoc to Optimized in one phase</li>
+        <li>Design interventions that address the weakest dimension first</li>
+      </ul>
+
+      <h3>Why It Works</h3>
+      <ul>
+        <li>Prevents the classic failure mode: "We bought the tool but nobody uses it"</li>
+        <li>Forces holistic thinking &mdash; you can't just address technology in isolation</li>
+        <li>The hexagon visualization makes gaps obvious and communicable to stakeholders</li>
+      </ul>
+
+      <div class="box box--blue">
+        <span class="box-label">Key Insight</span>
+        <p>Deloitte's central thesis: "Successful transformation requires equal focus on business design AND digital solution design." Technology without process redesign is shelfware. Process redesign without talent development is unsustainable.</p>
+      </div>
+
+      <h3>Relevance to Taylor Group</h3>
+      <ul>
+        <li>Taylor's ClickUp Brain situation is a textbook Deloitte case: Technology dimension is present, but Talent (training), Process (workflows), and Governance (policies) dimensions are at Level 1</li>
+        <li>The hexagon approach validates our decision to start with People &amp; Culture before Tech Integrations</li>
+        <li>Asset management needs assessment across all 6 dimensions, not just a technology solution</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 03 — BCG -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">03 &mdash; BCG</span>
+      <h2>Digital Acceleration Index (DAI)</h2>
+
+      <h3>What</h3>
+      <ul>
+        <li>4 building blocks: Digital Strategy, Digitizing the Core, New Digital Growth, Key Enablers</li>
+        <li>Quantitative maturity scoring across 36 indicators</li>
+        <li>Benchmarking against industry peers and digital leaders</li>
+        <li>Focus on measuring digital maturity, not just planning it</li>
+      </ul>
+
+      <h3>How</h3>
+      <ul>
+        <li>Start with quick wins that self-fund the transformation &mdash; BCG calls these "no-regret moves"</li>
+        <li>Move across all 6 dimensions in parallel (don't sequence purely linearly)</li>
+        <li>Use the DAI score to benchmark progress quarterly</li>
+        <li>Focus on "Digitizing the Core" first &mdash; this is where the ROI is most immediate and measurable</li>
+        <li>Build the "Key Enablers" (data, talent, governance) simultaneously</li>
+      </ul>
+
+      <h3>Why It Works</h3>
+      <ul>
+        <li>Data-driven assessment removes opinion and politics from prioritization</li>
+        <li>Quick wins build both momentum and budget &mdash; transformation becomes self-funding</li>
+        <li>The DAI provides an objective benchmark that leadership can track over time</li>
+        <li>Parallel execution across dimensions prevents bottlenecks</li>
+      </ul>
+
+      <div class="box box--amber">
+        <span class="box-label">Key Approach</span>
+        <p>BCG's "no-regret moves" philosophy: identify initiatives that deliver value regardless of which strategic direction the company ultimately pursues. For Taylor, this means email automation, asset cataloging, and ClickUp optimization are no-regret moves &mdash; they deliver value no matter what.</p>
+      </div>
+
+      <h3>Relevance to Taylor Group</h3>
+      <ul>
+        <li>The DAI scoring approach could be adapted to create Taylor's own transformation scorecard</li>
+        <li>"Digitizing the Core" maps to our Processes and Tech Integrations pillars</li>
+        <li>BCG's parallel execution philosophy validates addressing People &amp; Culture alongside Tech, not sequentially</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 04 — ACCENTURE -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">04 &mdash; Accenture</span>
+      <h2>Total Enterprise Reinvention</h2>
+
+      <h3>What</h3>
+      <ul>
+        <li>Operating model redesign with data and technology as the core driver</li>
+        <li>Customer-centric multidisciplinary teams + enterprise platform teams</li>
+        <li>Not a digital overlay on an existing model &mdash; a fundamental redesign of how the business operates</li>
+        <li>The most ambitious framework &mdash; designed for companies ready for radical change</li>
+      </ul>
+
+      <h3>How</h3>
+      <ul>
+        <li>Redesign the operating model around data &mdash; every decision, process, and interaction is data-informed</li>
+        <li>Create multidisciplinary teams organized around customer outcomes, not functional silos</li>
+        <li>Build enterprise platform teams that maintain shared infrastructure and tools</li>
+        <li>Replace legacy operating model entirely, not incrementally</li>
+      </ul>
+
+      <h3>Why It Works</h3>
+      <ul>
+        <li>Most ambitious and comprehensive approach &mdash; addresses root causes, not symptoms</li>
+        <li>Data-centricity ensures decisions are evidence-based from the start</li>
+        <li>Team structure redesign breaks down silos permanently, not temporarily</li>
+      </ul>
+
+      <div class="box box--green">
+        <span class="box-label">Key Distinction</span>
+        <p>Accenture's approach differs fundamentally from others: it doesn't optimize the existing model &mdash; it replaces it. This is the right framework for companies where the current operating model is a structural barrier to growth. It's the most disruptive but also the most transformative.</p>
+      </div>
+
+      <h3>Relevance to Taylor Group</h3>
+      <ul>
+        <li>Taylor isn't ready for total enterprise reinvention &mdash; and that's fine. The current priority is connecting and optimizing what exists</li>
+        <li>However, the data-centricity principle is directly applicable: Taylor's transformation should be building toward data-informed decision-making at every level</li>
+        <li>The multidisciplinary team concept is relevant for the DISCOVERY phase &mdash; assembling cross-functional stakeholders</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 05 — INDUSTRY STANDARD -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">05 &mdash; Industry Standard</span>
+      <h2>The Classic Framework: People, Process, Technology, Data</h2>
+
+      <h3>What</h3>
+      <ul>
+        <li>The original 4-pillar transformation framework, increasingly extended to 5 pillars with Governance/Compliance</li>
+        <li>Universal across industries: manufacturing, services, technology, healthcare</li>
+        <li>Simple enough to communicate to any stakeholder, robust enough to structure a multi-year program</li>
+        <li>The foundation that every consulting framework builds upon</li>
+      </ul>
+
+      <h3>How</h3>
+      <ul>
+        <li>Assess each pillar independently &mdash; current state, desired state, gap analysis</li>
+        <li>Map interdependencies between pillars: Technology changes require Process changes, which require People changes</li>
+        <li>Address the weakest pillar first &mdash; it's the bottleneck that limits all others</li>
+        <li>Add Governance as the fifth pillar when AI, data privacy, or regulatory concerns are present</li>
+      </ul>
+
+      <h3>Why It Works</h3>
+      <ul>
+        <li>Simplicity is its strength &mdash; executives, managers, and front-line employees all understand it</li>
+        <li>Forces acknowledgment that technology alone doesn't transform anything</li>
+        <li>The interdependency mapping reveals hidden blockers and dependencies</li>
+      </ul>
+
+      <h3>Case Studies</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Transformation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AT&amp;T</strong></td>
+              <td>Invested $1B in reskilling 280,000 employees for digital roles. Technology was available &mdash; the bottleneck was People. The reskilling program was the transformation.</td>
+            </tr>
+            <tr>
+              <td><strong>Domino's Pizza</strong></td>
+              <td>65% of US sales now come from digital channels. The transformation wasn't about building an app &mdash; it was about redesigning processes around digital-first customer experience.</td>
+            </tr>
+            <tr>
+              <td><strong>DBS Bank</strong></td>
+              <td>Named "World's Best Digital Bank" &mdash; achieved through a 5-year transformation focused equally on culture change, process redesign, and technology modernization.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box box--red">
+        <span class="box-label">Key Principle</span>
+        <p>Every consulting framework &mdash; McKinsey, Deloitte, BCG, Accenture &mdash; is fundamentally an elaboration of People, Process, Technology, Data. The value of the more sophisticated frameworks lies in the diagnostic tools and sequencing methodologies they provide.</p>
+      </div>
+
+      <h3>Relevance to Taylor Group</h3>
+      <ul>
+        <li>TransformAZ's 5-pillar framework is a deliberate extension of this classic model</li>
+        <li>The addition of Compliance as a distinct pillar (rather than folding it into Governance) reflects Taylor's specific client requirements (pharma, healthcare, financial services)</li>
+        <li>The framework's simplicity makes it communicable to Taylor's leadership without consulting jargon</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 06 — TRANSFORMAZ ALIGNMENT -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">06 &mdash; TransformAZ Alignment</span>
+      <h2>How Our Approach Maps to Industry Best Practices</h2>
+
+      <p>Our 5-pillar framework wasn't developed in a vacuum. It's informed by &mdash; and aligned with &mdash; the approaches used by the world's leading consulting firms. Here's how each of our pillars maps to the frameworks we've analyzed.</p>
+
+      <h3>Pillar Mapping</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TransformAZ</th>
+              <th>McKinsey 4Ds</th>
+              <th>Deloitte Hexagon</th>
+              <th>BCG DAI</th>
+              <th>Accenture TER</th>
+              <th>Industry Standard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>People &amp; Culture</strong></td>
+              <td>Org &amp; Talent (Dimension 3)</td>
+              <td>Talent + Mission</td>
+              <td>Key Enablers</td>
+              <td>Multidisciplinary Teams</td>
+              <td>People</td>
+            </tr>
+            <tr>
+              <td><strong>Processes</strong></td>
+              <td>Process Automation (Dimension 2)</td>
+              <td>Processes</td>
+              <td>Digitizing the Core</td>
+              <td>Operating Model</td>
+              <td>Process</td>
+            </tr>
+            <tr>
+              <td><strong>Tech Integrations</strong></td>
+              <td>Technology &amp; Data (Dimension 4)</td>
+              <td>Technology</td>
+              <td>Digital Strategy + Digitizing Core</td>
+              <td>Platform Teams</td>
+              <td>Technology</td>
+            </tr>
+            <tr>
+              <td><strong>Data</strong></td>
+              <td>Technology &amp; Data (Dimension 4)</td>
+              <td>Insights</td>
+              <td>Digitizing the Core</td>
+              <td>Data as Core Driver</td>
+              <td>Data</td>
+            </tr>
+            <tr>
+              <td><strong>Compliance</strong></td>
+              <td>Risk &amp; Compliance (Dimension 5)</td>
+              <td>Governance</td>
+              <td>Key Enablers</td>
+              <td>Governance</td>
+              <td>Governance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Phased Approach Mapping</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Our Phase</th>
+              <th>McKinsey</th>
+              <th>Deloitte</th>
+              <th>BCG</th>
+              <th>Accenture</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>INTAKE</strong></td>
+              <td>Discover</td>
+              <td>Assess Maturity</td>
+              <td>Benchmark (DAI)</td>
+              <td>Current State Analysis</td>
+            </tr>
+            <tr>
+              <td><strong>DISCOVERY</strong></td>
+              <td>Design</td>
+              <td>Map Capabilities</td>
+              <td>Identify No-Regret Moves</td>
+              <td>Define Target Model</td>
+            </tr>
+            <tr>
+              <td><strong>IMPLEMENTATION</strong></td>
+              <td>Deliver</td>
+              <td>Close Dimension Gaps</td>
+              <td>Execute Quick Wins</td>
+              <td>Build &amp; Scale</td>
+            </tr>
+            <tr>
+              <td><strong>STABILIZATION</strong></td>
+              <td>De-risk</td>
+              <td>Mature Capabilities</td>
+              <td>Measure &amp; Iterate</td>
+              <td>Embed &amp; Optimize</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Where We Align</h3>
+      <p>Our phased approach mirrors McKinsey's 4Ds almost exactly. Our pillar structure covers all 6 of Deloitte's hexagon dimensions. Our emphasis on quick wins echoes BCG's "no-regret moves" philosophy.</p>
+
+      <h3>Where We Differentiate</h3>
+      <p>Unlike Big 4 firms, we don't require Taylor to adopt a new operating model (Accenture) or implement enterprise-grade diagnostic tools (BCG DAI). We work at the scale appropriate for a $85M company &mdash; pragmatic, hands-on, and focused on activation rather than assessment.</p>
+
+      <h3>Our Advantage</h3>
+      <p>Big 4 frameworks are designed for Fortune 500 transformations with $50M+ budgets. TransformAZ adapts these proven methodologies for the mid-market &mdash; same intellectual rigor, right-sized execution, and at a fraction of the cost.</p>
+    </div>
+  </div>
+
+  <!-- 07 — KEY TAKEAWAYS -->
+  <div class="content page-break">
+    <div class="section">
+      <span class="section-number">07 &mdash; Key Takeaways</span>
+      <h2>What This Means for Our Engagement</h2>
+
+      <h3>What We Should Adopt</h3>
+      <ul>
+        <li><strong>From McKinsey:</strong> Lighthouse approach &mdash; start with visible, quick-win projects that build momentum and self-fund</li>
+        <li><strong>From Deloitte:</strong> Hexagonal assessment &mdash; never implement technology without assessing the Talent, Process, and Governance dimensions first</li>
+        <li><strong>From BCG:</strong> No-regret moves &mdash; prioritize initiatives that deliver value regardless of future strategic direction</li>
+        <li><strong>From Accenture:</strong> Data centricity &mdash; build every solution with data collection and analysis baked in from day one</li>
+        <li><strong>From Industry Standard:</strong> Communication simplicity &mdash; use the 5-pillar framework for stakeholder communication</li>
+      </ul>
+
+      <h3>Where We Differ (And Why That's a Strength)</h3>
+      <ul>
+        <li>We don't require a 6-month diagnostic phase &mdash; our INTAKE + DISCOVERY is 3 months and produces actionable output</li>
+        <li>We don't sell software &mdash; we activate what exists (ClickUp, Gemini, M365)</li>
+        <li>We don't need a $50M budget &mdash; our engagement is right-sized for Taylor's scale and ambition</li>
+        <li>We emphasize culture and adoption over architecture and tooling &mdash; because that's where 70% of transformations fail</li>
+        <li>We maintain advisory continuity &mdash; we don't hand off to junior consultants after the strategy phase</li>
+      </ul>
+
+      <h3>The Statistics That Should Guide Every Decision</h3>
+
+      <div class="stat-grid">
+        <div class="box box--red">
+          <span class="box-label">16%</span>
+          <p>Digital transformations that fully succeed (McKinsey). This is why sequencing and culture-first approach matters.</p>
+        </div>
+        <div class="box box--amber">
+          <span class="box-label">70%</span>
+          <p>Change programs that fail to meet objectives. The failure isn't in the technology &mdash; it's in the adoption.</p>
+        </div>
+        <div class="box box--blue">
+          <span class="box-label">46%</span>
+          <p>Executives who say cultural change is the biggest challenge. This validates our People &amp; Culture pillar as #1.</p>
+        </div>
+        <div class="box box--green">
+          <span class="box-label">25%</span>
+          <p>Organizations that achieve expected AI ROI. The companies that succeed operationalize AI into workflows, not just experiment with it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer content">
+    TransformAZ &mdash; Internal Reference &mdash; March 2026 &mdash; Not for distribution
+  </footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building the Digital Backbone — Taylor Group | TransformAZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --bg: #f4f3f0;
+    --bg-white: #ffffff;
+    --accent: #7A7AE6;
+    --accent-light: #ededfc;
+    --accent-dark: #5a5abf;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+    --blue: #2c5282;
+    --blue-light: #e8f0fe;
+    --red: #c0392b;
+    --red-light: #fdeaea;
+    --border: #e0ddd6;
+    --border-light: #edeae4;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  .page-wrapper {
+    max-width: 920px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    box-shadow: 0 1px 40px rgba(0,0,0,0.06);
+  }
+
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── COVER ──────────────────────────── */
+  .cover {
+    padding: 60px 48px 48px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .cover::before {
+    content: 'STRATEGIC';
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    font-size: 5rem;
+    color: var(--accent);
+    opacity: 0.05;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+  .cover-inner { max-width: 600px; position: relative; z-index: 1; }
+  .cover-logo {
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 60px;
+  }
+  .cover-logo .light { font-weight: 300; color: var(--text); }
+  .cover-logo .bold { font-weight: 700; color: var(--accent); }
+  .cover-rule {
+    width: 56px; height: 4px; background: var(--accent);
+    border: none; margin: 0 0 28px; border-radius: 2px;
+  }
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .cover-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 8px 20px;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .cover-meta dt {
+    font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.08em; padding-top: 3px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 3px;
+    margin-top: 32px;
+    border: 1px solid var(--accent);
+  }
+
+  /* ── SECTIONS ───────────────────────── */
+  .section {
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--border-light);
+  }
+  .section:first-of-type { border-top: none; }
+  .section-number {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); display: block; margin-bottom: 6px;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem; font-weight: 600; line-height: 1.2;
+    padding-bottom: 12px; border-bottom: 3px solid var(--text);
+    margin-bottom: 24px; position: relative;
+  }
+  h2::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 48px; height: 3px; background: var(--accent);
+  }
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem; font-weight: 600; line-height: 1.25;
+    margin-top: 32px; margin-bottom: 10px;
+  }
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 0.82rem; font-weight: 700;
+    margin-top: 20px; margin-bottom: 6px;
+  }
+  p { margin-bottom: 12px; font-size: 0.92rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+  ul, ol { padding-left: 1.25rem; margin-bottom: 12px; font-size: 0.92rem; }
+  li { margin-bottom: 5px; }
+  li::marker { color: var(--accent); }
+
+  /* ── CALLOUT BOXES ──────────────────── */
+  .box {
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    border-left: 4px solid;
+    font-size: 0.88rem;
+  }
+  .box p { margin-bottom: 6px; }
+  .box p:last-child { margin-bottom: 0; }
+  .box-label {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 6px; display: block;
+  }
+  .box--accent { background: var(--accent-light); border-color: var(--accent); }
+  .box--accent .box-label { color: var(--accent); }
+  .box--red { background: var(--red-light); border-color: var(--red); }
+  .box--red .box-label { color: var(--red); }
+  .box--green { background: var(--green-light); border-color: var(--green); }
+  .box--green .box-label { color: var(--green); }
+  .box--amber { background: var(--amber-light); border-color: var(--amber); }
+  .box--amber .box-label { color: var(--amber); }
+  .box--blue { background: var(--blue-light); border-color: var(--blue); }
+  .box--blue .box-label { color: var(--blue); }
+
+  /* ── BLOCKQUOTE ─────────────────────── */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+  }
+  blockquote p { font-style: italic; margin-bottom: 4px; }
+  blockquote cite {
+    font-style: normal;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ── PILLAR CARDS ────────────────────── */
+  .pillar-card {
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--bg-white);
+  }
+  .pillar-card--people { border-left-color: var(--green); }
+  .pillar-card--process { border-left-color: var(--blue); }
+  .pillar-card--tech { border-left-color: var(--accent); }
+  .pillar-card--data { border-left-color: var(--amber); }
+  .pillar-card--compliance { border-left-color: var(--red); }
+  .pillar-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .pillar-tag {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .pillar-card--people .pillar-tag { background: var(--green-light); color: var(--green); }
+  .pillar-card--process .pillar-tag { background: var(--blue-light); color: var(--blue); }
+  .pillar-card--tech .pillar-tag { background: var(--accent-light); color: var(--accent); }
+  .pillar-card--data .pillar-tag { background: var(--amber-light); color: var(--amber); }
+  .pillar-card--compliance .pillar-tag { background: var(--red-light); color: var(--red); }
+  .pillar-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .pillar-card ul { margin-bottom: 12px; }
+  .pillar-card .box { margin-top: 12px; margin-bottom: 0; }
+
+  /* ── FINDING CARDS ─────────────────── */
+  .finding-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--bg-white);
+  }
+  .finding-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .severity-tag {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .severity-tag--red { background: var(--red-light); color: var(--red); }
+  .severity-tag--amber { background: var(--amber-light); color: var(--amber); }
+  .severity-tag--blue { background: var(--blue-light); color: var(--blue); }
+
+  /* ── VALUE PROP HIGHLIGHT ────────────── */
+  .value-prop {
+    border: 2px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--accent-light);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .value-prop p { font-weight: 600; margin-bottom: 0; }
+
+  /* ── BACKBONE DIAGRAM ──────────────── */
+  .backbone-diagram {
+    margin: 32px 0;
+    padding: 24px;
+    background: #faf9f7;
+    border-radius: 8px;
+  }
+  .backbone-pillars {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .backbone-pillar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+  }
+  .backbone-pillar-box {
+    width: 100%;
+    padding: 10px 6px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-top: 4px solid;
+    background: var(--bg-white);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .backbone-pillar-box--green { border-top-color: var(--green); color: var(--green); }
+  .backbone-pillar-box--blue { border-top-color: var(--blue); color: var(--blue); }
+  .backbone-pillar-box--accent { border-top-color: var(--accent); color: var(--accent); }
+  .backbone-pillar-box--amber { border-top-color: var(--amber); color: var(--amber); }
+  .backbone-pillar-box--red { border-top-color: var(--red); color: var(--red); }
+  .backbone-connector {
+    width: 2px;
+    height: 28px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+  .backbone-bar {
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+
+  /* ── CREATE/BUILD/EXECUTE DIAGRAM ──── */
+  .cbe-diagram {
+    margin: 32px 0;
+    padding: 24px;
+    background: #faf9f7;
+    border-radius: 8px;
+  }
+  .cbe-dimensions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .cbe-dim-tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+  .cbe-flow {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .cbe-phase {
+    flex: 1;
+    padding: 16px 12px;
+    text-align: center;
+    border-radius: 6px;
+    position: relative;
+  }
+  .cbe-phase h4 {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: white;
+  }
+  .cbe-phase p {
+    font-size: 0.72rem;
+    margin: 0;
+    color: rgba(255,255,255,0.85);
+  }
+  .cbe-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    padding: 0 6px;
+  }
+  .cbe-phase--create { background: var(--blue); }
+  .cbe-phase--build { background: var(--green); }
+  .cbe-phase--execute { background: var(--amber); }
+
+  /* ── BEFORE/AFTER TABLE ─────────────── */
+  .ba-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.82rem;
+  }
+  .ba-table thead th {
+    text-align: left;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--text);
+  }
+  .ba-table thead th:first-child { color: var(--text-muted); }
+  .ba-table thead th:last-child { color: var(--accent); }
+  .ba-table tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .ba-table tbody td:first-child { color: var(--text-muted); }
+  .ba-table tbody td:last-child { font-weight: 500; }
+  .ba-table tbody tr:last-child td { border-bottom: none; }
+
+  /* ── GANTT CHART ───────────────────── */
+  .gantt-wrapper {
+    margin: 24px 0;
+    background: #faf9f7;
+    border-radius: 8px;
+    padding: 24px;
+    overflow-x: auto;
+  }
+  .gantt-header {
+    display: grid;
+    grid-template-columns: 140px repeat(9, 1fr);
+    gap: 0;
+    margin-bottom: 4px;
+  }
+  .gantt-header span {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 6px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .gantt-header span:first-child {
+    text-align: left;
+  }
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 140px repeat(9, 1fr);
+    gap: 0;
+    align-items: center;
+    min-height: 44px;
+    margin-bottom: 6px;
+  }
+  .gantt-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-right: 12px;
+  }
+  .gantt-bar {
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+  }
+  .gantt-bar--blue { background: var(--blue); }
+  .gantt-bar--green { background: var(--green); }
+  .gantt-bar--accent { background: var(--accent); }
+  .gantt-bar--amber { background: var(--amber); }
+  .gantt-detail {
+    margin: 12px 0 24px;
+    padding: 0 0 0 140px;
+  }
+  .gantt-detail-phase {
+    margin-bottom: 16px;
+  }
+  .gantt-detail-phase h4 {
+    margin-top: 0;
+  }
+  .gantt-detail-phase p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .gantt-detail-phase .gantt-value {
+    font-style: italic;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── HORIZONS ──────────────────────── */
+  .horizon-card {
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .horizon-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: white;
+    font-size: 0.95rem;
+  }
+  .horizon-card ul {
+    margin-bottom: 0;
+    color: var(--text);
+  }
+  .horizon-card--blue { background: var(--blue-light); border-left: 5px solid var(--blue); }
+  .horizon-card--blue h3 { color: var(--blue); }
+  .horizon-card--amber { background: var(--amber-light); border-left: 5px solid var(--amber); }
+  .horizon-card--amber h3 { color: var(--amber); }
+  .horizon-card--green { background: var(--green-light); border-left: 5px solid var(--green); }
+  .horizon-card--green h3 { color: var(--green); }
+
+  /* ── STATS BOX ─────────────────────── */
+  .stats-box {
+    background: var(--accent-light);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .stats-box .box-label { color: var(--accent); }
+  .stats-box ul { margin-bottom: 8px; }
+  .stats-box li { font-size: 0.85rem; }
+  .stats-box p { font-size: 0.85rem; font-style: italic; color: var(--text-muted); }
+
+  /* ── FOOTER ─────────────────────────── */
+  .footer {
+    text-align: center; padding: 20px 0 32px;
+    font-size: 0.65rem; color: var(--text-muted);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ── PAGE BREAKS ────────────────────── */
+  .page-break { page-break-before: always; }
+
+  /* ── PRINT ──────────────────────────── */
+  @page { size: A4; margin: 14mm 0 18mm 0; }
+  @page:first { margin: 0; }
+
+  @media print {
+    html { font-size: 9.5pt; }
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-wrapper { box-shadow: none; max-width: none; }
+    .cover { min-height: auto; padding: 50px 40px 40px; page-break-after: always; }
+    .cover::before { display: none; }
+    .page-break { page-break-before: always; }
+    .section { page-break-before: auto; }
+    table { page-break-inside: avoid; }
+    .box { page-break-inside: avoid; }
+    .pillar-card { page-break-inside: avoid; }
+    .finding-card { page-break-inside: avoid; }
+    h2, h3, h4 { page-break-after: avoid; }
+    .content { padding: 0 40px; }
+
+    .box--accent { background: #ededfc !important; border-color: #7A7AE6 !important; }
+    .box--red { background: #fdeaea !important; border-color: #c0392b !important; }
+    .box--green { background: #e8f5ee !important; border-color: #2a7d4f !important; }
+    .box--amber { background: #fdf5e6 !important; border-color: #9a6f1e !important; }
+    .box--blue { background: #e8f0fe !important; border-color: #2c5282 !important; }
+    blockquote { background: #ededfc !important; }
+    .cover-badge { background: #ededfc !important; border-color: #7A7AE6 !important; color: #7A7AE6 !important; }
+    .cover { border-bottom-color: #7A7AE6 !important; }
+    .value-prop { background: #ededfc !important; border-color: #7A7AE6 !important; }
+    .pillar-card { border-color: #e0ddd6 !important; }
+    .pillar-card--people { border-left-color: #2a7d4f !important; }
+    .pillar-card--process { border-left-color: #2c5282 !important; }
+    .pillar-card--tech { border-left-color: #7A7AE6 !important; }
+    .pillar-card--data { border-left-color: #9a6f1e !important; }
+    .pillar-card--compliance { border-left-color: #c0392b !important; }
+    .pillar-card--people .pillar-tag { background: #e8f5ee !important; color: #2a7d4f !important; }
+    .pillar-card--process .pillar-tag { background: #e8f0fe !important; color: #2c5282 !important; }
+    .pillar-card--tech .pillar-tag { background: #ededfc !important; color: #7A7AE6 !important; }
+    .pillar-card--data .pillar-tag { background: #fdf5e6 !important; color: #9a6f1e !important; }
+    .pillar-card--compliance .pillar-tag { background: #fdeaea !important; color: #c0392b !important; }
+    .severity-tag--red { background: #fdeaea !important; color: #c0392b !important; }
+    .severity-tag--amber { background: #fdf5e6 !important; color: #9a6f1e !important; }
+    .severity-tag--blue { background: #e8f0fe !important; color: #2c5282 !important; }
+    .backbone-diagram { background: #faf9f7 !important; }
+    .backbone-bar { background: #7A7AE6 !important; color: white !important; }
+    .backbone-pillar-box { background: white !important; }
+    .gantt-wrapper { background: #faf9f7 !important; }
+    .gantt-bar--blue { background: #2c5282 !important; }
+    .gantt-bar--green { background: #2a7d4f !important; }
+    .gantt-bar--accent { background: #7A7AE6 !important; }
+    .gantt-bar--amber { background: #9a6f1e !important; }
+    .horizon-card--blue { background: #e8f0fe !important; border-color: #2c5282 !important; }
+    .horizon-card--amber { background: #fdf5e6 !important; border-color: #9a6f1e !important; }
+    .horizon-card--green { background: #e8f5ee !important; border-color: #2a7d4f !important; }
+    .stats-box { background: #ededfc !important; border-color: #7A7AE6 !important; }
+    .cbe-diagram { background: #faf9f7 !important; }
+    .cbe-phase--create { background: #2c5282 !important; }
+    .cbe-phase--build { background: #2a7d4f !important; }
+    .cbe-phase--execute { background: #9a6f1e !important; }
+    .cbe-phase h4 { color: white !important; }
+    .cbe-phase p { color: rgba(255,255,255,0.85) !important; }
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 14px; }
+    .cover { padding: 40px 20px 32px; min-height: auto; }
+    .cover h1 { font-size: 1.7rem; }
+    .content { padding: 0 16px; }
+    .backbone-pillars { flex-wrap: wrap; }
+    .backbone-pillar-col { width: 100px; }
+    .gantt-header, .gantt-row { grid-template-columns: 100px repeat(9, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <span class="light">Transform</span><span class="bold">AZ</span>
+      </div>
+      <hr class="cover-rule">
+      <h1>Building the Digital Backbone</h1>
+      <p class="cover-subtitle">A Transformation Strategy for Taylor Group</p>
+      <dl class="cover-meta">
+        <dt>Client</dt>
+        <dd>Taylor Group</dd>
+        <dt>Date</dt>
+        <dd>March 2026</dd>
+        <dt>Reference</dt>
+        <dd>TAZ-TG-2026-02</dd>
+      </dl>
+      <div class="cover-badge">Strategic Proposal</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 01 — THE OPPORTUNITY                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <main class="content">
+
+    <section class="section">
+      <span class="section-number">01 &mdash; The Opportunity</span>
+      <h2>95 Years of Growth. One Moment of Strategic Advantage.</h2>
+
+      <p>Taylor Group has grown organically for 95 years into an enterprise-scale operation &mdash; $85M revenue, 321 people, spanning 40+ countries. But this growth has been powered by startup-era processes. That's not a criticism; it's a testament to the caliber of the people. The question isn't whether Taylor has succeeded &mdash; it's what becomes possible when you add a digital foundation to that talent.</p>
+
+      <p>The experiential marketing industry is at an inflection point. The market has reached $15.8B, with 74% of brands increasing event budgets. But the landscape is shifting radically: lead times that were 8 weeks are now 2 weeks. AI-powered competitors are entering the space. The companies that thrive won't be the ones with the most people &mdash; they'll be the ones with the smartest operations.</p>
+
+      <p>The tools are already in place. ClickUp, Gemini, Microsoft 365 &mdash; Taylor has invested in the technology. But without a unified strategy, these tools sit dormant. The investment has been made; the return hasn't been realized.</p>
+
+      <p>There is no CTO. No unified technology roadmap. No connective tissue between tools, teams, and offices. This isn't unusual for companies that grew through acquisition and organic expansion &mdash; but it means every department has optimized in isolation.</p>
+
+      <p>Only 16% of digital transformations fully succeed (McKinsey). That means doing this right matters more than doing it fast. The approach matters. The sequencing matters. The culture matters.</p>
+
+      <!-- CHANGE 2: Urgency sub-section -->
+      <h3>The Cost of Waiting</h3>
+
+      <div class="box box--amber">
+        <span class="box-label">Urgency</span>
+        <p>Every quarter without a unified digital strategy:</p>
+        <ul>
+          <li>Redundant asset fabrication continues unchecked &mdash; estimated $125K&ndash;$300K per quarter</li>
+          <li>Sales&harr;production misalignment compounds with growth &mdash; each new market Taylor enters multiplies the coordination gap</li>
+          <li>AI-powered competitors are already operationalizing &mdash; Freeman, GPJ, and Jack Morton have publicly announced AI and automation programs</li>
+          <li>The ClickUp, Gemini, and M365 investments depreciate without activation &mdash; Taylor is paying for capability it isn't using</li>
+          <li>The talent gap widens &mdash; the longer adoption is delayed, the harder the eventual change</li>
+        </ul>
+        <p>This is not a 2027 problem with a 2026 option. The operational cost is being paid today. The question is how long Taylor continues to absorb it.</p>
+      </div>
+
+      <div class="value-prop">
+        <p>The &ldquo;Digital Backbone&rdquo; is what transforms Taylor from a collection of talented teams into one connected, AI-amplified operation. Not new software &mdash; new connective tissue.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 02 — KEY FINDINGS                          -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">02 &mdash; Key Findings</span>
+      <h2>What Discovery Revealed</h2>
+
+      <p>Six patterns emerged from our conversations with Dean, Mike, and the leadership team. Each represents both a current cost and a future opportunity.</p>
+
+      <!-- Finding 1 -->
+      <div class="finding-card">
+        <div class="finding-header">
+          <h3>Asset Management Blind Spot</h3>
+          <span class="severity-tag severity-tag--red">High Impact</span>
+        </div>
+        <blockquote>
+          <p>&ldquo;We probably have, I don't know, somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn't tell you exactly what we have.&rdquo;</p>
+          <cite>&mdash; Dean</cite>
+        </blockquote>
+        <h4>What this means</h4>
+        <p>Without centralized asset tracking, teams rebuild what already exists. Across three warehouses and 40+ countries of event deployments, the duplication is invisible but costly.</p>
+        <div class="box box--amber">
+          <span class="box-label">Estimated Annual Impact</span>
+          <p><strong>$500K &ndash; $1.2M annually</strong> in redundant fabrication, lost assets, and missed reuse opportunities.</p>
+          <p><em>Based on 3-5% redundant fabrication rate across $15-25M annual asset-related spend.</em></p>
+        </div>
+      </div>
+
+      <!-- Finding 2 -->
+      <div class="finding-card">
+        <div class="finding-header">
+          <h3>Sales &harr; Production Disconnect</h3>
+          <span class="severity-tag severity-tag--red">High Impact</span>
+        </div>
+        <blockquote>
+          <p>&ldquo;Sales will sell something and then production finds out and goes, 'Wait, we can't do that in that timeline.'&rdquo;</p>
+          <cite>&mdash; Dean</cite>
+        </blockquote>
+        <h4>What this means</h4>
+        <p>Sales operates without real-time visibility into production capacity, leading to over-promises, compressed timelines, and margin erosion. The gap between what's sold and what's feasible creates downstream chaos.</p>
+        <div class="box box--amber">
+          <span class="box-label">Estimated Annual Impact</span>
+          <p><strong>$400K &ndash; $800K annually</strong> in rush costs, rework, and margin compression.</p>
+          <p><em>Estimated from rush premiums (15-25%) on misaligned projects, assuming 10-15 projects/year impacted.</em></p>
+        </div>
+      </div>
+
+      <!-- Finding 3 -->
+      <div class="finding-card">
+        <div class="finding-header">
+          <h3>Executive Time Drain</h3>
+          <span class="severity-tag severity-tag--amber">Medium Impact</span>
+        </div>
+        <blockquote>
+          <p>&ldquo;I get 400 to 500 emails a day. I'd say 70% are CCs where I don't really need to be included.&rdquo;</p>
+          <cite>&mdash; Dean</cite>
+        </blockquote>
+        <h4>What this means</h4>
+        <p>Senior leadership spends hours daily processing communication that could be filtered, summarized, or routed automatically. This isn't just an email problem &mdash; it's a decision-making bottleneck.</p>
+        <div class="box box--amber">
+          <span class="box-label">Estimated Annual Impact</span>
+          <p><strong>$225K &ndash; $300K annually</strong> in executive productivity lost to communication overhead.</p>
+          <p><em>Based on 2-3 hours/day across 3-4 senior leaders at loaded cost.</em></p>
+        </div>
+      </div>
+
+      <div class="page-break"></div>
+
+      <!-- Finding 4 -->
+      <div class="finding-card">
+        <div class="finding-header">
+          <h3>Dormant AI Investment</h3>
+          <span class="severity-tag severity-tag--amber">Medium Impact</span>
+        </div>
+        <blockquote>
+          <p>&ldquo;We're paying for ClickUp Brain but nobody's really using it.&rdquo;</p>
+          <cite>&mdash; Mike</cite>
+        </blockquote>
+        <h4>What this means</h4>
+        <p>Taylor is already paying for AI capabilities embedded in its project management platform. The investment exists; the activation doesn't. This represents the lowest-hanging fruit in the transformation.</p>
+        <div class="box box--amber">
+          <span class="box-label">Estimated Annual Impact</span>
+          <p><strong>Estimated $75K &ndash; $150K in unrealized productivity gains</strong> from tools already purchased.</p>
+        </div>
+      </div>
+
+      <!-- Finding 5 -->
+      <div class="finding-card">
+        <div class="finding-header">
+          <h3>Generational Adoption Gap</h3>
+          <span class="severity-tag severity-tag--blue">Strategic</span>
+        </div>
+        <blockquote>
+          <p>&ldquo;The younger employees pick things up instantly. Some of our senior people... it's a harder conversation.&rdquo;</p>
+          <cite>&mdash; Dean</cite>
+        </blockquote>
+        <h4>What this means</h4>
+        <p>Without a segmented adoption strategy, technology rollouts create friction instead of momentum. A one-size-fits-all approach will fail. Different personas need different pathways, different training, and different timelines.</p>
+        <div class="box box--amber">
+          <span class="box-label">Estimated Annual Impact</span>
+          <p>Every month of delayed adoption costs momentum. Industry data shows 6-month delays double transformation costs.</p>
+          <p>Adoption failure is the #1 reason transformations stall. Addressing this proactively de-risks the entire program.</p>
+        </div>
+      </div>
+
+      <!-- Finding 6 -->
+      <div class="finding-card">
+        <div class="finding-header">
+          <h3>Missing Strategic Tech Layer</h3>
+          <span class="severity-tag severity-tag--blue">Strategic</span>
+        </div>
+        <blockquote>
+          <p>&ldquo;We don't have a CTO. We've never had someone whose job is to look at all of this holistically.&rdquo;</p>
+          <cite>&mdash; Dean</cite>
+        </blockquote>
+        <h4>What this means</h4>
+        <p>Every technology decision has been made reactively and departmentally. There's no architecture, no roadmap, no governance. TransformAZ fills this gap during the engagement &mdash; and builds the framework so Taylor can sustain it after.</p>
+        <div class="box box--amber">
+          <span class="box-label">Estimated Annual Impact</span>
+          <p><strong>Uncoordinated technology spend estimated at $200K &ndash; $400K annually</strong> in duplicated tools, unused licenses, and integration workarounds.</p>
+        </div>
+      </div>
+
+      <!-- Aggregate Total Callout -->
+      <div class="value-prop">
+        <p><strong>Aggregate Estimated Impact: $1.4M &ndash; $2.85M annually</strong> in operational friction, redundant spend, and unrealized technology value.</p>
+        <p style="font-weight: 400;">These estimates are conservative and based on patterns observed in similar-scale organizations. The actual figure becomes precise during the INTAKE phase &mdash; one of its primary deliverables.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 03 — THE DIGITAL BACKBONE                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">03 &mdash; The Digital Backbone</span>
+      <h2>One Connected Operation</h2>
+
+      <p>Think of the Digital Backbone as the nervous system of Taylor Group's operation. Just as the spine connects every part of the body &mdash; enabling the brain to communicate with the hands, the eyes to coordinate with the feet &mdash; the Digital Backbone connects every part of Taylor's business: sales, production, assets, communication, and decisions.</p>
+
+      <p>In practice, this means: information flows seamlessly between offices. Production capacity is visible to sales in real time. Assets are tracked, cataloged, and reusable. Decisions are informed by data, not gut feel. And AI amplifies human talent rather than replacing it.</p>
+
+      <p>Critically, the Digital Backbone is built on what Taylor already owns. This isn't about buying new software. It's about activating what's there, connecting what's siloed, and adding the intelligence layer that turns tools into a system.</p>
+
+      <!-- Create/Build/Execute Diagram -->
+      <div class="cbe-diagram">
+        <div class="cbe-dimensions">
+          <span class="cbe-dim-tag" style="background: var(--green-light); color: var(--green);">People &amp; Culture</span>
+          <span class="cbe-dim-tag" style="background: var(--blue-light); color: var(--blue);">Processes</span>
+          <span class="cbe-dim-tag" style="background: var(--accent-light); color: var(--accent);">Tech</span>
+          <span class="cbe-dim-tag" style="background: var(--amber-light); color: var(--amber);">Data</span>
+          <span class="cbe-dim-tag" style="background: var(--red-light); color: var(--red);">Compliance</span>
+        </div>
+        <div class="cbe-flow">
+          <div class="cbe-phase cbe-phase--create">
+            <h4>CREATE</h4>
+            <p>Strategy &amp; Creative</p>
+          </div>
+          <div class="cbe-arrow">&rarr;</div>
+          <div class="cbe-phase cbe-phase--build">
+            <h4>BUILD</h4>
+            <p>Digital Experiences &amp; Fabrication</p>
+          </div>
+          <div class="cbe-arrow">&rarr;</div>
+          <div class="cbe-phase cbe-phase--execute">
+            <h4>EXECUTE</h4>
+            <p>Program Management &amp; Measurement</p>
+          </div>
+        </div>
+        <div class="backbone-bar" style="margin-top: 12px;">Digital Backbone</div>
+      </div>
+
+      <p>Taylor already operates in Create, Build, Execute. You create experiences for the world's biggest brands. You build everything from scenic environments to digital platforms. You execute programs across 40+ countries. The Digital Backbone doesn't change what you do &mdash; it transforms how well you can do it. It's the intelligence layer that runs beneath your entire operation.</p>
+
+      <p>Like the operational nervous system that Dassault Syst&egrave;mes is building for manufacturing &mdash; but tailored specifically for experiential marketing. Where Dassault connects design to fabrication to supply chain, Taylor's Digital Backbone connects creative to production to logistics to client delivery.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 04 — THE TRANSFORMATION                    -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">04 &mdash; The Transformation</span>
+      <h2>Your Language. Your Framework. Five Dimensions.</h2>
+
+      <p>Taylor already operates in Create, Build, Execute. It's how you conceive, produce, and deliver experiences for the world's most demanding brands. The Digital Backbone doesn't change that framework &mdash; it strengthens every layer of it.</p>
+
+      <p>Across all three phases, we address <strong>five transformation dimensions</strong> &mdash; the areas where operational maturity determines whether a company scales efficiently or simply grows larger:</p>
+
+      <div style="display: flex; justify-content: center; gap: 8px; margin: 16px 0 28px; flex-wrap: wrap;">
+        <span class="cbe-dim-tag" style="background: var(--green-light); color: var(--green);">People &amp; Culture</span>
+        <span class="cbe-dim-tag" style="background: var(--blue-light); color: var(--blue);">Processes</span>
+        <span class="cbe-dim-tag" style="background: var(--accent-light); color: var(--accent);">Tech Integrations</span>
+        <span class="cbe-dim-tag" style="background: var(--amber-light); color: var(--amber);">Data</span>
+        <span class="cbe-dim-tag" style="background: var(--red-light); color: var(--red);">Compliance</span>
+      </div>
+
+      <p>Each dimension shows up differently depending on the phase. Here's how the backbone transforms each layer &mdash; and what it means for Taylor.</p>
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- CREATE                                 -->
+      <!-- ══════════════════════════════════════ -->
+      <h3 style="color: var(--blue); margin-top: 28px;">CREATE &mdash; Strategy &amp; Creative</h3>
+      <p class="pillar-subtitle">The backbone helps teams think faster, think smarter, and create with more context.</p>
+
+      <p>In the Create layer, the backbone enables teams to think with more context, move faster, and develop ideas that are better connected to business reality. Today, ideation depends almost entirely on the individuals in the room &mdash; their memory, their relationships, their experience. The backbone changes that equation.</p>
+
+      <h4 style="color: var(--blue);">Strategic Intelligence</h4>
+      <p>The backbone gives strategy and creative teams access to broader and better inputs at the start of the process:</p>
+      <ul>
+        <li>Client history and past program knowledge</li>
+        <li>Competitor activity and experiential benchmarks</li>
+        <li>Market trends and directional signals</li>
+        <li>Category patterns and emerging formats</li>
+        <li>Prior campaign learnings and results</li>
+      </ul>
+      <p>This shifts ideation away from isolated inspiration and toward better-informed creative thinking.</p>
+
+      <h4 style="color: var(--blue);">Creative Memory</h4>
+      <p>Without a backbone, ideas live in people, decks, folders, and scattered files. With a backbone, the organization gains:</p>
+      <ul>
+        <li>Searchable archives of concepts, builds, and proposals</li>
+        <li>Visibility into previous ideas developed for similar clients or sectors</li>
+        <li>A reusable body of intellectual and creative work</li>
+      </ul>
+      <p>This reduces reinvention and strengthens continuity across teams.</p>
+
+      <h4 style="color: var(--blue);">Proposal Acceleration</h4>
+      <p>A major value unlock in Create is speed. The backbone helps teams respond to opportunities faster, assemble proposals using past materials and pricing logic, build early concepts with stronger grounding in what has already been done, and shorten the time between brief and first strategic output. The business can think faster, propose faster, and generate more ideas.</p>
+
+      <h4 style="color: var(--blue);">Better Forecasting During Ideation</h4>
+      <p>The strongest ideas are not only exciting &mdash; they are also feasible. The backbone brings early visibility into approximate production complexity, likely resource intensity, delivery implications, and whether similar components or assets already exist. This creates a better link between creative ambition and operational reality.</p>
+
+      <h4 style="color: var(--blue);">AI-Assisted Ideation</h4>
+      <p>AI matters here, but as an accelerator inside a broader technology foundation. Potential value includes concept expansion, reference generation, draft narrative support, alternative routes for creative exploration, and faster synthesis of market and client inputs. The point is not automated creativity, but <strong>augmented creative velocity</strong>.</p>
+
+      <div class="value-prop" style="border-color: var(--blue);">
+        <p><strong>CREATE becomes:</strong> more informed, faster, more reusable, more grounded in reality, and more capable of generating quality ideas at speed.</p>
+      </div>
+
+      <table class="ba-table">
+        <thead><tr><th>Before</th><th>After</th></tr></thead>
+        <tbody><tr>
+          <td>Ideas start from scratch, proposals assembled manually, institutional knowledge lives in people's heads</td>
+          <td>Institutional memory searchable, proposals accelerated, creative ambition grounded in operational reality</td>
+        </tr></tbody>
+      </table>
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- BUILD                                  -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="page-break"></div>
+      <h3 style="color: var(--green); margin-top: 28px;">BUILD &mdash; Digital Experiences &amp; Fabrication</h3>
+      <p class="pillar-subtitle">The backbone helps great ideas become buildable, scalable, and operationally viable.</p>
+
+      <p>In the Build layer, the backbone connects concept to production. This is where the business translates ideas into things that can actually be made, configured, integrated, shipped, and deployed. It's Taylor's operational core &mdash; and it's where the biggest efficiency gaps live.</p>
+
+      <h4 style="color: var(--green);">Design-to-Build Continuity</h4>
+      <p>One of the biggest friction points in complex project businesses is the handoff between creative intent and production reality. The backbone improves this by enabling:</p>
+      <ul>
+        <li>Continuity between design outputs and production inputs</li>
+        <li>Shared documentation across creative, digital, and fabrication teams</li>
+        <li>Clearer specifications and less interpretation loss</li>
+        <li>Stronger alignment between what is imagined and what is actually buildable</li>
+      </ul>
+      <p>This reduces downstream confusion and rework.</p>
+
+      <h4 style="color: var(--green);">Asset Intelligence</h4>
+      <p>The backbone creates visibility into what the business already owns, has built, or can reuse:</p>
+      <ul>
+        <li>Reusable scenic elements and prior fabrication components</li>
+        <li>Historic build references and material precedents</li>
+        <li>Digital assets connected to physical experiences</li>
+      </ul>
+      <p>Instead of starting from zero, teams can build from memory.</p>
+
+      <h4 style="color: var(--green);">Materials &amp; Component Visibility</h4>
+      <p>The backbone creates a stronger picture of what is needed to build and what is already available &mdash; supporting material planning, component tracking, procurement coordination, and supplier-related visibility. This reduces unnecessary friction and helps control costs and timing.</p>
+
+      <h4 style="color: var(--green);">Capacity &amp; Production Forecasting</h4>
+      <p>A major theme from discovery was the need to better align sales growth with production capacity. The backbone makes it easier to understand current production load, team capacity, likely constraints, timing conflicts across projects, and build implications of incoming pipeline. This is where the business starts moving from <strong>reactive production to planned production</strong>.</p>
+
+      <h4 style="color: var(--green);">Digital&ndash;Physical Integration</h4>
+      <p>Taylor is unusual because Build includes both digital experiences and physical fabrication. The backbone creates alignment across physical environments, interactive experiences, content production, platform integration, and on-site digital behavior. This is a major strategic advantage if connected well.</p>
+
+      <h4 style="color: var(--green);">Cost Intelligence</h4>
+      <p>The backbone improves the ability to estimate and manage cost before problems surface &mdash; benchmark against past builds, anticipate cost drivers, understand design decisions with production implications, and price work with better historical reference. Build becomes not just faster, but more <strong>commercially informed</strong>.</p>
+
+      <div class="value-prop" style="border-color: var(--green);">
+        <p><strong>BUILD becomes:</strong> more coordinated, more predictable, more reusable, more cost-aware, and more connected across digital and physical work.</p>
+      </div>
+
+      <table class="ba-table">
+        <thead><tr><th>Before</th><th>After</th></tr></thead>
+        <tbody><tr>
+          <td>Sales sells blind, assets rebuilt because nobody knows they exist, each office runs its own way</td>
+          <td>Design-to-build continuity, searchable asset inventory, planned production, cost intelligence from history</td>
+        </tr></tbody>
+      </table>
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- EXECUTE                                -->
+      <!-- ══════════════════════════════════════ -->
+      <div class="page-break"></div>
+      <h3 style="color: var(--amber); margin-top: 28px;">EXECUTE &mdash; Program Management &amp; Measurement</h3>
+      <p class="pillar-subtitle">The backbone turns execution from something people discover too late into something they can manage actively.</p>
+
+      <p>In the Execute layer, the backbone enables orchestration. This is where complexity peaks, because projects move from internal planning into real-world delivery. It's also where Taylor's leadership spends the most time today &mdash; often manually.</p>
+
+      <h4 style="color: var(--amber);">Project Orchestration</h4>
+      <p>Execution depends on multiple teams, timelines, vendors, dependencies, and deliverables moving together. The backbone helps create:</p>
+      <ul>
+        <li>Centralized project visibility and shared timelines</li>
+        <li>Better coordination across departments</li>
+        <li>Clearer dependencies and ownership</li>
+        <li>Stronger alignment between planning and delivery</li>
+      </ul>
+      <p>This is the shift from fragmented execution to <strong>connected execution</strong>.</p>
+
+      <h4 style="color: var(--amber);">Resource Allocation</h4>
+      <p>Execution quality depends on whether the right people and capabilities are available at the right moment. The backbone supports better crew planning, specialist allocation, visibility into team utilization, and cross-project resource balancing. This reduces overload, blind spots, and fire-fighting.</p>
+
+      <h4 style="color: var(--amber);">Logistics &amp; Deployment Visibility</h4>
+      <p>In experiential work, execution involves physical movement, deployment, timing, setup, breakdown, and on-site coordination. The backbone improves logistics tracking, deployment readiness, handoff from fabrication to site, installation sequencing, and clarity around what is arriving where and when. This reduces execution risk.</p>
+
+      <h4 style="color: var(--amber);">Real-Time Execution Visibility</h4>
+      <p>One of the highest-value outcomes of a backbone is making delivery visible while it is happening. Project status can be monitored more clearly, emerging issues can be seen earlier, leadership can intervene sooner, and decisions can be made with better information. When execution is visible in a system, leadership doesn't need to be CC'd on every email to stay informed.</p>
+
+      <h4 style="color: var(--amber);">Measurement &amp; Learning</h4>
+      <p>Taylor's Execute layer includes Measurement &mdash; execution does not end at delivery. The backbone captures event outcomes, attendee engagement, lead conversion data, performance patterns across formats, and post-event learnings. This closes the loop between delivery and future strategy.</p>
+
+      <h4 style="color: var(--amber);">Continuous Improvement</h4>
+      <p>Once execution data is captured and connected, the business gains something bigger than reporting: <strong>a learning system</strong>. Each project informs the next. Recurring issues become visible. High-performing formats become identifiable. The company becomes better over time, not just busier.</p>
+
+      <div class="value-prop" style="border-color: var(--amber);">
+        <p><strong>EXECUTE becomes:</strong> more visible, more coordinated, more predictable, more measurable, and more capable of learning over time.</p>
+      </div>
+
+      <table class="ba-table">
+        <thead><tr><th>Before</th><th>After</th></tr></thead>
+        <tbody><tr>
+          <td>Status via email chains, reactive fire-fighting, post-event learnings lost, no unified view</td>
+          <td>Real-time visibility, connected execution, organizational learning compounds over time</td>
+        </tr></tbody>
+      </table>
+
+      <!-- ── Transformation Dimensions Summary ── -->
+      <div class="page-break"></div>
+      <h3 style="color: var(--accent);">Five Dimensions Across Every Phase</h3>
+      <p>The five transformation dimensions &mdash; People &amp; Culture, Processes, Tech Integrations, Data, and Compliance &mdash; run through every layer of Create, Build, and Execute. Here's how they map:</p>
+
+      <div class="pillar-card pillar-card--people" style="margin: 16px 0;">
+        <div class="pillar-header"><h4 style="margin:0;">People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div>
+        <p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p>
+        <div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div>
+      </div>
+
+      <div class="pillar-card pillar-card--process" style="margin: 16px 0;">
+        <div class="pillar-header"><h4 style="margin:0;">Processes</h4><span class="pillar-tag">Dimension</span></div>
+        <p>SOP modernization of actual workflows. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p>
+        <div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div>
+      </div>
+
+      <div class="pillar-card pillar-card--tech" style="margin: 16px 0;">
+        <div class="pillar-header"><h4 style="margin:0;">Tech Integrations</h4><span class="pillar-tag">Dimension</span></div>
+        <p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p>
+        <div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div>
+      </div>
+
+      <div class="pillar-card pillar-card--data" style="margin: 16px 0;">
+        <div class="pillar-header"><h4 style="margin:0;">Data</h4><span class="pillar-tag">Dimension</span></div>
+        <p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Client intelligence across verticals. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p>
+        <div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div>
+      </div>
+
+      <div class="pillar-card pillar-card--compliance" style="margin: 16px 0;">
+        <div class="pillar-header"><h4 style="margin:0;">Compliance</h4><span class="pillar-tag">Dimension</span></div>
+        <p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Internal controls for AI-generated content. Regulatory readiness for pharma and healthcare clients.</p>
+        <div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div>
+      </div>
+
+      <!-- C/B/E Outcome Callout -->
+      <div class="value-prop" style="margin-top: 28px;">
+        <p><strong>Five dimensions. Three phases. One backbone.</strong> The Digital Backbone makes Taylor more informed in Create, more coordinated in Build, and more governed in Execute. It doesn't add complexity &mdash; it removes the friction that 95 years of organic growth naturally created.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 05 — TIMELINE                              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">05 &mdash; Timeline</span>
+      <h2>A Phased Approach</h2>
+
+      <p>Transformation is sequenced for momentum. Each phase builds on the previous, ensuring that early wins fund and justify later investment.</p>
+
+      <div class="gantt-wrapper">
+        <div class="gantt-header">
+          <span></span>
+          <span>Apr</span>
+          <span>May</span>
+          <span>Jun</span>
+          <span>Jul</span>
+          <span>Aug</span>
+          <span>Sep</span>
+          <span>Oct</span>
+          <span>Nov</span>
+          <span>Dec</span>
+        </div>
+
+        <!-- Intake: Apr–May (cols 1-2) -->
+        <div class="gantt-row">
+          <span class="gantt-label" style="color: var(--blue);">Intake</span>
+          <div class="gantt-bar gantt-bar--blue" style="grid-column: 2 / 4;">Intake</div>
+        </div>
+
+        <!-- Discovery: Jun (col 3) -->
+        <div class="gantt-row">
+          <span class="gantt-label" style="color: var(--green);">Discovery</span>
+          <div class="gantt-bar gantt-bar--green" style="grid-column: 4 / 5;">Discovery</div>
+        </div>
+
+        <!-- Implementation: Jul–Oct (cols 4-7) -->
+        <div class="gantt-row">
+          <span class="gantt-label" style="color: var(--accent);">Implementation</span>
+          <div class="gantt-bar gantt-bar--accent" style="grid-column: 5 / 9;">Implementation</div>
+        </div>
+
+        <!-- Stabilization: Nov+ (cols 8-9) -->
+        <div class="gantt-row">
+          <span class="gantt-label" style="color: var(--amber);">Stabilization</span>
+          <div class="gantt-bar gantt-bar--amber" style="grid-column: 9 / 11;">Stabilization</div>
+        </div>
+      </div>
+
+      <h3 style="color: var(--blue);">Intake <span style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">&mdash; April &ndash; May 2026</span></h3>
+      <p>SOP documentation review, technology audit, stakeholder mapping, engagement preparation.</p>
+      <p><em>Value delivered: Clear baseline of current state. No assumptions &mdash; only evidence.</em></p>
+
+      <h3 style="color: var(--green);">Discovery <span style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">&mdash; June 2026</span></h3>
+      <p>Onsite Toronto interviews, process mapping workshops, technology assessment, AI vision alignment.</p>
+      <p><em>Value delivered: Shared understanding of what's possible and what matters most.</em></p>
+
+      <h3 style="color: var(--accent);">Implementation <span style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">&mdash; July &ndash; October 2026</span></h3>
+      <p>Priority workstream execution, automation builds, platform optimization, champion training.</p>
+      <p><em>Value delivered: Tangible improvements. Measurable ROI. Teams experiencing the change.</em></p>
+
+      <h3 style="color: var(--amber);">Stabilization <span style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">&mdash; November 2026+</span></h3>
+      <p>Adoption reinforcement, measurement &amp; reporting, knowledge transfer, advisory retainer.</p>
+      <p><em>Value delivered: Self-sustaining capability. Taylor owns the transformation, not TransformAZ.</em></p>
+
+      <div class="value-prop" style="margin-top: 32px;">
+        <p style="font-weight: 700; margin-bottom: 12px;">How the phases map to Create, Build, Execute:</p>
+        <p style="font-weight: 400;"><strong>INTAKE + DISCOVERY</strong> &rarr; Primarily <strong>CREATE</strong> &mdash; understanding how Taylor creates, builds, and executes today. Documenting workflows, mapping processes, auditing technology.</p>
+        <p style="font-weight: 400;"><strong>IMPLEMENTATION</strong> &rarr; Primarily <strong>BUILD</strong> &mdash; activating tools, connecting systems, building automations, training champions.</p>
+        <p style="font-weight: 400;"><strong>STABILIZATION</strong> &rarr; Primarily <strong>EXECUTE</strong> &mdash; measuring adoption, optimizing workflows, ensuring the backbone sustains itself.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 06 — MARKET INSIGHTS                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">06 &mdash; Market Insights</span>
+      <h2>AI in Experiential Marketing: Three Horizons</h2>
+
+      <p>Understanding where the industry is heading helps frame why transformation now is a strategic imperative, not a technology project.</p>
+
+      <!-- Horizon 1 -->
+      <div class="horizon-card horizon-card--blue">
+        <h3>Horizon 1: Now &rarr; 12 Months</h3>
+        <ul>
+          <li>$15.8 billion global experiential marketing market at its peak</li>
+          <li>82% of brands report that in-person events deliver higher ROI than digital alternatives</li>
+          <li>AI is already automating 47% of marketing activities, with 30% productivity gains achievable</li>
+          <li>Most companies are experimenting; few have operationalized AI into their workflows</li>
+          <li>Quick wins available now: email automation, meeting summarization, content draft generation, project status reporting</li>
+        </ul>
+      </div>
+
+      <!-- Horizon 2 -->
+      <div class="horizon-card horizon-card--amber">
+        <h3>Horizon 2: 1&ndash;3 Years</h3>
+        <ul>
+          <li>Agentic AI replaces basic chatbots &mdash; ClickUp Brain evolves into autonomous project management agents</li>
+          <li>Multimodal AI enables new forms of immersive experience design and visualization</li>
+          <li>Asset tracking moves from spreadsheets to RFID/IoT-based real-time monitoring</li>
+          <li>Companies that transformed early are winning enterprise contracts through operational proof points</li>
+          <li>The gap between AI-enabled and AI-absent firms becomes a competitive divide</li>
+        </ul>
+      </div>
+
+      <!-- Horizon 3 -->
+      <div class="horizon-card horizon-card--green">
+        <h3>Horizon 3: 5&ndash;10 Years &mdash; Where We See Taylor Group in 2036</h3>
+        <ul>
+          <li>Predictive operations: AI forecasts capacity needs, material costs, and client demands before they materialize</li>
+          <li>Digital twin technology: virtual replicas of warehouses, assets, and event spaces for planning and optimization</li>
+          <li>AI-powered creative augmentation: from concept to fabrication specs to procurement to logistics &mdash; AI-assisted end-to-end</li>
+          <li>Taylor's institutional knowledge becomes its competitive moat &mdash; proprietary data, process intelligence, client insights</li>
+          <li>The companies that built their Digital Backbone in 2026 are the market leaders in 2036</li>
+        </ul>
+      </div>
+
+      <!-- Stats Box -->
+      <div class="stats-box">
+        <span class="box-label">The Transformation Landscape</span>
+        <ul>
+          <li><strong>16%</strong> of digital transformations fully succeed &mdash; McKinsey</li>
+          <li><strong>70%</strong> of change programs fail to meet objectives</li>
+          <li><strong>Only 25%</strong> of organizations achieve expected AI ROI</li>
+          <li><strong>40% cost reduction</strong> potential for companies with unified digital operations &mdash; McKinsey Lighthouse Study</li>
+        </ul>
+        <p>These statistics aren't meant to discourage. They're meant to emphasize: approach matters more than ambition.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 07 — WHY TRANSFORMAZ                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">07 &mdash; Why TransformAZ</span>
+      <h2>The Right Partner for This Moment</h2>
+
+      <p><strong>Industry experience that matters.</strong> We've worked with eSports organizations, trade show companies, and creative agencies &mdash; industries where the work is project-based, deadline-driven, and deeply human. We understand that Taylor's business isn't a factory floor. It's a creative operation that needs systems, not the other way around.</p>
+
+      <p><strong>Operational-first approach.</strong> We don't start with technology. We start with how people actually work, what processes actually exist, and where the real friction lives. Technology is the enabler, not the answer.</p>
+
+      <p><strong>Activate what you have.</strong> Our first instinct isn't to sell new software. It's to make the investments Taylor has already made &mdash; ClickUp, Gemini, M365 &mdash; actually deliver value. This reduces cost, accelerates timeline, and builds on familiar tools.</p>
+
+      <p><strong>People-centered transformation.</strong> The 16% success rate for digital transformations isn't a technology problem. It's a people problem. We build adoption into every phase, not as an afterthought but as the primary design constraint.</p>
+
+      <p><strong>Phased, de-risked engagement.</strong> Each phase delivers standalone value. Taylor sees results before committing to the next stage. No multi-year contracts. No lock-in. Prove value, then expand.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 08 — INVESTMENT & NEXT STEPS               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">08 &mdash; Next Steps</span>
+      <h2>Moving Forward</h2>
+
+      <h3>Investment Framework</h3>
+
+      <p>TransformAZ structures engagements for accountability and de-risked investment. Each phase is scoped, priced, and delivered independently &mdash; Taylor commits only to the current phase, with full visibility into what comes next.</p>
+
+      <table class="ba-table">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Duration</th>
+            <th>Format</th>
+            <th>Investment Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INTAKE</td>
+            <td>6-8 weeks</td>
+            <td>Remote</td>
+            <td>Fixed project fee</td>
+          </tr>
+          <tr>
+            <td>DISCOVERY</td>
+            <td>2 weeks</td>
+            <td>Onsite Toronto + remote</td>
+            <td>Fixed project fee</td>
+          </tr>
+          <tr>
+            <td>IMPLEMENTATION</td>
+            <td>16 weeks</td>
+            <td>Hybrid</td>
+            <td>Monthly retainer with defined deliverables</td>
+          </tr>
+          <tr>
+            <td>STABILIZATION</td>
+            <td>Ongoing</td>
+            <td>Remote</td>
+            <td>Advisory retainer (monthly or quarterly)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Specific investment figures are developed after INTAKE scoping confirms the precise workstreams, team requirements, and deliverable set. This ensures pricing reflects Taylor's actual needs &mdash; not assumptions.</p>
+
+      <h3>What Taylor Gets in Each Phase</h3>
+
+      <ul>
+        <li><strong>INTAKE delivers:</strong> Documented current-state assessment, technology audit, stakeholder map, prioritized workstream recommendations, and a scoped proposal for DISCOVERY + IMPLEMENTATION with defined deliverables and pricing. This is the phase where estimates become precise.</li>
+        <li><strong>DISCOVERY delivers:</strong> Process maps, capability assessment, AI readiness evaluation, quick-win identification, and a detailed implementation roadmap validated by Taylor's leadership team onsite.</li>
+        <li><strong>IMPLEMENTATION delivers:</strong> Activated platforms (ClickUp, Gemini, M365), built automations, trained champions, documented SOPs, and measurable KPIs for each workstream.</li>
+        <li><strong>STABILIZATION delivers:</strong> Adoption monitoring, optimization recommendations, quarterly business reviews, and knowledge transfer that ensures Taylor owns the transformation &mdash; not TransformAZ.</li>
+      </ul>
+
+      <h3>Proposed Next Step</h3>
+
+      <div class="value-prop">
+        <p><strong>We propose starting with INTAKE in April 2026.</strong></p>
+        <p style="font-weight: 400;">This is a contained, fixed-fee engagement that delivers a comprehensive assessment and a scoped roadmap &mdash; with no obligation to proceed further. At the end of INTAKE, Taylor will have:</p>
+        <ol style="font-weight: 400; margin: 12px 0 12px 1.25rem;">
+          <li>A clear, evidence-based picture of current operations</li>
+          <li>Quantified impact estimates (replacing the ranges in this document with precise figures)</li>
+          <li>A prioritized list of quick wins and strategic workstreams</li>
+          <li>A fully scoped and priced proposal for DISCOVERY and IMPLEMENTATION</li>
+        </ol>
+        <p style="font-weight: 400;">If the assessment confirms the opportunity outlined in this document, we proceed. If not, Taylor walks away with a valuable operational audit at minimal cost.</p>
+      </div>
+
+      <p>To discuss INTAKE scoping and timeline, contact TransformAZ to schedule a 45-minute alignment session with Dean and the leadership team.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      TransformAZ &mdash; March 2026 &mdash; Prepared exclusively for Taylor Group
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>

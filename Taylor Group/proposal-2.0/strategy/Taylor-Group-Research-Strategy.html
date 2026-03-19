@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research, Findings &amp; Transformation Strategy — Taylor Group | TransformAZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --bg: #f4f3f0;
+    --bg-white: #ffffff;
+    --accent: #c0392b;
+    --accent-light: #fdeaea;
+    --accent-dark: #962d23;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+    --blue: #2c5282;
+    --blue-light: #e8f0fe;
+    --border: #e0ddd6;
+    --border-light: #edeae4;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  .page-wrapper {
+    max-width: 920px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    box-shadow: 0 1px 40px rgba(0,0,0,0.06);
+  }
+
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── COVER ──────────────────────────── */
+  .cover {
+    padding: 60px 48px 48px;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .cover::before {
+    content: 'INTERNAL';
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    font-size: 5rem;
+    color: var(--accent);
+    opacity: 0.05;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+  .cover-inner { max-width: 600px; position: relative; z-index: 1; }
+  .cover-logo {
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 60px;
+  }
+  .cover-logo .light { font-weight: 300; color: var(--text); }
+  .cover-logo .bold { font-weight: 700; color: var(--accent); }
+  .cover-rule {
+    width: 56px; height: 4px; background: var(--accent);
+    border: none; margin: 0 0 28px; border-radius: 2px;
+  }
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .cover-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 8px 20px;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .cover-meta dt {
+    font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; font-size: 0.65rem; letter-spacing: 0.08em; padding-top: 3px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 12px; border-radius: 3px;
+    margin-top: 32px;
+    border: 1px solid var(--accent);
+  }
+
+  /* ── SECTIONS ───────────────────────── */
+  .section {
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--border-light);
+  }
+  .section:first-of-type { border-top: none; }
+  .section-number {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); display: block; margin-bottom: 6px;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.45rem; font-weight: 600; line-height: 1.2;
+    padding-bottom: 12px; border-bottom: 3px solid var(--text);
+    margin-bottom: 24px; position: relative;
+  }
+  h2::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 48px; height: 3px; background: var(--accent);
+  }
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem; font-weight: 600; line-height: 1.25;
+    margin-top: 32px; margin-bottom: 10px;
+  }
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 0.82rem; font-weight: 700;
+    margin-top: 20px; margin-bottom: 6px;
+  }
+  p { margin-bottom: 12px; font-size: 0.92rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+  ul, ol { padding-left: 1.25rem; margin-bottom: 12px; font-size: 0.92rem; }
+  li { margin-bottom: 5px; }
+  li::marker { color: var(--accent); }
+
+  /* ── CALLOUT BOXES ──────────────────── */
+  .box {
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    border-left: 4px solid;
+    font-size: 0.88rem;
+  }
+  .box p { margin-bottom: 6px; }
+  .box p:last-child { margin-bottom: 0; }
+  .box-label {
+    font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 6px; display: block;
+  }
+  .box--red { background: var(--accent-light); border-color: var(--accent); }
+  .box--red .box-label { color: var(--accent); }
+  .box--green { background: var(--green-light); border-color: var(--green); }
+  .box--green .box-label { color: var(--green); }
+  .box--amber { background: var(--amber-light); border-color: var(--amber); }
+  .box--amber .box-label { color: var(--amber); }
+  .box--blue { background: var(--blue-light); border-color: var(--blue); }
+  .box--blue .box-label { color: var(--blue); }
+
+  /* ── TABLES ─────────────────────────── */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 16px 0; font-size: 0.82rem;
+  }
+  thead th {
+    text-align: left; font-size: 0.65rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); padding: 10px 10px 10px 0;
+    border-bottom: 2px solid var(--text);
+  }
+  tbody td {
+    padding: 9px 10px 9px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .table-wrap {
+    background: #faf9f7;
+    border-radius: 6px;
+    padding: 4px 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+
+  /* ── BLOCKQUOTE ─────────────────────── */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 16px 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+  }
+  blockquote p { font-style: italic; margin-bottom: 4px; }
+  blockquote cite {
+    font-style: normal;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ── PILLAR CARDS ────────────────────── */
+  .pillar-card {
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--bg-white);
+  }
+  .pillar-card--discover { border-left-color: var(--blue); }
+  .pillar-card--activate { border-left-color: var(--amber); }
+  .pillar-card--connect { border-left-color: var(--accent); }
+  .pillar-card--protect { border-left-color: var(--green); }
+  .pillar-card--future { border-left-color: #6b46c1; }
+  .pillar-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .pillar-tag {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .pillar-card--discover .pillar-tag { background: var(--blue-light); color: var(--blue); }
+  .pillar-card--activate .pillar-tag { background: var(--amber-light); color: var(--amber); }
+  .pillar-card--connect .pillar-tag { background: var(--accent-light); color: var(--accent); }
+  .pillar-card--protect .pillar-tag { background: var(--green-light); color: var(--green); }
+  .pillar-card--future .pillar-tag { background: #f3e8ff; color: #6b46c1; }
+  .pillar-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .pillar-card ul { margin-bottom: 12px; }
+  .pillar-card .box { margin-top: 12px; margin-bottom: 0; }
+
+  /* ── VALUE PROP HIGHLIGHT ────────────── */
+  .value-prop {
+    border: 2px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--accent-light);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .value-prop p { font-weight: 600; margin-bottom: 0; }
+
+  /* ── TOC ─────────────────────────────── */
+  .toc {
+    padding: 48px 0 32px;
+  }
+  .toc h2 { margin-bottom: 20px; }
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-number {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-width: 72px;
+  }
+  .toc-title { font-weight: 600; }
+
+  /* ── FOOTER ─────────────────────────── */
+  .footer {
+    text-align: center; padding: 20px 0 32px;
+    font-size: 0.65rem; color: var(--text-muted);
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+
+  /* ── PAGE BREAKS ────────────────────── */
+  .page-break { page-break-before: always; }
+
+  /* ── PRINT ──────────────────────────── */
+  @page { size: A4; margin: 14mm 0 18mm 0; }
+  @page:first { margin: 0; }
+
+  @media print {
+    html { font-size: 9.5pt; }
+    body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page-wrapper { box-shadow: none; max-width: none; }
+    .cover { min-height: auto; padding: 50px 40px 40px; page-break-after: always; }
+    .cover::before { display: none; }
+    .page-break { page-break-before: always; }
+    .section { page-break-before: auto; }
+    table { page-break-inside: avoid; }
+    .box { page-break-inside: avoid; }
+    .pillar-card { page-break-inside: avoid; }
+    h2, h3, h4 { page-break-after: avoid; }
+    .content { padding: 0 40px; }
+
+    .box--red { background: #fdeaea !important; }
+    .box--green { background: #e8f5ee !important; }
+    .box--amber { background: #fdf5e6 !important; }
+    .box--blue { background: #e8f0fe !important; }
+    .table-wrap { background: #faf9f7 !important; }
+    blockquote { background: #fdeaea !important; }
+    .cover-badge { background: #fdeaea !important; border-color: #c0392b !important; color: #c0392b !important; }
+    .cover { border-bottom-color: #c0392b !important; }
+    .value-prop { background: #fdeaea !important; border-color: #c0392b !important; }
+    .pillar-card { border-color: #e0ddd6 !important; }
+    .pillar-card--discover { border-left-color: #2c5282 !important; }
+    .pillar-card--activate { border-left-color: #9a6f1e !important; }
+    .pillar-card--connect { border-left-color: #c0392b !important; }
+    .pillar-card--protect { border-left-color: #2a7d4f !important; }
+    .pillar-card--future { border-left-color: #6b46c1 !important; }
+    .pillar-card--discover .pillar-tag { background: #e8f0fe !important; color: #2c5282 !important; }
+    .pillar-card--activate .pillar-tag { background: #fdf5e6 !important; color: #9a6f1e !important; }
+    .pillar-card--connect .pillar-tag { background: #fdeaea !important; color: #c0392b !important; }
+    .pillar-card--protect .pillar-tag { background: #e8f5ee !important; color: #2a7d4f !important; }
+    .pillar-card--future .pillar-tag { background: #f3e8ff !important; color: #6b46c1 !important; }
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 14px; }
+    .cover { padding: 40px 20px 32px; min-height: auto; }
+    .cover h1 { font-size: 1.7rem; }
+    .content { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- COVER -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <span class="light">transform</span><span class="bold">az</span>
+      </div>
+      <hr class="cover-rule">
+      <h1>Research, Findings &amp;<br>Transformation Strategy</h1>
+      <p class="cover-subtitle">Taylor Group &mdash; Strategic Analysis</p>
+      <dl class="cover-meta">
+        <dt>Document</dt>
+        <dd>Internal Research &amp; Strategy</dd>
+        <dt>Prepared for</dt>
+        <dd>Internal use only</dd>
+        <dt>Client</dt>
+        <dd>Taylor Group (Toronto, Canada)</dd>
+        <dt>Date</dt>
+        <dd>March 2026</dd>
+        <dt>Status</dt>
+        <dd>CONFIDENTIAL &mdash; INTERNAL</dd>
+      </dl>
+      <span class="cover-badge">Confidential &mdash; Internal</span>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ═══════════════════════════════════
+         TABLE OF CONTENTS
+         ═══════════════════════════════════ -->
+    <nav class="toc page-break">
+      <h2>Table of Contents</h2>
+      <ol class="toc-list">
+        <li><span class="toc-number">Section 01</span><span class="toc-title">Company Profile &mdash; Research</span></li>
+        <li><span class="toc-number">Section 02</span><span class="toc-title">TransformAZ Value Proposition for Taylor Group</span></li>
+        <li><span class="toc-number">Section 03</span><span class="toc-title">Opportunity Statement</span></li>
+        <li><span class="toc-number">Section 04</span><span class="toc-title">Findings &mdash; What we discovered in the meetings</span></li>
+        <li><span class="toc-number">Section 05</span><span class="toc-title">Transformation Areas &mdash; Complete Map</span></li>
+        <li><span class="toc-number">Section 06</span><span class="toc-title">Transformation Campaign Pillars</span></li>
+        <li><span class="toc-number">Section 07</span><span class="toc-title">Industry Context &mdash; Data for the AI Vision Document</span></li>
+        <li><span class="toc-number">Section 08</span><span class="toc-title">Executive Summary</span></li>
+      </ol>
+    </nav>
+
+    <!-- ═══════════════════════════════════
+         SECTION 1: COMPANY PROFILE
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 01</span>
+      <h2>Company Profile &mdash; Research</h2>
+
+      <h3>Company data</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Field</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Legal name</strong></td><td>The Taylor Group</td></tr>
+            <tr><td><strong>Founded</strong></td><td>1931 (95 years)</td></tr>
+            <tr><td><strong>Origin</strong></td><td>Sawmill &rarr; exhibit fabrication &rarr; global experiential agency</td></tr>
+            <tr><td><strong>Employees</strong></td><td>~321</td></tr>
+            <tr><td><strong>Estimated revenue</strong></td><td>~$85M USD (source: ZoomInfo)</td></tr>
+            <tr><td><strong>HQ</strong></td><td>Toronto, Canada (90 Fraser Ave + planta en Orangeville, ON)</td></tr>
+            <tr><td><strong>Offices</strong></td><td>Toronto, Boston, Cleveland</td></tr>
+            <tr><td><strong>Warehousing</strong></td><td>Orlando, Las Vegas (logistics hubs for trade shows)</td></tr>
+            <tr><td><strong>Global reach</strong></td><td>40+ countries</td></tr>
+            <tr><td><strong>Ownership</strong></td><td>Private company. Dean Marks = Owner. Ben Seaton = Operating CEO.</td></tr>
+            <tr><td><strong>Website</strong></td><td>taylorinc.com</td></tr>
+            <tr><td><strong>Industry</strong></td><td>Experiential Marketing / Event Services</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Service structure (from the website)</h3>
+      <p>Taylor operates on 3 pillars:</p>
+      <ol>
+        <li><strong>Create</strong> &mdash; Experience strategy, creative ideation, design</li>
+        <li><strong>Build</strong> &mdash; In-house fabrication, event production, digital/content services</li>
+        <li><strong>Execute</strong> &mdash; Program management, logistics execution, results measurement</li>
+      </ol>
+
+      <h3>Business verticals (from the calls)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Vertical</th><th>Description</th><th>Example clients</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Technology</strong></td><td>Exhibits and activations for tech companies, cybersecurity</td><td>Intel (26 years), Microsoft, Samsung, LG, ZScaler, Proofpoint, Veeam</td></tr>
+            <tr><td><strong>Healthcare / Pharma</strong></td><td>Medical congresses, pharma events, medical device</td><td>AstraZeneca, Novartis, BMS, Genentech, Roche, Stryker, Kartos Therapeutics</td></tr>
+            <tr><td><strong>Consumer / Brand</strong></td><td>Brand activations, retail environments, live events</td><td>Porsche, Volkswagen, Nike, Chanel, Audi, Shopify, WestJet</td></tr>
+            <tr><td><strong>Digital / Global Core</strong></td><td>Internal tech division: AR/VR, gaming, content creation, interactive</td><td>~30-35 people, operated semi-independently</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>&ldquo;Global Core&rdquo; Division (from the calls)</h3>
+      <ul>
+        <li>~30-35 people: developers, gamers, content creators</li>
+        <li>Historically operated as an &ldquo;internal startup&rdquo; separate from the core business</li>
+        <li>Originated from the acquisition of a digital company in 2007</li>
+        <li>Capabilities: websites, touchscreens, AR/VR, video games for exhibits, interactive experiences</li>
+        <li>Dean mentioned they are now &ldquo;much more integrated&rdquo; with the main business</li>
+        <li>Opportunity: this division has technical capabilities that could benefit the entire operation</li>
+      </ul>
+
+      <h3>Notable portfolio (from the website + calls)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Project</th><th>Type</th><th>Detail</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Intel @ CES 2026</td><td>Exhibit</td><td>Core Ultra Series 3 launch &mdash; 26-year relationship</td></tr>
+            <tr><td>Dassault Syst&egrave;mes @ CES</td><td>Exhibit</td><td>Reference partner for Diso/SolidWorks</td></tr>
+            <tr><td>Aramco Americas @ IMAGE 2025</td><td>Exhibit</td><td>50&rsquo; &times; 60&rsquo; &mdash; enterprise scale</td></tr>
+            <tr><td>Porsche 75 Years @ CIAS</td><td>Activation</td><td>Anniversary at Toronto International Auto Show</td></tr>
+            <tr><td>The Block &mdash; NBA All-Star</td><td>Event</td><td>Mountain Dew/Ruffles fan experience, Cleveland</td></tr>
+            <tr><td>San Francisco 49ers Museum</td><td>Permanent</td><td>Fan engagement installation</td></tr>
+            <tr><td>Canon Experience Centre</td><td>Retail</td><td>Retail environment redesign</td></tr>
+            <tr><td>WestJet Christmas Miracle</td><td>Event</td><td>Viral brand activation</td></tr>
+            <tr><td>Scotiabank Respite</td><td>Environment</td><td>Relaxation retreat space</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Current positioning (from the website)</h3>
+      <ul>
+        <li><em>&ldquo;Immersive brand experiences built to perform&rdquo;</em></li>
+        <li><em>&ldquo;Everything is possible&rdquo;</em></li>
+        <li>They position themselves as: storytellers, artists, strategists, problem solvers, craftspeople, architects of brand experiences</li>
+        <li>Emphasis on: flawless execution, service mindset, measurable results</li>
+      </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 2: VALUE PROPOSITION
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 02</span>
+      <h2>TransformAZ Value Proposition for Taylor Group</h2>
+
+      <h3>Why does Taylor need TransformAZ?</h3>
+      <p>Taylor Group is an $85M company with 321 employees that has grown organically over 95 years. They have the <strong>scale of an enterprise company</strong> but operate with the <strong>processes of a company that grew without a formal technology structure</strong>. They have no CTO. Their tech stack was adopted reactively (ClickUp because they needed PM, Gemini because Google, M365 because finance). There is no unified technology strategy.</p>
+
+      <p>The timing is critical:</p>
+      <ul>
+        <li>The B2B trade show industry reached <strong>$15.8 billion in 2024</strong> &mdash; it is at historic highs</li>
+        <li><strong>74% of Fortune 1000 marketers</strong> plan to increase event budgets</li>
+        <li>But <strong>lead times compressed from 8 to 2 weeks</strong> &mdash; operational speed is now a competitive differentiator</li>
+        <li>Only <strong>25% of organizations achieve the expected ROI from AI investments</strong> &mdash; implementing poorly is worse than not implementing at all</li>
+        <li><strong>70% of change programs fail</strong> &mdash; change management is not optional</li>
+      </ul>
+
+      <h3>Value Proposition Statement</h3>
+      <div class="value-prop">
+        <p>TransformAZ helps Taylor Group turn 95 years of operational knowledge into a competitive technological advantage &mdash; activating the tools they already have, optimizing the processes that already work, and preparing the team for a future where speed and operational intelligence define who wins the enterprise contracts.</p>
+      </div>
+
+      <h3>Value Proposition &mdash; Breakdown</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pillar</th><th>What we offer</th><th>Why it matters for Taylor</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Industry expertise</strong></td><td>We come from the same industry (eSports, trade shows, creative agencies). We understand the project lifecycle, the enterprise client relationship, and the execution pressure.</td><td>We don&rsquo;t need 3 months to understand their business. We&rsquo;ve already lived it.</td></tr>
+            <tr><td><strong>Operational-first</strong></td><td>We don&rsquo;t start with technology. We start with how people work, how information flows, where hours are lost.</td><td>Taylor doesn&rsquo;t need more software. They need the software they already have to work for them.</td></tr>
+            <tr><td><strong>People-centered change</strong></td><td>We understand that a 60-year-old CFO and a 25-year-old designer from Colombia have completely different needs.</td><td>Transformation fails when you don&rsquo;t consider the human. Dean said it: &ldquo;we take care of our people.&rdquo;</td></tr>
+            <tr><td><strong>Activate, don&rsquo;t replace</strong></td><td>ClickUp Brain, Gemini, M365 &mdash; they already pay for these tools. We activate them.</td><td>Every unused tool is money thrown away. ClickUp Brain is paid for with 0% utilization.</td></tr>
+            <tr><td><strong>Phased, de-risked</strong></td><td>They only commit to discovery. If it doesn&rsquo;t work for them, they have a valuable roadmap and we leave.</td><td>A 95-year-old company doesn&rsquo;t take risks with unknown consultants. Our approach eliminates the risk.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 3: OPPORTUNITY STATEMENT
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 03</span>
+      <h2>Opportunity Statement</h2>
+
+      <h3>Internal use (how we talk among ourselves)</h3>
+      <blockquote>
+        <p>Taylor Group is an $85M company, 321 employees, 95 years of history, with Fortune 500 clients who pay for multi-million dollar experiences. They operate with processes that grew organically, no CTO, with an underutilized tech stack, and under the pressure of an industry that went from 8 weeks of lead time to 2. The CEO initiated the search. Both EVPs have the same pain point. There is no budget resistance. The mandate is top-down. This is a $60K+ engagement with potential for a $54K annual retainer. This is the type of client that gives you a case study worth 10 more clients.</p>
+      </blockquote>
+
+      <h3>For the client (how we present it to Dean)</h3>
+      <div class="box box--green">
+        <span class="box-label">Client-Facing Version</span>
+        <p>Taylor Group has built something remarkable over 95 years &mdash; a business that blends craftsmanship with creativity at a scale few competitors can match. But the speed at which your industry is evolving &mdash; compressed lead times, AI-powered competitors, enterprise clients demanding more with less notice &mdash; requires a different kind of operational backbone. The tools are already in place. The talent is already there. What&rsquo;s missing is the connective tissue: a unified technology strategy, standardized processes that scale across offices, and the confidence that every investment in AI and automation is grounded in how your people actually work. That&rsquo;s what this engagement delivers.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 4: FINDINGS
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 04</span>
+      <h2>Findings &mdash; What we discovered in the meetings</h2>
+
+      <!-- Finding 1 -->
+      <h3>Finding 1: Asset Management is money being thrown away</h3>
+      <h4>Direct evidence (Dean, Call 2):</h4>
+      <blockquote>
+        <p>&ldquo;We build a lot of custom things, and then we store them for clients. Sometimes they own them, sometimes they don&rsquo;t, and we don&rsquo;t do a great job of tracking them, because everything has to be dismantled to ship. It&rsquo;s like Ikea then assembled on site and then disassembled back into the IKEA boxes, and then it just stays. And you can&rsquo;t make sense of it. We ended up rebuilding a lot of things.&rdquo;</p>
+        <cite>&mdash; Dean Marks, Call 2</cite>
+      </blockquote>
+
+      <h4>Industry context:</h4>
+      <ul>
+        <li>The B2B trade show market is $15.8B. Custom-fabricated exhibits represent a significant fraction of the cost per event.</li>
+        <li>Companies like Genesis Exhibits already offer Asset Management Systems (AssetPRO) with: real-time tracking, usage history, inventory coordinates, lifecycle management.</li>
+        <li>Solutions include: barcodes, RFID tags, centralized ERPs, specialized platforms like ExhibitForce and ExhibitDay.</li>
+        <li><strong>ROI of well-implemented asset tracking:</strong> cost reduction through reuse, elimination of emergency shipments, consistent brand protection, sustainability compliance.</li>
+      </ul>
+
+      <div class="box box--amber">
+        <span class="box-label">Potential quantification</span>
+        <p>If Taylor fabricates ~50-100 custom projects/year with an average fabrication cost of $50K-150K, and they rebuild 15-20% of what they could have reused:</p>
+        <p><strong>Annual cost of not tracking assets: $375K&ndash;$3M</strong> (wide range, Phase 1 quantifies it precisely)</p>
+        <p>Even the conservative end ($375K) justifies the entire program investment.</p>
+      </div>
+
+      <!-- Finding 2 -->
+      <h3>Finding 2: The Sales&harr;Production disconnect is the main bottleneck</h3>
+      <h4>Direct evidence (Dean, Call 2):</h4>
+      <blockquote>
+        <p>&ldquo;The biggest opportunity is good structural alignment between sales growth and production capacity. Somebody would sell something. Here&rsquo;s a picture, send it out to the shop. Yeah, we can build it. And we hope for the best.&rdquo;</p>
+        <cite>&mdash; Dean Marks, Call 2</cite>
+      </blockquote>
+
+      <h4>What this means:</h4>
+      <ul>
+        <li>Sales sells without visibility into actual production capacity</li>
+        <li>Production receives projects without sufficient context on what was sold</li>
+        <li>The &ldquo;people on site are the last line of defense to fix anything we didn&rsquo;t do&rdquo;</li>
+        <li>This worked with 8-week lead times. With 2 weeks, every mistake costs exponentially more.</li>
+      </ul>
+
+      <div class="box box--amber">
+        <span class="box-label">Potential quantification</span>
+        <p>With 2-week lead times, every misalignment = overtime hours, rush shipments, show floor errors.</p>
+        <p>If 5-10% of projects have alignment issues, and the resolution cost is $5K-15K per incident:</p>
+        <p><strong>Estimated annual impact: $250K&ndash;$1.5M</strong></p>
+      </div>
+
+      <!-- Finding 3 -->
+      <h3>Finding 3: Executive time is consumed by routing, not decision-making</h3>
+      <h4>Direct evidence (Mike, Call 1):</h4>
+      <blockquote>
+        <p>&ldquo;Say I&rsquo;m getting 400 emails, 500 emails a day. How do I take the 70% of emails that I get CC&rsquo;d on? How do I make those as read emails? How do we filter them? If we can make a 10% improvement in efficiencies, that&rsquo;s a lot on a business our size.&rdquo;</p>
+        <cite>&mdash; Mike, Call 1</cite>
+      </blockquote>
+
+      <h4>What this means:</h4>
+      <ul>
+        <li>Mike (EVP) and Frank (VP Healthcare) are operating as &ldquo;human information routers&rdquo;</li>
+        <li>70% of emails are CC &rarr; information they need to see but not act on</li>
+        <li>The executives of an $85M company are spending their most expensive time on the most automatable task</li>
+        <li>ClickUp Brain and Gemini could solve this, but nobody knows how to configure them</li>
+      </ul>
+
+      <div class="box box--amber">
+        <span class="box-label">Quantification</span>
+        <p>If 3 executives lose 2 hrs/day on non-strategic email.</p>
+        <p>Estimated executive time value: $150-200/hr (opportunity cost).</p>
+        <p><strong>Annual cost: $225K&ndash;$300K</strong></p>
+        <p>Target reduction of 40%: <strong>$90K&ndash;$120K recovered/year</strong></p>
+      </div>
+
+      <!-- Finding 4 -->
+      <h3>Finding 4: ClickUp Brain is paid for and deactivated</h3>
+      <h4>Direct evidence (Mike, Call 1):</h4>
+      <blockquote>
+        <p>&ldquo;We have ClickUp Brain, which leverages Chat GPT and Claude and Gemini. We have the ability through ClickUp, they can build some agents for us. We&rsquo;re kind of stuck about how do we use those agents? What do we do with them? We don&rsquo;t know enough about it to even understand it.&rdquo;</p>
+        <cite>&mdash; Mike, Call 1</cite>
+      </blockquote>
+
+      <h4>What this means:</h4>
+      <ul>
+        <li>They have an AI layer integrated into their main PM tool</li>
+        <li>They are paying for it (ClickUp Brain is a $5-7/user/month add-on)</li>
+        <li>With 321 employees, if only 100 have ClickUp with Brain: <strong>$6K-8.4K/year paid with no return</strong></li>
+        <li>But the real cost is not the license &mdash; it is the lost opportunity to automate status queries, weekly summaries, client update drafts, and answers to recurring questions</li>
+      </ul>
+
+      <!-- Finding 5 -->
+      <h3>Finding 5: The generational gap is real but not the threat they think</h3>
+      <h4>Direct evidence (Dean, Call 2):</h4>
+      <blockquote>
+        <p>&ldquo;You can take a designer, a guy that designs exhibits, maybe from Colombia with a very thick accent, can&rsquo;t pitch. You&rsquo;re going to have these people who have talents, who used to start from scratch that are now using AI tools.&rdquo;</p>
+        <cite>&mdash; Dean Marks, Call 2</cite>
+      </blockquote>
+
+      <h4>Direct evidence (Mike, Call 1):</h4>
+      <blockquote>
+        <p>&ldquo;Some of the folks that are above me, like our CFO, they&rsquo;re pushing 60, they&rsquo;re stuck in their ways.&rdquo;</p>
+        <cite>&mdash; Mike, Call 1</cite>
+      </blockquote>
+
+      <h4>What this means:</h4>
+      <ul>
+        <li>There are two populations with different needs: early adopters (younger, already using AI individually) and resisters (senior, &ldquo;stuck in their ways&rdquo;)</li>
+        <li>The risk is NOT that senior people won&rsquo;t adopt &mdash; it is that younger employees adopt without governance and senior people are left without tools that make their work easier</li>
+        <li>Dean was explicit: <em>&ldquo;Even if people are affected by this, we will make sure that we take good care of people. Because if people are looking over their shoulder and worried about how &mdash; we just know this is a very sensitive thing.&rdquo;</em></li>
+        <li><strong>The transformation needs to segment the audience and design different adoption paths</strong></li>
+      </ul>
+
+      <!-- Finding 6 -->
+      <h3>Finding 6: No CTO &mdash; a strategic gap that we fill</h3>
+      <h4>Direct evidence (Dean, Call 2):</h4>
+      <blockquote>
+        <p>&ldquo;We do not have a CTO, but we&rsquo;ve, you know, despite that, have gotten to the point where we&rsquo;re pretty large.&rdquo;</p>
+        <cite>&mdash; Dean Marks, Call 2</cite>
+      </blockquote>
+
+      <h4>What this means:</h4>
+      <ul>
+        <li>An $85M company with 321 employees and operations in 5 cities does not have a person who owns the technology strategy</li>
+        <li>Tech decisions are made reactively (&ldquo;we looked at ClickUp&rdquo;, &ldquo;we added Chat&rdquo;)</li>
+        <li>There is no technology roadmap, no tool governance, no cross-office standards</li>
+        <li><strong>TransformAZ can position itself as fractional CTO/advisor</strong> &mdash; not just during the program, but as a permanent retainer</li>
+      </ul>
+
+      <div class="box box--green">
+        <span class="box-label">Key Opportunity</span>
+        <p>The absence of a CTO in an $85M company creates a natural strategic gap. TransformAZ can fill that role during the program and transition to a permanent advisory retainer &mdash; $54K/year in recurring revenue with 81-85% margins.</p>
+      </div>
+
+      <!-- Finding 7 -->
+      <h3>Finding 7: Dassault Syst&egrave;mes already showed them the future</h3>
+      <h4>Direct evidence (Dean, Call 2):</h4>
+      <blockquote>
+        <p>&ldquo;Through Intel, we work very closely with Dassault Syst&egrave;mes... they&rsquo;re doing things like scanning the manufacturing facility, 3D scanning it, looking at from the time the work order comes in till the time the final invoice goes out. And how do we optimize that? When the project opens and it&rsquo;s speccing aluminum, it might tell you that aluminum prices may go up in six months, so we should buy now.&rdquo;</p>
+        <cite>&mdash; Dean Marks, Call 2</cite>
+      </blockquote>
+
+      <h4>What this means:</h4>
+      <ul>
+        <li>Dean already has a vision of what is possible (he saw it at a client)</li>
+        <li>He knows that SolidWorks/Dassault are building a &ldquo;3D universe&rdquo; for end-to-end optimization</li>
+        <li>This becomes the <strong>aspirational benchmark</strong> for the AI Vision document</li>
+        <li>We can reference this example as &ldquo;what your clients are already doing &mdash; and what Taylor can learn from them&rdquo;</li>
+      </ul>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 5: TRANSFORMATION AREAS
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 05</span>
+      <h2>Transformation Areas &mdash; Complete Map</h2>
+
+      <h3>Area 1: Operational Intelligence</h3>
+      <p><strong>What:</strong> Convert scattered operational data into actionable intelligence</p>
+      <ul>
+        <li>Asset tracking y lifecycle management</li>
+        <li>Production capacity visibility y forecasting</li>
+        <li>Project profitability tracking en tiempo real</li>
+        <li>Cross-office operational dashboards</li>
+      </ul>
+      <div class="box box--amber">
+        <span class="box-label">Estimated impact</span>
+        <p><strong>$375K&ndash;$3M/year</strong> in assets, <strong>$250K&ndash;$1.5M/year</strong> in alignment</p>
+      </div>
+
+      <h3>Area 2: Executive &amp; Knowledge Amplification</h3>
+      <p><strong>What:</strong> Free up executive time and democratize organizational knowledge</p>
+      <ul>
+        <li>Email filtering and AI-powered triage</li>
+        <li>ClickUp Brain activation (agents, queries, summaries)</li>
+        <li>Gemini integration (meeting notes, drafts, scheduling)</li>
+        <li>Organizational knowledge base (replace info siloed in individual heads)</li>
+      </ul>
+      <div class="box box--amber">
+        <span class="box-label">Estimated impact</span>
+        <p><strong>$90K&ndash;$120K/year</strong> in recovered executive time</p>
+      </div>
+
+      <h3>Area 3: Workflow Automation &amp; Platform Optimization</h3>
+      <p><strong>What:</strong> Automate repetitive processes and optimize the central platform (ClickUp)</p>
+      <ul>
+        <li>ClickUp architecture redesign where needed</li>
+        <li>10-15 priority automations (assignment, notifications, status, deadlines)</li>
+        <li>Integration ClickUp &harr; M365 &harr; Gemini</li>
+        <li>Dashboards by role (Executive, PM, Production, Sales)</li>
+      </ul>
+      <div class="box box--amber">
+        <span class="box-label">Estimated impact</span>
+        <p><strong>30-50%</strong> reduction in manual coordination time</p>
+      </div>
+
+      <h3>Area 4: Process Standardization &amp; Governance</h3>
+      <p><strong>What:</strong> Document, standardize, and govern how work gets done</p>
+      <ul>
+        <li>Updated SOPs (current ones have up to 90 years of drift)</li>
+        <li>Cross-office standardization (Toronto, Boston, Cleveland)</li>
+        <li>AI governance policy (who uses what, how it is shared, what is not uploaded)</li>
+        <li>Data governance and compliance framework</li>
+      </ul>
+      <div class="box box--amber">
+        <span class="box-label">Estimated impact</span>
+        <p>Reduced variability, faster onboarding, risk mitigation</p>
+      </div>
+
+      <h3>Area 5: People &amp; Change Architecture</h3>
+      <p><strong>What:</strong> Design the transformation around people, not technology</p>
+      <ul>
+        <li>Audience segmentation (executives, mid-management, operations, creative, digital)</li>
+        <li>Differentiated adoption paths by profile and comfort level</li>
+        <li>Internal champions program</li>
+        <li>Transformation communication strategy</li>
+        <li>Skills development roadmap by role</li>
+      </ul>
+      <div class="box box--red">
+        <span class="box-label">Critical impact</span>
+        <p>The difference between the <strong>70% of change programs that fail</strong> and the 30% that succeed</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 6: TRANSFORMATION CAMPAIGN PILLARS
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 06</span>
+      <h2>Transformation Campaign Pillars</h2>
+
+      <h3>Naming: &ldquo;Taylor Forward&rdquo; (proposed program name)</h3>
+      <p><em>Alternatives: &ldquo;Taylor Next&rdquo;, &ldquo;Taylor 2.0&rdquo;, &ldquo;Project Catalyst&rdquo;</em></p>
+      <p>The name matters because it gives the effort an internal identity. Dean will call it this when speaking with his board or other executives. It has to sound like something Taylor would already do.</p>
+
+      <!-- Pillar 1: DISCOVER -->
+      <div class="pillar-card pillar-card--discover">
+        <div class="pillar-header">
+          <span class="pillar-tag">Pillar 1</span>
+          <h3 style="margin:0;">DISCOVER</h3>
+        </div>
+        <p class="pillar-subtitle">&ldquo;Understand before we build&rdquo;</p>
+        <ul>
+          <li>Pre-discovery intake (SOPs, tools, docs)</li>
+          <li>Onsite immersion with stakeholders</li>
+          <li>Process mapping of key flows</li>
+          <li>Digital maturity assessment</li>
+          <li>Technology audit</li>
+        </ul>
+        <div class="box box--blue">
+          <span class="box-label">Output</span>
+          <p>Transformation Roadmap + AI Vision Document + Architecture Blueprint</p>
+        </div>
+      </div>
+
+      <!-- Pillar 2: ACTIVATE -->
+      <div class="pillar-card pillar-card--activate">
+        <div class="pillar-header">
+          <span class="pillar-tag">Pillar 2</span>
+          <h3 style="margin:0;">ACTIVATE</h3>
+        </div>
+        <p class="pillar-subtitle">&ldquo;Unlock what you already own&rdquo;</p>
+        <ul>
+          <li><strong>ClickUp Brain:</strong> from paid-and-forgotten tool to operational intelligence engine</li>
+          <li><strong>Gemini:</strong> from &ldquo;we have it&rdquo; to email triage, meeting summaries, document drafting</li>
+          <li><strong>M365:</strong> from finance-only to collaboration platform</li>
+          <li><strong>Automations:</strong> 10-15 workflows that run themselves</li>
+        </ul>
+        <div class="box box--amber">
+          <span class="box-label">Key message</span>
+          <p>We are not selling new software. We are activating what they already paid for.</p>
+        </div>
+      </div>
+
+      <!-- Pillar 3: CONNECT -->
+      <div class="pillar-card pillar-card--connect">
+        <div class="pillar-header">
+          <span class="pillar-tag">Pillar 3</span>
+          <h3 style="margin:0;">CONNECT</h3>
+        </div>
+        <p class="pillar-subtitle">&ldquo;One company, one system&rdquo;</p>
+        <ul>
+          <li>Sales &harr; Production visibility (the missing bridge)</li>
+          <li>Asset Management system (no more &ldquo;we don&rsquo;t do a great job of tracking&rdquo;)</li>
+          <li>Cross-office process standardization</li>
+          <li>Global Core &harr; Operations integration</li>
+          <li>Executive dashboards that unify the view</li>
+        </ul>
+        <div class="box box--red">
+          <span class="box-label">Key message</span>
+          <p>Taylor has 5 offices, 3 verticals, and a tech division. Everything needs to look like one company.</p>
+        </div>
+      </div>
+
+      <!-- Pillar 4: PROTECT -->
+      <div class="pillar-card pillar-card--protect">
+        <div class="pillar-header">
+          <span class="pillar-tag">Pillar 4</span>
+          <h3 style="margin:0;">PROTECT</h3>
+        </div>
+        <p class="pillar-subtitle">&ldquo;Transformation that takes care of people&rdquo;</p>
+        <ul>
+          <li>Change management with respect for Taylor&rsquo;s culture (95 years, &ldquo;people care, they&rsquo;re passionate&rdquo;)</li>
+          <li>Segmented adoption: training the CFO is not the same as training the 25-year-old designer</li>
+          <li>AI governance policy: what can be used, how, and what is not uploaded to external tools</li>
+          <li>Internal champions: 3-5 people per department who sustain the change after we leave</li>
+        </ul>
+        <div class="box box--green">
+          <span class="box-label">Key message</span>
+          <p>Taylor&rsquo;s people are what make Taylor great. The transformation amplifies them, it does not replace them.</p>
+        </div>
+      </div>
+
+      <!-- Pillar 5: FUTURE-PROOF -->
+      <div class="pillar-card pillar-card--future">
+        <div class="pillar-header">
+          <span class="pillar-tag">Pillar 5</span>
+          <h3 style="margin:0;">FUTURE-PROOF</h3>
+        </div>
+        <p class="pillar-subtitle">&ldquo;See around corners&rdquo;</p>
+        <ul>
+          <li>AI Vision document: how AI will transform experiential marketing in 6-12 months, 2-3 years, and long horizon</li>
+          <li>What Dassault Syst&egrave;mes is already doing (3D universe, supply chain optimization, predictive procurement) &mdash; and how Taylor can learn from its own clients</li>
+          <li>Competitive landscape: what other agencies are doing (Skyline, Genesis, Impact XM with asset management; AI-powered agencies with 30% productivity gains)</li>
+          <li>IP strategy: &ldquo;the future of company valuation is really in the IP&rdquo; &mdash; Dean already knows this. How we build technological IP for Taylor.</li>
+        </ul>
+        <div class="box box--blue">
+          <span class="box-label">Key message</span>
+          <p>We don&rsquo;t just fix today. We prepare Taylor to compete in 2028.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 7: INDUSTRY CONTEXT
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 07</span>
+      <h2>Industry Context &mdash; Data for the AI Vision Document</h2>
+
+      <h3>Experiential Marketing Market</h3>
+      <div class="box box--blue">
+        <span class="box-label">Market data</span>
+        <ul>
+          <li>US B2B trade show market: <strong>$15.8 billion</strong> (2024), surpassed pre-pandemic levels</li>
+          <li><strong>37%</strong> of events exceeded their pre-pandemic performance</li>
+          <li><strong>74%</strong> of Fortune 1000 marketers plan to increase event budgets</li>
+          <li><strong>82%</strong> of attendees prefer in-person events over virtual</li>
+        </ul>
+      </div>
+
+      <h3>AI in Marketing &mdash; Key statistics</h3>
+      <div class="box box--amber">
+        <span class="box-label">Critical AI data</span>
+        <ul>
+          <li>AI can automate <strong>47%</strong> of marketing activities</li>
+          <li>Companies can save <strong>24%</strong> of marketing labor time with generative AI (30% gain in productivity)</li>
+          <li>Only <strong>25%</strong> of organizations achieve the expected ROI from AI &mdash; 75% fail due to: skill gaps, resistance, poor implementation</li>
+          <li><strong>70%</strong> of change management programs fail</li>
+        </ul>
+      </div>
+
+      <h3>2026 trends relevant to Taylor</h3>
+      <ol>
+        <li><strong>From experimentation to operation:</strong> Companies are moving from &ldquo;let&rsquo;s try AI&rdquo; to &ldquo;let&rsquo;s redesign teams, processes, and governance around AI&rdquo; &mdash; exactly what we propose</li>
+        <li><strong>Agentic AI:</strong> Autonomous AI agents are replacing chatbots &mdash; ClickUp Brain is already heading in that direction</li>
+        <li><strong>Multimodal AI:</strong> Experiences that integrate text, voice, and visual &mdash; relevant to Global Core&rsquo;s work</li>
+        <li><strong>Post-AI authenticity:</strong> With so much AI-generated content, clients will value &ldquo;unmistakably human&rdquo; more &mdash; a natural advantage for Taylor (craftspeople, physical fabrication)</li>
+        <li><strong>Sustainability in asset management:</strong> Reuse, lifecycle extension, environmental impact tracking &mdash; competitive differentiator and ESG compliance</li>
+      </ol>
+
+      <h3>Relevant competitive benchmarks</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Competitor / Reference</th><th>What they do</th><th>Relevance for Taylor</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Genesis Exhibits (AssetPRO)</strong></td><td>Asset management system with real-time tracking, deployment requests, usage history</td><td>Model of what Taylor needs for their warehouse/asset problem</td></tr>
+            <tr><td><strong>Skyline Exhibits</strong></td><td>Modular booth designs, reuse-first approach, Fab 50 company</td><td>Competitor that already optimized asset lifecycle</td></tr>
+            <tr><td><strong>Impact XM</strong></td><td>Rental programs + refurbishment for sustainability</td><td>Alternative business model that Taylor could explore</td></tr>
+            <tr><td><strong>Dassault Syst&egrave;mes</strong></td><td>3D universe, supply chain optimization, predictive procurement</td><td>Already a Taylor client &rarr; direct aspirational benchmark</td></tr>
+            <tr><td><strong>Agencies AI-powered (Superside, etc.)</strong></td><td>30% productivity gains, AI-first operations</td><td>What Taylor competes against if it doesn&rsquo;t transform</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 8: EXECUTIVE SUMMARY
+         ═══════════════════════════════════ -->
+    <section class="section page-break">
+      <span class="section-number">Section 08</span>
+      <h2>Executive Summary &mdash; For use in presentations</h2>
+
+      <p><strong>Taylor Group is an exceptional company at an inflection point.</strong></p>
+
+      <p>95 years of history. $85M in revenue. 321 talented people. Clients like Intel, Microsoft, and AstraZeneca. Global presence in 40+ countries. In-house fabrication, digital capabilities, and a portfolio that ranges from CES to the Super Bowl.</p>
+
+      <p>But beneath that surface is a company that grew organically without a CTO, without a unified technology strategy, and without the standardized processes that its current scale demands. Lead times compressed 4x. Executives function as email routers. Assets are rebuilt because nobody tracks them. AI tools are paid for but turned off.</p>
+
+      <div class="box box--green">
+        <span class="box-label">Executive Summary</span>
+        <p><strong>TransformAZ proposes a phased transformation program that starts by understanding &mdash; not prescribing. That activates the tools Taylor already has &mdash; not sells new ones. That respects the 95-year culture &mdash; not replaces it. And that prepares Taylor to compete not just today, but in 2028.</strong></p>
+        <p>The numbers are compelling: the program pays for itself with asset management savings alone. Everything else is upside.</p>
+      </div>
+
+      <p style="margin-top: 32px; font-size: 0.82rem; color: var(--text-muted); font-style: italic;">Document prepared by TransformAZ &mdash; March 2026<br>Internal use only. Does not constitute a binding offer.</p>
+
+      <h3>Sources used in this research</h3>
+      <ul style="font-size: 0.82rem; color: var(--text-muted);">
+        <li>Taylor Inc &mdash; Website (taylorinc.com)</li>
+        <li>Taylor Inc &mdash; Our Work (taylorinc.com/our-work)</li>
+        <li>The Taylor Group &mdash; LinkedIn</li>
+        <li>Dean Marks &mdash; ZoomInfo</li>
+        <li>The Taylor Group &mdash; BizBash</li>
+        <li>Genesis Exhibits &mdash; AssetPRO</li>
+        <li>Trade Show Asset Management Solutions</li>
+        <li>Kantar Marketing Trends 2026</li>
+        <li>Adweek &mdash; 10 AI Marketing Trends 2026</li>
+        <li>Lippincott &mdash; 12 Trends for 2026</li>
+      </ul>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      Internal document &mdash; TransformAZ &mdash; March 2026<br>
+      Not for client distribution under any circumstances.
+    </footer>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Strategy Proposal — SME Group | TransformAZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ───────────────────────────────────────────
+     DESIGN TOKENS
+     ─────────────────────────────────────────── */
+  :root {
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --bg: #f4f3f0;
+    --bg-white: #ffffff;
+    --accent: #7A7AE6;
+    --accent-light: #ebebfa;
+    --accent-dark: #5a5abf;
+    --border: #e0ddd6;
+    --border-light: #edeae4;
+
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif;
+
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 40px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+  }
+
+  /* ───────────────────────────────────────────
+     RESET & BASE
+     ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+
+  /* ───────────────────────────────────────────
+     LAYOUT
+     ─────────────────────────────────────────── */
+  .page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    box-shadow: 0 1px 40px rgba(0,0,0,0.06);
+  }
+
+  .content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  /* ───────────────────────────────────────────
+     TYPOGRAPHY
+     ─────────────────────────────────────────── */
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 1.65rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+
+  h3 {
+    font-size: 1.12rem;
+    font-weight: 600;
+    margin-top: var(--space-lg);
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin-bottom: var(--space-sm);
+    line-height: 1.65;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 600; }
+
+  a {
+    color: var(--accent-dark);
+    text-decoration: none;
+  }
+
+  /* ───────────────────────────────────────────
+     COVER — editorial, with accent presence
+     ─────────────────────────────────────────── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: 4px solid var(--accent);
+    overflow: hidden;
+  }
+
+  /* Large decorative accent glyph */
+  .cover::before {
+    content: 'AZ';
+    position: absolute;
+    right: -30px;
+    bottom: -40px;
+    font-family: var(--font-serif);
+    font-size: 22rem;
+    font-weight: 700;
+    color: var(--accent);
+    opacity: 0.04;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+  }
+
+  .cover-inner {
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-logo {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .cover-logo .wordmark {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .cover-logo .wordmark-light {
+    font-weight: 300;
+    color: var(--text);
+  }
+
+  .cover-logo .wordmark-bold {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .cover-rule {
+    width: 56px;
+    height: 4px;
+    background: var(--accent);
+    border: none;
+    margin: 0 0 var(--space-lg);
+    border-radius: 2px;
+  }
+
+  .cover h1 {
+    margin-bottom: 12px;
+    font-size: 2.8rem;
+  }
+
+  .cover-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: var(--space-xl);
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px var(--space-md);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-md);
+  }
+
+  .cover-meta dt {
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding-top: 3px;
+  }
+
+  .cover-meta dd {
+    color: var(--text);
+  }
+
+  .cover-confidential {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: var(--space-xl);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+  }
+
+  /* ───────────────────────────────────────────
+     TABLE OF CONTENTS
+     ─────────────────────────────────────────── */
+  .toc {
+    padding: var(--space-xl) 0 var(--space-lg);
+  }
+
+  .toc h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    border-top: 2px solid var(--text);
+  }
+
+  .toc-list li {
+    display: flex;
+    align-items: baseline;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  .toc-number {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--accent);
+    width: 36px;
+    flex-shrink: 0;
+    font-size: 0.8rem;
+  }
+
+  .toc-title {
+    font-family: var(--font-serif);
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* ───────────────────────────────────────────
+     SECTIONS
+     ─────────────────────────────────────────── */
+  .section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .section:first-of-type {
+    border-top: none;
+  }
+
+  .section-number {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .section > h2 {
+    padding-bottom: var(--space-sm);
+    border-bottom: 3px solid var(--text);
+    margin-bottom: var(--space-lg);
+    position: relative;
+  }
+
+  /* Accent underline on h2 — small purple bar under the main rule */
+  .section > h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  /* ───────────────────────────────────────────
+     EXECUTIVE SUMMARY — prominent blockquote
+     ─────────────────────────────────────────── */
+  .exec-summary {
+    border-left: 4px solid var(--accent);
+    padding: var(--space-md) var(--space-md) var(--space-md) var(--space-lg);
+    margin: var(--space-md) 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .exec-summary p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .exec-summary ul {
+    margin: var(--space-sm) 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .exec-summary li {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .exec-summary li::marker {
+    color: var(--accent);
+  }
+
+  /* ───────────────────────────────────────────
+     LISTS
+     ─────────────────────────────────────────── */
+  ul, ol {
+    padding-left: 1.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  li::marker {
+    color: var(--accent);
+  }
+
+  /* Sub-heading labels (Scope & Activities, Deliverables) */
+  .label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent);
+    margin-top: var(--space-md);
+    margin-bottom: 10px;
+  }
+
+  /* ───────────────────────────────────────────
+     APPROACH — numbered pillars
+     ─────────────────────────────────────────── */
+  .approach-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: approach;
+    margin: var(--space-md) 0;
+  }
+
+  .approach-list > li {
+    counter-increment: approach;
+    padding: var(--space-sm) 0 var(--space-sm) 56px;
+    position: relative;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .approach-list > li:last-child {
+    border-bottom: none;
+  }
+
+  .approach-list > li::before {
+    content: counter(approach);
+    position: absolute;
+    left: 0;
+    top: var(--space-sm);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .approach-list > li strong {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .approach-list > li .desc {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
+  /* ───────────────────────────────────────────
+     PULL QUOTE
+     ─────────────────────────────────────────── */
+  .pull-quote {
+    text-align: center;
+    padding: var(--space-lg) var(--space-lg);
+    margin: var(--space-lg) 0;
+    position: relative;
+  }
+
+  .pull-quote::before,
+  .pull-quote::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto;
+    border-radius: 1px;
+  }
+
+  .pull-quote::before { margin-bottom: var(--space-md); }
+  .pull-quote::after { margin-top: var(--space-md); }
+
+  .pull-quote p {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .pull-quote .attribution {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-style: normal;
+    color: var(--accent);
+    margin-top: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  /* ───────────────────────────────────────────
+     TABLES
+     ─────────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-md) 0;
+    font-size: 0.95rem;
+  }
+
+  thead th {
+    text-align: left;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    padding: 14px 12px 14px 0;
+    border-bottom: 2px solid var(--text);
+  }
+
+  thead th:last-child { text-align: right; padding-right: 0; }
+
+  tbody td {
+    padding: 14px 12px 14px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody td:last-child { text-align: right; padding-right: 0; }
+
+  tfoot td {
+    padding: 16px 12px 16px 0;
+    border-top: 2px solid var(--text);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  tfoot td:last-child { text-align: right; padding-right: 0; }
+
+  /* Investment table — highlight total */
+  .investment-table tfoot td {
+    color: var(--accent-dark);
+  }
+
+  /* Phase detail tables (2-col key/value) */
+  .phase-detail-table {
+    margin: var(--space-sm) 0 var(--space-lg);
+    background: #faf9f7;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .phase-detail-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .phase-detail-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .phase-detail-table td:first-child {
+    font-weight: 700;
+    color: var(--text-muted);
+    width: 130px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .phase-detail-table td:last-child { text-align: left; }
+
+  /* KPI tables */
+  .kpi-table td:first-child {
+    font-weight: 600;
+    width: 190px;
+    color: var(--text);
+  }
+
+  .kpi-table td:last-child { text-align: left; }
+
+  .kpi-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* ───────────────────────────────────────────
+     NEXT STEPS
+     ─────────────────────────────────────────── */
+  .steps-list {
+    counter-reset: steps;
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0;
+  }
+
+  .steps-list > li {
+    counter-increment: steps;
+    padding: var(--space-sm) 0 var(--space-sm) 52px;
+    position: relative;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .steps-list > li:last-child { border-bottom: none; }
+
+  .steps-list > li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: var(--space-sm);
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .steps-list > li strong {
+    font-family: var(--font-serif);
+    font-size: 1.02rem;
+  }
+
+  .steps-list > li p {
+    margin: 4px 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  /* ───────────────────────────────────────────
+     CLOSING & SIGNATURE
+     ─────────────────────────────────────────── */
+  .closing {
+    padding: var(--space-xl) 0 var(--space-lg);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .closing > p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .signature {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 2px solid var(--text);
+    display: inline-block;
+  }
+
+  .signature-name {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .signature-title {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .signature-org {
+    font-size: 0.88rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  .signature-contact {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* ───────────────────────────────────────────
+     TERMS
+     ─────────────────────────────────────────── */
+  .terms {
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-xl);
+  }
+
+  .terms h4 {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .terms p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-xs);
+  }
+
+  /* ───────────────────────────────────────────
+     FOOTER
+     ─────────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: var(--space-md) 0 var(--space-lg);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ───────────────────────────────────────────
+     RESPONSIVE
+     ─────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    html { font-size: 15px; }
+
+    .cover {
+      padding: var(--space-xl) var(--space-md) var(--space-lg);
+      min-height: auto;
+    }
+    .cover h1 { font-size: 2rem; }
+    .cover::before { font-size: 12rem; right: -20px; }
+    h2 { font-size: 1.35rem; }
+
+    .cover-meta { grid-template-columns: 80px 1fr; }
+    .content { padding: 0 var(--space-sm); }
+
+    .approach-list > li { padding-left: 48px; }
+    .approach-list > li::before { width: 32px; height: 32px; font-size: 0.85rem; }
+
+    .steps-list > li { padding-left: 44px; }
+
+    .kpi-table td:first-child { width: auto; }
+    table { font-size: 0.85rem; }
+    thead th, tbody td, tfoot td { padding: 10px 8px 10px 0; }
+  }
+
+  /* ───────────────────────────────────────────
+     PRINT
+     ─────────────────────────────────────────── */
+  @media print {
+    @page { size: A4; margin: 18mm; }
+
+    html { font-size: 10.5pt; }
+    body { background: white; color: #000; }
+
+    .page-wrapper {
+      max-width: none;
+      background: white;
+      box-shadow: none;
+    }
+
+    .cover {
+      min-height: auto;
+      padding: 30mm 0 20mm;
+      page-break-after: page;
+      border-bottom-color: var(--accent);
+    }
+
+    .cover::before { display: none; }
+
+    .toc { page-break-after: page; }
+
+    #understanding { page-break-before: page; }
+    #approach { page-break-before: page; }
+    #engagement { page-break-before: page; }
+    #investment { page-break-before: page; }
+    #governance { page-break-before: page; }
+    #outcomes { page-break-before: page; }
+    #next-steps { page-break-before: page; }
+
+    table { page-break-inside: avoid; }
+    .signature { page-break-inside: avoid; }
+    .pull-quote { page-break-inside: avoid; }
+    .exec-summary { page-break-inside: avoid; }
+
+    h2, h3 { page-break-after: avoid; }
+    a { color: var(--text); }
+
+    .cover-confidential { position: static; margin-top: 30px; opacity: 1; }
+
+    .exec-summary { background: #f5f5fc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .phase-detail-table { background: #f7f7f5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .approach-list > li::before { background: var(--accent); -webkit-print-color-adjust: exact; print-color-adjust: exact; color: white; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ════════════════════════════════════════════
+       COVER
+       ════════════════════════════════════════════ -->
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="cover-logo">
+        <span class="wordmark">
+          <span class="wordmark-light">transform</span><span class="wordmark-bold">az</span>
+        </span>
+      </div>
+
+      <hr class="cover-rule">
+
+      <h1>Transformation<br>Strategy Proposal</h1>
+      <p class="cover-subtitle">Operational Clarity for Scalable Growth</p>
+
+      <dl class="cover-meta">
+        <dt>Prepared for</dt>
+        <dd>SME Group ("Company")</dd>
+        <dt>Attention</dt>
+        <dd>Constantin Nechita</dd>
+        <dt>Date</dt>
+        <dd>January 21, 2026</dd>
+        <dt>Reference</dt>
+        <dd>TAZ-2026-SME-001</dd>
+      </dl>
+    </div>
+    <div class="cover-confidential">Confidential — Prepared exclusively for SME Group</div>
+  </header>
+
+  <!-- ════════════════════════════════════════════
+       TABLE OF CONTENTS
+       ════════════════════════════════════════════ -->
+  <div class="content">
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol class="toc-list">
+        <li><span class="toc-number">01</span><span class="toc-title">Executive Summary</span></li>
+        <li><span class="toc-number">02</span><span class="toc-title">About TransformAZ</span></li>
+        <li><span class="toc-number">03</span><span class="toc-title">Understanding Your Business</span></li>
+        <li><span class="toc-number">04</span><span class="toc-title">Our Approach</span></li>
+        <li><span class="toc-number">05</span><span class="toc-title">Engagement Structure</span></li>
+        <li><span class="toc-number">06</span><span class="toc-title">Your Investment</span></li>
+        <li><span class="toc-number">07</span><span class="toc-title">Governance &amp; Communication</span></li>
+        <li><span class="toc-number">08</span><span class="toc-title">Expected Outcomes</span></li>
+        <li><span class="toc-number">09</span><span class="toc-title">Next Steps</span></li>
+        <li><span class="toc-number">10</span><span class="toc-title">Terms &amp; Conditions</span></li>
+      </ol>
+    </nav>
+
+    <!-- ════════════════════════════════════════════
+         1. EXECUTIVE SUMMARY
+         ════════════════════════════════════════════ -->
+    <section id="executive-summary" class="section">
+      <span class="section-number">Section 01</span>
+      <h2>Executive Summary</h2>
+
+      <div class="exec-summary">
+        <p>SME Group's franchise portfolio has reached a scale where manual coordination and spreadsheet-driven processes introduce measurable risk to compliance management and financial controls. TransformAZ proposes a two-phase engagement to bring structure, automation, and reliability to the Company's highest-impact workflows:</p>
+        <ul>
+          <li><strong>Phase 1 — Discovery &amp; Roadmap</strong> (2 weeks, £3,000): diagnostic assessment of current systems, processes, and data flows across two priority areas</li>
+          <li><strong>Phase 2 — Transformation Execution</strong> (4 weeks, £6,000): implementation of prioritised improvements validated in Phase 1</li>
+          <li><strong>Total investment:</strong> £9,000 over approximately 6 weeks, with Phase 2 scope confirmed only after Phase 1 review</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         2. ABOUT TRANSFORMAZ
+         ════════════════════════════════════════════ -->
+    <section id="about" class="section">
+      <span class="section-number">Section 02</span>
+      <h2>About TransformAZ</h2>
+
+      <p>
+        TransformAZ is an operational transformation consultancy founded by Fermín Azcueta, whose background spans legal advisory, project management, and operational strategy. The firm operates as a curated network of operators, strategists, and builders — assembling the right expertise for each engagement rather than relying on a fixed team. This model allows us to bring senior, relevant experience to every project without the overhead of a traditional firm.
+      </p>
+      <p>
+        Our work sits at the intersection of vision and structure: we help growing businesses redesign how work gets done, aligning technology, processes, and decision structures to support scale without adding unnecessary complexity. We specialise in franchise networks, multi-brand portfolios, and operationally intensive businesses where compliance management, financial controls, and cross-brand coordination are critical — and where practical execution matters more than theoretical frameworks.
+      </p>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         3. UNDERSTANDING YOUR BUSINESS
+         ════════════════════════════════════════════ -->
+    <section id="understanding" class="section">
+      <span class="section-number">Section 03</span>
+      <h2>Understanding Your Business</h2>
+
+      <p>
+        SME Group operates a franchise-based portfolio in which individual brands function as standalone legal and operational entities under a centralised head office structure. While franchisor systems govern core in-store technology, the Company retains full responsibility for back-office operations, compliance oversight, financial controls, and cross-brand coordination.
+      </p>
+      <p>
+        As the portfolio has grown, several core operational workflows have become increasingly reliant on manual coordination, spreadsheet-based tracking, and individual judgement under high volume. These conditions introduce operational risk, reduce consistency across brands, and place unsustainable cognitive load on key personnel.
+      </p>
+      <p>
+        Two initial <strong>Areas of Transformation</strong> have been identified as immediate priorities due to their volume, complexity, and sensitivity to error:
+      </p>
+
+      <h3>Compliance &amp; Repairs / Maintenance</h3>
+      <p>
+        High daily intake of compliance issues and maintenance requests across physical assets demands accurate prioritisation, contractor coordination, and scheduling under tight deadlines. Currently, manual decision-making under pressure increases the risk of missed regulatory deadlines, misallocation of contractor resources, and disruption to store operations — with potential knock-on effects to brand compliance standing.
+      </p>
+
+      <h3>Income Reconciliation &amp; Financial Controls</h3>
+      <p>
+        Reconciliation of sales, cash, card, and third-party aggregator income across multiple data sources and brands is performed manually, creating inefficiency, delays in financial reporting, and dependency on individual operators. As transaction volume grows, the current process cannot scale without proportional headcount increases — making it a clear candidate for structured automation.
+      </p>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         4. OUR APPROACH
+         ════════════════════════════════════════════ -->
+    <section id="approach" class="section">
+      <span class="section-number">Section 04</span>
+      <h2>Our Approach</h2>
+
+      <p>
+        The engagement applies a technical and operational diagnostic approach to evaluate how current systems, processes, and data support day-to-day operations and strategic objectives. Rather than attempting broad transformation, we focus on the workflows that create the most operational friction — and bring structure, clarity, and system-level support where it matters most.
+      </p>
+      <p>
+        Our methodology is built around three core dimensions:
+      </p>
+
+      <ol class="approach-list">
+        <li>
+          <strong>Technology Infrastructure</strong>
+          <span class="desc">How platforms, tools, and integrations currently operate — and where gaps, redundancies, or underutilised capabilities exist.</span>
+        </li>
+        <li>
+          <strong>Process Design</strong>
+          <span class="desc">How workflows, handoffs, and manual touchpoints are structured — identifying bottlenecks, dependencies, and areas for standardisation.</span>
+        </li>
+        <li>
+          <strong>Decision Flow</strong>
+          <span class="desc">How information reaches decision-makers — and whether reporting structures and escalation paths support timely, informed action.</span>
+        </li>
+      </ol>
+
+      <div class="pull-quote">
+        <p>"We don't introduce complexity to manage complexity. We find the structure that was always needed — and build it to last."</p>
+        <span class="attribution">TransformAZ Methodology</span>
+      </div>
+
+      <h3>Key Activities</h3>
+      <ul>
+        <li>Process mapping to document dependencies, manual touchpoints, and improvement areas</li>
+        <li>Review of existing technology stack, integrations, and data flow across core functions</li>
+        <li>Assessment of system configuration, automation capabilities, and reporting accuracy</li>
+        <li>Stakeholder sessions to capture operational pain points and alignment gaps</li>
+        <li>Synthesis of findings into structured documentation outlining priorities, opportunities, and next steps</li>
+      </ul>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         5. ENGAGEMENT STRUCTURE
+         ════════════════════════════════════════════ -->
+    <section id="engagement" class="section">
+      <span class="section-number">Section 05</span>
+      <h2>Engagement Structure</h2>
+
+      <p>
+        The engagement is structured in two sequential phases that build on each other, designed to enable decisive execution while minimising operational risk and establishing a strong foundation for long-term improvement.
+      </p>
+
+      <!-- Phase 1 -->
+      <h3>Phase 1 — Discovery &amp; Roadmap</h3>
+      <p>
+        Phase 1 establishes the foundation for the transformation effort by building a deep understanding of the Company's current operational and technological environment. The objective is to identify key Areas of Transformation and determine where improvements in systems, processes, and data structure will create the most impact.
+      </p>
+
+      <span class="label">Scope &amp; Activities</span>
+      <ul>
+        <li>Conduct an initial review of available documentation, system access, and existing reporting structures</li>
+        <li>Hold stakeholder sessions to understand workflows, dependencies, and operational priorities across both transformation areas</li>
+        <li>Evaluate how key systems are currently used, configured, and interconnected</li>
+        <li>Map high-level processes and data flows to highlight manual steps, redundancies, and integration gaps</li>
+      </ul>
+
+      <span class="label">Deliverables</span>
+      <ul>
+        <li><strong>Current-State Assessment Report</strong> — documented overview of systems, processes, and dependencies across both Areas of Transformation</li>
+        <li><strong>Data Flow &amp; Friction Map</strong> — visual mapping of data flow, reporting visibility, and operational friction points</li>
+        <li><strong>Transformation Roadmap</strong> — prioritised recommendations with defined scope, sequencing, and expected impact for Phase 2</li>
+      </ul>
+
+      <table class="phase-detail-table">
+        <tr><td>Duration</td><td>2 weeks at approximately 10 hours/week</td></tr>
+        <tr><td>Total Hours</td><td>~20 hours</td></tr>
+        <tr><td>Rate</td><td>£150/hr</td></tr>
+        <tr><td>Investment</td><td><strong>£3,000 GBP</strong></td></tr>
+      </table>
+
+      <!-- Phase 2 -->
+      <h3>Phase 2 — Transformation Execution</h3>
+      <p>
+        Phase 2 translates the agreed roadmap into concrete operational improvements. This phase focuses on implementing the prioritised solutions identified during Phase 1, with the objective of reducing manual effort, improving prioritisation and coordination, and increasing operational reliability within the selected workflows.
+      </p>
+      <p>
+        Scope, sequencing, and pace are defined at the conclusion of Phase 1 to ensure that work is focused on the areas of highest impact and aligned with the Company's operational constraints and risk profile.
+      </p>
+
+      <span class="label">Scope &amp; Activities</span>
+      <ul>
+        <li>Detailed design of execution workflows, including prioritisation logic, escalation paths, and ownership</li>
+        <li>Configuration and implementation of supporting systems, automation, or decision-support mechanisms</li>
+        <li>Integration of existing data sources and tools where feasible, without disrupting franchisor-mandated systems</li>
+        <li>Definition of operating procedures, controls, and oversight mechanisms to support ongoing use</li>
+        <li>Iterative validation with stakeholders to ensure solutions function as intended in practice</li>
+      </ul>
+
+      <span class="label">Deliverables</span>
+      <ul>
+        <li><strong>Configured Workflows &amp; Automation</strong> — implemented prioritisation logic, routing rules, and automation for target processes</li>
+        <li><strong>Operating Procedures Document</strong> — clear ownership, escalation logic, and step-by-step procedures for the new workflows</li>
+        <li><strong>Integration &amp; Data Mapping</strong> — connected data sources with validated data flow and reconciliation checks</li>
+        <li><strong>Stakeholder Validation Report</strong> — documented results of user acceptance testing and iterative adjustments</li>
+        <li><strong>Scalability Playbook</strong> — practical foundation and guidelines for extending improvements to additional areas</li>
+      </ul>
+
+      <table class="phase-detail-table">
+        <tr><td>Duration</td><td>4 weeks at approximately 10 hours/week</td></tr>
+        <tr><td>Total Hours</td><td>~40 hours</td></tr>
+        <tr><td>Rate</td><td>£150/hr</td></tr>
+        <tr><td>Investment</td><td><strong>£6,000 GBP</strong></td></tr>
+      </table>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         6. YOUR INVESTMENT
+         ════════════════════════════════════════════ -->
+    <section id="investment" class="section">
+      <span class="section-number">Section 06</span>
+      <h2>Your Investment</h2>
+
+      <p>
+        The following table provides a consolidated view of the engagement investment. The phased structure allows SME Group to evaluate findings from Discovery before committing to Execution — managing risk while maintaining momentum.
+      </p>
+
+      <table class="investment-table">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Duration</th>
+            <th>Hours</th>
+            <th>Rate</th>
+            <th>Investment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 1</strong> — Discovery &amp; Roadmap</td>
+            <td>2 weeks</td>
+            <td>~20 hrs</td>
+            <td>£150/hr</td>
+            <td>£3,000</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong> — Transformation Execution</td>
+            <td>4 weeks</td>
+            <td>~40 hrs</td>
+            <td>£150/hr</td>
+            <td>£6,000</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">Total Engagement Investment</td>
+            <td>£9,000 GBP</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <p>
+        This investment covers approximately 60 hours of senior consulting engagement across 6 weeks. The phased approach means that Phase 2 scope is confirmed only after Phase 1 findings are reviewed and approved — giving SME Group full control over pace and direction. Compared to the ongoing operational cost of manual processes, misallocated resources, and delayed financial reporting, this represents a targeted investment in sustainable operational capacity.
+      </p>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         7. GOVERNANCE & COMMUNICATION
+         ════════════════════════════════════════════ -->
+    <section id="governance" class="section">
+      <span class="section-number">Section 07</span>
+      <h2>Governance &amp; Communication</h2>
+
+      <p>
+        A clear governance structure ensures alignment throughout the engagement, minimises surprises, and keeps all stakeholders informed of progress and decisions.
+      </p>
+
+      <h3>Meeting Cadence</h3>
+      <ul>
+        <li><strong>Weekly check-in</strong> (30 min) — progress update, blockers, and priorities</li>
+        <li><strong>Phase Review</strong> — formal presentation of findings and deliverables at each phase end</li>
+        <li><strong>Ad hoc sessions</strong> as needed for urgent decisions or stakeholder input</li>
+      </ul>
+
+      <h3>Reporting</h3>
+      <ul>
+        <li>Brief weekly written summary following each check-in</li>
+        <li>Phase 1 deliverables presented in formal review session</li>
+        <li>All documentation shared via mutually agreed collaboration platform</li>
+      </ul>
+
+      <h3>Points of Contact</h3>
+      <ul>
+        <li><strong>SME Group:</strong> Constantin Nechita — primary sponsor and decision-maker</li>
+        <li><strong>TransformAZ:</strong> Fermín Azcueta — engagement lead for all communications</li>
+        <li>Escalation path via engagement leads for any scope or timeline concerns</li>
+      </ul>
+
+      <h3>Client Involvement</h3>
+      <ul>
+        <li>Availability for weekly check-ins and scheduled stakeholder sessions</li>
+        <li>Timely provision of system access, documentation, and data as requested</li>
+        <li>Decision authority on scope changes and Phase 2 confirmation</li>
+      </ul>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         8. EXPECTED OUTCOMES
+         ════════════════════════════════════════════ -->
+    <section id="outcomes" class="section">
+      <span class="section-number">Section 08</span>
+      <h2>Expected Outcomes &amp; Success Criteria</h2>
+
+      <p>
+        The following framework outlines the key performance indicators that will be used to measure the impact of the transformation effort. These metrics will be validated and baselined during Phase 1 and tracked throughout Phase 2 execution.
+      </p>
+
+      <h3>Compliance &amp; Repairs / Maintenance</h3>
+      <table class="kpi-table">
+        <thead>
+          <tr>
+            <th>KPI</th>
+            <th>What We'll Measure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Response Time</td>
+            <td>Reduction in average time from issue intake to contractor assignment</td>
+          </tr>
+          <tr>
+            <td>Resolution Rate</td>
+            <td>Increase in issues resolved within SLA or regulatory deadline</td>
+          </tr>
+          <tr>
+            <td>Error Reduction</td>
+            <td>Decrease in misrouted, duplicated, or missed compliance items</td>
+          </tr>
+          <tr>
+            <td>Prioritisation Accuracy</td>
+            <td>Consistency of priority assignment vs. actual urgency and regulatory impact</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Income Reconciliation &amp; Financial Controls</h3>
+      <table class="kpi-table">
+        <thead>
+          <tr>
+            <th>KPI</th>
+            <th>What We'll Measure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reconciliation Time</td>
+            <td>Reduction in hours spent on manual reconciliation per reporting cycle</td>
+          </tr>
+          <tr>
+            <td>Accuracy Rate</td>
+            <td>Improvement in first-pass reconciliation accuracy across income sources</td>
+          </tr>
+          <tr>
+            <td>Operator Dependency</td>
+            <td>Reduction in reliance on specific individuals to complete reconciliation</td>
+          </tr>
+          <tr>
+            <td>Reporting Latency</td>
+            <td>Faster availability of reconciled financial data to management</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="kpi-note">
+        These KPIs are presented as a measurement framework to be validated during Phase 1. Specific baseline values and targets will be established through the Discovery process, based on actual current-state data and stakeholder input.
+      </p>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         9. NEXT STEPS
+         ════════════════════════════════════════════ -->
+    <section id="next-steps" class="section">
+      <span class="section-number">Section 09</span>
+      <h2>Next Steps</h2>
+
+      <p>To initiate the engagement, we recommend the following sequence:</p>
+
+      <ol class="steps-list">
+        <li>
+          <strong>Confirm Engagement Scope</strong>
+          <p>Review this proposal, address any questions, and confirm approval to proceed with Phase 1. A formal Statement of Work will be prepared upon confirmation.</p>
+        </li>
+        <li>
+          <strong>Schedule Kickoff Meeting</strong>
+          <p>Align key stakeholders and set initial meeting dates. The kickoff session will cover objectives, timelines, communication protocols, and access requirements.</p>
+        </li>
+        <li>
+          <strong>Provide Access &amp; Documentation</strong>
+          <p>Share relevant system credentials, process documents, reporting templates, and any existing operational documentation to support the initial review.</p>
+        </li>
+        <li>
+          <strong>Begin Discovery Phase</strong>
+          <p>Formal commencement of Phase 1 activities. Within the first week, expect initial stakeholder sessions and a preliminary assessment of available documentation and systems.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         CLOSING & SIGNATURE
+         ════════════════════════════════════════════ -->
+    <div class="closing">
+      <p>
+        We appreciate the opportunity to present this proposal and are confident that a structured, phased engagement will deliver meaningful and lasting operational improvement for SME Group. We look forward to discussing the next steps and answering any questions you may have.
+      </p>
+
+      <div class="signature">
+        <div class="signature-name">Fermín Azcueta</div>
+        <div class="signature-title">Founder &amp; Engagement Lead</div>
+        <div class="signature-org">TransformAZ</div>
+        <div class="signature-contact">
+          <a href="https://www.transformaz.co">transformaz.co</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         10. TERMS & CONDITIONS
+         ════════════════════════════════════════════ -->
+    <div class="terms">
+      <h4>Terms &amp; Conditions</h4>
+      <p>This proposal is intended for discussion and planning purposes only and does not constitute a binding agreement. A formal Statement of Work (SOW) will be developed upon confirmation of the selected engagement option, detailing specific deliverables, timelines, and terms.</p>
+      <p>All prices listed are exclusive of VAT and do not include any third-party software, licensing, or vendor costs associated with implementation.</p>
+      <p>This document is confidential and has been prepared exclusively for SME Group. It may not be reproduced, distributed, or disclosed to any third party without the prior written consent of TransformAZ.</p>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         FOOTER
+         ════════════════════════════════════════════ -->
+    <footer class="footer">
+      TransformAZ &middot; Confidential &middot; TAZ-2026-SME-001
+    </footer>
+
+  </div><!-- /.content -->
+</div><!-- /.page-wrapper -->
+
+</body>
+</html>
