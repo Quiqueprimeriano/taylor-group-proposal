@@ -512,7 +512,6 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    ═══════════════════════════════════════════════ */
 .phases-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;position:relative;
-  width:calc(100vw - 140px);max-width:1280px;margin-left:50%;transform:translateX(-50%);
 }
 /* Phase numbering via counter */
 .phase-card{
@@ -843,7 +842,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .findings-grid,.phases-grid,.horizons-grid,.competitor-grid{grid-template-columns:1fr}
-  .phases-grid{width:100%;transform:none;margin-left:0}
+
   .timeline{flex-direction:column;padding:0 0 0 20px;gap:24px}
   .timeline::before{top:0;bottom:0;left:26px;right:auto;width:2px;height:100%;transform-origin:top}
   .timeline-node{flex-direction:row;align-items:center;gap:14px}
