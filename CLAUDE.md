@@ -27,6 +27,8 @@ node SME-Group/take-screenshots.js
 - **Client folders:** `SME-Group/`, `Taylor Group/` — each contains HTML source documents, generation scripts, and output files (PDF/DOCX)
 - **HTML→PDF pipeline:** Playwright with `printBackground: true`, zero margins, `preferCSSPageSize: true`. HTML files use `@page` CSS for A4 sizing and print-specific styles
 - **DOCX generation:** Python scripts using `python-docx` with manual styling (no template files)
+- **Tay chatbot:** Claude-powered bot embedded in the Interactive Pitch. Netlify Function (`netlify/functions/chat.js`) proxies to Claude API. Local dev server at `chat-bot/server.js`. Both share the same SYSTEM_PROMPT — keep in sync when proposal content changes
+- **Netlify deployment:** `netlify.toml` publishes `Taylor Group/proposal-2.0/pitch/` (requires `index.html` copy of main HTML). Redirect `/api/chat` → `/.netlify/functions/chat`. ANTHROPIC_API_KEY set in Netlify env vars
 
 ## Brand & Design Tokens
 
@@ -53,7 +55,7 @@ node SME-Group/take-screenshots.js
 - **Expand/collapse:** Always use `max-height` + `opacity` CSS transitions (never `display:none/block`) for animatable expand/collapse
 - **Sidebar nav tracking:** Scroll-based `offsetTop` comparison, not IntersectionObserver (fails on tall sections)
 - **Card hover effects:** `translateY(-2px)` + elevated `box-shadow`. Gradient top borders via `::after` pseudo-elements (not `border-image`, which breaks `border-radius`)
-- **CBE diagram:** Lives in Section 03 (Digital Backbone). CSS animated flow phases that double as navigation for expandable content panels below. Never duplicate in Section 04
+- **CBE diagram:** Lives in Section 04 (Digital Backbone). CSS animated flow phases that double as navigation for expandable content panels below. Never duplicate in Section 05
 - **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
 - **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20–30%" not "30%"). No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
 - **Source links:** Data-heavy sections end with a "Sources & methodology → 09" button linking to the references section

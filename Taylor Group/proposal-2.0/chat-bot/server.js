@@ -21,7 +21,7 @@ const SYSTEM_PROMPT = `You are Tay, a friendly and knowledgeable AI assistant em
 - Keep answers to 2-4 sentences total. Use bullet points only when listing 3+ items
 - Never repeat information the user already knows. Go straight to the answer
 - You can use **bold** for emphasis (rendered as HTML)
-- When referencing specific sections, mention their number (e.g., "Section 02 — Key Findings")
+- When referencing specific sections, mention their number (e.g., "Section 03 — Key Findings")
 - Never invent data — only use what's in the context below
 - If asked something outside the proposal scope, say so honestly
 - Never reveal internal pricing rationale, hourly rates, or margins
@@ -51,7 +51,12 @@ TransformAZ is a consulting firm specializing in operational and technological s
 ## Taylor Group Proposal — "Designing the Digital Backbone"
 
 ### Section 01 — The Opportunity
-Taylor Group: 95-year-old experiential marketing company. $85M revenue, 300+ employees, 40+ countries. $128B global experiential marketing market.
+"95 Years of Growth. A Defining Moment for Transformation."
+Taylor Group: 95-year-old experiential marketing company. $85M revenue, 300+ employees, 40+ countries. $128B global experiential marketing market. Taylor has grown through legacy and craft — now the opportunity is to build the digital infrastructure to match that scale.
+
+### Section 02 — The New Operating Paradigm
+"From Technology Adoption to System-Level Performance"
+The shift is not about adding more tools — it's about moving from Reactive Adoption (tool-by-tool, department-by-department, disconnected) to Designed Transformation (system-level, cross-functional, outcome-driven). Most organizations adopt technology reactively. Taylor's opportunity is to design an integrated operating system.
 
 **Cost of Waiting (verified stats):**
 - 20–30% lower operational efficiency (fragmented systems) — McKinsey
@@ -59,7 +64,8 @@ Taylor Group: 95-year-old experiential marketing company. $85M revenue, 300+ emp
 - 15–25% higher operational cost (manual processes) — BCG
 - 2–3x growth rate for digitally mature competitors — MIT Sloan/Capgemini
 
-### Section 02 — Key Findings
+### Section 03 — Key Findings
+"What Initial Interviews Revealed"
 Aggregate Estimated Impact: $1.6M–$2.85M annually.
 
 1. **Asset Management Blind Spot** — HIGH IMPACT — $500K–$1.2M/year
@@ -80,12 +86,13 @@ Aggregate Estimated Impact: $1.6M–$2.85M annually.
 6. **Missing Strategic Tech Layer** — STRATEGIC — $200K–$400K/year
    No CTO. Technology decisions made in isolation.
 
-### Section 03 — The Digital Backbone
+### Section 04 — The Digital Backbone
+"One Connected Operation"
 The Digital Backbone = Taylor's operating system. Connects three modes (Create, Build, Execute) with five foundational layers (People & Culture, Processes, Technology, Data, Compliance).
 
-**CREATE** (Strategy & Creative): Strategic intelligence, creative memory, proposal acceleration, better forecasting, AI-assisted ideation.
-**BUILD** (Experiences & Fabrication): Design-to-build continuity, asset intelligence, materials tracking, capacity forecasting, digital-physical integration, cost intelligence.
-**EXECUTE** (Program Management): Project orchestration, resource allocation, logistics, real-time visibility, measurement & learning, continuous improvement.
+**CREATE** (Strategy & Creative): Strategic intelligence, creative memory, proposal acceleration, operational awareness, AI-assisted ideation.
+**BUILD** (Experiences & Fabrication): Design-to-build continuity, asset intelligence, material planning, capacity forecasting, cost intelligence.
+**EXECUTE** (Program Management): Project orchestration, resource allocation, logistics & deployment, real-time visibility, measurement & learning.
 
 **Five Dimensions:**
 - People & Culture: Segmented adoption paths, champions program, culture-first change management
@@ -94,34 +101,35 @@ The Digital Backbone = Taylor's operating system. Connects three modes (Create, 
 - Data: Asset inventory, production capacity data, project profitability tracking, executive dashboards
 - Compliance: AI governance, data handling standards, IP protection, regulatory readiness (pharma/healthcare clients)
 
-### Section 04 — The Transformation (Phases)
-1. **INTAKE** (Apr–May 2026) — Remote — SOP documentation, technology audit, stakeholder mapping
-2. **DISCOVERY** (Jun–Jul 2026) — Onsite Toronto + Remote — Interviews, process mapping, AI vision alignment
-3. **IMPLEMENTATION** (Aug–Oct 2026) — Hybrid — Workstream execution, automation builds, champion training
-4. **STABILIZATION** (Nov 2026+) — Remote — Adoption reinforcement, knowledge transfer
+### Section 05 — The Transformation Approach
+"From Insight to System-Level Execution"
+Six phases, each building on the previous. Each phase produces tangible deliverables and builds institutional knowledge.
 
-Mapping: INTAKE+DISCOVERY → CREATE, IMPLEMENTATION → BUILD, STABILIZATION → EXECUTE
+0. **PRE-ENGAGEMENT** (Apr 2026) — Remote — Scope alignment, governance model, team structure, commercial terms
+1. **INTAKE** (Apr–May 2026) — Remote — SOP documentation, technology audit, stakeholder mapping (8-12 interviews), 3 process maps, digital maturity scorecard, transformation roadmap
+2. **DISCOVERY** (Jun–Jul 2026) — Onsite Toronto + Remote — Validated process maps, 3-5 quick-win automations (live), AI readiness report, champion playbook, executive workshop, implementation proposal
+3. **IMPLEMENTATION** (Aug–Oct 2026) — Hybrid — Workflow redesign, system activation, automation builds, champion training
+4. **STABILIZATION** (Nov 2026+) — Remote — Adoption monitoring, optimization, knowledge transfer
+X. **CHANGE ENABLEMENT** — Continuous throughout — Stakeholder alignment, communication cadence, adoption support
 
-### Section 05 — Timeline
-April 2026 start. Phased approach where each phase builds on the previous. Early wins fund later investment.
+**Re-engagement Decision Point:** After INTAKE delivery, Taylor reviews findings and decides whether to continue to DISCOVERY. No obligation — INTAKE stands alone as a complete diagnostic.
 
 ### Section 06 — Market Insights
+"The AI Transformation Landscape"
 - 88% of enterprises use AI, only 39% report measurable EBIT impact — McKinsey 2025
 - 53% productivity boost in Lighthouse factories — McKinsey/WEF 2025
 - 500% ROI from predictive maintenance — Deloitte 2024
 - AI in manufacturing: $34B → $155B by 2030 — MarketsandMarkets
 - Only 16% of digital transformations fully succeed — McKinsey
-- 189 Lighthouse factories benchmark the global network — WEF 2025
-- Microsoft 365 Copilot ships agentic capabilities at $30/user/month
 
 **Competitors:**
 - Jack Morton + Impact XM: Merged Jan 2026, combining client lists and data for scale
-- Freeman: Largest event services company, already using AI and VR in operations
+- Freeman: Largest event services company, already using AI and VR
 - GPJ (George P. Johnson): Part of Project Worldwide, embedding tech into every step
 
-**Taylor's AI Journey:** 2026 Digital Backbone → 2027 AI-Powered Ops → 2029 Autonomous Ops → 2032 Experience Twins → 2036 Industry Leader
-
-### Section 07 — Next Steps & Section 08 — Intake Proposal
+### Section 07 — Next Steps
+"Moving Forward"
+Two engagement options with clear next step: 30-minute scoping call to align priorities, confirm access, and schedule kickoff. No preparation needed.
 
 **Pricing (Two Options):**
 
@@ -137,13 +145,12 @@ April 2026 start. Phased approach where each phase builds on the previous. Early
 
 **ROI Context:** $18K = ~1% of annual friction ($1.6M-$2.85M). $42K = <3% of annual friction.
 
-**INTAKE Scope of Work:**
-- SOP Documentation & Review (Foundation)
-- Technology Audit (Core) — ClickUp, M365, Gemini, departmental tools
-- Stakeholder Mapping (People) — 8-12 structured interviews
-- Process Mapping (Operations) — 3 core flows: Sales-to-Production, Creative-to-Fabrication, Executive Operations
-- Digital Maturity Assessment (Core) — Five-dimension evaluation
-- Transformation Roadmap (Strategy) — Prioritized workstreams
+### Section 08 — Intake Proposal
+"The INTAKE: Where Evidence Replaces Assumptions"
+Detailed scope of work for the INTAKE phase with deliverables table and engagement terms.
+
+**INTAKE Deliverables:**
+- Current-State Assessment, Technology Stack Audit, Stakeholder Interview Findings, 3 Process Maps, Digital Maturity Scorecard, Transformation Roadmap
 
 **Engagement Terms:**
 - Full NDA, findings shared only with designated Taylor leadership
@@ -152,9 +159,8 @@ April 2026 start. Phased approach where each phase builds on the previous. Early
 - Travel billed at cost, not in project fee
 - No obligation to proceed to subsequent phases
 
-**First step:** 30-minute scoping call to align priorities, confirm access, schedule kickoff. No preparation needed.
-
 ### Section 09 — References
+"Supporting Research & References"
 All data sourced from: McKinsey, World Economic Forum, Deloitte, IDC, BCG, MIT Sloan, MarketsandMarkets, EventTrack, IPA. All links verified as of March 2026.
 
 ---

@@ -53,12 +53,34 @@
   --sidebar-w:220px;
   --ease:cubic-bezier(.4,0,.2,1);
   --ease-out:cubic-bezier(0,0,.2,1);
+  /* Spacing */
+  --space-xs:4px;
+  --space-sm:8px;
+  --space-md:16px;
+  --space-lg:24px;
+  --space-xl:32px;
+  --space-2xl:48px;
+  --space-3xl:56px;
+  /* Radius */
+  --radius-sm:8px;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --radius-xl:18px;
+  --radius-pill:20px;
+  /* Shadows */
+  --shadow-sm:0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.08);
+  --shadow-xl:0 16px 48px rgba(0,0,0,.07);
+  --shadow-accent:0 8px 24px rgba(122,122,230,.3);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;font-feature-settings:'cv01','cv02','ss01'}
 ::selection{background:var(--accent);color:#fff}
+.skip-link{position:absolute;top:-100%;left:16px;z-index:9999;padding:8px 16px;background:var(--accent);color:#fff;font-family:var(--sans);font-size:var(--text-sm);font-weight:600;border-radius:0 0 8px 8px;text-decoration:none;transition:top .2s var(--ease)}
+.skip-link:focus{top:0}
 
 /* ═══════════════════════════════════════════════
    GRADIENT MESH BACKGROUND
@@ -241,12 +263,12 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
    ═══════════════════════════════════════════════ */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:36px 0}
 .stat-card{
-  text-align:center;padding:32px 16px;background:var(--bg-white);
-  border-radius:14px;border:1px solid var(--border-light);
-  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  text-align:center;padding:var(--space-xl) var(--space-md);background:var(--bg-white);
+  border-radius:var(--radius-lg);border:1px solid var(--border-light);
+  box-shadow:var(--shadow-sm);
   transition:all .35s var(--ease);position:relative;overflow:hidden;
 }
-.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:14px 14px 0 0}
+.stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:var(--radius-lg) var(--radius-lg) 0 0}
 .stat-card:hover{border-color:rgba(122,122,230,.2);box-shadow:0 8px 32px rgba(122,122,230,.06);transform:translateY(-3px)}
 .stat-card__value{
   font-family:var(--mono);font-size:var(--text-3xl);font-weight:700;
@@ -258,7 +280,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
 /* ═══════════════════════════════════════════════
    BOXES & VALUE PROPS
    ═══════════════════════════════════════════════ */
-.box{padding:18px 22px;border-radius:10px;margin:16px 0;border-left:3px solid;font-size:var(--text-sm);background:var(--bg-warm)}
+.box{padding:18px 22px;border-radius:var(--radius-md);margin:16px 0;border-left:3px solid;font-size:var(--text-sm);background:var(--bg-warm)}
 .box p{margin-bottom:5px;max-width:none;color:var(--text-secondary)}
 .box p:last-child{margin-bottom:0}
 .box ul{color:var(--text-secondary);max-width:none}
@@ -291,21 +313,22 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    ═══════════════════════════════════════════════ */
 .findings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0}
 .finding-card{
-  border:1px solid var(--border);border-radius:14px;padding:24px 24px 24px 28px;
-  background:var(--bg-white);cursor:pointer;overflow:hidden;
+  border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);
+  background:var(--bg-white);cursor:pointer;overflow:hidden;position:relative;
   transition:box-shadow .35s var(--ease),border-color .35s,transform .35s var(--ease);
   transform-style:preserve-3d;perspective:800px;
-  will-change:transform;border-left:3px solid var(--accent);
+  will-change:transform;
 }
-.finding-card:hover{border-color:rgba(122,122,230,.25);border-left-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
-/* Severity-based left border colors */
-.finding-card:has(.severity-tag--red){border-left-color:var(--accent)}
-.finding-card:has(.severity-tag--amber){border-left-color:var(--accent-dark)}
-.finding-card:has(.severity-tag--blue){border-left-color:var(--text-tertiary)}
+.finding-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient);border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.finding-card:hover{border-color:rgba(122,122,230,.25);box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
+/* Severity-based top bar colors */
+.finding-card:has(.severity-tag--red)::after{background:linear-gradient(90deg,var(--red),var(--accent))}
+.finding-card:has(.severity-tag--amber)::after{background:linear-gradient(90deg,var(--amber),var(--accent-dark))}
+.finding-card:has(.severity-tag--blue)::after{background:linear-gradient(90deg,var(--blue),var(--text-tertiary))}
 .finding-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .finding-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px}
 .finding-header h3{margin:0;font-size:var(--text-base);line-height:1.3;color:var(--text)}
-.severity-tag{font-family:var(--mono);font-size:var(--text-3xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.severity-tag{font-family:var(--mono);font-size:var(--text-3xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:var(--radius-pill);white-space:nowrap;flex-shrink:0}
 .severity-tag--red{background:var(--red-bg);color:var(--red)}
 .severity-tag--amber{background:var(--amber-bg);color:var(--amber)}
 .severity-tag--blue{background:var(--blue-bg);color:var(--blue)}
@@ -357,7 +380,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 .pillar-card--compliance::before{background:var(--red)}
 .pillar-header{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
 .pillar-header h4{margin:0;font-size:var(--text-xl);color:var(--text)}
-.pillar-tag{font-family:var(--mono);font-size:var(--text-3xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.pillar-tag{font-family:var(--mono);font-size:var(--text-3xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:3px 10px;border-radius:var(--radius-pill);white-space:nowrap}
 .pillar-card--people .pillar-tag{background:var(--green-bg);color:var(--green)}
 .pillar-card--process .pillar-tag{background:var(--blue-bg);color:var(--blue)}
 .pillar-card--tech .pillar-tag{background:var(--accent-light);color:var(--accent)}
@@ -472,7 +495,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
 .cbe-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0 0 28px}
 .cbe-card{
-  padding:20px 22px;border-radius:12px;background:var(--bg-white);
+  padding:20px 22px;border-radius:var(--radius-lg);background:var(--bg-white);
   border:1px solid var(--border-light);position:relative;overflow:hidden;
   transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
 }
@@ -511,11 +534,10 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    ═══════════════════════════════════════════════ */
 .phases-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;position:relative;
-  width:calc(100vw - 140px);max-width:1280px;margin-left:50%;transform:translateX(-50%);
 }
 /* Phase numbering via counter */
 .phase-card{
-  padding:32px;border-radius:14px;border:1px solid var(--border-light);
+  padding:var(--space-xl);border-radius:var(--radius-lg);border:1px solid var(--border-light);
   background:var(--bg-white);transition:box-shadow .35s var(--ease),border-color .35s;
   position:relative;overflow:hidden;transform-style:preserve-3d;perspective:800px;will-change:transform;z-index:1;
 }
@@ -597,7 +619,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    ═══════════════════════════════════════════════ */
 .horizons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
 .horizon-card{
-  border-radius:14px;padding:24px;border:1px solid var(--border-light);
+  border-radius:var(--radius-lg);padding:var(--space-lg);border:1px solid var(--border-light);
   background:var(--bg-white);transition:all .35s var(--ease);
   transform-style:preserve-3d;perspective:800px;will-change:transform;
   position:relative;overflow:hidden;
@@ -669,8 +691,8 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
 /* Competitor cards */
 .competitor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 20px}
-.competitor-card{background:var(--bg-white);border:1px solid var(--border-light);border-left:3px solid var(--text-tertiary);border-radius:0 14px 14px 0;padding:24px;transition:all .35s var(--ease)}
-.competitor-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-2px)}
+.competitor-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:24px;transition:all .35s var(--ease)}
+.competitor-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-2px);border-color:rgba(122,122,230,.2)}
 .competitor-card h4{font-family:var(--mono);font-size:var(--text-base);font-weight:700;color:var(--text-primary);margin:0 0 10px;letter-spacing:.02em}
 .competitor-card__action{font-size:var(--text-sm);color:var(--text-secondary);margin:0 0 10px;line-height:1.55}
 .competitor-card__implication{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0}
@@ -706,7 +728,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 /* CTA */
 .cta-box{
   text-align:center;padding:52px 40px;background:var(--bg-white);
-  border:1px solid rgba(122,122,230,.2);border-radius:18px;margin:36px 0;
+  border:1px solid rgba(122,122,230,.2);border-radius:var(--radius-xl);margin:36px 0;
   position:relative;overflow:hidden;
 }
 .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--accent-glow) 0%,transparent 70%);opacity:.5;pointer-events:none;animation:ctaPulse 4s ease-in-out infinite}
@@ -775,7 +797,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    PRINT
    ═══════════════════════════════════════════════ */
 @media print{
-  .sidebar,.hamburger,.progress-bar,.scroll-hint,.gradient-mesh,.sidebar-overlay,.tay-fab,.tay-panel{display:none!important}
+  .sidebar,.hamburger,.progress-bar,.scroll-hint,.gradient-mesh,.sidebar-overlay,.tay-fab,.tay-panel,.skip-link{display:none!important}
 .bb-particles{display:none!important}
   .main{margin-left:0!important}
   .section,.interstitial{min-height:auto;padding:28px 36px;max-width:none}
@@ -842,7 +864,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .findings-grid,.phases-grid,.horizons-grid,.competitor-grid{grid-template-columns:1fr}
-  .phases-grid{width:100%;transform:none;margin-left:0}
+
   .timeline{flex-direction:column;padding:0 0 0 20px;gap:24px}
   .timeline::before{top:0;bottom:0;left:26px;right:auto;width:2px;height:100%;transform-origin:top}
   .timeline-node{flex-direction:row;align-items:center;gap:14px}
@@ -978,6 +1000,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   background:var(--bg-warm);color:var(--text);
   border-bottom-right-radius:4px;
 }
+.tay-msg--error{align-self:flex-start;background:var(--red-bg);color:var(--text-secondary);border:1px solid rgba(220,38,38,.15);border-bottom-left-radius:4px;font-style:italic}
 .tay-msg a{color:var(--accent);text-decoration:underline;font-weight:500}
 .tay-msg strong{font-weight:600}
 /* Typing indicator */
@@ -1016,13 +1039,13 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 .tay-input::placeholder{color:var(--text-tertiary)}
 .tay-input:focus{border-color:var(--accent)}
 .tay-send{
-  width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;
+  width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
   background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
   transition:background .2s,transform .15s;flex-shrink:0;
 }
 .tay-send:hover{background:var(--accent-dark)}
 .tay-send:active{transform:scale(.92)}
-.tay-send svg{width:16px;height:16px}
+.tay-send svg{width:18px;height:18px}
 
 /* Mobile */
 @media(max-width:768px){
@@ -1032,6 +1055,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 </style>
 </head>
 <body>
+<a href="#opportunity" class="skip-link">Skip to content</a>
 
 <!-- Gradient mesh bg -->
 <div class="gradient-mesh" aria-hidden="true"></div>
@@ -1433,17 +1457,17 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
     <div class="anim" style="--d:.45s">
       <div class="pillar-tabs" role="tablist">
-        <button class="pillar-tab is-active" role="tab" aria-selected="true" data-tab="people">People &amp; Culture</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="process">Processes</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="tech">Tech</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="data">Data</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="compliance">Compliance</button>
+        <button class="pillar-tab is-active" role="tab" aria-selected="true" data-tab="people" id="tab-btn-people">People &amp; Culture</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="process" id="tab-btn-process">Processes</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="tech" id="tab-btn-tech">Tech</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="data" id="tab-btn-data">Data</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="compliance" id="tab-btn-compliance">Compliance</button>
       </div>
-      <div class="pillar-tab-content is-active" id="tab-people"><div class="pillar-card pillar-card--people"><div class="pillar-header"><h4>People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div><p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p><div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-process"><div class="pillar-card pillar-card--process"><div class="pillar-header"><h4>Processes</h4><span class="pillar-tag">Dimension</span></div><p>SOP modernization. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p><div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-tech"><div class="pillar-card pillar-card--tech"><div class="pillar-header"><h4>Tech Integrations</h4><span class="pillar-tag">Dimension</span></div><p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p><div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-data"><div class="pillar-card pillar-card--data"><div class="pillar-header"><h4>Data</h4><span class="pillar-tag">Dimension</span></div><p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p><div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-compliance"><div class="pillar-card pillar-card--compliance"><div class="pillar-header"><h4>Compliance</h4><span class="pillar-tag">Dimension</span></div><p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Regulatory readiness for pharma and healthcare clients.</p><div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content is-active" id="tab-people" role="tabpanel" aria-labelledby="tab-btn-people"><div class="pillar-card pillar-card--people"><div class="pillar-header"><h4>People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div><p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p><div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-process" role="tabpanel" aria-labelledby="tab-btn-process"><div class="pillar-card pillar-card--process"><div class="pillar-header"><h4>Processes</h4><span class="pillar-tag">Dimension</span></div><p>SOP modernization. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p><div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-tech" role="tabpanel" aria-labelledby="tab-btn-tech"><div class="pillar-card pillar-card--tech"><div class="pillar-header"><h4>Tech Integrations</h4><span class="pillar-tag">Dimension</span></div><p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p><div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-data" role="tabpanel" aria-labelledby="tab-btn-data"><div class="pillar-card pillar-card--data"><div class="pillar-header"><h4>Data</h4><span class="pillar-tag">Dimension</span></div><p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p><div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-compliance" role="tabpanel" aria-labelledby="tab-btn-compliance"><div class="pillar-card pillar-card--compliance"><div class="pillar-header"><h4>Compliance</h4><span class="pillar-tag">Dimension</span></div><p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Regulatory readiness for pharma and healthcare clients.</p><div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div></div></div>
     </div>
 
     <div class="value-prop anim" style="--d:.5s">
@@ -2233,7 +2257,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
       <div class="tay-header__sub">Taylor Group Assistant</div>
     </div>
   </div>
-  <div class="tay-messages" id="tay-messages"></div>
+  <div class="tay-messages" id="tay-messages" aria-live="polite"></div>
   <div class="tay-suggestions" id="tay-suggestions"></div>
   <div class="tay-input-wrap">
     <input class="tay-input" id="tay-input" type="text" placeholder="Ask about the proposal..." autocomplete="off">
@@ -2880,53 +2904,53 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   const SUGGESTIONS = {
     cover:[
       'What is this proposal about?',
-      'Tell me about TransformAZ',
-      'What does "Digital Backbone" mean?'
+      'Who is TransformAZ?',
+      'What results has TransformAZ delivered before?'
     ],
     opportunity:[
-      'Why is this a defining moment for Taylor?',
-      'What does the $128B market mean for Taylor?',
-      'What happens if Taylor doesn\'t act now?'
+      'Why is now a defining moment for Taylor?',
+      'How big is the experiential marketing market?',
+      'What does the cost of waiting look like?'
     ],
     paradigm:[
-      'What is the difference between reactive and designed transformation?',
-      'Why do only 20-30% of AI initiatives scale?',
-      'What are Lighthouse factories?'
+      'What is the difference between Reactive Adoption and Designed Transformation?',
+      'How does this shift affect Taylor specifically?',
+      'What does system-level performance mean in practice?'
     ],
     findings:[
-      'What is the total annual friction?',
+      'What is the total estimated annual friction?',
       'Which finding has the highest dollar impact?',
-      'What is the asset management blind spot?'
+      'How were these estimates calculated?'
     ],
     backbone:[
-      'How do Create, Build, Execute connect?',
-      'What are the five foundational layers?',
-      'How does the Backbone solve the findings?'
+      'What is the Digital Backbone?',
+      'How do Create, Build, and Execute connect?',
+      'What changes for Taylor\'s day-to-day operations?'
     ],
     transformation:[
-      'Walk me through the four phases',
+      'Walk me through the phases',
       'What is the difference between INTAKE and DISCOVERY?',
-      'When does onsite work happen?'
+      'What happens at the re-engagement decision point?'
     ],
     market:[
-      'What are Taylor\'s competitors doing?',
-      'What is the AI adoption gap?',
-      'What does Taylor\'s AI journey look like?'
+      'What are Taylor\'s competitors doing with AI?',
+      'Why do only 16% of transformations fully succeed?',
+      'What does Taylor\'s long-term AI journey look like?'
     ],
     'next-steps':[
       'What are the two engagement options?',
-      'How is the investment structured?',
+      'What does Taylor get for $18K vs $42K?',
       'What is the first step to begin?'
     ],
     'intake-proposal':[
       'What exactly does INTAKE deliver?',
-      'How many interviews and process maps?',
-      'What are the engagement terms?'
+      'What does DISCOVERY add on top?',
+      'What are the engagement terms and cancellation policy?'
     ],
     references:[
-      'Where does the data come from?',
-      'Which organizations are cited?',
-      'Are all sources from 2024-2026?'
+      'Where does the data in this proposal come from?',
+      'Are all sources recent and verified?',
+      'Which research firms are cited?'
     ]
   };
 
@@ -2994,10 +3018,10 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
       var data = await res.json();
       var answer = data.response || 'Sorry, I couldn\'t process that.';
       conversationHistory.push({role:'assistant',content:answer});
-      return formatResponse(answer);
+      return {text:formatResponse(answer),error:false};
     }catch(err){
       console.warn('Tay API error:',err);
-      return 'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.';
+      return {text:'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.',error:true};
     }
   }
 
@@ -3010,9 +3034,9 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     input.disabled=true;
 
     showTyping();
-    var answer = await callAPI(text);
+    var result = await callAPI(text);
     removeTyping();
-    addMsg(answer,'bot');
+    addMsg(result.text, result.error ? 'error' : 'bot');
     renderSuggestions();
 
     input.disabled=false;
