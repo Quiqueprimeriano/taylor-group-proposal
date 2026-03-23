@@ -1,0 +1,11 @@
+[build]
+  publish = "Taylor Group/proposal-2.0/pitch"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/chat"
+  to = "/.netlify/functions/chat"
+  status = 200
