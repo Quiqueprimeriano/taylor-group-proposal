@@ -59,6 +59,8 @@
 html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;font-feature-settings:'cv01','cv02','ss01'}
 ::selection{background:var(--accent);color:#fff}
+.skip-link{position:absolute;top:-100%;left:16px;z-index:9999;padding:8px 16px;background:var(--accent);color:#fff;font-family:var(--sans);font-size:var(--text-sm);font-weight:600;border-radius:0 0 8px 8px;text-decoration:none;transition:top .2s var(--ease)}
+.skip-link:focus{top:0}
 
 /* ═══════════════════════════════════════════════
    GRADIENT MESH BACKGROUND
@@ -775,7 +777,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    PRINT
    ═══════════════════════════════════════════════ */
 @media print{
-  .sidebar,.hamburger,.progress-bar,.scroll-hint,.gradient-mesh,.sidebar-overlay,.tay-fab,.tay-panel{display:none!important}
+  .sidebar,.hamburger,.progress-bar,.scroll-hint,.gradient-mesh,.sidebar-overlay,.tay-fab,.tay-panel,.skip-link{display:none!important}
 .bb-particles{display:none!important}
   .main{margin-left:0!important}
   .section,.interstitial{min-height:auto;padding:28px 36px;max-width:none}
@@ -1016,13 +1018,13 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 .tay-input::placeholder{color:var(--text-tertiary)}
 .tay-input:focus{border-color:var(--accent)}
 .tay-send{
-  width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;
+  width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
   background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
   transition:background .2s,transform .15s;flex-shrink:0;
 }
 .tay-send:hover{background:var(--accent-dark)}
 .tay-send:active{transform:scale(.92)}
-.tay-send svg{width:16px;height:16px}
+.tay-send svg{width:18px;height:18px}
 
 /* Mobile */
 @media(max-width:768px){
@@ -1032,6 +1034,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 </style>
 </head>
 <body>
+<a href="#opportunity" class="skip-link">Skip to content</a>
 
 <!-- Gradient mesh bg -->
 <div class="gradient-mesh" aria-hidden="true"></div>
@@ -1433,17 +1436,17 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
     <div class="anim" style="--d:.45s">
       <div class="pillar-tabs" role="tablist">
-        <button class="pillar-tab is-active" role="tab" aria-selected="true" data-tab="people">People &amp; Culture</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="process">Processes</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="tech">Tech</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="data">Data</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="compliance">Compliance</button>
+        <button class="pillar-tab is-active" role="tab" aria-selected="true" data-tab="people" id="tab-btn-people">People &amp; Culture</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="process" id="tab-btn-process">Processes</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="tech" id="tab-btn-tech">Tech</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="data" id="tab-btn-data">Data</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="compliance" id="tab-btn-compliance">Compliance</button>
       </div>
-      <div class="pillar-tab-content is-active" id="tab-people"><div class="pillar-card pillar-card--people"><div class="pillar-header"><h4>People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div><p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p><div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-process"><div class="pillar-card pillar-card--process"><div class="pillar-header"><h4>Processes</h4><span class="pillar-tag">Dimension</span></div><p>SOP modernization. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p><div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-tech"><div class="pillar-card pillar-card--tech"><div class="pillar-header"><h4>Tech Integrations</h4><span class="pillar-tag">Dimension</span></div><p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p><div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-data"><div class="pillar-card pillar-card--data"><div class="pillar-header"><h4>Data</h4><span class="pillar-tag">Dimension</span></div><p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p><div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-compliance"><div class="pillar-card pillar-card--compliance"><div class="pillar-header"><h4>Compliance</h4><span class="pillar-tag">Dimension</span></div><p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Regulatory readiness for pharma and healthcare clients.</p><div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content is-active" id="tab-people" role="tabpanel" aria-labelledby="tab-btn-people"><div class="pillar-card pillar-card--people"><div class="pillar-header"><h4>People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div><p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p><div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-process" role="tabpanel" aria-labelledby="tab-btn-process"><div class="pillar-card pillar-card--process"><div class="pillar-header"><h4>Processes</h4><span class="pillar-tag">Dimension</span></div><p>SOP modernization. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p><div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-tech" role="tabpanel" aria-labelledby="tab-btn-tech"><div class="pillar-card pillar-card--tech"><div class="pillar-header"><h4>Tech Integrations</h4><span class="pillar-tag">Dimension</span></div><p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p><div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-data" role="tabpanel" aria-labelledby="tab-btn-data"><div class="pillar-card pillar-card--data"><div class="pillar-header"><h4>Data</h4><span class="pillar-tag">Dimension</span></div><p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p><div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-compliance" role="tabpanel" aria-labelledby="tab-btn-compliance"><div class="pillar-card pillar-card--compliance"><div class="pillar-header"><h4>Compliance</h4><span class="pillar-tag">Dimension</span></div><p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Regulatory readiness for pharma and healthcare clients.</p><div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div></div></div>
     </div>
 
     <div class="value-prop anim" style="--d:.5s">
@@ -2233,7 +2236,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
       <div class="tay-header__sub">Taylor Group Assistant</div>
     </div>
   </div>
-  <div class="tay-messages" id="tay-messages"></div>
+  <div class="tay-messages" id="tay-messages" aria-live="polite"></div>
   <div class="tay-suggestions" id="tay-suggestions"></div>
   <div class="tay-input-wrap">
     <input class="tay-input" id="tay-input" type="text" placeholder="Ask about the proposal..." autocomplete="off">
