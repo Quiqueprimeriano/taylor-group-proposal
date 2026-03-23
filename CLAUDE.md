@@ -9,24 +9,28 @@ TransformAZ is a consulting firm's deliverable generation system. Each client ge
 ## Build Commands
 
 ```bash
-# Generate PDFs from HTML (per client folder)
-node SME-Group/generate-pdf.js
-node "Taylor Group/generate-pdf.js"
+# Generate PDFs from HTML
+node "Taylor Group/proposal-2.0/generate-pdf.js"    # Taylor static docs → PDF
 
-# Generate DOCX from Python script
+# Generate DOCX
+node "Taylor Group/proposal-2.0/pitch/generate-full-pitch-docx.js"
+node "Taylor Group/proposal-2.0/pitch/generate-intake-docx.js"
+node "Taylor Group/scripts/generate-agenda-docx.js"
 python3 SME-Group/generate-onepager-docx.py
 
-# Take screenshots for presentations
+# Take screenshots
 node SME-Group/take-screenshots.js
+node "Taylor Group/proposal-2.0/pitch/take-screenshots.js"
 ```
 
-**Dependencies:** Playwright (chromium) for HTML→PDF, python-docx for DOCX generation.
+**Dependencies:** All in root `package.json` — Playwright (chromium) for HTML→PDF, docx/pptxgenjs for DOCX/PPTX, python-docx for Python DOCX generation.
 
 ## Architecture
 
 - **Client folders:** `SME-Group/`, `Taylor Group/` — each contains HTML source documents, generation scripts, and output files (PDF/DOCX)
 - **HTML→PDF pipeline:** Playwright with `printBackground: true`, zero margins, `preferCSSPageSize: true`. HTML files use `@page` CSS for A4 sizing and print-specific styles
-- **DOCX generation:** Python scripts using `python-docx` with manual styling (no template files)
+- **DOCX generation:** Python scripts using `python-docx` with manual styling (no template files). JS DOCX scripts use `docx` npm package
+- **Dependencies:** All consolidated in root `package.json`. No inner package.json files — `require()` walks up to root `node_modules/`
 - **Tay chatbot:** Claude-powered bot embedded in the Interactive Pitch. Netlify Function (`netlify/functions/chat.js`) proxies to Claude API. Local dev server at `chat-bot/server.js`. Both share the same SYSTEM_PROMPT — keep in sync when proposal content changes
 - **Netlify deployment:** `netlify.toml` publishes `Taylor Group/proposal-2.0/pitch/` (requires `index.html` copy of main HTML). Redirect `/api/chat` → `/.netlify/functions/chat`. ANTHROPIC_API_KEY set in Netlify env vars
 
@@ -35,10 +39,14 @@ node SME-Group/take-screenshots.js
 - **Fonts (Interactive Pitch):** Source Serif 4 (headings), Inter with `font-feature-settings: 'cv01','cv02','ss01'` (body), JetBrains Mono (data/mono)
 - **Fonts (Static docs):** Source Serif 4 (headings), Source Sans 3 (body); Calibri in DOCX
 - **Type scale:** 1.25 Major Third ratio with 12 CSS tokens (`--text-3xs` through `--text-5xl`). Never use hardcoded `font-size` values — always use a `--text-*` token
+- **Spacing tokens:** `--space-xs` (4px) through `--space-3xl` (56px). Use for padding/margin on main components
+- **Radius tokens:** `--radius-sm` (8px), `--radius-md` (10px), `--radius-lg` (14px), `--radius-xl` (18px), `--radius-pill` (20px). `::after` top bars must use the same radius token as their parent card
+- **Shadow tokens:** `--shadow-sm` through `--shadow-xl`, `--shadow-accent` for accent glow
 - **Client-facing accent:** `#7A7AE6` (purple)
 - **Internal docs accent:** `#c0392b` (red) — visually distinguishes internal from client-facing
 - **Layout:** Single `--content-w: 960px` column for interactive pitch. No breakout widths (causes asymmetry with sidebar)
 - **CSS print essentials:** `print-color-adjust: exact`, `-webkit-print-color-adjust: exact` for background colors
+- **Full design system:** See `DESIGN.md` for complete token reference, component catalog, and accessibility specs
 
 ## Key Conventions
 
@@ -54,7 +62,9 @@ node SME-Group/take-screenshots.js
 - **Scroll-reveal text:** Groups `.scroll-reveal` paragraphs per section into one continuous word stream. Uses scroll position, not IntersectionObserver. Effect must be very subtle: opacity 0.55→1, 150ms transition, NO blur
 - **Expand/collapse:** Always use `max-height` + `opacity` CSS transitions (never `display:none/block`) for animatable expand/collapse
 - **Sidebar nav tracking:** Scroll-based `offsetTop` comparison, not IntersectionObserver (fails on tall sections)
+- **Card accent diversity:** Three distinct treatments to avoid AI-slop monoculture: (1) `::after` top gradient bar for finding-cards and stat-cards, (2) `border-left` / `::before` left bar for boxes, CBE cards, and pillar cards, (3) neutral border with hover accent for competitor cards. Never use the same accent pattern on all card types
 - **Card hover effects:** `translateY(-2px)` + elevated `box-shadow`. Gradient top borders via `::after` pseudo-elements (not `border-image`, which breaks `border-radius`)
+- **Accessibility:** Skip-to-content link (visible on focus), minimum 44px touch targets, `role="tabpanel"` + `aria-labelledby` on pillar tabs, `aria-live="polite"` on chatbot messages. Chatbot error messages use `.tay-msg--error` (distinct visual style)
 - **CBE diagram:** Lives in Section 04 (Digital Backbone). CSS animated flow phases that double as navigation for expandable content panels below. Never duplicate in Section 05
 - **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
 - **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20–30%" not "30%"). No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
