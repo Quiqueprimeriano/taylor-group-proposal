@@ -49,8 +49,11 @@ node SME-Group/take-screenshots.js
 ## Interactive Pitch Patterns (Taylor Group)
 
 - **Scroll animations:** IntersectionObserver with low thresholds (0.05–0.15) for early triggers. Never use threshold > 0.2
-- **Scroll-reveal text:** Groups `.scroll-reveal` paragraphs per section into one continuous word stream. Uses scroll position, not IntersectionObserver
+- **Scroll-reveal text:** Groups `.scroll-reveal` paragraphs per section into one continuous word stream. Uses scroll position, not IntersectionObserver. Effect must be very subtle: opacity 0.55→1, 150ms transition, NO blur
 - **Expand/collapse:** Always use `max-height` + `opacity` CSS transitions (never `display:none/block`) for animatable expand/collapse
 - **Sidebar nav tracking:** Scroll-based `offsetTop` comparison, not IntersectionObserver (fails on tall sections)
 - **Card hover effects:** `translateY(-2px)` + elevated `box-shadow`. Gradient top borders via `::after` pseudo-elements (not `border-image`, which breaks `border-radius`)
-- **CBE diagram:** CSS animated flow phases that double as navigation for expandable content panels below
+- **CBE diagram:** Lives in Section 03 (Digital Backbone). CSS animated flow phases that double as navigation for expandable content panels below. Never duplicate in Section 04
+- **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
+- **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20–30%" not "30%"). No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
+- **Source links:** Data-heavy sections end with a "Sources & methodology → 09" button linking to the references section

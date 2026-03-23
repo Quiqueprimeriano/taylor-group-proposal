@@ -91,8 +91,11 @@ All statistics used in `Taylor-Group-Interactive-Pitch.html` are listed below wi
 - **Status:** ✅ Public news. Competitors consolidating around data platforms.
 
 ### Predictive Maintenance ROI (300-500%)
-- **Source:** Attributed to "Tech-Stack" in the pitch
-- **Status:** ⚠️ Generic industry estimates. Multiple sources cite similar ranges but no single authoritative source pinned down. Consider attributing to "industry estimates" rather than a specific source.
+- **Source:** [Predictive Maintenance and the Smart Factory (PDF)](https://www2.deloitte.com/content/dam/Deloitte/us/Documents/process-and-operations/us-cons-predictive-maintenance.pdf)
+- **Claim used:**
+  - Predictive maintenance delivers **300–500% ROI** in manufacturing environments — ✅ Verified (Deloitte)
+- **Note:** Previously attributed to "Tech-Stack" (non-existent source). Updated 2026-03-20.
+- **Note:** "Computer vision QC: 200–300% ROI" claim was removed — no credible source found.
 
 ---
 
@@ -117,3 +120,16 @@ Used for pricing validation, not shown to client.
 | 35% digital transformations succeed | Inconsistent with interstitial (16%) | 16% fully succeed | McKinsey |
 | 75% manufacturers use digital twins | Imprecise | ~75% in advanced industries | McKinsey |
 | Sources footer | Listed Deloitte as primary | Updated to McKinsey, WEF, IDC, MarketsandMarkets | — |
+
+## Summary of Changes Made (2026-03-20)
+
+| Original Claim | Issue | Corrected To | Source |
+|---|---|---|---|
+| "Tech-Stack 2025" (stat card) | Non-existent source | "Deloitte 2024" | Deloitte — Predictive Maintenance and the Smart Factory |
+| "Tech-Stack" (Horizon 1 bullet: 95% of manufacturers) | No verifiable source | 189 Lighthouse factories benchmark the network — WEF 2025 | WEF Global Lighthouse Network |
+| "Tech-Stack" (Horizon 2 bullet: pred maint + CV QC) | Non-existent source; CV QC 200-300% ROI unverifiable | Predictive maintenance 300-500% ROI — Deloitte (removed CV QC claim) | Deloitte |
+| "Industry Reports 2025" (stat card) | Vague attribution | "MarketsandMarkets 2025" | MarketsandMarkets AI in Manufacturing |
+| Cost of Waiting stat cards (30%, 40%, 25%, 3x) | No source attribution | Added McKinsey 2018, McKinsey 2017, BCG 2020, MIT Sloan/Capgemini | Multiple verified sources |
+| "40% slower execution" | Arbitrary midpoint of 30-50% range | "50% slower execution" (top of verified range) | McKinsey — The Case for Digital Reinvention |
+| "$250B digital twins by 2034" | No pinned source, projections vary widely | Removed projection, kept verified $24.5B current market | MarketsandMarkets 2025 |
+| "30% of factories by 2029" (IDC) | Unverifiable prediction | Replaced with verified $34B→$155B AI in mfg growth | MarketsandMarkets |

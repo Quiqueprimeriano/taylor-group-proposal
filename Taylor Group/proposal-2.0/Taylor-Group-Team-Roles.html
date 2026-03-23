@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Taylor Group — Team Roles & Engagement Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #c0392b;
+    --accent-light: #fdeaea;
+    --blue: #2c5282;
+    --blue-light: #e8f0fe;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+    --purple: #7A7AE6;
+    --purple-light: #ededfc;
+    --red: #c0392b;
+    --red-light: #fdeaea;
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --border: #d5d5d5;
+    --bg: #faf9f7;
+    --bg-white: #ffffff;
+    --font-serif: 'Source Serif 4', Georgia, serif;
+    --font-sans: 'Source Sans 3', 'Segoe UI', sans-serif;
+  }
+  @page { size: A4; margin: 20mm 22mm 22mm 22mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ── COVER ─────────────────────────── */
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d1b3d 50%, #1a1a2e 100%);
+    color: white;
+    padding: 60px 40px;
+    page-break-after: always;
+  }
+  .cover-badge {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 5px 16px;
+    border-radius: 3px;
+    margin-bottom: 48px;
+  }
+  .cover h1 {
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cover .subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 48px;
+  }
+  .cover .meta {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── SECTIONS ──────────────────────── */
+  .section { padding: 40px; }
+  .section-number {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 24px 0 10px;
+  }
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 16px 0 6px;
+  }
+  p { margin-bottom: 10px; }
+  ul, ol { margin: 8px 0 12px 20px; }
+  li { margin-bottom: 4px; }
+  .page-break { page-break-before: always; }
+
+  /* ── ROLE CARDS ────────────────────── */
+  .role-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    background: var(--bg-white);
+    page-break-inside: avoid;
+  }
+  .role-card--lead { border-left: 6px solid var(--accent); }
+  .role-card--process { border-left: 6px solid var(--blue); }
+  .role-card--tech { border-left: 6px solid var(--green); }
+
+  .role-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .role-tag {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .role-tag--lead { background: var(--red-light); color: var(--red); }
+  .role-tag--process { background: var(--blue-light); color: var(--blue); }
+  .role-tag--tech { background: var(--green-light); color: var(--green); }
+  .role-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  /* ── TABLES ────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 16px 0;
+  }
+  th {
+    background: #1a1a2e;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.68rem;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #faf9f7; }
+  .raci-a { font-weight: 700; color: var(--accent); }
+  .raci-r { font-weight: 700; color: var(--blue); }
+  .raci-c { color: var(--text-muted); }
+  .raci-i { color: #bbb; }
+
+  /* ── FLOW DIAGRAM ──────────────────── */
+  .flow-phase {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
+    align-items: stretch;
+  }
+  .flow-col {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    background: var(--bg-white);
+    font-size: 0.78rem;
+  }
+  .flow-col h4 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px;
+  }
+  .flow-col--lead { border-top: 4px solid var(--accent); }
+  .flow-col--lead h4 { color: var(--accent); }
+  .flow-col--process { border-top: 4px solid var(--blue); }
+  .flow-col--process h4 { color: var(--blue); }
+  .flow-col--tech { border-top: 4px solid var(--green); }
+  .flow-col--tech h4 { color: var(--green); }
+
+  /* ── CALLOUT ───────────────────────── */
+  .callout {
+    border-left: 4px solid var(--accent);
+    background: var(--accent-light);
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    margin: 16px 0;
+  }
+  .callout--blue { border-left-color: var(--blue); background: var(--blue-light); }
+  .callout--green { border-left-color: var(--green); background: var(--green-light); }
+  .callout--amber { border-left-color: var(--amber); background: var(--amber-light); }
+
+  .value-prop {
+    border: 2px solid var(--accent);
+    border-left: 5px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    background: var(--accent-light);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  /* ── PRINT ─────────────────────────── */
+  @media print {
+    body { background: white; }
+    .section { padding: 0; }
+    .page-break { page-break-before: always; }
+    .role-card { page-break-inside: avoid; }
+    .flow-phase { page-break-inside: avoid; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    .cover { background: #1a1a2e !important; }
+    th { background: #1a1a2e !important; color: white !important; }
+    .role-card--lead { border-left-color: #c0392b !important; }
+    .role-card--process { border-left-color: #2c5282 !important; }
+    .role-card--tech { border-left-color: #2a7d4f !important; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- COVER                                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="cover">
+    <div class="cover-badge">Internal &mdash; TransformAZ</div>
+    <h1>Team Roles &amp;<br>Engagement Flow</h1>
+    <p class="subtitle">Taylor Group Digital Backbone Transformation<br>138 Tasks &middot; 5 Phases &middot; 3 Roles</p>
+    <p class="meta">TransformAZ &mdash; March 2026 &mdash; Confidential</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 01 — OVERVIEW                               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section">
+    <span class="section-number">01 &mdash; Overview</span>
+    <h2>Three Roles. One Backbone.</h2>
+
+    <p>The Taylor Group transformation requires a lean, high-impact team of three consultants, each with a distinct area of ownership. The team structure follows industry best practices (McKinsey, Deloitte, BCG) adapted for mid-market engagements where every person wears multiple hats and there is no room for role ambiguity.</p>
+
+    <p>The engagement spans 5 phases, 138 tasks, and approximately 15 months &mdash; from pre-engagement scoping through advisory retainer. The three roles work in parallel, intersecting at defined touchpoints and governed by a clear RACI matrix.</p>
+
+    <div class="flow-phase">
+      <div class="flow-col flow-col--lead">
+        <h4>Ferm&iacute;n</h4>
+        <p><strong>Engagement Lead</strong></p>
+        <p>Client relationship, strategic direction, stakeholder alignment, executive presentations, governance. The single point of accountability for the engagement.</p>
+      </div>
+      <div class="flow-col flow-col--process">
+        <h4>Agust&iacute;n</h4>
+        <p><strong>Process &amp; Implementation Consultant</strong></p>
+        <p>Process mapping, stakeholder interviews, SOP design, workflow optimization, implementation execution, adoption tracking. The bridge between strategy and execution.</p>
+      </div>
+      <div class="flow-col flow-col--tech">
+        <h4>[Tech Lead]</h4>
+        <p><strong>Technology &amp; Solutions Architect</strong></p>
+        <p>ClickUp architecture, Gemini deployment, M365 integration, automation engine, dashboards, data infrastructure. The builder who turns designs into systems.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Design principle:</strong> Ferm&iacute;n owns the <em>what</em> and the <em>why</em>. Agust&iacute;n owns the <em>how</em> (processes and people). Tech Lead owns the <em>how</em> (systems and tools). All three converge on the <em>when</em> (delivery).
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 02 — ROLE PROFILES                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section page-break">
+    <span class="section-number">02 &mdash; Role Profiles</span>
+    <h2>Detailed Role Descriptions</h2>
+
+    <!-- ── FERMÍN ── -->
+    <div class="role-card role-card--lead">
+      <div class="role-header">
+        <h3 style="color: var(--accent); margin: 0;">Ferm&iacute;n &mdash; Engagement Lead</h3>
+        <span class="role-tag role-tag--lead">Principal</span>
+      </div>
+      <p class="role-subtitle">Strategic direction, client management, executive alignment, quality assurance</p>
+
+      <h4>Core Responsibilities</h4>
+      <ul>
+        <li><strong>Client relationship owner.</strong> Single point of contact for Dean, Mike, and the executive team. Manages expectations, escalates risks, steers toward consensus.</li>
+        <li><strong>Strategic direction.</strong> Sets the engagement hypothesis (McKinsey approach), defines priorities, and makes scope decisions. Final authority on what gets done and in what order.</li>
+        <li><strong>Executive alignment.</strong> Facilitates steering committee sessions, presents findings and recommendations, and secures buy-in at every phase gate.</li>
+        <li><strong>Quality assurance.</strong> Reviews every deliverable before it reaches the client. Ensures narrative coherence across process, technology, and people workstreams.</li>
+        <li><strong>Governance &amp; scope.</strong> Manages the RACI matrix, change requests, and scope boundaries. Protects the team from scope creep while maintaining client satisfaction.</li>
+        <li><strong>Team coordination.</strong> Runs internal syncs, unblocks team members, and manages resource allocation across phases.</li>
+      </ul>
+
+      <h4>Phase-by-Phase Activities</h4>
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Key Activities</th><th>Key Deliverables</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 0</strong><br>Pre-Engagement</td>
+            <td>
+              <ul>
+                <li>Define transformation objectives with leadership</li>
+                <li>Define workstreams in scope</li>
+                <li>Negotiate and execute contract</li>
+                <li>Design governance structure (Sponsor, SteerCo)</li>
+                <li>Define decision-making framework</li>
+                <li>Build team structure and allocation plan</li>
+              </ul>
+            </td>
+            <td>Scope document, Governance model, Signed agreement, Team structure, Allocation plan</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 1</strong><br>Intake</td>
+            <td>
+              <ul>
+                <li>Design information request framework</li>
+                <li>Oversee data room setup and data collection</li>
+                <li>Review synthesis from Agust&iacute;n and Tech Lead</li>
+                <li>Build initial hypotheses (with team)</li>
+                <li>Define discovery plan with executive sponsor</li>
+              </ul>
+            </td>
+            <td>Hypothesis set v1, Discovery plan, Information request framework</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong><br>Discovery</td>
+            <td>
+              <ul>
+                <li>Conduct executive interviews (Dean, Mike, VPs)</li>
+                <li>Facilitate discovery kickoff session</li>
+                <li>Synthesize findings across all workstreams</li>
+                <li>Prioritize initiatives (no-regret moves vs. strategic bets)</li>
+                <li>Define lighthouse projects for Phase 3</li>
+                <li>Present and validate findings with leadership</li>
+              </ul>
+            </td>
+            <td>Consolidated findings, Lighthouse definitions, Final diagnosis report, Implementation roadmap</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong><br>Implementation</td>
+            <td>
+              <ul>
+                <li>Oversee all 6 parallel workstreams</li>
+                <li>Lead weekly client status meetings</li>
+                <li>Drive change communication plan</li>
+                <li>Facilitate AI governance policy with leadership &amp; legal</li>
+                <li>Review and approve all deliverables</li>
+                <li>Manage cross-office coordination (Toronto, Boston, Cleveland)</li>
+              </ul>
+            </td>
+            <td>AI governance policy, Change comms, Phase-gate presentations</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong><br>Stabilization</td>
+            <td>
+              <ul>
+                <li>Lead executive transformation report</li>
+                <li>Deliver ROI measurement report</li>
+                <li>Conduct monthly strategic advisory sessions</li>
+                <li>Quarterly scorecard reviews</li>
+                <li>Ensure knowledge transfer completeness</li>
+              </ul>
+            </td>
+            <td>Executive transformation report, Scorecard v3, Internal playbook approval</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Decision rights:</strong> Final authority on scope, timeline, priorities, and deliverable quality. Accountable (the &ldquo;A&rdquo; in RACI) for every client-facing deliverable. Only person who can approve scope changes.
+      </div>
+    </div>
+
+    <!-- ── AGUSTÍN ── -->
+    <div class="page-break"></div>
+    <div class="role-card role-card--process">
+      <div class="role-header">
+        <h3 style="color: var(--blue); margin: 0;">Agust&iacute;n &mdash; Process &amp; Implementation Consultant</h3>
+        <span class="role-tag role-tag--process">Operations</span>
+      </div>
+      <p class="role-subtitle">Process mapping, stakeholder interviews, SOP design, implementation execution, adoption</p>
+
+      <h4>Core Responsibilities</h4>
+      <ul>
+        <li><strong>Stakeholder interviews.</strong> Conducts 3-4 interviews per day during Discovery using semi-structured guides. Interviews functional teams (Ops, Creative, Sales, IT, Warehouse) and cross-office staff (Boston, Cleveland remotely). Documents both the formal process (&ldquo;how it should work&rdquo;) and the actual process (&ldquo;how it really works&rdquo;).</li>
+        <li><strong>Process mapping.</strong> Builds current-state and future-state process maps using SIPOC, swim lane diagrams, and value stream mapping. Maps workflows across the Create&rarr;Build&rarr;Execute cycle. Identifies bottlenecks, redundancies, manual workarounds, and automation opportunities.</li>
+        <li><strong>SOP design &amp; modernization.</strong> Documents existing SOPs for priority workflows, then designs future-state SOPs with automation touchpoints. Ensures SOPs are written for actual users, not filing cabinets.</li>
+        <li><strong>Gap analysis.</strong> Quantifies waste: time lost, error rates, rework percentages, handoff delays. Maps gaps to the 5 transformation dimensions (Deloitte Hexagon approach).</li>
+        <li><strong>Adoption &amp; change support.</strong> Recruits and manages internal champions (3-5 per department). Designs segmented training paths. Conducts bi-weekly adoption pulse checks. Bridges the gap between what&rsquo;s designed and what people actually do.</li>
+        <li><strong>Implementation execution.</strong> Drives process optimization workstream during Phase 3: cross-office standardization, sales-production alignment, estimation frameworks. Works with Tech Lead to ensure automations match redesigned processes.</li>
+      </ul>
+
+      <h4>Interview &amp; Research Methodology</h4>
+      <ul>
+        <li><strong>Preparation:</strong> Reviews existing documentation (SOPs, org charts, job descriptions) before every interview. Prepares semi-structured discussion guides organized by functional area and mapped to transformation dimensions.</li>
+        <li><strong>Technique:</strong> Opens with rapport-building, then uses directed questions (&ldquo;Walk me through exactly what happens when a new client order comes in&rdquo;) and open-ended probes (&ldquo;What would you change about how your team communicates with operations?&rdquo;). Probes for quantitative data: cycle times, error rates, handoff delays.</li>
+        <li><strong>Frameworks:</strong> SIPOC (high-level), Current-State Process Maps (detailed), Value Stream Mapping (waste identification), Swim Lane Diagrams (cross-functional responsibility).</li>
+        <li><strong>Tools:</strong> Miro/Lucidchart for process maps, ClickUp for task tracking, structured interview templates, observation checklists for gemba walks.</li>
+        <li><strong>Output:</strong> Each interview produces a structured summary with: key quotes, process observations, pain points identified, automation opportunities flagged, dimension mapping.</li>
+      </ul>
+
+      <h4>Phase-by-Phase Activities</h4>
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Key Activities</th><th>Key Deliverables</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 0</strong><br>Pre-Engagement</td>
+            <td>
+              <ul>
+                <li>Support scope definition (workstream identification)</li>
+                <li>Define SLA and ways of working</li>
+                <li>Design information request framework (with Ferm&iacute;n)</li>
+              </ul>
+            </td>
+            <td>SLA defined, Ways of Working doc, Information request template</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 1</strong><br>Intake</td>
+            <td>
+              <ul>
+                <li>Collect and review SOPs and process documentation</li>
+                <li>Review org structure, roles, and decision flows</li>
+                <li>Analyze email/communication patterns and volume</li>
+                <li>Map core workflows (initial) and decision-making flows</li>
+                <li>Score maturity: People &amp; Culture and Processes (Deloitte Hexagon)</li>
+                <li>Build initial hypotheses (gaps, frictions)</li>
+                <li>Identify no-regret moves / quick wins (BCG approach)</li>
+              </ul>
+            </td>
+            <td>Process insights, Org insights, Initial workflow maps, Decision flow maps, People &amp; Process maturity scores, Hypothesis set v1, Quick wins shortlist</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong><br>Discovery</td>
+            <td>
+              <ul>
+                <li>Prepare interview guides (role-specific, dimension-mapped)</li>
+                <li>Conduct functional/team interviews (Ops, Creative, Sales, IT)</li>
+                <li>Conduct cross-office interviews (Boston, Cleveland &mdash; remote)</li>
+                <li>Shadow key workflows: sales-to-production handoff</li>
+                <li>Observe operations on-site (incl. warehouse, gemba walks)</li>
+                <li>Assess generational adoption readiness</li>
+                <li>Identify potential internal champions (3-5 per dept)</li>
+                <li>Validate workflows and decision-making processes with teams</li>
+                <li>Map gaps to 5 transformation dimensions</li>
+              </ul>
+            </td>
+            <td>Functional insights, Cross-office insights, Handoff friction map, Adoption readiness matrix, Champion candidate list, Validated workflow maps, Validated decision maps, Dimension-mapped gap matrix</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong><br>Implementation</td>
+            <td>
+              <ul>
+                <li>Document current-state SOPs for priority workflows</li>
+                <li>Design future-state SOPs with automation touchpoints</li>
+                <li>Define estimation improvement framework</li>
+                <li>Align workflows across Toronto, Boston, Cleveland</li>
+                <li>Recruit &amp; onboard internal champions</li>
+                <li>Design segmented training paths (execs, ops, creative)</li>
+                <li>Lead operations and creative training sessions</li>
+                <li>Conduct adoption pulse checks (bi-weekly)</li>
+                <li>Define data handling standards (with Legal/IT)</li>
+              </ul>
+            </td>
+            <td>Current-state SOPs, Future-state SOPs, Estimation framework, Standardized workflows, Champions onboarded, Training curriculum, Training sessions completed, Adoption metrics</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong><br>Stabilization</td>
+            <td>
+              <ul>
+                <li>Identify adoption gaps by department, role, office</li>
+                <li>Design targeted interventions for low-adoption areas</li>
+                <li>Conduct booster training sessions</li>
+                <li>Transition champions from users to internal coaches</li>
+                <li>Refine SOPs based on actual adoption patterns</li>
+                <li>Create internal transformation playbook</li>
+              </ul>
+            </td>
+            <td>Adoption gap analysis, Intervention plans, SOPs v2, Internal transformation playbook</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout--blue">
+        <strong>Critical role:</strong> Agust&iacute;n is the bridge between strategy (Ferm&iacute;n) and technology (Tech Lead). Every automation the Tech Lead builds should map to a process Agust&iacute;n has mapped. Every process Agust&iacute;n redesigns should be informed by what the Tech Lead says is possible.
+      </div>
+    </div>
+
+    <!-- ── TECH LEAD ── -->
+    <div class="page-break"></div>
+    <div class="role-card role-card--tech">
+      <div class="role-header">
+        <h3 style="color: var(--green); margin: 0;">[Tech Lead] &mdash; Technology &amp; Solutions Architect</h3>
+        <span class="role-tag role-tag--tech">Technology</span>
+      </div>
+      <p class="role-subtitle">ClickUp architecture, Gemini/AI deployment, M365 integration, automations, dashboards, data infrastructure</p>
+
+      <h4>Core Responsibilities</h4>
+      <ul>
+        <li><strong>Technology audit &amp; assessment.</strong> Inventories all current tools, licenses, integrations, and actual usage patterns. Identifies tool sprawl, underutilization, and integration gaps. Evaluates ClickUp Brain status, Gemini deployment, M365 configuration.</li>
+        <li><strong>Architecture design.</strong> Designs the overall ClickUp workspace structure (Spaces, Folders, Lists, status flows, custom fields). Architects integrations between ClickUp, Google Workspace, M365, and automation middleware. Produces the technology architecture document.</li>
+        <li><strong>Automation engine.</strong> Builds and tests all workflow automations: approval chains, status-triggered notifications, auto-assignment rules, recurring task generation. Targets 10-15 priority automations across the engagement.</li>
+        <li><strong>AI deployment.</strong> Configures and deploys Gemini for email triage (executive team), meeting summarization, and content drafting. Activates ClickUp Brain across priority workspaces. Defines AI tool configurations and usage patterns.</li>
+        <li><strong>Dashboard &amp; data infrastructure.</strong> Designs and builds executive dashboards (capacity visibility, project profitability, unified operational view). Creates the asset cataloging system. Deploys data tracking frameworks.</li>
+        <li><strong>Training &amp; documentation.</strong> Conducts hands-on tech training sessions. Creates video walkthroughs and quick-reference guides. Provides &ldquo;office hours&rdquo; support during post-launch weeks. Documents all configurations and architecture decisions.</li>
+      </ul>
+
+      <h4>Technical Skill Requirements</h4>
+      <ul>
+        <li><strong>ClickUp expert:</strong> Workspace architecture, custom fields, automations, Brain/AI features, API integrations, template design</li>
+        <li><strong>Google Workspace / Gemini:</strong> Admin configuration, Gemini AI features, Gmail rules and routing, Calendar integration, Drive organization</li>
+        <li><strong>Microsoft 365:</strong> SharePoint/Teams administration, Power Automate (for M365-side automations), Excel/Power BI for dashboards</li>
+        <li><strong>Integration tools:</strong> Make (Integromat), Zapier, or n8n for cross-platform automation. API literacy for custom integrations.</li>
+        <li><strong>Data:</strong> Dashboard design (ClickUp dashboards, Google Sheets, Power BI), data modeling, basic SQL for data extraction if needed</li>
+      </ul>
+
+      <h4>Phase-by-Phase Activities</h4>
+      <table>
+        <thead>
+          <tr><th>Phase</th><th>Key Activities</th><th>Key Deliverables</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 0</strong><br>Pre-Engagement</td>
+            <td>
+              <ul>
+                <li>Support tools &amp; collaboration definition</li>
+                <li>Prepare technology assessment methodology</li>
+              </ul>
+            </td>
+            <td>Tools stack agreed, Assessment methodology</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 1</strong><br>Intake</td>
+            <td>
+              <ul>
+                <li>Set up data room repository</li>
+                <li>Access and explore all systems (ClickUp, M365, Gemini)</li>
+                <li>Audit ClickUp workspace architecture &amp; Brain status</li>
+                <li>Audit Gemini deployment and usage patterns</li>
+                <li>Review systems, data flows, and integrations</li>
+                <li>Score maturity: Tech Integrations, Data, Compliance</li>
+              </ul>
+            </td>
+            <td>Data room live, ClickUp audit report, Gemini audit report, Systems insights, Tech/Data/Compliance maturity scores</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong><br>Discovery</td>
+            <td>
+              <ul>
+                <li>Hands-on ClickUp usage assessment with teams</li>
+                <li>Assess Gemini/M365 actual usage vs. potential</li>
+                <li>Validate systems usage and gaps</li>
+                <li>Validate data flows and quality gaps</li>
+                <li>Define lighthouse projects (technical scope)</li>
+                <li>Update transformation scorecard (technology sections)</li>
+              </ul>
+            </td>
+            <td>ClickUp usage patterns report, AI tools gap analysis, Systems validation insights, Data quality assessment, Lighthouse technical specs</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong><br>Implementation</td>
+            <td>
+              <ul>
+                <li>Deploy Gemini email triage for executives</li>
+                <li>Configure Gemini meeting summarization</li>
+                <li>Build email routing &amp; filtering rules</li>
+                <li>Restructure ClickUp workspace architecture</li>
+                <li>Activate ClickUp Brain across priority workspaces</li>
+                <li>Build 10-15 workflow automations</li>
+                <li>Pilot and scale asset cataloging system</li>
+                <li>Design &amp; deploy capacity visibility dashboard</li>
+                <li>Design &amp; deploy executive dashboard</li>
+                <li>Deploy profitability tracking in ClickUp/M365</li>
+                <li>Expand M365 from finance to org-wide</li>
+                <li>Connect M365 (Global Core) with ClickUp (Operations)</li>
+                <li>Build proposal &amp; concept library</li>
+                <li>Conduct executive training (dashboards, AI tools)</li>
+              </ul>
+            </td>
+            <td>Gemini live (email + meetings), ClickUp restructured + Brain active, 15 automations live, Asset catalog, 4 dashboards live, M365 expanded, Systems integrated, Creative memory system, Executive training</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong><br>Stabilization</td>
+            <td>
+              <ul>
+                <li>Optimize automations based on usage data</li>
+                <li>Refine dashboards based on leadership feedback</li>
+                <li>Optimize Gemini and ClickUp Brain configurations</li>
+                <li>Document all configurations and architecture decisions</li>
+                <li>Train internal team to manage ClickUp architecture</li>
+                <li>Train internal team on dashboard maintenance</li>
+                <li>Transfer AI governance ownership to internal team</li>
+              </ul>
+            </td>
+            <td>Automations optimized, Dashboards v2, AI tools tuned, Technical documentation, Internal team self-sufficient, Ownership transferred</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout--green">
+        <strong>Build principle:</strong> Nothing gets built without a process map from Agust&iacute;n and a strategic priority from Ferm&iacute;n. The Tech Lead builds what the team has validated &mdash; never on assumption.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 03 — RACI MATRIX                            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section page-break">
+    <span class="section-number">03 &mdash; RACI Matrix</span>
+    <h2>Responsibility Assignment</h2>
+
+    <p><strong>A</strong> = Accountable (final decision) &nbsp; <strong>R</strong> = Responsible (does the work) &nbsp; <strong>C</strong> = Consulted &nbsp; <strong>I</strong> = Informed</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 40%;">Deliverable / Activity</th>
+          <th style="width: 20%; text-align: center;">Ferm&iacute;n<br><small>Lead</small></th>
+          <th style="width: 20%; text-align: center;">Agust&iacute;n<br><small>Process</small></th>
+          <th style="width: 20%; text-align: center;">Tech Lead<br><small>Technology</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Strategy & Governance -->
+        <tr><td colspan="4" style="background: var(--red-light); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Strategy &amp; Governance</td></tr>
+        <tr><td>Engagement scope &amp; SOW</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Project plan &amp; milestones</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Governance structure &amp; decision framework</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-i" style="text-align:center">I</td><td class="raci-i" style="text-align:center">I</td></tr>
+        <tr><td>Executive presentations (phase gates)</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>AI governance policy</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td><td class="raci-r" style="text-align:center">R</td></tr>
+        <tr><td>Change management &amp; communications</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R</td><td class="raci-i" style="text-align:center">I</td></tr>
+
+        <!-- Discovery & Assessment -->
+        <tr><td colspan="4" style="background: var(--blue-light); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue);">Discovery &amp; Assessment</td></tr>
+        <tr><td>Executive interviews (Dean, Mike, VPs)</td><td class="raci-r" style="text-align:center">R</td><td class="raci-c" style="text-align:center">C</td><td class="raci-i" style="text-align:center">I</td></tr>
+        <tr><td>Functional / team interviews</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Operational observation &amp; gemba walks</td><td class="raci-i" style="text-align:center">I</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Technology audit (ClickUp, Gemini, M365)</td><td class="raci-i" style="text-align:center">I</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td></tr>
+        <tr><td>Current-state process maps</td><td class="raci-i" style="text-align:center">I</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Maturity scorecard (5 dimensions)</td><td class="raci-a" style="text-align:center">A</td><td class="raci-r" style="text-align:center">R (People, Process)</td><td class="raci-r" style="text-align:center">R (Tech, Data, Compliance)</td></tr>
+        <tr><td>Gap analysis &amp; diagnosis report</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R</td><td class="raci-r" style="text-align:center">R</td></tr>
+        <tr><td>Lighthouse project definitions</td><td class="raci-a" style="text-align:center">A</td><td class="raci-r" style="text-align:center">R (process scope)</td><td class="raci-r" style="text-align:center">R (tech scope)</td></tr>
+
+        <!-- Implementation -->
+        <tr><td colspan="4" style="background: var(--green-light); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green);">Implementation</td></tr>
+        <tr><td>ClickUp workspace restructure &amp; Brain activation</td><td class="raci-i" style="text-align:center">I</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td></tr>
+        <tr><td>Gemini deployment (email, meetings)</td><td class="raci-i" style="text-align:center">I</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td></tr>
+        <tr><td>Workflow automations (10-15)</td><td class="raci-i" style="text-align:center">I</td><td class="raci-r" style="text-align:center">R (define logic)</td><td class="raci-a" style="text-align:center">A, R (build)</td></tr>
+        <tr><td>SOP modernization (current + future state)</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Capacity visibility dashboard</td><td class="raci-c" style="text-align:center">C</td><td class="raci-r" style="text-align:center">R (requirements)</td><td class="raci-a" style="text-align:center">A, R (build)</td></tr>
+        <tr><td>Executive dashboard</td><td class="raci-a" style="text-align:center">A (approval)</td><td class="raci-c" style="text-align:center">C</td><td class="raci-r" style="text-align:center">R (build)</td></tr>
+        <tr><td>Asset cataloging system</td><td class="raci-i" style="text-align:center">I</td><td class="raci-r" style="text-align:center">R (taxonomy)</td><td class="raci-a" style="text-align:center">A, R (system)</td></tr>
+        <tr><td>Cross-office workflow standardization</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R (tool config)</td></tr>
+        <tr><td>M365 expansion &amp; integration</td><td class="raci-i" style="text-align:center">I</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td></tr>
+        <tr><td>Proposal &amp; concept library (creative memory)</td><td class="raci-c" style="text-align:center">C</td><td class="raci-r" style="text-align:center">R (content design)</td><td class="raci-a" style="text-align:center">A, R (system)</td></tr>
+
+        <!-- People & Adoption -->
+        <tr><td colspan="4" style="background: var(--amber-light); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber);">People &amp; Adoption</td></tr>
+        <tr><td>Champion recruitment &amp; onboarding</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td></tr>
+        <tr><td>Segmented training design</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R (tech content)</td></tr>
+        <tr><td>Executive training delivery</td><td class="raci-r" style="text-align:center">R (co-lead)</td><td class="raci-c" style="text-align:center">C</td><td class="raci-r" style="text-align:center">R (tech demos)</td></tr>
+        <tr><td>Operations training delivery</td><td class="raci-i" style="text-align:center">I</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R (tool training)</td></tr>
+        <tr><td>Creative training delivery</td><td class="raci-i" style="text-align:center">I</td><td class="raci-r" style="text-align:center">R (process)</td><td class="raci-a" style="text-align:center">A, R (AI tools)</td></tr>
+        <tr><td>Adoption pulse checks &amp; metrics</td><td class="raci-i" style="text-align:center">I</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R (data)</td></tr>
+
+        <!-- Knowledge Transfer -->
+        <tr><td colspan="4" style="background: var(--purple-light); font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--purple);">Knowledge Transfer &amp; Advisory</td></tr>
+        <tr><td>Technical documentation</td><td class="raci-i" style="text-align:center">I</td><td class="raci-c" style="text-align:center">C</td><td class="raci-a" style="text-align:center">A, R</td></tr>
+        <tr><td>Internal transformation playbook</td><td class="raci-a" style="text-align:center">A</td><td class="raci-r" style="text-align:center">R</td><td class="raci-r" style="text-align:center">R</td></tr>
+        <tr><td>ROI measurement &amp; executive report</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-r" style="text-align:center">R (process KPIs)</td><td class="raci-r" style="text-align:center">R (tech metrics)</td></tr>
+        <tr><td>Monthly advisory sessions</td><td class="raci-a" style="text-align:center">A, R</td><td class="raci-c" style="text-align:center">C</td><td class="raci-c" style="text-align:center">C</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 04 — ENGAGEMENT FLOW                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section page-break">
+    <span class="section-number">04 &mdash; Engagement Flow</span>
+    <h2>Phase-by-Phase Team Coordination</h2>
+
+    <p>How the three roles interact, what each produces, and how outputs flow between team members at every phase.</p>
+
+    <!-- PHASE 0 -->
+    <h3 style="color: var(--accent);">Phase 0 &mdash; Pre-Engagement (Mar 18 &ndash; Apr 15)</h3>
+    <p><strong>Mode:</strong> Remote &nbsp;|&nbsp; <strong>Lead:</strong> Ferm&iacute;n &nbsp;|&nbsp; <strong>Cadence:</strong> Daily async + 2x/week sync</p>
+
+    <div class="flow-phase">
+      <div class="flow-col flow-col--lead">
+        <h4>Ferm&iacute;n</h4>
+        <ul>
+          <li>Leads scope definition with client</li>
+          <li>Designs governance &amp; decision framework</li>
+          <li>Negotiates &amp; executes contract</li>
+          <li>Builds team structure &amp; allocation</li>
+        </ul>
+        <p><strong>&rarr;</strong> Outputs to Agust&iacute;n: Scope doc, workstreams, SLAs to operationalize</p>
+        <p><strong>&rarr;</strong> Outputs to Tech: Tools decision, access requirements</p>
+      </div>
+      <div class="flow-col flow-col--process">
+        <h4>Agust&iacute;n</h4>
+        <ul>
+          <li>Supports scope (operational workstreams)</li>
+          <li>Defines SLAs &amp; ways of working</li>
+          <li>Designs information request framework</li>
+          <li>Prepares interview methodology</li>
+        </ul>
+        <p><strong>&rarr;</strong> Outputs to Ferm&iacute;n: Information request template for client</p>
+        <p><strong>&rarr;</strong> Outputs to Tech: Data requirements for data room</p>
+      </div>
+      <div class="flow-col flow-col--tech">
+        <h4>Tech Lead</h4>
+        <ul>
+          <li>Defines collaboration tools stack</li>
+          <li>Prepares tech assessment methodology</li>
+          <li>Sets up internal project workspace</li>
+        </ul>
+        <p><strong>&rarr;</strong> Outputs to Ferm&iacute;n: Tools recommendation</p>
+        <p><strong>&rarr;</strong> Outputs to Agust&iacute;n: Data room structure specs</p>
+      </div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <h3 style="color: var(--blue);">Phase 1 &mdash; Intake (May 1 &ndash; June 30)</h3>
+    <p><strong>Mode:</strong> Remote &nbsp;|&nbsp; <strong>Lead:</strong> Ferm&iacute;n &nbsp;|&nbsp; <strong>Cadence:</strong> Daily async + 2x/week sync + Friday synthesis</p>
+
+    <div class="flow-phase">
+      <div class="flow-col flow-col--lead">
+        <h4>Ferm&iacute;n</h4>
+        <ul>
+          <li>Sends information request to Taylor</li>
+          <li>Reviews team synthesis weekly</li>
+          <li>Builds hypotheses (with team)</li>
+          <li>Defines discovery plan with sponsor</li>
+          <li>Compiles Transformation Scorecard v1</li>
+        </ul>
+        <p><strong>&larr;</strong> Receives from Agust&iacute;n: Process &amp; people insights</p>
+        <p><strong>&larr;</strong> Receives from Tech: System audit reports</p>
+      </div>
+      <div class="flow-col flow-col--process">
+        <h4>Agust&iacute;n</h4>
+        <ul>
+          <li>Reviews SOPs, org charts, decision flows</li>
+          <li>Analyzes communication patterns</li>
+          <li>Maps initial workflows &amp; decisions</li>
+          <li>Scores People &amp; Process maturity</li>
+          <li>Identifies quick wins (BCG approach)</li>
+        </ul>
+        <p><strong>&rarr;</strong> Produces: Process insights, workflow maps, maturity scores</p>
+        <p><strong>&harr;</strong> Syncs with Tech: Maps processes to tools</p>
+      </div>
+      <div class="flow-col flow-col--tech">
+        <h4>Tech Lead</h4>
+        <ul>
+          <li>Sets up data room</li>
+          <li>Accesses &amp; audits ClickUp, Gemini, M365</li>
+          <li>Reviews data flows &amp; integrations</li>
+          <li>Scores Tech, Data, Compliance maturity</li>
+        </ul>
+        <p><strong>&rarr;</strong> Produces: System audits, maturity scores, tech insights</p>
+        <p><strong>&harr;</strong> Syncs with Agust&iacute;n: What tech enables/blocks which processes</p>
+      </div>
+    </div>
+
+    <div class="callout callout--blue">
+      <strong>Key handoff &mdash; Friday synthesis:</strong> Every Friday, all three team members contribute their week&rsquo;s findings to a shared synthesis document. Ferm&iacute;n integrates into a unified hypothesis that drives the following week&rsquo;s priorities. By end of Phase 1, the team has a joint Transformation Scorecard and a Discovery plan aligned with all three perspectives.
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="page-break"></div>
+    <h3 style="color: var(--green);">Phase 2 &mdash; Discovery (Jul 1 &ndash; Aug 31)</h3>
+    <p><strong>Mode:</strong> Onsite Toronto (2+ weeks) + Remote &nbsp;|&nbsp; <strong>Lead:</strong> Ferm&iacute;n &nbsp;|&nbsp; <strong>Cadence:</strong> Daily morning huddle + daily debrief + weekly client checkpoint</p>
+
+    <div class="flow-phase">
+      <div class="flow-col flow-col--lead">
+        <h4>Ferm&iacute;n</h4>
+        <ul>
+          <li>Facilitates discovery kickoff</li>
+          <li>Conducts leadership interviews</li>
+          <li>Runs daily morning huddles</li>
+          <li>Synthesizes cross-workstream findings</li>
+          <li>Prioritizes initiatives (BCG framework)</li>
+          <li>Defines lighthouse projects</li>
+          <li>Presents to &amp; validates with leadership</li>
+          <li>Drafts implementation roadmap</li>
+        </ul>
+        <p><strong>&larr;</strong> Daily input from Agust&iacute;n &amp; Tech</p>
+        <p><strong>&rarr;</strong> Directs daily focus areas</p>
+      </div>
+      <div class="flow-col flow-col--process">
+        <h4>Agust&iacute;n</h4>
+        <ul>
+          <li>Conducts 3-4 functional interviews/day</li>
+          <li>Cross-office interviews (Boston, Cleveland)</li>
+          <li>Shadows sales-to-production handoffs</li>
+          <li>Observes warehouse &amp; operations (gemba)</li>
+          <li>Assesses adoption readiness by generation</li>
+          <li>Identifies champion candidates</li>
+          <li>Validates workflows &amp; decisions with teams</li>
+          <li>Maps gaps to 5 dimensions</li>
+        </ul>
+        <p><strong>&rarr;</strong> Daily debrief: insights, quotes, friction points</p>
+        <p><strong>&harr;</strong> Coordinates with Tech on system observations</p>
+      </div>
+      <div class="flow-col flow-col--tech">
+        <h4>Tech Lead</h4>
+        <ul>
+          <li>Hands-on ClickUp assessment with users</li>
+          <li>Assesses Gemini/M365 actual vs. potential</li>
+          <li>Validates system usage &amp; data quality gaps</li>
+          <li>Specs lighthouse projects (technical)</li>
+          <li>Updates scorecard (tech sections)</li>
+        </ul>
+        <p><strong>&rarr;</strong> Daily debrief: system findings, possibilities</p>
+        <p><strong>&harr;</strong> Tells Agust&iacute;n what&rsquo;s technically possible for each process</p>
+      </div>
+    </div>
+
+    <div class="callout callout--green">
+      <strong>Daily rhythm (onsite):</strong><br>
+      <strong>8:30 AM</strong> &mdash; Morning huddle (15 min): who interviews whom, what to probe, logistics.<br>
+      <strong>9:00 &ndash; 5:00</strong> &mdash; Interviews, observation, assessment (parallel tracks).<br>
+      <strong>5:30 PM</strong> &mdash; End-of-day debrief (30 min): share findings, cross-pollinate, update shared notes.<br>
+      <strong>Wednesday 3:00 PM</strong> &mdash; Mid-week deep synthesis (90 min): Agust&iacute;n presents process maps, Tech maps technology to processes, Ferm&iacute;n connects to strategic recommendations.<br>
+      <strong>Friday 2:00 PM</strong> &mdash; Client checkpoint (60 min): Ferm&iacute;n presents preliminary findings, gets course-correction feedback.
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="page-break"></div>
+    <h3 style="color: var(--amber);">Phase 3 &mdash; Implementation (Sep 1 &ndash; Dec 15)</h3>
+    <p><strong>Mode:</strong> Hybrid &nbsp;|&nbsp; <strong>Lead:</strong> Ferm&iacute;n &nbsp;|&nbsp; <strong>Cadence:</strong> Daily async + Mon planning + Thu demo + Fri client status</p>
+
+    <div class="flow-phase">
+      <div class="flow-col flow-col--lead">
+        <h4>Ferm&iacute;n</h4>
+        <ul>
+          <li>Oversees 6 parallel workstreams</li>
+          <li>Weekly client status meetings (Fridays)</li>
+          <li>Drives AI governance with leadership</li>
+          <li>Reviews all deliverables before client</li>
+          <li>Manages scope &amp; change requests</li>
+          <li>Co-leads executive training</li>
+          <li>Coordinates cross-office logistics</li>
+        </ul>
+        <p><strong>Weekly cycle:</strong></p>
+        <p>Mon: Set sprint priorities &rarr; Thu: Review demos &rarr; Fri: Client status</p>
+      </div>
+      <div class="flow-col flow-col--process">
+        <h4>Agust&iacute;n</h4>
+        <ul>
+          <li>Documents current &amp; future-state SOPs</li>
+          <li>Aligns workflows across 3 offices</li>
+          <li>Recruits &amp; manages champions program</li>
+          <li>Designs &amp; delivers training (ops, creative)</li>
+          <li>Defines estimation framework</li>
+          <li>Runs adoption pulse checks (bi-weekly)</li>
+          <li>Defines data handling standards</li>
+        </ul>
+        <p><strong>&harr;</strong> With Tech: &ldquo;Here&rsquo;s the process &mdash; build the automation&rdquo;</p>
+        <p><strong>&harr;</strong> With Tech: &ldquo;Champions need training on X tool&rdquo;</p>
+      </div>
+      <div class="flow-col flow-col--tech">
+        <h4>Tech Lead</h4>
+        <ul>
+          <li>Deploys Gemini (email + meetings)</li>
+          <li>Restructures ClickUp + activates Brain</li>
+          <li>Builds 10-15 automations</li>
+          <li>Builds dashboards (capacity, exec, profit)</li>
+          <li>Deploys asset cataloging system</li>
+          <li>Integrates M365 &harr; ClickUp</li>
+          <li>Builds creative memory / concept library</li>
+          <li>Trains executives on tech tools</li>
+        </ul>
+        <p><strong>&harr;</strong> With Agust&iacute;n: &ldquo;Process X is ready &mdash; here&rsquo;s what I built&rdquo;</p>
+        <p><strong>&harr;</strong> With Agust&iacute;n: &ldquo;Automation Y needs process validation&rdquo;</p>
+      </div>
+    </div>
+
+    <div class="callout callout--amber">
+      <strong>Critical coordination pattern:</strong> Agust&iacute;n defines the process logic; Tech Lead builds the automation. They work in paired sprints &mdash; Agust&iacute;n delivers an SOP with automation touchpoints, Tech Lead builds and tests the automation, Agust&iacute;n validates with the team, Tech Lead iterates. Ferm&iacute;n reviews before client deployment.<br><br>
+      <strong>Bi-weekly sprint reviews</strong> (all 3 + client stakeholders): Demo completed work, gather feedback, adjust next sprint priorities.
+    </div>
+
+    <!-- PHASE 4 -->
+    <h3 style="color: var(--purple);">Phase 4 &mdash; Stabilization &amp; Advisory (Jan 2027 &ndash; Jul 2027)</h3>
+    <p><strong>Mode:</strong> Remote / Advisory &nbsp;|&nbsp; <strong>Lead:</strong> Ferm&iacute;n &nbsp;|&nbsp; <strong>Cadence:</strong> Weekly async + monthly advisory</p>
+
+    <div class="flow-phase">
+      <div class="flow-col flow-col--lead">
+        <h4>Ferm&iacute;n</h4>
+        <ul>
+          <li>Delivers executive transformation report</li>
+          <li>Measures ROI against baseline scorecard</li>
+          <li>Runs monthly advisory sessions</li>
+          <li>Quarterly scorecard reviews</li>
+          <li>Ensures knowledge transfer completeness</li>
+        </ul>
+      </div>
+      <div class="flow-col flow-col--process">
+        <h4>Agust&iacute;n</h4>
+        <ul>
+          <li>Identifies adoption gaps by segment</li>
+          <li>Designs targeted interventions</li>
+          <li>Conducts booster training</li>
+          <li>Transitions champions to coaches</li>
+          <li>Refines SOPs, writes playbook</li>
+        </ul>
+      </div>
+      <div class="flow-col flow-col--tech">
+        <h4>Tech Lead</h4>
+        <ul>
+          <li>Optimizes automations &amp; dashboards</li>
+          <li>Tunes AI configurations</li>
+          <li>Writes technical documentation</li>
+          <li>Trains internal team on architecture</li>
+          <li>Transfers ownership to client IT</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 05 — CADENCE & GOVERNANCE                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section page-break">
+    <span class="section-number">05 &mdash; Cadence &amp; Governance</span>
+    <h2>Meeting Cadence &amp; Communication Model</h2>
+
+    <h3>Internal Team Cadence</h3>
+    <table>
+      <thead>
+        <tr><th>Meeting</th><th>Frequency</th><th>Duration</th><th>Purpose</th><th>Participants</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Async standup</td><td>Daily</td><td>5 min each</td><td>Progress, blockers, plan for the day</td><td>All 3</td></tr>
+        <tr><td>Team sync</td><td>2x/week</td><td>30-45 min</td><td>Cross-workstream alignment, unblock</td><td>All 3</td></tr>
+        <tr><td>Friday synthesis</td><td>Weekly</td><td>45 min</td><td>Integrate findings, update hypotheses</td><td>All 3</td></tr>
+        <tr><td>Sprint planning (Phase 3)</td><td>Monday</td><td>30 min</td><td>Set weekly priorities and sprint goals</td><td>All 3</td></tr>
+        <tr><td>Demo &amp; review (Phase 3)</td><td>Thursday</td><td>45 min</td><td>Review completed work, prepare for client</td><td>All 3</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Client-Facing Cadence</h3>
+    <table>
+      <thead>
+        <tr><th>Meeting</th><th>Frequency</th><th>Duration</th><th>Purpose</th><th>TransformAZ</th><th>Taylor</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Status update</td><td>Weekly</td><td>60 min</td><td>Progress, risks, decisions needed</td><td>Ferm&iacute;n (lead)</td><td>Executive Sponsor</td></tr>
+        <tr><td>Sprint review</td><td>Bi-weekly (Phase 3)</td><td>90 min</td><td>Demo deliverables, gather feedback</td><td>All 3</td><td>Sponsor + stakeholders</td></tr>
+        <tr><td>Steering committee</td><td>Monthly / phase gates</td><td>60 min</td><td>Strategic alignment, major decisions</td><td>Ferm&iacute;n</td><td>Executive team</td></tr>
+        <tr><td>Phase gate review</td><td>End of each phase</td><td>90 min</td><td>Phase completion, approve next phase</td><td>All 3</td><td>Executive team</td></tr>
+        <tr><td>Retrospective</td><td>End of each phase</td><td>60 min</td><td>What worked, what to improve</td><td>All 3 (internal)</td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Communication Channels</h3>
+    <table>
+      <thead>
+        <tr><th>Channel</th><th>Purpose</th><th>Who</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Slack / Teams (internal)</td><td>Daily async updates, quick questions, file sharing</td><td>TransformAZ team</td></tr>
+        <tr><td>Slack / Teams (shared)</td><td>Client-facing questions, logistics, scheduling</td><td>All + Taylor contacts</td></tr>
+        <tr><td>ClickUp project board</td><td>Task tracking, status updates, workstream visibility</td><td>All</td></tr>
+        <tr><td>Shared Drive (data room)</td><td>Documents, deliverables, interview notes, reports</td><td>All</td></tr>
+        <tr><td>Email</td><td>Formal communications, contract matters, escalations only</td><td>Ferm&iacute;n &harr; Sponsor</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 06 — TASK DISTRIBUTION                      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section page-break">
+    <span class="section-number">06 &mdash; Task Distribution</span>
+    <h2>138 Tasks &mdash; Who Does What</h2>
+
+    <p>Approximate task ownership based on primary responsibility (some tasks are shared):</p>
+
+    <table>
+      <thead>
+        <tr><th>Role</th><th>Phase 0</th><th>Phase 1</th><th>Phase 2</th><th>Phase 3</th><th>Phase 4</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color: var(--accent);">Ferm&iacute;n</strong> (Lead)</td>
+          <td style="text-align:center">14</td>
+          <td style="text-align:center">5</td>
+          <td style="text-align:center">8</td>
+          <td style="text-align:center">7</td>
+          <td style="text-align:center">5</td>
+          <td style="text-align:center"><strong>39</strong></td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--blue);">Agust&iacute;n</strong> (Process)</td>
+          <td style="text-align:center">3</td>
+          <td style="text-align:center">12</td>
+          <td style="text-align:center">13</td>
+          <td style="text-align:center">14</td>
+          <td style="text-align:center">8</td>
+          <td style="text-align:center"><strong>50</strong></td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--green);">Tech Lead</strong></td>
+          <td style="text-align:center">2</td>
+          <td style="text-align:center">8</td>
+          <td style="text-align:center">5</td>
+          <td style="text-align:center">16</td>
+          <td style="text-align:center">7</td>
+          <td style="text-align:center"><strong>38</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Shared / Joint</strong></td>
+          <td style="text-align:center">1</td>
+          <td style="text-align:center">3</td>
+          <td style="text-align:center">3</td>
+          <td style="text-align:center">2</td>
+          <td style="text-align:center">2</td>
+          <td style="text-align:center"><strong>11</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Load Distribution by Phase</h3>
+
+    <div class="callout">
+      <strong>Phase 3 is the bottleneck.</strong> 39 tasks running in parallel across 6 workstreams, 3 cities, 4 months. The Tech Lead carries 16 tasks (heaviest build phase). Agust&iacute;n carries 14 tasks (SOP + training + adoption). Ferm&iacute;n shifts from doing to overseeing. All three must be at peak capacity July&ndash;October.
+    </div>
+
+    <h3>Skill Matrix</h3>
+    <table>
+      <thead>
+        <tr><th>Skill Area</th><th style="text-align: center;">Ferm&iacute;n</th><th style="text-align: center;">Agust&iacute;n</th><th style="text-align: center;">Tech Lead</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Client management &amp; executive alignment</td><td style="text-align:center"><strong style="color:var(--accent);">Primary</strong></td><td style="text-align:center">Support</td><td style="text-align:center">&mdash;</td></tr>
+        <tr><td>Strategic planning &amp; prioritization</td><td style="text-align:center"><strong style="color:var(--accent);">Primary</strong></td><td style="text-align:center">Contribute</td><td style="text-align:center">Contribute</td></tr>
+        <tr><td>Stakeholder interviews</td><td style="text-align:center">Executive level</td><td style="text-align:center"><strong style="color:var(--blue);">Primary</strong></td><td style="text-align:center">Technical interviews</td></tr>
+        <tr><td>Process mapping &amp; SOP design</td><td style="text-align:center">&mdash;</td><td style="text-align:center"><strong style="color:var(--blue);">Primary</strong></td><td style="text-align:center">Consulted</td></tr>
+        <tr><td>Change management &amp; training</td><td style="text-align:center">Executive sponsor</td><td style="text-align:center"><strong style="color:var(--blue);">Primary</strong></td><td style="text-align:center">Tech content</td></tr>
+        <tr><td>ClickUp / Gemini / M365 configuration</td><td style="text-align:center">&mdash;</td><td style="text-align:center">Requirements</td><td style="text-align:center"><strong style="color:var(--green);">Primary</strong></td></tr>
+        <tr><td>Automation &amp; integration development</td><td style="text-align:center">&mdash;</td><td style="text-align:center">Logic definition</td><td style="text-align:center"><strong style="color:var(--green);">Primary</strong></td></tr>
+        <tr><td>Dashboard &amp; data architecture</td><td style="text-align:center">Requirements</td><td style="text-align:center">KPI definition</td><td style="text-align:center"><strong style="color:var(--green);">Primary</strong></td></tr>
+        <tr><td>Compliance &amp; governance design</td><td style="text-align:center"><strong style="color:var(--accent);">Primary</strong></td><td style="text-align:center">Support</td><td style="text-align:center">Technical input</td></tr>
+        <tr><td>Adoption measurement</td><td style="text-align:center">Review</td><td style="text-align:center"><strong style="color:var(--blue);">Primary</strong></td><td style="text-align:center">Data collection</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 07 — INTERCOMMUNICATION MAP                 -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section page-break">
+    <span class="section-number">07 &mdash; Intercommunication</span>
+    <h2>Information Flows Between Roles</h2>
+
+    <p>The three roles form a triangle of continuous information exchange. Every output from one role becomes an input for another. Here are the critical handoffs:</p>
+
+    <h3 style="color: var(--accent);">Ferm&iacute;n &harr; Agust&iacute;n</h3>
+    <table>
+      <thead><tr><th>From</th><th>To</th><th>What</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Ferm&iacute;n</td><td>Agust&iacute;n</td><td>Strategic priorities, scope decisions, hypothesis updates</td><td>Weekly sync + as needed</td></tr>
+        <tr><td>Ferm&iacute;n</td><td>Agust&iacute;n</td><td>Executive interview insights (top-down perspective)</td><td>Daily debrief (Discovery)</td></tr>
+        <tr><td>Ferm&iacute;n</td><td>Agust&iacute;n</td><td>Client feedback on deliverables, course corrections</td><td>After every client meeting</td></tr>
+        <tr><td>Agust&iacute;n</td><td>Ferm&iacute;n</td><td>Process findings, gap analysis, friction points</td><td>Daily debrief + weekly synthesis</td></tr>
+        <tr><td>Agust&iacute;n</td><td>Ferm&iacute;n</td><td>Stakeholder quotes and sentiments (ground truth)</td><td>After every interview</td></tr>
+        <tr><td>Agust&iacute;n</td><td>Ferm&iacute;n</td><td>Adoption metrics and champion feedback</td><td>Bi-weekly (Phase 3-4)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="color: var(--blue);">Agust&iacute;n &harr; Tech Lead</h3>
+    <table>
+      <thead><tr><th>From</th><th>To</th><th>What</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Agust&iacute;n</td><td>Tech Lead</td><td>Process maps with automation touchpoints flagged</td><td>As processes are mapped</td></tr>
+        <tr><td>Agust&iacute;n</td><td>Tech Lead</td><td>SOP requirements (&ldquo;build this automation for this workflow&rdquo;)</td><td>Sprint planning (Phase 3)</td></tr>
+        <tr><td>Agust&iacute;n</td><td>Tech Lead</td><td>Training needs (&ldquo;Champions need training on X&rdquo;)</td><td>Weekly (Phase 3)</td></tr>
+        <tr><td>Agust&iacute;n</td><td>Tech Lead</td><td>Asset taxonomy and classification logic</td><td>Phase 3 start</td></tr>
+        <tr><td>Tech Lead</td><td>Agust&iacute;n</td><td>What&rsquo;s technically possible/feasible for each process</td><td>Continuous (Discovery + Implementation)</td></tr>
+        <tr><td>Tech Lead</td><td>Agust&iacute;n</td><td>Automation demos for process validation</td><td>Sprint review (Phase 3)</td></tr>
+        <tr><td>Tech Lead</td><td>Agust&iacute;n</td><td>System usage data for adoption tracking</td><td>Bi-weekly (Phase 3-4)</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="color: var(--green);">Ferm&iacute;n &harr; Tech Lead</h3>
+    <table>
+      <thead><tr><th>From</th><th>To</th><th>What</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td>Ferm&iacute;n</td><td>Tech Lead</td><td>Lighthouse project definitions and priorities</td><td>Phase 2 &rarr; 3 transition</td></tr>
+        <tr><td>Ferm&iacute;n</td><td>Tech Lead</td><td>Executive dashboard requirements</td><td>Phase 3 start</td></tr>
+        <tr><td>Ferm&iacute;n</td><td>Tech Lead</td><td>AI governance policy for implementation</td><td>Phase 3 (when approved)</td></tr>
+        <tr><td>Tech Lead</td><td>Ferm&iacute;n</td><td>Technology audit findings and recommendations</td><td>Phase 1 end</td></tr>
+        <tr><td>Tech Lead</td><td>Ferm&iacute;n</td><td>Build progress and technical blockers</td><td>Weekly status + Thu demo</td></tr>
+        <tr><td>Tech Lead</td><td>Ferm&iacute;n</td><td>Technical documentation for knowledge transfer</td><td>Phase 4</td></tr>
+      </tbody>
+    </table>
+
+    <div class="value-prop">
+      <p><strong>The golden rule of team coordination:</strong> No one builds in isolation. Agust&iacute;n doesn&rsquo;t design a process without knowing what tech can enable. Tech Lead doesn&rsquo;t build an automation without a validated process map. Ferm&iacute;n doesn&rsquo;t present to the client without ground-truth from both. Every deliverable passes through at least two sets of eyes before it reaches Taylor.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOOTER                                      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="section" style="text-align: center; padding: 60px 40px; color: var(--text-muted); font-size: 0.78rem;">
+    <p>TransformAZ &mdash; March 2026 &mdash; Internal &mdash; Confidential</p>
+    <p>Taylor Group Digital Backbone Transformation &mdash; Team Roles &amp; Engagement Flow</p>
+  </section>
+
+</body>
+</html>

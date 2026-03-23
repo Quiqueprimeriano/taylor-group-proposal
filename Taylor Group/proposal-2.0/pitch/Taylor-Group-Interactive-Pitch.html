@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Building the Digital Backbone — Taylor Group | TransformAZ</title>
+<title>Designing the Digital Backbone — Taylor Inc. | TransformAZ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:opsz,wght@14..32,400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
@@ -123,16 +123,16 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
    ═══════════════════════════════════════════════ */
 .section{
   min-height:100vh;padding:100px 48px;max-width:var(--content-w);margin:0 auto;
-  display:flex;flex-direction:column;justify-content:center;
+  display:flex;flex-direction:column;justify-content:center;overflow:visible;
 }
 .section-num{
   font-family:var(--mono);font-size:var(--text-xs);font-weight:600;
   text-transform:uppercase;letter-spacing:.15em;color:var(--accent);
-  display:inline-block;margin-bottom:12px;
+  display:block;margin-bottom:12px;text-align:center;
 }
 .section h2{
   font-family:var(--serif);font-size:var(--text-4xl);font-weight:700;
-  line-height:1.1;margin-bottom:28px;letter-spacing:-.03em;color:var(--text);
+  line-height:1.1;margin-bottom:28px;letter-spacing:-.03em;color:var(--text);text-align:center;
 }
 .section h3{font-family:var(--serif);font-size:var(--text-2xl);font-weight:600;line-height:1.3;margin-top:32px;margin-bottom:12px}
 .section h4{font-family:var(--sans);font-size:var(--text-xl);font-weight:700;margin-top:20px;margin-bottom:8px}
@@ -148,7 +148,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
    ═══════════════════════════════════════════════ */
 .interstitial{
   min-height:70vh;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;padding:80px 48px;position:relative;
   overflow:hidden;
   background:linear-gradient(135deg,#faf9f7,#f3f1ed);
@@ -199,7 +199,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
   line-height:1.08;letter-spacing:-.04em;margin-bottom:16px;color:var(--text);
 }
 #cover h1 .word{
-  display:inline-block;opacity:0;
+  display:inline-block;opacity:0;margin-right:.25em;
   transform:translateY(40px);filter:blur(10px);
   animation:wordReveal .8s var(--ease-out) forwards;
 }
@@ -221,7 +221,7 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
 .cover-meta dd{color:var(--text-secondary)}
 .cover-badge{
   display:inline-block;background:var(--accent-light);color:var(--accent);
-  font-family:var(--mono);font-size:var(--text-2xs);font-weight:600;
+  font-family:var(--mono);font-size:var(--text-2xs);font-weight:700;
   text-transform:uppercase;letter-spacing:.14em;padding:5px 14px;
   border-radius:20px;margin-top:28px;border:1px solid rgba(122,122,230,.2);
   opacity:0;animation:fadeIn .6s var(--ease) 1.9s forwards;
@@ -324,10 +324,17 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   margin:40px 0;padding:0;position:relative;
   height:420px;
 }
-.backbone-canvas{
-  width:100%;height:100%;border-radius:16px;
-  background:var(--bg-warm);border:1px solid var(--border-light);
-}
+#backbone-vis-disconnected{height:320px}
+.bb-disc-conn{stroke-width:1;fill:none;stroke-dasharray:4 6;opacity:.12}
+.bb-disc-gap{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;fill:var(--text-tertiary);text-anchor:middle}
+.backbone-svg{width:100%;height:100%;border-radius:16px;background:transparent}
+.bb-conn{stroke-width:1;fill:none;opacity:.07;transition:opacity .3s var(--ease),stroke-width .3s var(--ease)}
+.bb-conn.bb-flow{stroke-dasharray:6 4;opacity:.15}
+.backbone-svg.has-hover .bb-conn{opacity:.03}
+.backbone-svg.has-hover .bb-conn.is-lit{opacity:.35;stroke-width:2}
+.bb-node{cursor:pointer}
+.bb-ring{transition:stroke-width .25s var(--ease),filter .25s var(--ease)}
+.bb-node:hover .bb-ring,.bb-node.is-hovered .bb-ring{stroke-width:3;filter:drop-shadow(0 3px 8px rgba(0,0,0,.12))}
 
 /* Pillar tabs */
 .pillar-tabs{display:flex;gap:2px;margin:24px 0 0;background:var(--bg-warm);border-radius:10px;padding:3px;border:1px solid var(--border-light);overflow-x:auto}
@@ -488,11 +495,24 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 .ba-table tbody td:last-child{font-weight:500;color:var(--text)}
 .ba-table tbody tr:last-child td{border-bottom:none}
 .ba-table tbody td strong{color:var(--text)}
+/* Paradigm comparison table */
+.paradigm-table{width:100%;border-collapse:collapse;margin:28px 0;font-size:var(--text-sm)}
+.paradigm-table thead th{text-align:left;font-family:var(--mono);font-size:var(--text-2xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:14px 16px;border-bottom:2px solid var(--border)}
+.paradigm-table thead th:first-child{color:var(--text-tertiary);width:22%}
+.paradigm-table thead th:nth-child(2){color:var(--text-secondary)}
+.paradigm-table thead th:nth-child(3){color:var(--accent)}
+.paradigm-table tbody td{padding:12px 16px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--text-secondary);line-height:1.5}
+.paradigm-table tbody td:first-child{font-family:var(--mono);font-size:var(--text-xs);font-weight:600;color:var(--text-tertiary);letter-spacing:.03em}
+.paradigm-table tbody td:nth-child(3){color:var(--text);font-weight:500}
+.paradigm-table tbody tr:last-child td{border-bottom:none}
 
 /* ═══════════════════════════════════════════════
    PHASE CARDS — 3D Tilt
    ═══════════════════════════════════════════════ */
-.phases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0;position:relative}
+.phases-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;position:relative;
+  width:calc(100vw - 140px);max-width:1280px;margin-left:50%;transform:translateX(-50%);
+}
 /* Phase numbering via counter */
 .phase-card{
   padding:32px;border-radius:14px;border:1px solid var(--border-light);
@@ -515,16 +535,30 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 .phase-card h3{margin-top:0;font-size:var(--text-lg);color:var(--text);letter-spacing:.04em}
 .phase-date{font-family:var(--mono);font-size:var(--text-sm);color:var(--text-secondary);margin-bottom:10px}
 .phase-card p{font-size:var(--text-sm);max-width:none}
+/* Phase expand/collapse */
+.phase-expand-hint{font-family:var(--mono);font-size:var(--text-2xs);color:var(--text-tertiary);margin-top:12px;letter-spacing:.05em;transition:opacity .2s;cursor:pointer}
+.phase-expand-hint::before{content:'+ ';color:var(--accent)}
+.phase-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .35s var(--ease),margin .3s;margin-top:0}
+.phase-card.is-expanded .phase-detail{max-height:1200px;opacity:1;margin-top:20px}
+.phase-card.is-expanded .phase-expand-hint::before{content:'− '}
+.phase-card.is-expanded{border-color:rgba(122,122,230,.3);box-shadow:0 8px 32px rgba(122,122,230,.08)}
+.phase-detail .stats-grid{margin:16px 0;grid-template-columns:repeat(2,1fr);gap:10px}
+.phase-detail .stat-card{padding:16px 10px}
+.phase-detail .stat-card__value{font-size:var(--text-xl)}
+.phase-detail .stat-card__label{font-size:var(--text-3xs);letter-spacing:.06em}
+.phase-detail h4{margin-top:16px;margin-bottom:8px}
+.phase-detail .phase-detail__cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.phase-detail .phase-detail__col h4{margin-top:0}
 .phase-card ul{font-size:var(--text-sm);max-width:none}
 
 /* ═══════════════════════════════════════════════
    GANTT — Scroll-driven
    ═══════════════════════════════════════════════ */
 .gantt-wrapper{margin:32px 0;background:var(--bg-white);border-radius:16px;padding:28px;overflow-x:auto;border:1px solid var(--border-light)}
-.gantt-header{display:grid;grid-template-columns:120px repeat(9,1fr);margin-bottom:6px}
+.gantt-header{display:grid;grid-template-columns:150px repeat(12,1fr);margin-bottom:6px}
 .gantt-header span{font-family:var(--mono);font-size:var(--text-2xs);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-tertiary);text-align:center;padding:8px 4px;border-bottom:1px solid var(--border-light)}
 .gantt-header span:first-child{text-align:left}
-.gantt-row{display:grid;grid-template-columns:120px repeat(9,1fr);align-items:center;min-height:44px;margin-bottom:4px}
+.gantt-row{display:grid;grid-template-columns:150px repeat(12,1fr);align-items:center;min-height:44px;margin-bottom:4px}
 .gantt-label{font-family:var(--mono);font-size:var(--text-2xs);font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding-right:12px}
 .gantt-bar{border-radius:6px;padding:9px 12px;font-family:var(--mono);font-size:var(--text-2xs);font-weight:600;color:#fff;transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease-out)}
 .gantt-bar.is-filling{transform:scaleX(1)}
@@ -532,6 +566,31 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 .gantt-bar--green{background:var(--green)}
 .gantt-bar--accent{background:var(--accent)}
 .gantt-bar--amber{background:var(--amber)}
+.gantt-bar--muted{background:var(--bg-warm);color:var(--text-tertiary);border:1px dashed var(--border)}
+.gantt-bar--change{background:linear-gradient(90deg,var(--blue),var(--green),var(--accent),var(--amber));opacity:.2;border-radius:6px}
+.gantt-row--decision{height:48px}
+.gantt-decision-row{
+  display:flex;align-items:center;justify-content:center;position:relative;
+}
+.gantt-decision-row::before{
+  content:'';width:28px;height:28px;
+  background:var(--bg-white);border:2.5px solid var(--accent);
+  transform:rotate(45deg);box-shadow:0 0 0 4px rgba(122,122,230,.1),0 3px 12px rgba(122,122,230,.25);
+  position:absolute;left:50%;margin-left:-14px;z-index:2;
+}
+.gantt-decision-row::after{
+  content:'Re-engagement decision';
+  position:absolute;left:50%;transform:translateX(-50%);top:calc(50% + 22px);
+  font-family:var(--mono);font-size:var(--text-3xs);font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--accent);
+  white-space:nowrap;z-index:2;
+}
+.gantt-decision-row .decision-line-left,
+.gantt-decision-row .decision-line-right{
+  position:absolute;top:50%;height:0;border-top:2px dashed var(--accent);opacity:.5;
+}
+.gantt-decision-row .decision-line-left{left:0;width:calc(50% - 22px)}
+.gantt-decision-row .decision-line-right{left:calc(50% + 22px);width:calc(50% - 22px)}
 
 /* ═══════════════════════════════════════════════
    HORIZON CARDS — 3D Tilt
@@ -635,8 +694,8 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   max-width:700px;margin:0 auto;
 }
 .section-quote__text strong{font-weight:600;color:var(--accent-dark)}
-.section-quote__text .sr-word{display:inline-block;opacity:.1;transition:opacity .35s var(--ease),filter .35s var(--ease),color .35s var(--ease);filter:blur(3px)}
-.section-quote__text .sr-word.is-revealed{opacity:1;filter:blur(0)}
+.section-quote__text .sr-word{display:inline-block;opacity:.55;transition:opacity .15s var(--ease),color .15s var(--ease)}
+.section-quote__text .sr-word.is-revealed{opacity:1}
 
 /* Source attribution */
 .market-sources{font-family:var(--mono);font-size:var(--text-3xs);color:var(--text-tertiary);letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--border-light)}
@@ -695,11 +754,10 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    SCROLL REVEAL — Word-by-word
    ═══════════════════════════════════════════════ */
 .scroll-reveal .sr-word{
-  display:inline-block;opacity:.1;
-  transition:opacity .3s var(--ease),filter .3s var(--ease);
-  filter:blur(2px);
+  display:inline-block;opacity:.55;
+  transition:opacity .15s var(--ease);
 }
-.scroll-reveal .sr-word.is-revealed{opacity:1;filter:blur(0)}
+.scroll-reveal .sr-word.is-revealed{opacity:1}
 
 /* ═══════════════════════════════════════════════
    ANIMATIONS
@@ -717,13 +775,16 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    PRINT
    ═══════════════════════════════════════════════ */
 @media print{
-  .sidebar,.hamburger,.progress-bar,.scroll-hint,.gradient-mesh,.sidebar-overlay,.backbone-canvas{display:none!important}
+  .sidebar,.hamburger,.progress-bar,.scroll-hint,.gradient-mesh,.sidebar-overlay,.tay-fab,.tay-panel{display:none!important}
+.bb-particles{display:none!important}
   .main{margin-left:0!important}
   .section,.interstitial{min-height:auto;padding:28px 36px;max-width:none}
   #cover{min-height:auto;padding:40px 36px;page-break-after:always}
   body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .anim,.scroll-reveal .sr-word{opacity:1!important;transform:none!important;filter:none!important}
   .finding-detail{max-height:none!important;opacity:1!important;margin-top:12px!important}
+  .phase-detail{max-height:none!important;opacity:1!important;margin-top:12px!important}
+  .phase-expand-hint,.finding-expand-hint{display:none}
   .finding-expand-hint{display:none}
   .gantt-bar{transform:scaleX(1)!important}
   .pillar-tab-content{display:block!important}
@@ -749,6 +810,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   h2,h3,h4{page-break-after:avoid}
   .box,.finding-card,.pillar-card,.phase-card,.horizon-card,.competitor-card{page-break-inside:avoid}
   .backbone-vis{height:auto;min-height:200px}
+  #backbone-vis-disconnected{height:auto;min-height:160px}
   .timeline::before{transform:scaleX(1)!important}
   .timeline-node__dot{opacity:1!important;transform:scale(1)!important}
   .timeline-label{opacity:1!important;transform:none!important}
@@ -780,6 +842,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .findings-grid,.phases-grid,.horizons-grid,.competitor-grid{grid-template-columns:1fr}
+  .phases-grid{width:100%;transform:none;margin-left:0}
   .timeline{flex-direction:column;padding:0 0 0 20px;gap:24px}
   .timeline::before{top:0;bottom:0;left:26px;right:auto;width:2px;height:100%;transform-origin:top}
   .timeline-node{flex-direction:row;align-items:center;gap:14px}
@@ -787,7 +850,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   .timeline-node:nth-child(2) .timeline-label,.timeline-node:nth-child(3) .timeline-label,.timeline-node:nth-child(4) .timeline-label,.timeline-node:nth-child(5) .timeline-label{text-align:left}
   .timeline-label{margin-top:0}
   .timeline-label__desc{max-width:none}
-  .gantt-header,.gantt-row{grid-template-columns:90px repeat(9,1fr)}
+  .gantt-header,.gantt-row{grid-template-columns:110px repeat(12,1fr)}
   .pillar-tab{padding:7px 10px;font-size:var(--text-xs)}
   .cbe-grid{grid-template-columns:1fr}
   .cbe-flow-phase__hint{font-size:var(--text-3xs)}
@@ -797,6 +860,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   .cbe-flow-arrow{width:20px}
   .cbe-dim-connectors{display:none}
   .backbone-vis{height:300px}
+  #backbone-vis-disconnected{height:220px}
 }
 
 /* ═══════════════════════════════════════════════
@@ -811,6 +875,159 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   #cover h1 .word{opacity:1!important;transform:none!important;filter:none!important}
   .cover-logo-main,.cover-rule,.cover-subtitle,.cover-meta,.cover-badge{opacity:1!important}
   .scroll-reveal .sr-word{opacity:1!important;filter:none!important}
+  .bb-particles{display:none}
+}
+
+/* ═══════════════════════════════════════════════
+   TAY CHATBOT
+   ═══════════════════════════════════════════════ */
+.tay-fab{
+  position:fixed;bottom:28px;right:28px;z-index:900;
+  width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+  background:linear-gradient(135deg,#7A7AE6,#5a5abf);
+  box-shadow:0 4px 24px rgba(122,122,230,.35),0 0 0 0 rgba(122,122,230,.25);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+  animation:tay-breathe 3s ease-in-out infinite;
+}
+.tay-fab:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(122,122,230,.45)}
+.tay-fab.is-open{animation:none;transform:rotate(0)}
+@keyframes tay-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+/* Robot avatar inside FAB */
+.tay-fab__avatar{
+  width:32px;height:32px;transition:opacity .2s,transform .2s;
+  user-select:none;display:flex;align-items:center;justify-content:center;
+}
+.tay-fab.is-open .tay-fab__avatar{opacity:0;transform:scale(.5)}
+.tay-fab__close{
+  position:absolute;color:#fff;font-size:var(--text-xl);font-weight:300;
+  font-family:var(--sans);line-height:1;opacity:0;transform:scale(.5) rotate(-90deg);
+  transition:opacity .2s,transform .2s;
+}
+.tay-fab.is-open .tay-fab__close{opacity:1;transform:scale(1) rotate(0)}
+/* Robot eye blink */
+@keyframes tay-blink{0%,92%,100%{ry:3.5}96%{ry:0.5}}
+
+/* Notification badge */
+.tay-fab__badge{
+  position:absolute;top:-2px;right:-2px;
+  width:18px;height:18px;border-radius:50%;
+  background:#dc2626;color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);
+  transition:transform .2s var(--ease),opacity .2s;
+}
+.tay-fab__badge.is-hidden{transform:scale(0);opacity:0}
+
+/* Chat panel */
+.tay-panel{
+  position:fixed;bottom:96px;right:28px;z-index:899;
+  width:380px;max-height:640px;
+  background:var(--bg-white);
+  border-radius:16px;
+  box-shadow:0 12px 48px rgba(0,0,0,.12),0 0 0 1px var(--border-light);
+  display:flex;flex-direction:column;
+  opacity:0;transform:translateY(16px) scale(.96);
+  pointer-events:none;
+  transition:opacity .3s var(--ease),transform .3s var(--ease);
+  overflow:hidden;
+}
+.tay-panel.is-open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+
+/* Header */
+.tay-header{
+  background:linear-gradient(135deg,#7A7AE6,#5a5abf);
+  padding:16px 20px;display:flex;align-items:center;gap:12px;
+  flex-shrink:0;
+}
+.tay-header__icon{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+}
+.tay-header__info{flex:1}
+.tay-header__name{color:#fff;font-weight:600;font-size:var(--text-sm);letter-spacing:.01em}
+.tay-header__sub{color:rgba(255,255,255,.7);font-size:var(--text-xs)}
+
+/* Messages area */
+.tay-messages{
+  flex:1;overflow-y:auto;padding:16px;
+  display:flex;flex-direction:column;gap:10px;justify-content:flex-start;
+  min-height:200px;max-height:440px;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.tay-messages::-webkit-scrollbar{width:4px}
+.tay-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+
+/* Message bubbles */
+.tay-msg{
+  max-width:85%;font-size:var(--text-sm);line-height:1.5;
+  padding:10px 14px;border-radius:14px;
+  animation:tay-msg-in .3s var(--ease-out);
+}
+@keyframes tay-msg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tay-msg--bot{
+  align-self:flex-start;
+  background:var(--accent-light);color:var(--text);
+  border-bottom-left-radius:4px;
+}
+.tay-msg--user{
+  align-self:flex-end;
+  background:var(--bg-warm);color:var(--text);
+  border-bottom-right-radius:4px;
+}
+.tay-msg a{color:var(--accent);text-decoration:underline;font-weight:500}
+.tay-msg strong{font-weight:600}
+/* Typing indicator */
+.tay-typing{align-self:flex-start;display:flex;gap:4px;padding:12px 16px}
+.tay-typing span{
+  width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.4;
+  animation:tay-dot 1.2s ease-in-out infinite;
+}
+.tay-typing span:nth-child(2){animation-delay:.15s}
+.tay-typing span:nth-child(3){animation-delay:.3s}
+@keyframes tay-dot{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
+
+/* Suggestions */
+.tay-suggestions{
+  padding:0 16px 12px;display:flex;flex-wrap:wrap;gap:6px;flex-shrink:0;
+}
+.tay-pill{
+  font-size:var(--text-xs);font-family:var(--sans);
+  padding:6px 12px;border-radius:20px;border:1px solid var(--border);
+  background:var(--bg-white);color:var(--text-secondary);cursor:pointer;
+  transition:all .2s var(--ease);line-height:1.3;text-align:left;
+}
+.tay-pill:hover{border-color:var(--accent);color:var(--accent);background:rgba(122,122,230,.04)}
+
+/* Input */
+.tay-input-wrap{
+  display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border-light);
+  flex-shrink:0;background:var(--bg-white);
+}
+.tay-input{
+  flex:1;border:1px solid var(--border);border-radius:20px;
+  padding:8px 14px;font-size:var(--text-sm);font-family:var(--sans);
+  color:var(--text);background:var(--bg-white);outline:none;
+  transition:border-color .2s;
+}
+.tay-input::placeholder{color:var(--text-tertiary)}
+.tay-input:focus{border-color:var(--accent)}
+.tay-send{
+  width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .15s;flex-shrink:0;
+}
+.tay-send:hover{background:var(--accent-dark)}
+.tay-send:active{transform:scale(.92)}
+.tay-send svg{width:16px;height:16px}
+
+/* Mobile */
+@media(max-width:768px){
+  .tay-panel{width:calc(100vw - 24px);right:12px;bottom:88px;max-height:75vh}
+  .tay-fab{bottom:20px;right:16px;width:50px;height:50px}
 }
 </style>
 </head>
@@ -832,13 +1049,14 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   <ul class="sidebar__nav" role="list">
     <li><a href="#cover"><span class="nav-num">00</span> Cover</a></li>
     <li><a href="#opportunity"><span class="nav-num">01</span> The Opportunity</a></li>
-    <li><a href="#findings"><span class="nav-num">02</span> Key Findings</a></li>
-    <li><a href="#backbone"><span class="nav-num">03</span> Digital Backbone</a></li>
-    <li><a href="#transformation"><span class="nav-num">04</span> Transformation</a></li>
-    <li><a href="#timeline"><span class="nav-num">05</span> Timeline</a></li>
+    <li><a href="#paradigm"><span class="nav-num">02</span> New Paradigm</a></li>
+    <li><a href="#findings"><span class="nav-num">03</span> Key Findings</a></li>
+    <li><a href="#backbone"><span class="nav-num">04</span> Digital Backbone</a></li>
+    <li><a href="#transformation"><span class="nav-num">05</span> Transformation Approach</a></li>
     <li><a href="#market"><span class="nav-num">06</span> Market Insights</a></li>
     <li><a href="#next-steps"><span class="nav-num">07</span> Next Steps</a></li>
     <li><a href="#intake-proposal"><span class="nav-num">08</span> Intake Proposal</a></li>
+    <li><a href="#references"><span class="nav-num">09</span> References</a></li>
   </ul>
 </nav>
 
@@ -852,10 +1070,12 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
     <div class="cover-inner">
       <div class="cover-logo-main"><span class="light">Transform</span><span class="bold">AZ</span></div>
       <hr class="cover-rule">
-      <h1><span class="word">Building </span><span class="word">the </span><span class="word">Digital </span><span class="word">Backbone</span></h1>
-      <p class="cover-subtitle">A Transformation Strategy for Taylor Group</p>
-      <dl class="cover-meta"><dt>Client</dt><dd>Taylor Group</dd><dt>Date</dt><dd>March 2026</dd><dt>Reference</dt><dd>TAZ-TG-2026-02</dd></dl>
-      <div class="cover-badge">Strategic Proposal</div>
+      <h1><span class="word">Designing </span><span class="word">the </span><span class="word">Digital </span><span class="word">Backbone </span></h1>
+      <p class="cover-subtitle">A Transformation Strategy for Taylor Inc.</p>
+      <div style="text-align:center;margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div class="cover-badge" style="margin-top:0">Strategic Proposal</div>
+        <div class="cover-badge" style="margin-top:0">Confidential</div>
+      </div>
     </div>
     <div class="scroll-hint" aria-hidden="true"><div class="scroll-hint__chevron"></div></div>
   </section>
@@ -863,113 +1083,180 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   <!-- OPPORTUNITY ────────────────────────────── -->
   <section id="opportunity" class="section">
     <span class="section-num anim">01 &mdash; The Opportunity</span>
-    <h2 class="anim" style="--d:.1s">95 Years of Growth.<br>One Moment of Strategic Advantage.</h2>
+    <h2 class="anim" style="--d:.1s">95 Years of Growth.<br>A Defining Moment for Transformation.</h2>
 
     <div class="stats-grid anim" style="--d:.2s">
+      <div class="stat-card"><div class="stat-card__value" data-count-target="300" data-count-prefix="+" data-glitch>0</div><div class="stat-card__label">Employees</div></div>
+      <div class="stat-card"><div class="stat-card__value" style="font-size:var(--text-2xl)">40+</div><div class="stat-card__label">Countries</div></div>
       <div class="stat-card"><div class="stat-card__value" data-count-target="95" data-count-suffix=" yrs" data-glitch>0</div><div class="stat-card__label">Legacy</div></div>
-      <div class="stat-card"><div class="stat-card__value" data-count-target="85" data-count-prefix="$" data-count-suffix="M" data-glitch>0</div><div class="stat-card__label">Revenue</div></div>
-      <div class="stat-card"><div class="stat-card__value" data-count-target="321" data-glitch>0</div><div class="stat-card__label">People</div></div>
-      <div class="stat-card"><div class="stat-card__value" data-count-target="15.8" data-count-prefix="$" data-count-suffix="B" data-count-decimals="1" data-glitch>0</div><div class="stat-card__label">Market Size</div></div>
+      <div class="stat-card"><div class="stat-card__value" data-count-target="128" data-count-prefix="$" data-count-suffix="B" data-glitch>0</div><div class="stat-card__label">Market Size</div></div>
     </div>
 
-    <p class="anim scroll-reveal" style="--d:.3s">Taylor Group has grown organically for 95 years into an enterprise-scale operation &mdash; $85M revenue, 321 people, spanning 40+ countries. But this growth has been powered by startup-era processes. That's not a criticism; it's a testament to the caliber of the people. The question isn't whether Taylor has succeeded &mdash; it's what becomes possible when you add a digital foundation to that talent.</p>
+    <p class="anim scroll-reveal" style="--d:.3s">Taylor Inc. has grown organically for decades into an enterprise-scale operation &mdash; over 300 employees and a global footprint across 40+ countries. This growth has been powered by processes built organically over time. Not through a unified system, but through the strength, experience, and adaptability of its people.</p>
 
-    <p class="anim scroll-reveal" style="--d:.35s">The experiential marketing industry is at an inflection point. Global spend hit a record $128B in 2024, with 74% of Fortune 1000 marketers increasing event budgets. But the landscape is shifting: lead times that were 8 weeks are now 2 weeks. AI-powered competitors are entering the space. The companies that thrive won't be the ones with the most people &mdash; they'll be the ones with the smartest operations.</p>
+    <p class="anim scroll-reveal" style="--d:.35s">The question is no longer whether Taylor has succeeded &mdash; it&rsquo;s what becomes possible when that capability is supported by the right digital foundation.</p>
 
-    <p class="anim scroll-reveal" style="--d:.4s">The tools are already in place. ClickUp, Gemini, Microsoft 365 &mdash; Taylor has invested in the technology. But without a unified strategy, these tools sit dormant. The investment has been made; the return hasn't been realized.</p>
+    <p class="anim scroll-reveal" style="--d:.4s">The experiential marketing industry is at an inflection point representing a <strong>$128B global market</strong>. The landscape is shifting: faster execution, shorter timelines, higher expectations. The companies that will thrive are those with smarter, more efficient systems &mdash; designed to enable consistent, scalable execution.</p>
 
-    <div class="box box--amber anim" style="--d:.5s">
-      <span class="box-label">The Cost of Waiting</span>
-      <p>Every quarter without a unified digital strategy:</p>
-      <ul>
-        <li>Redundant asset fabrication &mdash; $125K&ndash;$300K per quarter</li>
-        <li>Sales&harr;production misalignment compounds with every new market</li>
-        <li>Freeman, GPJ, Jack Morton already operationalizing AI</li>
-        <li>ClickUp, Gemini, M365 investments depreciating without activation</li>
-      </ul>
-    </div>
+    <p class="anim scroll-reveal" style="--d:.45s">Taylor stands at the edge of a meaningful opportunity &mdash; to design the system that enables its next phase of growth.</p>
+
   </section>
 
   <!-- INTERSTITIAL 1 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn't tell you exactly what we have.&rdquo;">
+    <div class="interstitial__text" data-tw-text="&ldquo;It&rsquo;s a pretty unique business. It&rsquo;s fun, it has a lot of breadth and depth, and it&rsquo;s constantly evolving. But we&rsquo;re all very busy servicing clients and staying on the business.&rdquo;">
     </div>
-    <span class="interstitial__source">&mdash; Dean, CEO, Taylor Group</span>
+    <span class="interstitial__source">&mdash; Taylor Group Leadership</span>
+  </div>
+
+  <!-- NEW OPERATING PARADIGM ────────────────── -->
+  <section id="paradigm" class="section">
+    <span class="section-num anim">02 &mdash; The New Operating Paradigm</span>
+    <h2 class="anim" style="--d:.1s">From Technology Adoption<br>to System-Level Performance</h2>
+
+    <p class="anim scroll-reveal" style="--d:.2s">We are in the midst of a new industrial shift &mdash; the most significant transformation in operating models since the digital and industrial revolutions. This shift is driven by the convergence of artificial intelligence, data, automation, and connected systems. But its impact is not primarily technological. It is organizational.</p>
+
+    <p class="anim scroll-reveal" style="--d:.25s">Most organizations are still approaching this shift through a <strong>Reactive Adoption</strong>* &mdash; introducing tools, piloting use cases, and enabling teams to experiment. The data reflects the limitations of this approach:</p>
+
+    <div class="box box--amber anim" style="--d:.3s">
+      <p>Only ~20&ndash;30% of AI initiatives move beyond pilot into scaled deployment. Most value remains trapped in isolated use cases, rather than embedded into core workflows across the business.</p>
+    </div>
+
+    <p class="anim scroll-reveal" style="--d:.35s">A different pattern is emerging among leading organizations.</p>
+
+    <p class="anim scroll-reveal" style="--d:.5s">They are not focused on point solutions but on <strong>Designed Transformation</strong>** &mdash; reviewing workflows alongside technology adoption, investing in data integration and cross-functional visibility, and scaling solutions across the enterprise rather than within individual teams.</p>
+
+    <div class="anim" style="--d:.55s">
+      <table class="paradigm-table">
+        <thead><tr><th>Dimension</th><th>Reactive Adoption*</th><th>Designed Transformation**</th></tr></thead>
+        <tbody>
+          <tr><td>Starting Point</td><td>Tools &amp; use cases</td><td>End-to-end workflows</td></tr>
+          <tr><td>Focus</td><td>Task optimization</td><td>System redesign</td></tr>
+          <tr><td>Implementation</td><td>Pilots &amp; experiments</td><td>Scaled transformation</td></tr>
+          <tr><td>AI Role</td><td>Assistant to individuals</td><td>Embedded in execution</td></tr>
+          <tr><td>Data</td><td>Fragmented across systems</td><td>Integrated across functions</td></tr>
+          <tr><td>Impact</td><td>Localized improvements</td><td>Enterprise-wide performance</td></tr>
+          <tr><td>Scalability</td><td>Limited</td><td>Built to scale</td></tr>
+          <tr><td>Outcome</td><td>More activity</td><td>Better performance</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box--amber anim" style="--d:.6s">
+      <span class="box-label">The Cost of Waiting</span>
+      <p>Every quarter without a unified digital strategy compounds inefficiencies, increases cost, and widens the competitive gap.</p>
+    </div>
+
+    <div class="stats-grid anim" style="--d:.65s">
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="20" data-range-high="30" data-count-suffix="%" data-glitch>20&ndash;30%</div><div class="stat-card__label">Lower operational efficiency</div><div class="stat-card__source">&rarr; Due to fragmented systems</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="30" data-range-high="50" data-count-suffix="%" data-glitch>30&ndash;50%</div><div class="stat-card__label">Slower execution cycles</div><div class="stat-card__source">&rarr; Compared to digitally enabled peers</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="15" data-range-high="25" data-count-suffix="%" data-glitch>15&ndash;25%</div><div class="stat-card__label">Higher operational cost</div><div class="stat-card__source">&rarr; Due to manual processes</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="2" data-range-high="3" data-count-suffix="x" data-glitch>2&ndash;3x</div><div class="stat-card__label">Growth rate for digitally mature competitors</div><div class="stat-card__source">&rarr; Compared to industry average</div></div>
+    </div>
+
+    <p class="anim scroll-reveal" style="--d:.75s">The gap is no longer defined by access to technology. It is defined by how the operation itself is designed.</p>
+  </section>
+
+  <!-- INTERSTITIAL — PARADIGM → FINDINGS ────── -->
+  <div class="interstitial" data-typewriter>
+    <div class="interstitial__text" data-tw-text="Not a lack of capability &mdash; a lack of system-level connection."></div>
   </div>
 
   <!-- FINDINGS ───────────────────────────────── -->
   <section id="findings" class="section">
-    <span class="section-num anim">02 &mdash; Key Findings</span>
-    <h2 class="anim" style="--d:.1s">What Discovery Revealed</h2>
+    <span class="section-num anim">03 &mdash; Key Findings</span>
+    <h2 class="anim" style="--d:.1s">What Initial Interviews Revealed</h2>
 
-    <div class="value-prop anim" style="--d:.15s">
-      <p>Aggregate Estimated Impact: <strong><span data-count-target="1.4" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="2.85" data-count-prefix="$" data-count-suffix="M" data-count-decimals="2" data-glitch>$0</span> annually</strong></p>
+    <p class="anim scroll-reveal" style="--d:.15s">The new paradigm is not theoretical. It is already playing out across Taylor&rsquo;s day-to-day operations.</p>
+
+    <p class="anim scroll-reveal" style="--d:.2s">Initial conversations point to a clear pattern: Not a lack of capability &mdash; but a lack of system-level connection.</p>
+
+    <div class="value-prop anim" style="--d:.25s">
+      <p>Aggregate Estimated Impact: <strong><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="2.85" data-count-prefix="$" data-count-suffix="M" data-count-decimals="2" data-glitch>$0</span> annually</strong></p>
     </div>
 
-    <p class="anim scroll-reveal" style="--d:.2s">Six patterns emerged from our conversations with Dean, Mike, and the leadership team.</p>
+    <p class="anim" style="--d:.3s;font-size:var(--text-sm);color:var(--text-secondary);font-style:italic">* Findings are based on initial conversations and directional estimates. Actual impact may vary &mdash; figures will be validated and refined as part of the diagnostic phase.</p>
 
     <div class="findings-grid">
       <div class="finding-card anim tilt-card" style="--d:.25s" role="button" tabindex="0" aria-expanded="false">
         <div class="finding-header"><h3>Asset Management Blind Spot</h3><span class="severity-tag severity-tag--red">High Impact</span></div>
         <div class="finding-impact">$500K &ndash; $1.2M / year</div>
+        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--red)">Estimated annual impact</div>
         <div class="finding-expand-hint">expand</div>
         <div class="finding-detail">
-          <blockquote><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn't tell you exactly what we have.&rdquo;</p><cite>&mdash; Dean</cite></blockquote>
+          <blockquote><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn&rsquo;t tell you exactly what we have.&rdquo;</p></blockquote>
           <p>Without centralized asset tracking, teams rebuild what already exists across three warehouses and 40+ countries.</p>
-          <div class="box box--amber"><span class="box-label">Annual Impact</span><p><strong>$500K &ndash; $1.2M</strong> in redundant fabrication, lost assets, and missed reuse.</p></div>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>Estimated 5&ndash;10% annual inefficiency from lost, unused, or duplicated assets. Additional costs from redundant fabrication and logistics.</p></div>
         </div>
       </div>
 
       <div class="finding-card anim tilt-card" style="--d:.35s" role="button" tabindex="0" aria-expanded="false">
         <div class="finding-header"><h3>Sales &harr; Production Disconnect</h3><span class="severity-tag severity-tag--red">High Impact</span></div>
         <div class="finding-impact">$400K &ndash; $800K / year</div>
+        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--red)">Estimated annual impact</div>
         <div class="finding-expand-hint">expand</div>
         <div class="finding-detail">
-          <blockquote><p>&ldquo;Sales will sell something and then production finds out and goes, 'Wait, we can't do that in that timeline.'&rdquo;</p><cite>&mdash; Dean</cite></blockquote>
+          <blockquote><p>&ldquo;Sales will sell something and then production finds out and goes, &lsquo;Wait, we can&rsquo;t do that in that timeline.&rsquo;&rdquo;</p></blockquote>
           <p>Sales operates without visibility into production capacity, leading to over-promises and margin erosion.</p>
-          <div class="box box--amber"><span class="box-label">Annual Impact</span><p><strong>$400K &ndash; $800K</strong> in rush costs, rework, and margin compression.</p></div>
+          <div class="box box--amber"><span class="box-label">Rationale</span>
+            <p>Based on observed workflow patterns and typical cost structures in custom build environments:</p>
+            <ul>
+              <li>15&ndash;30% of projects are impacted by sales &harr; production misalignment</li>
+              <li>Each affected project incurs $10K&ndash;$25K in combined impact (redesign, rush production and logistics, margin compression)</li>
+              <li>Based on an estimated 40&ndash;80 projects per quarter</li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="finding-card anim tilt-card" style="--d:.45s" role="button" tabindex="0" aria-expanded="false">
         <div class="finding-header"><h3>Executive Time Drain</h3><span class="severity-tag severity-tag--amber">Medium Impact</span></div>
         <div class="finding-impact">$225K &ndash; $300K / year</div>
+        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--amber)">Estimated annual impact</div>
         <div class="finding-expand-hint">expand</div>
         <div class="finding-detail">
-          <blockquote><p>&ldquo;I get 400 to 500 emails a day. I'd say 70% are CCs where I don't really need to be included.&rdquo;</p><cite>&mdash; Dean</cite></blockquote>
-          <div class="box box--amber"><span class="box-label">Annual Impact</span><p><strong>$225K &ndash; $300K</strong> in executive productivity lost to communication overhead.</p></div>
+          <blockquote><p>&ldquo;I get 400 to 500 emails a day. I&rsquo;d say 70% are CCs where I don&rsquo;t really need to be included.&rdquo;</p></blockquote>
+          <p>Senior leadership time is consumed by low-value communication &mdash; reducing focus on strategic decisions and operational alignment.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>400&ndash;500 emails/day with ~70% low-value or unnecessary. Estimated 2&ndash;3 hours/day of executive time lost. Based on average executive cost of $150&ndash;$250/hour.</p></div>
         </div>
       </div>
 
       <div class="finding-card anim tilt-card" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Dormant AI Investment</h3><span class="severity-tag severity-tag--amber">Medium Impact</span></div>
-        <div class="finding-impact">$75K &ndash; $150K / year</div>
+        <div class="finding-header"><h3>Underutilized Technology Investment</h3><span class="severity-tag severity-tag--amber">Medium Impact</span></div>
+        <div class="finding-impact">$75K &ndash; $200K / year</div>
+        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--amber)">Estimated annual impact</div>
         <div class="finding-expand-hint">expand</div>
         <div class="finding-detail">
-          <blockquote><p>&ldquo;We're paying for ClickUp Brain but nobody's really using it.&rdquo;</p><cite>&mdash; Mike</cite></blockquote>
-          <div class="box box--amber"><span class="box-label">Annual Impact</span><p><strong>$75K &ndash; $150K</strong> in unrealized productivity gains from tools already purchased.</p></div>
+          <blockquote><p>&ldquo;We&rsquo;re paying for ClickUp Brain but nobody&rsquo;s really using it.&rdquo;</p></blockquote>
+          <p>Technology investments are already in place &mdash; but without adoption, integration, and shared workflows, their value erodes over time.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>~$60K&ndash;$130K annual investment across core tools (ClickUp, M365, AI tools). Estimated 40&ndash;70% underutilization due to fragmented adoption and lack of integration. Lost productivity and coordination value typically 2&ndash;3x tool cost.</p></div>
         </div>
       </div>
 
       <div class="finding-card anim tilt-card" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
         <div class="finding-header"><h3>Generational Adoption Gap</h3><span class="severity-tag severity-tag--blue">Strategic</span></div>
-        <div class="finding-impact">6-month delay = 2x cost</div>
+        <div class="finding-impact">$200K &ndash; $500K / year</div>
+        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--blue)">Estimated annual impact</div>
         <div class="finding-expand-hint">expand</div>
         <div class="finding-detail">
-          <blockquote><p>&ldquo;The younger employees pick things up instantly. Some of our senior people... it's a harder conversation.&rdquo;</p><cite>&mdash; Dean</cite></blockquote>
-          <div class="box box--amber"><span class="box-label">Annual Impact</span><p>Every month of delayed adoption costs momentum. 6-month delays double transformation costs.</p></div>
+          <blockquote><p>&ldquo;The younger employees pick things up instantly. Some of our senior people&hellip; it&rsquo;s a harder conversation.&rdquo;</p></blockquote>
+          <p>Technology adoption is inconsistent across the organization. Junior and technical teams adopt new tools quickly. But adoption at the management layer lags &mdash; creating bottlenecks in approvals, decision-making, and execution flow.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>~20&ndash;30 managers involved in approvals / decision layers. 5&ndash;10 hours/week lost per manager due to friction (tool gaps, back-and-forth, manual processes). Avg loaded cost: ~$120&ndash;150/hour.</p></div>
         </div>
       </div>
 
       <div class="finding-card anim tilt-card" style="--d:.75s" role="button" tabindex="0" aria-expanded="false">
         <div class="finding-header"><h3>Missing Strategic Tech Layer</h3><span class="severity-tag severity-tag--blue">Strategic</span></div>
         <div class="finding-impact">$200K &ndash; $400K / year</div>
+        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--blue)">Estimated annual impact</div>
         <div class="finding-expand-hint">expand</div>
         <div class="finding-detail">
-          <blockquote><p>&ldquo;We don't have a CTO. We've never had someone whose job is to look at all of this holistically.&rdquo;</p><cite>&mdash; Dean</cite></blockquote>
-          <div class="box box--amber"><span class="box-label">Annual Impact</span><p><strong>$200K &ndash; $400K</strong> in duplicated tools, unused licenses, integration workarounds.</p></div>
+          <blockquote><p>&ldquo;We don&rsquo;t have a CTO. We&rsquo;ve never had someone whose job is to look at all of this holistically.&rdquo;</p></blockquote>
+          <p>Technology decisions are made in isolation &mdash; by function, by need, and in real time. Without a central owner, tools, data, and workflows evolve independently rather than as a system.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>Direct Waste: $15K&ndash;$60K. Workarounds: $90K&ndash;$300K. Lost leverage: $100K&ndash;$400K.</p></div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -980,56 +1267,42 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
   <!-- BACKBONE ───────────────────────────────── -->
   <section id="backbone" class="section">
-    <span class="section-num anim">03 &mdash; The Digital Backbone</span>
+    <span class="section-num anim">04 &mdash; The Digital Backbone</span>
     <h2 class="anim" style="--d:.1s">One Connected Operation</h2>
 
-    <p class="anim scroll-reveal" style="--d:.2s">Think of the Digital Backbone as the nervous system of Taylor Group's operation. It connects every part of Taylor's business: sales, production, assets, communication, and decisions. Information flows seamlessly. Production capacity is visible to sales in real time. Assets are tracked and reusable. AI amplifies human talent rather than replacing it.</p>
+    <p class="anim scroll-reveal" style="--d:.15s">Taylor&rsquo;s operation is structured across three core modes of value creation: <strong>Create, Build, and Execute</strong>.</p>
 
-    <p class="anim scroll-reveal" style="--d:.25s">Critically, the Digital Backbone is built on what Taylor already owns. This isn't about buying new software. It's about activating what's there, connecting what's siloed, and adding the intelligence layer that turns tools into a system.</p>
+    <p class="anim scroll-reveal" style="--d:.18s">These modes define how ideas are developed, how they are produced, and how they are ultimately delivered. Together, they represent the full lifecycle of Taylor&rsquo;s work &mdash; from concept to execution.</p>
 
-    <!-- Neural network canvas -->
-    <div class="backbone-vis anim" style="--d:.3s" id="backbone-vis">
-      <canvas class="backbone-canvas" id="backbone-canvas"></canvas>
+    <p class="anim scroll-reveal" style="--d:.2s">These modes are supported by five foundational layers:</p>
+
+    <ul class="anim" style="--d:.22s">
+      <li>People &amp; Culture,</li>
+      <li>Processes,</li>
+      <li>Technology,</li>
+      <li>Data,</li>
+      <li>Compliance.</li>
+    </ul>
+
+    <!-- Disconnected state diagram -->
+    <div class="backbone-vis anim" style="--d:.25s" id="backbone-vis-disconnected">
+      <!-- SVG generated by Module F-disconnected -->
     </div>
 
-    <h3 class="anim" style="--d:.4s">Five Dimensions Across Every Phase</h3>
+    <p class="anim scroll-reveal" style="--d:.28s">Each of these layers plays a critical role in how the business runs. Work moves across Create, Build, and Execute through a combination of tools, handoffs, and individual coordination. Information is distributed across systems. Visibility is partial. Alignment depends on people rather than structure.</p>
 
-    <div class="anim" style="--d:.45s">
-      <div class="pillar-tabs" role="tablist">
-        <button class="pillar-tab is-active" role="tab" aria-selected="true" data-tab="people">People &amp; Culture</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="process">Processes</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="tech">Tech</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="data">Data</button>
-        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="compliance">Compliance</button>
-      </div>
-      <div class="pillar-tab-content is-active" id="tab-people"><div class="pillar-card pillar-card--people"><div class="pillar-header"><h4>People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div><p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p><div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-process"><div class="pillar-card pillar-card--process"><div class="pillar-header"><h4>Processes</h4><span class="pillar-tag">Dimension</span></div><p>SOP modernization. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p><div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-tech"><div class="pillar-card pillar-card--tech"><div class="pillar-header"><h4>Tech Integrations</h4><span class="pillar-tag">Dimension</span></div><p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p><div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-data"><div class="pillar-card pillar-card--data"><div class="pillar-header"><h4>Data</h4><span class="pillar-tag">Dimension</span></div><p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p><div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div></div></div>
-      <div class="pillar-tab-content" id="tab-compliance"><div class="pillar-card pillar-card--compliance"><div class="pillar-header"><h4>Compliance</h4><span class="pillar-tag">Dimension</span></div><p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Regulatory readiness for pharma and healthcare clients.</p><div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div></div></div>
+    <h3 class="anim" style="--d:.3s">The Digital Backbone Addresses This Gap</h3>
+
+    <p class="anim scroll-reveal" style="--d:.32s">It introduces a connected operational layer that links how work is created, built, and executed across the organization. Rather than adding new systems, it connects existing ones &mdash; enabling workflows to move end-to-end, data to flow in real time, and decisions to be made with full visibility.</p>
+
+    <p class="anim scroll-reveal" style="--d:.35s">It integrates the three modes of operation with the five foundational layers &mdash; turning them into a single, coordinated system.</p>
+
+    <!-- Connected state diagram -->
+    <div class="backbone-vis anim" style="--d:.38s" id="backbone-vis">
+      <!-- SVG generated by Module F -->
     </div>
 
-    <div class="value-prop anim" style="--d:.5s">
-      <p><strong>Five dimensions. Three phases. One backbone.</strong> The Digital Backbone makes Taylor more informed in Create, more coordinated in Build, and more governed in Execute.</p>
-    </div>
-  </section>
-
-  <!-- INTERSTITIAL 3 ─────────────────────────── -->
-  <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="Only 16% of digital transformations fully succeed. Approach matters more than ambition."></div>
-    <span class="interstitial__source">&mdash; McKinsey</span>
-  </div>
-
-  <!-- TRANSFORMATION ─────────────────────────── -->
-  <section id="transformation" class="section">
-    <span class="section-num anim">04 &mdash; The Transformation</span>
-    <h2 class="anim" style="--d:.1s">Your Language. Your Framework.<br>Five Dimensions.</h2>
-
-    <p class="anim scroll-reveal" style="--d:.15s">Taylor already operates in Create, Build, Execute. It's how you conceive, produce, and deliver experiences for the world's most demanding brands. The Digital Backbone doesn't change that framework &mdash; it strengthens every layer of it.</p>
-
-    <p class="anim scroll-reveal" style="--d:.2s">Across all three phases, we address <strong>five transformation dimensions</strong> &mdash; the areas where operational maturity determines whether a company scales efficiently or simply grows larger:</p>
-
-    <div class="cbe-diagram anim" style="--d:.25s">
+    <div class="cbe-diagram anim" style="--d:.42s">
       <div class="cbe-dim-rain">
         <span class="dim-tag" style="background:var(--green-bg);color:var(--green)">People &amp; Culture</span>
         <span class="dim-tag" style="background:var(--blue-bg);color:var(--blue)">Processes</span>
@@ -1059,188 +1332,347 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
       </div>
       <div class="cbe-backbone-bar">Digital Backbone</div>
 
-      <!-- Panels live inside diagram — expand below backbone bar -->
+      <!-- Panels expand below backbone bar -->
       <div class="cbe-panels-wrapper">
         <!-- ── CREATE Panel ── -->
         <div class="cbe-panel" id="cbe-create">
-          <p class="cbe-panel__subtitle">The backbone helps teams think faster, think smarter, and create with more context.</p>
-          <p class="cbe-panel__intro">In the Create layer, ideation depends almost entirely on the individuals in the room &mdash; their memory, their relationships, their experience. The backbone changes that equation.</p>
-
           <div class="cbe-grid">
             <div class="cbe-card cbe-card--blue">
               <h4>Strategic Intelligence</h4>
-              <p>Client history, competitor activity, market trends, and prior campaign learnings available at the start of every brief. Ideation shifts from isolated inspiration to informed creative thinking.</p>
+              <p>Client history, market context, and prior work available at the start of every brief</p>
             </div>
             <div class="cbe-card cbe-card--blue">
               <h4>Creative Memory</h4>
-              <p>Searchable archives of concepts, builds, and proposals. Visibility into previous ideas for similar clients or sectors. A reusable body of intellectual and creative work.</p>
+              <p>Searchable archive of concepts, proposals, and past builds</p>
             </div>
             <div class="cbe-card cbe-card--blue">
               <h4>Proposal Acceleration</h4>
-              <p>Respond to opportunities faster. Assemble proposals using past materials and pricing logic. Shorten the time between brief and first strategic output.</p>
+              <p>Faster response using reusable materials and pricing logic</p>
             </div>
             <div class="cbe-card cbe-card--blue">
-              <h4>Better Forecasting</h4>
-              <p>Early visibility into production complexity, resource intensity, delivery implications, and whether similar components already exist. Creative ambition meets operational reality.</p>
+              <h4>Operational Awareness</h4>
+              <p>Early visibility into production complexity and available assets</p>
             </div>
             <div class="cbe-card cbe-card--blue">
               <h4>AI-Assisted Ideation</h4>
-              <p>Concept expansion, reference generation, draft narrative support, and faster synthesis of market inputs. Not automated creativity &mdash; <strong>augmented creative velocity</strong>.</p>
+              <p>Faster concept expansion and synthesis of inputs</p>
             </div>
           </div>
 
           <div class="value-prop" style="border-color:var(--blue)">
-            <p><strong>CREATE becomes:</strong> more informed, faster, more reusable, more grounded in reality, and more capable of generating quality ideas at speed.</p>
+            <p>More informed. Faster. Grounded in reality.</p>
           </div>
           <table class="ba-table"><thead><tr><th>Before</th><th>After</th></tr></thead><tbody><tr><td>Ideas start from scratch, proposals assembled manually, institutional knowledge lives in people's heads</td><td>Institutional memory searchable, proposals accelerated, creative ambition grounded in operational reality</td></tr></tbody></table>
         </div>
 
         <!-- ── BUILD Panel ── -->
         <div class="cbe-panel" id="cbe-build">
-          <p class="cbe-panel__subtitle">The backbone helps great ideas become buildable, scalable, and operationally viable.</p>
-          <p class="cbe-panel__intro">In the Build layer, the backbone connects concept to production. This is Taylor's operational core &mdash; and it's where the biggest efficiency gaps live.</p>
-
           <div class="cbe-grid">
             <div class="cbe-card cbe-card--green">
               <h4>Design-to-Build Continuity</h4>
-              <p>Continuity between design outputs and production inputs. Shared documentation across creative, digital, and fabrication teams. Less interpretation loss.</p>
+              <p>Shared context across creative, digital, and production teams</p>
             </div>
             <div class="cbe-card cbe-card--green">
               <h4>Asset Intelligence</h4>
-              <p>Visibility into what the business already owns, has built, or can reuse. Reusable scenic elements, historic build references, digital assets connected to physical experiences.</p>
+              <p>Visibility into reusable builds, components, and materials</p>
             </div>
             <div class="cbe-card cbe-card--green">
-              <h4>Materials &amp; Components</h4>
-              <p>Stronger picture of what is needed vs. what is available. Material planning, component tracking, procurement coordination, and supplier visibility.</p>
+              <h4>Material Planning</h4>
+              <p>Clear view of needs, availability, and procurement</p>
             </div>
             <div class="cbe-card cbe-card--green">
               <h4>Capacity Forecasting</h4>
-              <p>Production load, team capacity, timing conflicts, and build implications of incoming pipeline. The shift from <strong>reactive to planned production</strong>.</p>
-            </div>
-            <div class="cbe-card cbe-card--green">
-              <h4>Digital&ndash;Physical Integration</h4>
-              <p>Alignment across physical environments, interactive experiences, content production, platform integration, and on-site digital behavior.</p>
+              <p>Production load and team availability visible upfront</p>
             </div>
             <div class="cbe-card cbe-card--green">
               <h4>Cost Intelligence</h4>
-              <p>Benchmark against past builds, anticipate cost drivers, price work with better historical reference. Build becomes not just faster, but more <strong>commercially informed</strong>.</p>
+              <p>Pricing informed by historical builds and benchmarks</p>
             </div>
           </div>
 
           <div class="value-prop" style="border-color:var(--green)">
-            <p><strong>BUILD becomes:</strong> more coordinated, more predictable, more reusable, more cost-aware, and more connected across digital and physical work.</p>
+            <p>More coordinated. Predictable. Reusable.</p>
           </div>
           <table class="ba-table"><thead><tr><th>Before</th><th>After</th></tr></thead><tbody><tr><td>Sales sells blind, assets rebuilt because nobody knows they exist, each office runs its own way</td><td>Design-to-build continuity, searchable asset inventory, planned production, cost intelligence from history</td></tr></tbody></table>
         </div>
 
         <!-- ── EXECUTE Panel ── -->
         <div class="cbe-panel" id="cbe-execute">
-          <p class="cbe-panel__subtitle">The backbone turns execution from something people discover too late into something they can manage actively.</p>
-          <p class="cbe-panel__intro">In the Execute layer, complexity peaks. Projects move from internal planning into real-world delivery. It's where Taylor's leadership spends the most time today &mdash; often manually.</p>
-
           <div class="cbe-grid">
             <div class="cbe-card cbe-card--amber">
               <h4>Project Orchestration</h4>
-              <p>Centralized project visibility, shared timelines, clearer dependencies and ownership. The shift from fragmented execution to <strong>connected execution</strong>.</p>
+              <p>Centralized visibility across timelines, ownership, and dependencies</p>
             </div>
             <div class="cbe-card cbe-card--amber">
               <h4>Resource Allocation</h4>
-              <p>Better crew planning, specialist allocation, visibility into team utilization, and cross-project resource balancing. Fewer blind spots and less fire-fighting.</p>
+              <p>Better crew planning and cross-project visibility</p>
             </div>
             <div class="cbe-card cbe-card--amber">
               <h4>Logistics &amp; Deployment</h4>
-              <p>Logistics tracking, deployment readiness, installation sequencing, and clarity around what is arriving where and when. Reduced execution risk.</p>
+              <p>Clear sequencing, readiness, and delivery tracking</p>
             </div>
             <div class="cbe-card cbe-card--amber">
               <h4>Real-Time Visibility</h4>
-              <p>Project status monitored clearly, emerging issues seen earlier, leadership intervenes sooner. No need to be CC'd on every email to stay informed.</p>
+              <p>Project status visible without manual follow-up</p>
             </div>
             <div class="cbe-card cbe-card--amber">
               <h4>Measurement &amp; Learning</h4>
-              <p>Event outcomes, attendee engagement, lead conversion, performance patterns. The loop between delivery and future strategy &mdash; closed.</p>
-            </div>
-            <div class="cbe-card cbe-card--amber">
-              <h4>Continuous Improvement</h4>
-              <p>Each project informs the next. Recurring issues become visible. High-performing formats become identifiable. The company becomes <strong>better over time, not just busier</strong>.</p>
+              <p>Performance data feeds future strategy</p>
             </div>
           </div>
 
           <div class="value-prop" style="border-color:var(--amber)">
-            <p><strong>EXECUTE becomes:</strong> more visible, more coordinated, more predictable, more measurable, and more capable of learning over time.</p>
+            <p>More visible. More coordinated. Learning over time.</p>
           </div>
           <table class="ba-table"><thead><tr><th>Before</th><th>After</th></tr></thead><tbody><tr><td>Status via email chains, reactive fire-fighting, post-event learnings lost, no unified view</td><td>Real-time visibility, connected execution, organizational learning compounds over time</td></tr></tbody></table>
         </div>
       </div>
     </div>
 
-    <div class="value-prop anim" style="--d:.4s;margin-top:36px">
-      <p><strong>Five dimensions. Three phases. One backbone.</strong> The Digital Backbone makes Taylor more informed in Create, more coordinated in Build, and more governed in Execute. It doesn't add complexity &mdash; it removes the friction that 95 years of organic growth naturally created.</p>
+    <h3 class="anim" style="--d:.45s">Five Dimensions Across Every Phase</h3>
+
+    <div class="anim" style="--d:.45s">
+      <div class="pillar-tabs" role="tablist">
+        <button class="pillar-tab is-active" role="tab" aria-selected="true" data-tab="people">People &amp; Culture</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="process">Processes</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="tech">Tech</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="data">Data</button>
+        <button class="pillar-tab" role="tab" aria-selected="false" data-tab="compliance">Compliance</button>
+      </div>
+      <div class="pillar-tab-content is-active" id="tab-people"><div class="pillar-card pillar-card--people"><div class="pillar-header"><h4>People &amp; Culture</h4><span class="pillar-tag">Dimension</span></div><p>Segmented adoption paths for executives, operations, and creative teams. Internal champions program (3-5 per department). Skills development roadmap by role. Culture-first change management that respects 95 years of institutional identity.</p><div class="box"><em>&ldquo;Technology changes fast. Culture changes slow. We start with culture.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-process"><div class="pillar-card pillar-card--process"><div class="pillar-header"><h4>Processes</h4><span class="pillar-tag">Dimension</span></div><p>SOP modernization. Sales-to-production alignment with real-time capacity visibility. Asset management lifecycle. Cross-office standardization across Toronto, Boston, and Cleveland.</p><div class="box"><em>&ldquo;Before automating a process, make sure it's the right process.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-tech"><div class="pillar-card pillar-card--tech"><div class="pillar-header"><h4>Tech Integrations</h4><span class="pillar-tag">Dimension</span></div><p>ClickUp architecture optimization + Brain activation. Gemini integration for email triage, meeting notes, and drafts. Automation engine (10-15 priority workflows). Global Core &harr; Operations tool alignment.</p><div class="box"><em>&ldquo;The best technology strategy starts with what you already own.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-data"><div class="pillar-card pillar-card--data"><div class="pillar-header"><h4>Data</h4><span class="pillar-tag">Dimension</span></div><p>Asset inventory intelligence. Production capacity data. Project profitability tracking. Executive dashboards. Performance feedback loops that close the Create&rarr;Build&rarr;Execute cycle.</p><div class="box"><em>&ldquo;You can't optimize what you can't measure.&rdquo;</em></div></div></div>
+      <div class="pillar-tab-content" id="tab-compliance"><div class="pillar-card pillar-card--compliance"><div class="pillar-header"><h4>Compliance</h4><span class="pillar-tag">Dimension</span></div><p>AI governance policy. Data handling standards for client IP, internal IP, and vendor data. IP protection strategy. Regulatory readiness for pharma and healthcare clients.</p><div class="box"><em>&ldquo;Innovation without guardrails is a liability.&rdquo;</em></div></div></div>
     </div>
 
-    <h3 class="anim" style="--d:.5s">The Phases</h3>
+    <div class="value-prop anim" style="--d:.5s">
+      <p><strong>Five dimensions. Three phases. One backbone.</strong> The Digital Backbone makes Taylor more informed in Create, more coordinated in Build, and more governed in Execute.</p>
+    </div>
+  </section>
+
+  <!-- INTERSTITIAL 3 ─────────────────────────── -->
+  <div class="interstitial" data-typewriter>
+    <div class="interstitial__text" data-tw-text="Only 16% of digital transformations fully succeed. Approach matters more than ambition."></div>
+    <span class="interstitial__source">&mdash; McKinsey</span>
+  </div>
+
+  <!-- TRANSFORMATION ─────────────────────────── -->
+  <section id="transformation" class="section">
+    <span class="section-num anim">05 &mdash; The Transformation Approach</span>
+    <h2 class="anim" style="--d:.1s">From Insight<br>to System-Level Execution</h2>
+
+    <p class="anim scroll-reveal" style="--d:.15s">The Digital Backbone is not deployed. It is built.</p>
+
+    <p class="anim scroll-reveal" style="--d:.18s">The transformation is not approached as a technology rollout &mdash; but as a redesign of how the organization operates.</p>
+
+    <p class="anim scroll-reveal" style="--d:.2s">It is structured, phase-based, and built to move from initial alignment to full system activation &mdash; ensuring that change is not introduced in isolation, but embedded across the business.</p>
+
+    <p class="anim scroll-reveal" style="--d:.22s">The approach follows a clear progression:</p>
+
+    <ol class="anim" style="--d:.25s">
+      <li>Alignment before action</li>
+      <li>Understanding before design</li>
+      <li>Validation before transformation</li>
+      <li>Execution based on evidence</li>
+      <li>Stabilization &amp; Optimization</li>
+    </ol>
+
+    <p class="anim scroll-reveal" style="--d:.28s">Each phase builds on the previous one &mdash; reducing ambiguity, increasing precision, and enabling confident decision-making.</p>
+
+    <div class="gantt-wrapper anim" style="--d:.29s" id="gantt-chart">
+      <div class="gantt-header"><span></span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan+</span></div>
+      <div class="gantt-row"><span class="gantt-label" style="color:var(--text-tertiary)">0 &middot; Pre-Engagement</span><div class="gantt-bar gantt-bar--muted" style="grid-column:2/3" data-gantt-delay="0">Pre-Engagement</div></div>
+      <div class="gantt-row"><span class="gantt-label" style="color:var(--blue)">1 &middot; Intake</span><div class="gantt-bar gantt-bar--blue" style="grid-column:3/5" data-gantt-delay="150">Intake</div></div>
+      <div class="gantt-row"><span class="gantt-label" style="color:var(--green)">2 &middot; Discovery</span><div class="gantt-bar gantt-bar--green" style="grid-column:5/7" data-gantt-delay="300">Discovery</div></div>
+      <div class="gantt-row gantt-row--decision"><span class="gantt-label" style="color:var(--accent);font-weight:700">&nbsp;</span><div class="gantt-decision-row" style="grid-column:6/8" data-gantt-delay="450"><span class="decision-line-left"></span><span class="decision-line-right"></span></div></div>
+      <div class="gantt-row"><span class="gantt-label" style="color:var(--accent)">3 &middot; Implementation</span><div class="gantt-bar gantt-bar--accent" style="grid-column:7/11" data-gantt-delay="600">Implementation</div></div>
+      <div class="gantt-row"><span class="gantt-label" style="color:var(--amber)">4 &middot; Stabilization</span><div class="gantt-bar gantt-bar--amber" style="grid-column:11/13" data-gantt-delay="900">Stabilization &amp; Optimization</div></div>
+      <div class="gantt-row"><span class="gantt-label" style="color:var(--text-secondary)">X &middot; Change Enablement</span><div class="gantt-bar gantt-bar--change" style="grid-column:3/13" data-gantt-delay="1100"></div></div>
+    </div>
+
+    <div class="box box--accent anim" style="--d:.3s">
+      <p>This framework:</p>
+      <ul>
+        <li>Moves from fragmented understanding to validated operational clarity</li>
+        <li>Ensures decisions are grounded in evidence, not assumption</li>
+        <li>Connects workflows, systems, data, and decision-making</li>
+        <li>Enables transformation to be sequenced, not improvised</li>
+        <li>Aligns leadership, teams, and execution under a shared system</li>
+      </ul>
+    </div>
+
+    <div class="value-prop anim" style="--d:.32s">
+      <p>Transformation is not introduced.<br>It is engineered &mdash; phase by phase, based on evidence.</p>
+    </div>
+
+    <h3 class="anim" style="--d:.35s">The Phases</h3>
 
     <div class="phases-grid">
-      <div class="phase-card phase-card--intake anim tilt-card" style="--d:.55s">
-        <span class="phase-tag">Intake</span><h3>INTAKE</h3><div class="phase-date">Apr &ndash; May 2026</div>
-        <p><strong>Remote</strong></p><p>SOP documentation, technology audit, stakeholder mapping.</p>
-        <ul><li>Current-state assessment</li><li>Technology audit</li><li>Prioritized workstreams</li><li>Scoped next-phase proposal</li></ul>
+      <div class="phase-card anim tilt-card" style="--d:.38s;border-color:var(--border)">
+        <span class="phase-tag" style="background:var(--bg-warm);color:var(--text-tertiary)">Phase 0</span><h3>PRE-ENGAGEMENT</h3><div class="phase-date">April 2026</div>
+        <p><strong>Remote</strong></p>
+        <p>Alignment is established across scope, structure, and expectations. This phase defines how we will work together &mdash; and concludes with the formalization of the engagement.</p>
+        <h4>Key Milestones</h4>
+        <ul>
+          <li>Define Scope &amp; Objectives</li>
+          <li>Establish Governance &amp; Ways of Working</li>
+          <li>Confirm Team &amp; Resourcing</li>
+          <li>Finalize Commercials &amp; Agreement</li>
+        </ul>
+        <div class="box" style="margin-top:12px"><p><strong>Outcome:</strong> Signed agreement and engagement ready to begin</p></div>
       </div>
-      <div class="phase-card phase-card--discovery anim tilt-card" style="--d:.65s">
-        <span class="phase-tag">Discovery</span><h3>DISCOVERY</h3><div class="phase-date">Jun &ndash; Jul 2026</div>
-        <p><strong>Onsite Toronto + Remote</strong></p><p>Interviews, process mapping, AI vision alignment.</p>
-        <ul><li>Process maps</li><li>AI readiness evaluation</li><li>Quick-win identification</li><li>Implementation roadmap</li></ul>
-      </div>
-      <div class="phase-card phase-card--implementation anim tilt-card" style="--d:.75s">
-        <span class="phase-tag">Implementation</span><h3>IMPLEMENTATION</h3><div class="phase-date">Aug &ndash; Oct 2026</div>
-        <p><strong>Hybrid</strong></p><p>Priority workstreams, automation builds, champion training.</p>
-        <ul><li>Activated platforms</li><li>Built automations</li><li>Trained champions</li><li>Measurable KPIs</li></ul>
-      </div>
-      <div class="phase-card phase-card--stabilization anim tilt-card" style="--d:.85s">
-        <span class="phase-tag">Stabilization</span><h3>STABILIZATION</h3><div class="phase-date">Nov 2026+</div>
-        <p><strong>Remote</strong></p><p>Adoption reinforcement, measurement, knowledge transfer.</p>
-        <ul><li>Adoption monitoring</li><li>Optimization recs</li><li>Quarterly reviews</li><li>Knowledge transfer</li></ul>
-      </div>
-    </div>
 
-    <div class="box box--accent anim" style="--d:.9s">
-      <span class="box-label">How the phases map to Create, Build, Execute</span>
-      <p><strong>INTAKE + DISCOVERY</strong> &rarr; Primarily <strong>CREATE</strong> &mdash; understanding how Taylor creates, builds, and executes today.</p>
-      <p><strong>IMPLEMENTATION</strong> &rarr; Primarily <strong>BUILD</strong> &mdash; activating tools, connecting systems, building automations, training champions.</p>
-      <p><strong>STABILIZATION</strong> &rarr; Primarily <strong>EXECUTE</strong> &mdash; measuring adoption, optimizing workflows, ensuring the backbone sustains itself.</p>
+      <div class="phase-card phase-card--intake anim tilt-card" style="--d:.45s" role="button" tabindex="0" aria-expanded="false">
+        <span class="phase-tag">Phase 1</span><h3>INTAKE</h3><div class="phase-date">May &ndash; Jun 2026</div>
+        <p><strong>Remote</strong></p>
+        <p>The Intake phase sets the foundation for Discovery. It focuses on collecting information, gaining access to systems, and building an initial understanding of how the business operates &mdash; before any on-site work begins.</p>
+        <h4>Key Milestones</h4>
+        <ul>
+          <li>Set up data room &amp; information structure</li>
+          <li>Collect core documentation (SOPs, org, systems)</li>
+          <li>Gain access to tools, platforms, and workflows</li>
+          <li>Review documentation and data flows</li>
+          <li>Define Discovery plan (interviews, workflows, focus areas)</li>
+          <li>Initiate leadership alignment &amp; early engagement</li>
+        </ul>
+        <div class="box" style="margin-top:12px"><p><strong>Outcome:</strong> Structured understanding of the current operation and a fully defined Discovery plan</p></div>
+        <div class="phase-expand-hint">Full phase breakdown</div>
+        <div class="phase-detail">
+          <h4>INTAKE: Setting the Ground for Discovery</h4>
+          <p>This phase establishes a controlled environment where fragmented information &mdash; across workflows, systems, data, and organizational structure &mdash; is centralized, validated, and made analyzable. This phase enables a first-pass reconstruction of how the business actually operates, beyond how it is described.</p>
+          <p>Through structured data collection, system access provisioning, and documentation review, Intake creates the conditions for understanding the operational model of the organization. This model informs where value is created, where friction accumulates, and where deeper investigation is required.</p>
+          <p>In parallel, the phase defines the Discovery strategy &mdash; identifying critical workflows, prioritizing stakeholders, and sequencing investigative efforts based on early signals.</p>
+          <p>The objective is not to solve &mdash; but to reduce ambiguity to a level where targeted intervention becomes possible.</p>
+
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-card__value">2 mo</div><div class="stat-card__label">Duration</div></div>
+            <div class="stat-card"><div class="stat-card__value" style="font-size:var(--text-xl)">Remote</div><div class="stat-card__label">Collaboration</div></div>
+            <div class="stat-card"><div class="stat-card__value">3</div><div class="stat-card__label">Core Flows Mapped</div></div>
+            <div class="stat-card"><div class="stat-card__value">5</div><div class="stat-card__label">Dimensions Assessed</div></div>
+          </div>
+
+          <div class="phase-detail__cols">
+            <div class="phase-detail__col">
+              <h4>Operating Model of the Phase</h4>
+              <ul>
+                <li>Fully remote execution</li>
+                <li>Early engagement with leadership group</li>
+                <li>Initial cadence of working sessions established</li>
+                <li>Stakeholders identified and aligned</li>
+                <li>Discovery sessions pre-scheduled</li>
+              </ul>
+            </div>
+            <div class="phase-detail__col">
+              <h4>What This Phase Does Not Do</h4>
+              <ul>
+                <li>No process redesign</li>
+                <li>No system changes</li>
+                <li>No implementation decisions</li>
+              </ul>
+              <div class="box" style="margin-top:12px"><p><em>This phase builds clarity &mdash; not solutions.</em></p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card phase-card--discovery anim tilt-card" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
+        <span class="phase-tag">Phase 2</span><h3>DISCOVERY</h3><div class="phase-date">Jul &ndash; Aug 2026</div>
+        <p><strong>Onsite Toronto + Remote</strong></p>
+        <p>The Discovery phase translates structured inputs into validated operational understanding. Through on-site observation, stakeholder interviews, and workflow validation, this phase identifies where value is created, where friction accumulates, and where transformation should be focused.</p>
+        <h4>Key Milestones</h4>
+        <ul>
+          <li>Conduct kickoff and align Discovery agenda</li>
+          <li>Execute leadership and functional interviews</li>
+          <li>Observe operations on-site (core workflows)</li>
+          <li>Validate workflows, systems, and decision-making</li>
+          <li>Identify gaps, redundancies, and breakdowns</li>
+          <li>Consolidate findings and validate with leadership</li>
+        </ul>
+        <div class="phase-expand-hint">Full phase breakdown</div>
+        <div class="phase-detail">
+          <h4>From Visibility to Validated Understanding</h4>
+          <p>Building on the foundation established during Intake, this phase moves into direct observation and engagement with the organization. It combines qualitative and quantitative inputs &mdash; interviews, workflow observation, and system validation &mdash; to reconstruct how the business actually operates in practice.</p>
+          <p>Rather than relying on documentation or perception, Discovery tests assumptions against reality. It identifies where workflows break, where decisions stall, where systems fail to connect, and where inefficiencies compound across the operation.</p>
+          <p>This phase produces a validated diagnosis of the current state &mdash; grounded in evidence, not interpretation.</p>
+
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-card__value">2 mo</div><div class="stat-card__label">Duration</div></div>
+            <div class="stat-card"><div class="stat-card__value" style="font-size:var(--text-xl)">Hybrid</div><div class="stat-card__label">Collaboration</div></div>
+            <div class="stat-card"><div class="stat-card__value">5</div><div class="stat-card__label">Pillars Assessed</div></div>
+            <div class="stat-card"><div class="stat-card__value">1</div><div class="stat-card__label">Transformation Roadmap</div></div>
+          </div>
+
+          <div class="phase-detail__cols">
+            <div class="phase-detail__col">
+              <h4>Operating Model of the Phase</h4>
+              <ul>
+                <li>Hybrid execution (on-site + remote)</li>
+                <li>High-touch engagement with leadership and teams</li>
+                <li>Direct observation of workflows in action</li>
+                <li>Iterative validation of findings with stakeholders</li>
+                <li>Continuous refinement of hypotheses</li>
+              </ul>
+            </div>
+            <div class="phase-detail__col">
+              <h4>Outcome</h4>
+              <p><strong>Current-State Report:</strong> A validated, end-to-end diagnosis of workflows, systems, data, and decision-making</p>
+              <p><strong>Transformation Roadmap:</strong> A prioritized and sequenced set of initiatives defining how the operation will be redesigned</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card phase-card--implementation anim tilt-card" style="--d:.65s">
+        <span class="phase-tag">Phase 3</span><h3>IMPLEMENTATION</h3><div class="phase-date">Sep &ndash; Dec 2026</div>
+        <p><strong>Hybrid</strong></p>
+        <p>The Implementation phase activates the transformation roadmap defined during Discovery. At this stage, the Digital Backbone is built in practice &mdash; redesigning workflows, connecting systems, and embedding new ways of operating across the organization.</p>
+        <p style="font-size:var(--text-sm);color:var(--text-tertiary);font-style:italic">The exact scope, sequencing, and priorities of this phase are defined based on the validated findings and roadmap produced in Discovery.</p>
+        <h4>Key Milestones</h4>
+        <ul>
+          <li>Prioritized initiatives based on Discovery outputs</li>
+          <li>Workflow redesign and system activation</li>
+          <li>Integration across tools, data, and teams</li>
+          <li>Rollout of new operating model</li>
+          <li>Governance and performance tracking established</li>
+          <li>Activated platforms</li>
+          <li>Built automations</li>
+          <li>Trained champions</li>
+          <li>Measurable KPIs</li>
+        </ul>
+      </div>
+
+      <div class="phase-card phase-card--stabilization anim tilt-card" style="--d:.75s">
+        <span class="phase-tag">Phase 4</span><h3>STABILIZATION &amp; OPTIMIZATION</h3><div class="phase-date">Jan 2027+</div>
+        <p><strong>Remote</strong></p>
+        <p>Workflows are implemented, systems are connected, and the Digital Backbone is embedded into day-to-day operations. The focus is not only on execution &mdash; but on ensuring that the new operating model performs consistently and improves over time.</p>
+        <ul>
+          <li>Adoption monitoring</li>
+          <li>Optimization recs</li>
+          <li>Quarterly reviews</li>
+          <li>Knowledge transfer</li>
+        </ul>
+      </div>
+
+      <div class="phase-card anim tilt-card" style="--d:.85s;border-color:var(--border)">
+        <span class="phase-tag" style="background:var(--bg-warm);color:var(--text-secondary)">Phase X</span><h3>CHANGE ENABLEMENT</h3><div class="phase-date">Continuous</div>
+        <p><strong>Across all phases</strong></p>
+        <p>Transformation does not happen through design alone &mdash; it happens through adoption.</p>
+        <p>This layer runs across the entire engagement, ensuring alignment, clarity, and engagement at every stage. It supports how the transformation is understood, communicated, and embedded within the organization.</p>
+        <p>From early stakeholder alignment to ongoing communication and reinforcement, this phase ensures that changes are not only implemented &mdash; but sustained.</p>
+        <h4>Key Milestones</h4>
+        <ul>
+          <li>Implement prioritized initiatives from the roadmap</li>
+          <li>Activate redesigned workflows across teams</li>
+          <li>Integrate systems and align data flows</li>
+          <li>Establish governance and operating rhythms</li>
+          <li>Monitor performance and resolve early friction</li>
+          <li>Optimize processes based on real usage and feedback</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- TIMELINE ───────────────────────────────── -->
-  <section id="timeline" class="section">
-    <span class="section-num anim">05 &mdash; Timeline</span>
-    <h2 class="anim" style="--d:.1s">A Phased Approach</h2>
-    <p class="anim scroll-reveal" style="--d:.2s">Each phase builds on the previous, ensuring early wins fund later investment.</p>
-
-    <div class="gantt-wrapper anim" style="--d:.3s" id="gantt-chart">
-      <div class="gantt-header"><span></span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div>
-      <div class="gantt-row"><span class="gantt-label" style="color:var(--blue)">Intake</span><div class="gantt-bar gantt-bar--blue" style="grid-column:2/4" data-gantt-delay="0">Intake</div></div>
-      <div class="gantt-row"><span class="gantt-label" style="color:var(--green)">Discovery</span><div class="gantt-bar gantt-bar--green" style="grid-column:4/6" data-gantt-delay="300">Discovery</div></div>
-      <div class="gantt-row"><span class="gantt-label" style="color:var(--accent)">Implementation</span><div class="gantt-bar gantt-bar--accent" style="grid-column:6/9" data-gantt-delay="600">Implementation</div></div>
-      <div class="gantt-row"><span class="gantt-label" style="color:var(--amber)">Stabilization</span><div class="gantt-bar gantt-bar--amber" style="grid-column:9/11" data-gantt-delay="900">Stabilization</div></div>
-    </div>
-
-    <div class="anim" style="--d:.35s">
-      <h3 style="color:var(--blue)">Intake <span style="font-weight:400;font-size:var(--text-sm);color:var(--text-tertiary)">&mdash; April &ndash; May 2026</span></h3>
-      <p>SOP review, technology audit, stakeholder mapping. <em>Value: Clear baseline. No assumptions &mdash; only evidence.</em></p>
-    </div>
-    <div class="anim" style="--d:.4s">
-      <h3 style="color:var(--green)">Discovery <span style="font-weight:400;font-size:var(--text-sm);color:var(--text-tertiary)">&mdash; June &ndash; July 2026</span></h3>
-      <p>Onsite Toronto interviews, process mapping, AI vision alignment. <em>Value: Shared understanding of what's possible.</em></p>
-    </div>
-    <div class="anim" style="--d:.45s">
-      <h3 style="color:var(--accent)">Implementation <span style="font-weight:400;font-size:var(--text-sm);color:var(--text-tertiary)">&mdash; August &ndash; October 2026</span></h3>
-      <p>Workstream execution, automation builds, champion training. <em>Value: Tangible improvements. Measurable ROI.</em></p>
-    </div>
-    <div class="anim" style="--d:.5s">
-      <h3 style="color:var(--amber)">Stabilization <span style="font-weight:400;font-size:var(--text-sm);color:var(--text-tertiary)">&mdash; November 2026+</span></h3>
-      <p>Adoption reinforcement, knowledge transfer. <em>Value: Taylor owns the transformation, not TransformAZ.</em></p>
-    </div>
-  </section>
 
   <!-- INTERSTITIAL 4 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
@@ -1252,14 +1684,14 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
     <span class="section-num anim">06 &mdash; Market Insights</span>
     <h2 class="anim" style="--d:.1s">The AI Transformation Landscape</h2>
 
-    <p class="scroll-reveal" style="max-width:none">88% of enterprises now use AI &mdash; but only 34% are truly reimagining their business. Here&rsquo;s where the industry stands, and why Taylor&rsquo;s timing is strategic.</p>
+    <p class="scroll-reveal" style="max-width:none">88% of enterprises now use AI &mdash; but only 39% report measurable EBIT impact. Here&rsquo;s where the industry stands, and why Taylor&rsquo;s timing is strategic.</p>
 
     <!-- Stat Cards -->
     <div class="stats-grid anim" style="--d:.2s">
       <div class="stat-card"><div class="stat-card__value" data-count-target="88" data-count-suffix="%" data-glitch>0</div><div class="stat-card__label">AI Adoption</div><div class="stat-card__source">McKinsey 2025</div></div>
       <div class="stat-card"><div class="stat-card__value" data-count-target="53" data-count-suffix="%" data-glitch>0</div><div class="stat-card__label">Productivity Boost</div><div class="stat-card__source">McKinsey/WEF 2025</div></div>
-      <div class="stat-card"><div class="stat-card__value" data-count-target="500" data-count-suffix="%" data-count-prefix="" data-glitch>0</div><div class="stat-card__label">Predictive Maint. ROI</div><div class="stat-card__source">Tech-Stack 2025</div></div>
-      <div class="stat-card"><div class="stat-card__value" data-count-target="155" data-count-prefix="$" data-count-suffix="B" data-glitch>0</div><div class="stat-card__label">AI in Mfg by 2030</div><div class="stat-card__source">Industry Reports 2025</div></div>
+      <div class="stat-card"><div class="stat-card__value" data-count-target="500" data-count-suffix="%" data-count-prefix="" data-glitch>0</div><div class="stat-card__label">Predictive Maint. ROI</div><div class="stat-card__source">Deloitte 2024</div></div>
+      <div class="stat-card"><div class="stat-card__value" data-count-target="155" data-count-prefix="$" data-count-suffix="B" data-glitch>0</div><div class="stat-card__label">AI in Mfg by 2030</div><div class="stat-card__source">MarketsandMarkets 2025</div></div>
     </div>
 
     <!-- Interactive Timelines -->
@@ -1356,9 +1788,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
       <div class="horizon-card horizon-card--blue anim tilt-card" style="--d:.35s">
         <h3>Horizon 1: Now &rarr; 12mo</h3>
         <ul>
-          <li>88% of orgs use AI in at least one function; worker access rose 50% in 2025 &mdash; McKinsey</li>
-          <li>Lighthouse factories: 53% labor productivity boost, 26% cost reduction &mdash; McKinsey/WEF</li>
-          <li>95% of manufacturers invested or planning to invest in AI automation &mdash; Tech-Stack</li>
+          <li>189 &ldquo;Lighthouse&rdquo; factories now benchmark the global network &mdash; early movers pulling ahead &mdash; WEF 2025</li>
           <li>Microsoft 365 Copilot now ships agentic capabilities at $30/user/month</li>
           <li>Quick wins available now: the tools Taylor already owns are evolving fast</li>
         </ul>
@@ -1369,18 +1799,16 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
           <li>Agentic AI replaces chatbots &mdash; Microsoft 2026 Wave 1: autonomous agents in Dynamics 365</li>
           <li>By 2026: 45% of G2000 OEMs connect field + engineering data via AI &mdash; IDC</li>
           <li>Digital twins: $24.5B market, ~75% adoption in advanced industries &mdash; McKinsey</li>
-          <li>Predictive maintenance: 300&ndash;500% ROI; computer vision QC: 200&ndash;300% ROI &mdash; Tech-Stack</li>
-          <li>Jack Morton + Impact XM merged (Jan 2026) &mdash; competitors consolidating around data platforms</li>
+          <li>Predictive maintenance delivers 300&ndash;500% ROI in manufacturing environments &mdash; Deloitte</li>
+          <li>By 2028: 65% of G1000 manufacturers integrate AI agents into design/simulation &mdash; IDC FutureScape</li>
         </ul>
       </div>
       <div class="horizon-card horizon-card--green anim tilt-card" style="--d:.55s">
         <h3>Horizon 3: 5&ndash;10 Years</h3>
         <p style="font-size:var(--text-xs);color:var(--text-tertiary);font-style:italic;margin:0 0 10px">Where We See Taylor Group in 2036</p>
         <ul>
-          <li>AI in manufacturing: $34B &rarr; $155B by 2030 at 35% CAGR &mdash; backbone builders become leaders</li>
-          <li>Digital twin market: $24.5B today, projected to exceed $250B by 2034 &mdash; virtual replicas of warehouses, assets, spaces</li>
-          <li>By 2028: 65% of G1000 manufacturers integrate AI agents into design/simulation &mdash; IDC</li>
-          <li>By 2029: 30% of factories manage controls centrally via open automation platforms &mdash; IDC</li>
+          <li>AI in manufacturing: $34B &rarr; $155B by 2030 at 35% CAGR &mdash; MarketsandMarkets</li>
+          <li>Digital twins become the standard for testing spaces, logistics, and activations before building</li>
           <li>Taylor&rsquo;s 95 years of institutional knowledge + Digital Backbone = moat AI-only entrants can&rsquo;t replicate</li>
         </ul>
       </div>
@@ -1411,20 +1839,6 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
     </div>
     <p class="market-closing anim" style="--d:.95s">Your competitors aren&rsquo;t waiting. Taylor&rsquo;s advantage: 95 years of institutional knowledge and a team ready to activate &mdash; but that window won&rsquo;t stay open.</p>
 
-    <!-- Stats Box: The Transformation Reality -->
-    <div class="stats-box anim" style="--d:1s">
-      <span class="box-label">The Transformation Reality</span>
-      <ul>
-        <li><strong>Only 16%</strong> of digital transformations fully succeed &mdash; McKinsey 2025</li>
-        <li><strong>Only 39%</strong> report enterprise-level EBIT impact from AI &mdash; McKinsey 2025</li>
-        <li><strong>53%</strong> average productivity boost in Lighthouse factories &mdash; McKinsey/WEF 2025</li>
-        <li><strong>~75%</strong> of advanced-industry companies have adopted digital twin technology &mdash; McKinsey 2025</li>
-      </ul>
-      <p>Everyone is buying AI tools. Almost nobody is connecting them. The winners won&rsquo;t be the companies that adopted AI first &mdash; they&rsquo;ll be the ones that wired it into how they actually work.</p>
-    </div>
-
-    <!-- Source Attribution -->
-    <div class="market-sources anim" style="--d:1s">Sources: McKinsey State of AI 2025 &middot; McKinsey/WEF Global Lighthouse Network 2025 &middot; IDC FutureScape 2026 &middot; MarketsandMarkets 2025</div>
   </section>
 
   <!-- NEXT STEPS ─────────────────────────────── -->
@@ -1453,7 +1867,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
     </ul>
 
     <div class="cta-box anim" style="--d:.4s">
-      <h3>Start INTAKE &mdash; April 2026</h3>
+      <h3>Start INTAKE</h3>
       <p>A contained, fixed-fee engagement. Comprehensive assessment. Scoped roadmap. No obligation to proceed further.</p>
       <a href="#intake-proposal" class="cta-btn">View Full INTAKE Proposal &darr;</a>
     </div>
@@ -1469,13 +1883,13 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   <!-- INTAKE PROPOSAL ──────────────────────────── -->
   <section id="intake-proposal" class="section">
     <span class="section-num anim">08 &mdash; Intake Proposal</span>
-    <h2>The INTAKE: Where Evidence Replaces&nbsp;Assumptions</h2>
+    <h2 class="anim" style="--d:.1s">The INTAKE: Where Evidence Replaces&nbsp;Assumptions</h2>
 
-    <p>Our initial assessment identified $1.4M&ndash;$2.85M in annual operational friction across Taylor Group. But these are estimates &mdash; directional signals drawn from public data, initial conversations, and pattern recognition. The INTAKE transforms those signals into precision: observed workflows, measured inefficiencies, documented dependencies.</p>
+    <p class="anim scroll-reveal" style="--d:.15s">Our initial assessment identified $1.6M&ndash;$2.85M in annual operational friction across Taylor Group. But these are estimates &mdash; directional signals drawn from public data, initial conversations, and pattern recognition. The INTAKE transforms those signals into precision: observed workflows, measured inefficiencies, documented dependencies.</p>
 
-    <p>Everything presented so far is a hypothesis. The INTAKE is where we prove it &mdash; or disprove it. Either outcome is valuable. Taylor either gains a validated roadmap for transformation, or walks away knowing the current operation is better than we estimated.</p>
+    <p class="anim scroll-reveal" style="--d:.2s">Everything presented so far is a hypothesis. The INTAKE is where we prove it &mdash; or disprove it. Either outcome is valuable. Taylor either gains a validated roadmap for transformation, or walks away knowing the current operation is better than we estimated.</p>
 
-    <!-- C2: Stat Cards -->
+    <!-- Stat Cards -->
     <div class="stats-grid anim" style="--d:.3s">
       <div class="stat-card"><div class="stat-card__value" data-count-target="2" data-count-suffix=" mo" data-glitch>0</div><div class="stat-card__label">Duration</div></div>
       <div class="stat-card"><div class="stat-card__value" data-count-target="12" data-glitch>0</div><div class="stat-card__label">Stakeholder Interviews</div></div>
@@ -1483,78 +1897,15 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
       <div class="stat-card"><div class="stat-card__value" data-count-target="5" data-glitch>0</div><div class="stat-card__label">Dimensions Assessed</div></div>
     </div>
 
-    <!-- C3: Scope of Work -->
-    <h3 class="anim" style="--d:.35s">Scope of Work</h3>
-    <div class="findings-grid">
-      <div class="finding-card anim tilt-card" style="--d:.4s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>SOP Documentation &amp; Review</h3><span class="severity-tag severity-tag--blue">Foundation</span></div>
-        <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:6px 0 0">Catalog existing procedures across departments</p>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <p>Comprehensive inventory of all Standard Operating Procedures across Sales, Production, Creative, Digital, and Healthcare divisions. Gap analysis against industry best practices. Assessment of documentation currency, accessibility, and actual adoption rates.</p>
-          <div class="box box--blue"><span class="box-label">Output</span><p>SOP catalog with gap analysis report, prioritized update recommendations, and standardized documentation templates.</p></div>
-        </div>
-      </div>
-
-      <div class="finding-card anim tilt-card" style="--d:.45s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Technology Audit</h3><span class="severity-tag" style="background:var(--accent-light);color:var(--accent)">Core</span></div>
-        <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:6px 0 0">Full inventory of ClickUp, M365, Gemini, and departmental tools</p>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <p>Architecture review of the entire technology ecosystem: ClickUp configuration and utilization, Microsoft 365 suite activation (including underused features), Google Gemini/AI tool adoption, plus every departmental tool and shadow IT system. License utilization rates, integration gaps, and Brain/AI activation status mapped.</p>
-          <div class="box box--accent"><span class="box-label">Output</span><p>Technology stack audit with utilization scores, integration map, license optimization recommendations, and AI readiness assessment.</p></div>
-        </div>
-      </div>
-
-      <div class="finding-card anim tilt-card" style="--d:.5s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Stakeholder Mapping</h3><span class="severity-tag" style="background:var(--green-bg);color:var(--green)">People</span></div>
-        <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:6px 0 0">8&ndash;12 structured interviews across functions</p>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <p>Structured interview protocol covering Sales, Production, Creative, Digital, and Healthcare divisions. Each interview maps pain points, wish lists, current workarounds, and organizational dynamics. Identifies champions, blockers, and influence networks critical for transformation adoption.</p>
-          <div class="box box--green"><span class="box-label">Output</span><p>Synthesized interview findings by department, stakeholder influence map, change readiness assessment, and champion identification.</p></div>
-        </div>
-      </div>
-
-      <div class="finding-card anim tilt-card" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Process Mapping</h3><span class="severity-tag severity-tag--amber">Operations</span></div>
-        <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:6px 0 0">End-to-end documentation of 3 core flows</p>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <p>Detailed documentation of three critical workflows: <strong>Sales-to-Production</strong> (quote through handoff), <strong>Creative-to-Fabrication</strong> (design through build), and <strong>Executive Operations</strong> (reporting, approvals, resource allocation). Each flow mapped with bottlenecks, handoff points, time sinks, and rework loops identified.</p>
-          <div class="box box--amber"><span class="box-label">Output</span><p>Visual process maps with narrative documentation, bottleneck analysis, and quantified time/cost impact at each friction point.</p></div>
-        </div>
-      </div>
-
-      <div class="finding-card anim tilt-card" style="--d:.6s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Digital Maturity Assessment</h3><span class="severity-tag" style="background:var(--accent-light);color:var(--accent)">Core</span></div>
-        <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:6px 0 0">Five-dimension evaluation across the organization</p>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <p>Structured assessment across five dimensions: <strong>People &amp; Culture</strong> (digital literacy, change appetite), <strong>Processes</strong> (standardization, automation readiness), <strong>Technology</strong> (stack maturity, integration depth), <strong>Data</strong> (quality, accessibility, governance), and <strong>Compliance</strong> (regulatory, security, privacy). Each dimension scored, benchmarked against industry peers, and gaps identified.</p>
-          <div class="box box--accent"><span class="box-label">Output</span><p>Digital Maturity Scorecard with dimension scores, peer benchmarks, gap analysis, and prioritized improvement recommendations.</p></div>
-        </div>
-      </div>
-
-      <div class="finding-card anim tilt-card" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Transformation Roadmap</h3><span class="severity-tag severity-tag--blue">Strategy</span></div>
-        <p style="font-size:var(--text-sm);color:var(--text-secondary);margin:6px 0 0">Prioritized workstreams + scoped next-phase proposal</p>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <p>All findings synthesized into a prioritized transformation roadmap. Quick wins (30&ndash;60 day impact) separated from strategic plays (6&ndash;18 month horizon). Estimated investment ranges for Discovery and Implementation phases. Recommended sequencing based on dependencies, risk, and organizational readiness.</p>
-          <div class="box box--blue"><span class="box-label">Output</span><p>Transformation Roadmap presentation with phased workstreams, investment ranges, risk assessment, and a scoped Discovery proposal ready for Taylor&rsquo;s review.</p></div>
-        </div>
-      </div>
+    <!-- Pre-Engagement -->
+    <div class="box box--accent anim" style="--d:.33s">
+      <span class="box-label">Phase 0 &mdash; Pre-Engagement</span>
+      <p>Before work begins, we align on scope, governance, team, and commercials. This phase concludes with a signed agreement and a fully defined engagement structure.</p>
+      <p style="font-family:var(--mono);font-size:var(--text-2xs);color:var(--text-tertiary);margin-top:8px;margin-bottom:0">Define Scope &amp; Objectives &nbsp;&middot;&nbsp; Establish Governance &nbsp;&middot;&nbsp; Confirm Team &nbsp;&middot;&nbsp; Finalize Agreement</p>
     </div>
 
-    <!-- C4: CBE Linkage -->
-    <div class="box box--accent anim" style="--d:.7s">
-      <span class="box-label">Where This Fits</span>
-      <p>INTAKE + DISCOVERY map primarily to <strong>CREATE</strong> &mdash; understanding how Taylor creates, builds, and executes today. No changes are made. No tools are reconfigured. Only observation, documentation, and analysis.</p>
-    </div>
-
-    <!-- C5: INTAKE Deliverables -->
-    <h3 class="anim" style="--d:.75s">INTAKE Deliverables</h3>
+    <!-- INTAKE Deliverables -->
+    <h3 class="anim" style="--d:.35s">INTAKE Deliverables</h3>
     <div class="anim" style="--d:.8s">
       <table class="ba-table">
         <thead><tr><th>Deliverable</th><th>Format</th><th>Description</th></tr></thead>
@@ -1628,7 +1979,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
     <!-- C7: ROI Framing -->
     <div class="value-prop anim" style="--d:1.15s">
-      <p>Against $1.4M&ndash;$2.85M in annual operational friction identified in our initial assessment, the INTAKE at $18,000 represents roughly 1% of the problem cost. The full INTAKE + DISCOVERY at $42,000 delivers not just the diagnosis but working automations and a validated roadmap &mdash; at less than 3% of the annual friction.</p>
+      <p>Against $1.6M&ndash;$2.85M in annual operational friction identified in our initial assessment, the INTAKE at $18,000 represents roughly 1% of the problem cost. The full INTAKE + DISCOVERY at $42,000 delivers not just the diagnosis but working automations and a validated roadmap &mdash; at less than 3% of the annual friction.</p>
     </div>
 
     <blockquote class="anim" style="--d:1.2s">
@@ -1653,15 +2004,244 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
     <!-- C9: Final CTA -->
     <div class="cta-box anim" style="--d:1.35s">
-      <h3>Let&rsquo;s Begin &mdash; April 2026</h3>
+      <h3>Let&rsquo;s Begin</h3>
       <p>The first step is a 30-minute scoping call to align on priorities, confirm stakeholder access, and schedule the kickoff. No preparation needed &mdash; we come to you.</p>
     </div>
 
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION 09: SUPPORTING RESEARCH & REFERENCES           -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section id="references" class="section">
+    <span class="section-num anim">09</span>
+    <h2 class="anim" style="--d:.1s">Supporting Research &amp; References</h2>
+    <p class="anim" style="--d:.15s;color:var(--text-secondary);font-size:var(--text-sm);max-width:720px">Every data point in this proposal is drawn from published, peer-reviewed, or analyst-verified research. Sources are grouped by topic below.</p>
+
+    <!-- AI Adoption & Impact -->
+    <div class="finding-card anim" style="cursor:default;--d:.2s">
+      <div class="finding-header"><h3>AI Adoption &amp; Impact</h3><span class="finding-tag" style="--tag-color:var(--accent)">McKinsey &bull; WEF</span></div>
+      <div class="finding-body" style="padding:0 24px 20px">
+        <table class="ba-table" style="margin-top:12px">
+          <thead><tr><th style="width:25%">Claim</th><th style="width:40%">Source</th><th style="width:35%">Link</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>88% of orgs use AI in at least one function (up from 78% YoY)</td>
+              <td>McKinsey &mdash; <em>The State of AI in 2025</em></td>
+              <td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>39% report measurable EBIT impact from AI</td>
+              <td>McKinsey &mdash; <em>The State of AI in 2025</em></td>
+              <td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>53% labour productivity boost; 26% cost reduction (Lighthouse factories)</td>
+              <td>McKinsey / WEF &mdash; <em>Global Lighthouse Network 2025</em></td>
+              <td><a href="https://www.mckinsey.com/capabilities/operations/our-insights/the-continuing-evolution-of-the-global-lighthouse-network" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>Only 16% of digital transformations fully succeed</td>
+              <td>McKinsey &mdash; <em>Unlocking Success in Digital Transformations</em></td>
+              <td><a href="https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/Organization/Our%20Insights/Unlocking%20success%20in%20digital%20transformations/Unlocking-success-in-digital-transformations.pdf" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com (PDF) &nearr;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Manufacturing & Industrial AI -->
+    <div class="finding-card anim" style="cursor:default;--d:.3s">
+      <div class="finding-header"><h3>Manufacturing &amp; Industrial AI</h3><span class="finding-tag" style="--tag-color:var(--blue)">IDC &bull; MarketsandMarkets &bull; Deloitte</span></div>
+      <div class="finding-body" style="padding:0 24px 20px">
+        <table class="ba-table" style="margin-top:12px">
+          <thead><tr><th style="width:25%">Claim</th><th style="width:40%">Source</th><th style="width:35%">Link</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>By 2026: 45% of G2000 OEMs connect field + engineering data via AI</td>
+              <td>IDC &mdash; <em>FutureScape 2026: Manufacturing Predictions</em></td>
+              <td><a href="https://blogs.idc.com/2025/11/12/charting-the-ai-driven-future-of-manufacturing/" target="_blank" rel="noopener" style="color:var(--accent)">blogs.idc.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>AI in manufacturing: $34B &rarr; $155B by 2030 (35.3% CAGR)</td>
+              <td>MarketsandMarkets &mdash; <em>AI in Manufacturing Market Report</em></td>
+              <td><a href="https://www.marketsandmarkets.com/Market-Reports/artificial-intelligence-manufacturing-market-72679105.html" target="_blank" rel="noopener" style="color:var(--accent)">marketsandmarkets.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>Digital twins: $24.5B market, ~75% adoption in advanced industries</td>
+              <td>McKinsey &mdash; <em>Product Digital Twins</em></td>
+              <td><a href="https://www.mckinsey.com/capabilities/operations/how-we-help-clients/product-development-procurement/product-digital-twins" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>Predictive maintenance delivers 300&ndash;500% ROI</td>
+              <td>Deloitte &mdash; <em>Predictive Maintenance and the Smart Factory</em></td>
+              <td><a href="https://www2.deloitte.com/content/dam/Deloitte/us/Documents/process-and-operations/us-cons-predictive-maintenance.pdf" target="_blank" rel="noopener" style="color:var(--accent)">deloitte.com (PDF) &nearr;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Experiential Marketing -->
+    <div class="finding-card anim" style="cursor:default;--d:.4s">
+      <div class="finding-header"><h3>Experiential Marketing Industry</h3><span class="finding-tag" style="--tag-color:var(--green)">EventTrack &bull; IPA</span></div>
+      <div class="finding-body" style="padding:0 24px 20px">
+        <table class="ba-table" style="margin-top:12px">
+          <thead><tr><th style="width:25%">Claim</th><th style="width:40%">Source</th><th style="width:35%">Link</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>$128B global experiential marketing spend (2024)</td>
+              <td>Industry aggregators &mdash; <em>Experiential Marketing Statistics 2026</em></td>
+              <td><a href="https://www.kandephotobooths.com/blog/experiential-marketing-statistics/" target="_blank" rel="noopener" style="color:var(--accent)">kandephotobooths.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>74% of Fortune 1000 marketers plan to increase experiential budgets</td>
+              <td>EventTrack 2025</td>
+              <td><a href="https://atneventstaffing.com/experiential-event-marketing-statistics-2025/" target="_blank" rel="noopener" style="color:var(--accent)">atneventstaffing.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>Event budgets growing +10.9% while overall B2B marketing declining -3.1%</td>
+              <td>IPA &mdash; <em>Bellwether Report 2025</em></td>
+              <td><a href="https://www.salmonlabs.co/newsletter/event-marketing-statistics" target="_blank" rel="noopener" style="color:var(--accent)">salmonlabs.co &nearr;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Digital Transformation Benchmarks -->
+    <div class="finding-card anim" style="cursor:default;--d:.5s">
+      <div class="finding-header"><h3>Digital Transformation Benchmarks</h3><span class="finding-tag" style="--tag-color:var(--amber)">Cost of Waiting sources</span></div>
+      <div class="finding-body" style="padding:0 24px 20px">
+        <table class="ba-table" style="margin-top:12px">
+          <thead><tr><th style="width:25%">Claim</th><th style="width:40%">Source</th><th style="width:35%">Link</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>20&ndash;30% lower efficiency in low digital maturity organizations</td>
+              <td>McKinsey &mdash; <em>Unlocking Success in Digital Transformations</em></td>
+              <td><a href="https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/Organization/Our%20Insights/Unlocking%20success%20in%20digital%20transformations/Unlocking-success-in-digital-transformations.pdf" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com (PDF) &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>15&ndash;25% higher costs from fragmented systems and manual processes</td>
+              <td>BCG &mdash; <em>Flipping the Odds of Digital Transformation Success</em></td>
+              <td><a href="https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation" target="_blank" rel="noopener" style="color:var(--accent)">bcg.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>2&ndash;3x higher revenue growth for digitally mature organizations</td>
+              <td>MIT Sloan / Capgemini &mdash; <em>Leading Digital</em> (Westerman et al.)</td>
+              <td><a href="https://mitsloan.mit.edu/ideas-made-to-matter/leading-digital-turning-technology-business-transformation" target="_blank" rel="noopener" style="color:var(--accent)">mitsloan.mit.edu &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>30&ndash;50% faster execution for digitally enabled organizations</td>
+              <td>McKinsey &mdash; <em>The Case for Digital Reinvention</em></td>
+              <td><a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-case-for-digital-reinvention" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Technology Platforms -->
+    <div class="finding-card anim" style="cursor:default;--d:.6s">
+      <div class="finding-header"><h3>Technology Platforms</h3><span class="finding-tag" style="--tag-color:var(--accent)">Microsoft &bull; Industry</span></div>
+      <div class="finding-body" style="padding:0 24px 20px">
+        <table class="ba-table" style="margin-top:12px">
+          <thead><tr><th style="width:25%">Claim</th><th style="width:40%">Source</th><th style="width:35%">Link</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Microsoft 365 Copilot ships agentic capabilities at $30/user/month</td>
+              <td>Microsoft &mdash; <em>2026 Wave 1 for Dynamics 365</em></td>
+              <td><a href="https://www.microsoft.com/en-us/microsoft-365/copilot" target="_blank" rel="noopener" style="color:var(--accent)">microsoft.com &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>Jack Morton + Impact XM merged (Jan 2026)</td>
+              <td>Industry news &mdash; Competitors consolidating around data platforms</td>
+              <td><a href="https://www.eventmarketer.com/" target="_blank" rel="noopener" style="color:var(--accent)">eventmarketer.com &nearr;</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="anim" style="--d:.65s;font-size:var(--text-xs);color:var(--text-tertiary);margin-top:32px;font-style:italic">All links verified as of March 2026. Sources are publicly available publications from recognized research firms, industry bodies, and technology providers.</p>
+
     <!-- Footer -->
-    <footer class="footer anim" style="--d:1.4s">TransformAZ &mdash; March 2026 &mdash; Prepared exclusively for Taylor Group</footer>
+    <footer class="footer anim" style="--d:.7s">TransformAZ &mdash; March 2026 &mdash; Prepared exclusively for Taylor Group</footer>
   </section>
 
 </main>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- TAY CHATBOT WIDGET                                     -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<button class="tay-fab" id="tay-fab" aria-label="Open Tay assistant">
+  <span class="tay-fab__avatar">
+    <svg viewBox="0 0 40 40" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Antenna -->
+      <line x1="20" y1="4" x2="20" y2="10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="20" cy="3" r="2" fill="#a78bfa"/>
+      <!-- Head -->
+      <rect x="8" y="10" width="24" height="18" rx="6" fill="#fff" stroke="rgba(255,255,255,.3)" stroke-width=".5"/>
+      <!-- Eyes -->
+      <ellipse cx="14.5" cy="19" rx="3.5" ry="3.5" fill="#7A7AE6">
+        <animate attributeName="ry" values="3.5;0.5;3.5" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.04;0.08" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" calcMode="spline"/>
+      </ellipse>
+      <ellipse cx="25.5" cy="19" rx="3.5" ry="3.5" fill="#7A7AE6">
+        <animate attributeName="ry" values="3.5;0.5;3.5" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.04;0.08" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" calcMode="spline"/>
+      </ellipse>
+      <!-- Eye shine -->
+      <circle cx="13" cy="17.5" r="1.2" fill="#fff" opacity=".8"/>
+      <circle cx="24" cy="17.5" r="1.2" fill="#fff" opacity=".8"/>
+      <!-- Smile -->
+      <path d="M15 23.5 Q20 27 25 23.5" stroke="#7A7AE6" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <!-- Ears -->
+      <rect x="4" y="16" width="4" height="6" rx="2" fill="#a78bfa"/>
+      <rect x="32" y="16" width="4" height="6" rx="2" fill="#a78bfa"/>
+      <!-- Body hint -->
+      <rect x="14" y="28" width="12" height="6" rx="3" fill="#fff" opacity=".6"/>
+      <circle cx="17" cy="31" r="1" fill="#a78bfa"/>
+      <circle cx="20" cy="31" r="1" fill="#7A7AE6"/>
+      <circle cx="23" cy="31" r="1" fill="#a78bfa"/>
+    </svg>
+  </span>
+  <span class="tay-fab__close">&times;</span>
+  <span class="tay-fab__badge" id="tay-badge">1</span>
+</button>
+
+<div class="tay-panel" id="tay-panel" role="dialog" aria-label="Tay — Taylor Group Assistant">
+  <div class="tay-header">
+    <div class="tay-header__icon">
+      <svg viewBox="0 0 40 40" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="4" x2="20" y2="10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="20" cy="3" r="2" fill="rgba(255,255,255,.6)"/>
+        <rect x="8" y="10" width="24" height="18" rx="6" fill="#fff" stroke="rgba(255,255,255,.3)" stroke-width=".5"/>
+        <ellipse cx="14.5" cy="19" rx="3.5" ry="3.5" fill="#7A7AE6">
+          <animate attributeName="ry" values="3.5;0.5;3.5" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.04;0.08" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" calcMode="spline"/>
+        </ellipse>
+        <ellipse cx="25.5" cy="19" rx="3.5" ry="3.5" fill="#7A7AE6">
+          <animate attributeName="ry" values="3.5;0.5;3.5" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.04;0.08" keySplines="0.4 0 0.2 1;0.4 0 0.2 1" calcMode="spline"/>
+        </ellipse>
+        <circle cx="13" cy="17.5" r="1.2" fill="#fff" opacity=".8"/>
+        <circle cx="24" cy="17.5" r="1.2" fill="#fff" opacity=".8"/>
+        <path d="M15 23.5 Q20 27 25 23.5" stroke="#7A7AE6" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <rect x="4" y="16" width="4" height="6" rx="2" fill="rgba(255,255,255,.5)"/>
+        <rect x="32" y="16" width="4" height="6" rx="2" fill="rgba(255,255,255,.5)"/>
+      </svg>
+    </div>
+    <div class="tay-header__info">
+      <div class="tay-header__name">Tay</div>
+      <div class="tay-header__sub">Taylor Group Assistant</div>
+    </div>
+  </div>
+  <div class="tay-messages" id="tay-messages"></div>
+  <div class="tay-suggestions" id="tay-suggestions"></div>
+  <div class="tay-input-wrap">
+    <input class="tay-input" id="tay-input" type="text" placeholder="Ask about the proposal..." autocomplete="off">
+    <button class="tay-send" id="tay-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+    </button>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
 <!-- JAVASCRIPT                                             -->
@@ -1804,6 +2384,16 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     function toggle(){ const x=card.classList.toggle('is-expanded'); card.setAttribute('aria-expanded',x); }
     card.addEventListener('click',toggle);
     card.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+  });
+
+  // Phase cards expand
+  document.querySelectorAll('.phase-card[role="button"]').forEach(card=>{
+    function toggle(e){
+      if(e.target.closest('a')) return;
+      const x=card.classList.toggle('is-expanded'); card.setAttribute('aria-expanded',x);
+    }
+    card.addEventListener('click',toggle);
+    card.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(e);} });
   });
 
   // 3D Tilt on cards
@@ -2004,160 +2594,503 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   });
 })();
 
-/* ── MODULE F: Backbone Neural Network ────────── */
+/* ── MODULE F-DISC: Disconnected State Diagram ── */
 ;(function(){
-  if(PRM) return;
-  const canvas = document.getElementById('backbone-canvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if(!ctx) return;
+  var el = document.getElementById('backbone-vis-disconnected');
+  if(!el) return;
+  var ns = 'http://www.w3.org/2000/svg';
+  var W = 960, H = 300;
+  var svg = document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.classList.add('backbone-svg');
+  el.appendChild(svg);
 
-  const nodes = [
-    // 5 pillars top row
-    {id:'people',label:'People & Culture',color:'#1a9959',x:.1,y:.15,r:28},
-    {id:'process',label:'Processes',color:'#2563eb',x:.3,y:.15,r:28},
-    {id:'tech',label:'Tech',color:'#7A7AE6',x:.5,y:.15,r:28},
-    {id:'data',label:'Data',color:'#b45309',x:.7,y:.15,r:28},
-    {id:'compliance',label:'Compliance',color:'#dc2626',x:.9,y:.15,r:28},
-    // CREATE/BUILD/EXECUTE middle
-    {id:'create',label:'CREATE',color:'#2563eb',x:.2,y:.52,r:36},
-    {id:'build',label:'BUILD',color:'#1a9959',x:.5,y:.52,r:36},
-    {id:'execute',label:'EXECUTE',color:'#b45309',x:.8,y:.52,r:36},
-    // BACKBONE bottom
-    {id:'backbone',label:'DIGITAL BACKBONE',color:'#7A7AE6',x:.5,y:.88,r:42},
+  /* Nodes — scattered positions to convey disconnection */
+  var dims = [
+    {id:'people',l:['People &','Culture'],c:'#1a9959',x:100,y:72,r:32},
+    {id:'process',l:['Processes'],c:'#2563eb',x:310,y:38,r:32},
+    {id:'tech',l:['Tech'],c:'#7A7AE6',x:500,y:65,r:32},
+    {id:'data',l:['Data'],c:'#b45309',x:670,y:42,r:32},
+    {id:'compliance',l:['Compliance'],c:'#dc2626',x:860,y:70,r:32}
+  ];
+  var modes = [
+    {id:'create',l:['CREATE'],c:'#2563eb',x:210,y:200,r:40},
+    {id:'build',l:['BUILD'],c:'#1a9959',x:510,y:228,r:40},
+    {id:'execute',l:['EXECUTE'],c:'#b45309',x:750,y:195,r:40}
   ];
 
-  const connections = [
-    // Pillars to phases
-    ['people','create'],['people','build'],['people','execute'],
-    ['process','create'],['process','build'],['process','execute'],
-    ['tech','create'],['tech','build'],['tech','execute'],
-    ['data','create'],['data','build'],['data','execute'],
-    ['compliance','create'],['compliance','build'],['compliance','execute'],
-    // Phases to backbone
-    ['create','backbone'],['build','backbone'],['execute','backbone'],
-    // Phase flow
-    ['create','build'],['build','execute'],
-  ];
-
-  let w,h,mx=-1,my=-1,time=0,hovered=null,started=false;
-  const particles = [];
-
-  function resize(){
-    const rect = canvas.parentElement.getBoundingClientRect();
-    w = rect.width; h = rect.height;
-    canvas.width = w * 2; canvas.height = h * 2;
-    canvas.style.width = w+'px'; canvas.style.height = h+'px';
-    ctx.scale(2,2);
-  }
-
-  function nodePos(n){ return {x:n.x*w, y:n.y*h}; }
-
-  function spawnParticle(from,to){
-    const p1=nodePos(from), p2=nodePos(to);
-    particles.push({x:p1.x,y:p1.y,tx:p2.x,ty:p2.y,p:0,speed:.008+Math.random()*.006,color:from.color});
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    time += .016;
-
-    // Spawn particles occasionally
-    if(started && Math.random()<.06){
-      const ci = Math.floor(Math.random()*connections.length);
-      const [a,b] = connections[ci];
-      const nA = nodes.find(n=>n.id===a);
-      const nB = nodes.find(n=>n.id===b);
-      if(nA&&nB) spawnParticle(nA,nB);
-    }
-
-    // Draw connections
-    connections.forEach(([a,b])=>{
-      const nA=nodes.find(n=>n.id===a), nB=nodes.find(n=>n.id===b);
-      if(!nA||!nB) return;
-      const p1=nodePos(nA), p2=nodePos(nB);
-      const isHovered = hovered && (hovered===a||hovered===b);
-      ctx.strokeStyle = isHovered ? 'rgba(122,122,230,.35)' : 'rgba(0,0,0,.06)';
-      ctx.lineWidth = isHovered ? 2 : 1;
-      ctx.beginPath();ctx.moveTo(p1.x,p1.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+  /* Dashed connections — faint, broken */
+  dims.forEach(function(d){
+    modes.forEach(function(m){
+      var p = document.createElementNS(ns,'path');
+      var cy1 = d.y + (m.y-d.y)*.42, cy2 = m.y - (m.y-d.y)*.32;
+      p.setAttribute('d','M'+d.x+','+d.y+' C'+d.x+','+cy1+' '+m.x+','+cy2+' '+m.x+','+m.y);
+      p.setAttribute('stroke',d.c);
+      p.classList.add('bb-disc-conn');
+      svg.appendChild(p);
     });
-
-    // Draw particles
-    for(let i=particles.length-1;i>=0;i--){
-      const p = particles[i];
-      p.p += p.speed;
-      if(p.p>=1){particles.splice(i,1);continue;}
-      const x = p.x + (p.tx-p.x)*p.p;
-      const y = p.y + (p.ty-p.y)*p.p;
-      const alpha = p.p<.2 ? p.p*5 : p.p>.8 ? (1-p.p)*5 : 1;
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = alpha*.6;
-      ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fill();
-      ctx.globalAlpha = 1;
-    }
-
-    // Draw nodes
-    nodes.forEach(n=>{
-      const p = nodePos(n);
-      const isHov = hovered===n.id;
-      const pulse = Math.sin(time*2 + n.x*10)*.5+.5;
-
-      // Glow
-      if(isHov||n.id==='backbone'){
-        ctx.fillStyle = n.color;
-        ctx.globalAlpha = .08 + pulse*.04;
-        ctx.beginPath();ctx.arc(p.x,p.y,n.r+12,0,Math.PI*2);ctx.fill();
-        ctx.globalAlpha = 1;
-      }
-
-      // Circle
-      ctx.fillStyle = '#fff';
-      ctx.strokeStyle = n.color;
-      ctx.lineWidth = isHov ? 3 : 2;
-      ctx.beginPath();ctx.arc(p.x,p.y,n.r,0,Math.PI*2);ctx.fill();ctx.stroke();
-
-      // Label
-      ctx.fillStyle = n.color;
-      ctx.font = (n.r>30?'700 11px':'600 9px')+' "JetBrains Mono",monospace';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      // Wrap long labels
-      const label = n.label;
-      if(label.length > 10 && n.r <= 28){
-        const parts = label.split(' ');
-        const mid = Math.ceil(parts.length/2);
-        ctx.fillText(parts.slice(0,mid).join(' '),p.x,p.y-6);
-        ctx.fillText(parts.slice(mid).join(' '),p.x,p.y+6);
-      } else {
-        ctx.fillText(label,p.x,p.y);
-      }
-    });
-
-    requestAnimationFrame(draw);
-  }
-
-  // Hover detection
-  canvas.addEventListener('mousemove',e=>{
-    const rect=canvas.getBoundingClientRect();
-    mx=e.clientX-rect.left; my=e.clientY-rect.top;
-    hovered = null;
-    nodes.forEach(n=>{
-      const p=nodePos(n);
-      if(Math.hypot(mx-p.x,my-p.y)<n.r+8) hovered=n.id;
-    });
-    canvas.style.cursor = hovered ? 'pointer' : 'default';
   });
-  canvas.addEventListener('mouseleave',()=>{hovered=null;});
 
-  // Start on visibility
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting && !started){ started=true; }});
-  },{threshold:.1});
-  obs.observe(canvas.parentElement);
+  /* Dashed flow arrows between modes */
+  [[0,1],[1,2]].forEach(function(pair){
+    var a = modes[pair[0]], b = modes[pair[1]];
+    var p = document.createElementNS(ns,'path');
+    var my = a.y - 24, dx = Math.abs(b.x-a.x);
+    p.setAttribute('d','M'+a.x+','+a.y+' C'+(a.x+dx*.4)+','+my+' '+(b.x-dx*.4)+','+my+' '+b.x+','+b.y);
+    p.setAttribute('stroke','var(--text-tertiary)');
+    p.classList.add('bb-disc-conn');
+    svg.appendChild(p);
+  });
 
-  window.addEventListener('resize',()=>{resize();});
-  resize();
-  requestAnimationFrame(draw);
+  /* Gap indicators — small "?" marks at midpoints */
+  var gapPairs = [[0,0],[2,1],[4,2]];
+  gapPairs.forEach(function(pair){
+    var d = dims[pair[0]], m = modes[pair[1]];
+    var mx = (d.x+m.x)/2, my = (d.y+m.y)/2;
+    var t = document.createElementNS(ns,'text');
+    t.setAttribute('x',mx); t.setAttribute('y',my);
+    t.classList.add('bb-disc-gap');
+    t.textContent='?';
+    svg.appendChild(t);
+  });
+
+  /* Draw dimension nodes */
+  function drawNode(n,isMode){
+    var g = document.createElementNS(ns,'g');
+    var ci = document.createElementNS(ns,'circle');
+    ci.setAttribute('cx',n.x); ci.setAttribute('cy',n.y); ci.setAttribute('r',n.r);
+    ci.setAttribute('fill','var(--bg-white)');
+    ci.setAttribute('stroke',n.c);
+    ci.setAttribute('stroke-width','1.5');
+    ci.setAttribute('stroke-dasharray', isMode ? 'none' : '4 3');
+    g.appendChild(ci);
+    var fs = isMode ? 13 : 11, fw = isMode ? '700' : '600';
+    n.l.forEach(function(line,i){
+      var t = document.createElementNS(ns,'text');
+      t.setAttribute('x',n.x);
+      t.setAttribute('y',n.y+(i-(n.l.length-1)/2)*13);
+      t.setAttribute('text-anchor','middle');
+      t.setAttribute('dominant-baseline','central');
+      t.setAttribute('fill',n.c);
+      t.setAttribute('font-family',"'JetBrains Mono',monospace");
+      t.setAttribute('font-size',fs); t.setAttribute('font-weight',fw);
+      t.setAttribute('letter-spacing','.02em');
+      t.textContent = line;
+      g.appendChild(t);
+    });
+    svg.appendChild(g);
+  }
+  dims.forEach(function(n){ drawNode(n,false); });
+  modes.forEach(function(n){ drawNode(n,true); });
+
+})();
+
+/* ── MODULE F: Backbone SVG Visualization ────── */
+;(function(){
+  const el = document.getElementById('backbone-vis');
+  if(!el) return;
+  const ns = 'http://www.w3.org/2000/svg';
+  const W = 960, H = 400;
+
+  const svg = document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.classList.add('backbone-svg');
+  el.appendChild(svg);
+
+  const defs = document.createElementNS(ns,'defs');
+  defs.innerHTML = '<filter id="bb-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+  svg.appendChild(defs);
+
+  /* Data */
+  const N = [
+    {id:'people',l:['People &','Culture'],c:'#1a9959',x:160,y:60,r:34},
+    {id:'process',l:['Processes'],c:'#2563eb',x:320,y:60,r:34},
+    {id:'tech',l:['Tech'],c:'#7A7AE6',x:480,y:60,r:34},
+    {id:'data',l:['Data'],c:'#b45309',x:640,y:60,r:34},
+    {id:'compliance',l:['Compliance'],c:'#dc2626',x:800,y:60,r:34},
+    {id:'create',l:['CREATE'],c:'#2563eb',x:240,y:220,r:42},
+    {id:'build',l:['BUILD'],c:'#1a9959',x:480,y:220,r:42},
+    {id:'execute',l:['EXECUTE'],c:'#b45309',x:720,y:220,r:42},
+    {id:'backbone',l:['DIGITAL','BACKBONE'],c:'#7A7AE6',x:480,y:358,r:52}
+  ];
+
+  /* Connections: [fromIdx, toIdx, type] */
+  const C = [];
+  for(let i=0;i<5;i++) for(let j=5;j<8;j++) C.push([i,j,'p']);
+  C.push([5,6,'f'],[6,7,'f']);
+  C.push([5,8,'b'],[6,8,'b'],[7,8,'b']);
+
+  function bz(a,b,t){
+    if(t==='f'){
+      const my=a.y-28, dx=Math.abs(b.x-a.x);
+      return 'M'+a.x+','+a.y+' C'+(a.x+dx*.4)+','+my+' '+(b.x-dx*.4)+','+my+' '+b.x+','+b.y;
+    }
+    const cy1=a.y+(b.y-a.y)*.42, cy2=b.y-(b.y-a.y)*.32;
+    return 'M'+a.x+','+a.y+' C'+a.x+','+cy1+' '+b.x+','+cy2+' '+b.x+','+b.y;
+  }
+
+  /* Draw connections */
+  const connG = document.createElementNS(ns,'g');
+  svg.appendChild(connG);
+  const connEls = [];
+  C.forEach(function(c){
+    var a=N[c[0]], b=N[c[1]], p=document.createElementNS(ns,'path');
+    p.setAttribute('d',bz(a,b,c[2]));
+    p.setAttribute('stroke',a.c);
+    p.classList.add('bb-conn');
+    if(c[2]==='f') p.classList.add('bb-flow');
+    p._ids=[a.id,b.id];
+    connG.appendChild(p);
+    connEls.push(p);
+  });
+
+  /* Particles on select paths */
+  var partG = document.createElementNS(ns,'g');
+  partG.classList.add('bb-particles');
+  svg.appendChild(partG);
+  [[0,5],[1,6],[2,6],[3,7],[4,7],[5,8],[6,8],[7,8]].forEach(function(pp,i){
+    var a=N[pp[0]], b=N[pp[1]], t=pp[0]<5?'p':(pp[1]===8?'b':'f');
+    var pid='bb-mp'+i, pe=document.createElementNS(ns,'path');
+    pe.setAttribute('d',bz(a,b,t)); pe.id=pid;
+    defs.appendChild(pe);
+    var ci=document.createElementNS(ns,'circle');
+    ci.setAttribute('r','3'); ci.setAttribute('fill',a.c);
+    ci.setAttribute('filter','url(#bb-glow)'); ci.setAttribute('opacity','0.6');
+    var am=document.createElementNS(ns,'animateMotion');
+    am.setAttribute('dur',(2.5+i*.35)+'s');
+    am.setAttribute('repeatCount','indefinite');
+    am.setAttribute('begin',(i*.6)+'s');
+    var mp=document.createElementNS(ns,'mpath');
+    mp.setAttribute('href','#'+pid);
+    am.appendChild(mp); ci.appendChild(am); partG.appendChild(ci);
+  });
+
+  /* Draw nodes */
+  var nodeG = document.createElementNS(ns,'g');
+  svg.appendChild(nodeG);
+  N.forEach(function(n){
+    var g = document.createElementNS(ns,'g');
+    g.classList.add('bb-node'); g.dataset.id=n.id;
+
+    /* Radial gradient */
+    var gr=document.createElementNS(ns,'radialGradient');
+    gr.id='bb-g-'+n.id; gr.setAttribute('cx','40%'); gr.setAttribute('cy','35%');
+    var isBB=n.id==='backbone';
+    var s1=document.createElementNS(ns,'stop');
+    s1.setAttribute('offset','0%'); s1.setAttribute('stop-color',n.c);
+    s1.setAttribute('stop-opacity',isBB?'1':'.1');
+    var s2=document.createElementNS(ns,'stop');
+    s2.setAttribute('offset','100%'); s2.setAttribute('stop-color',isBB?n.c:'#fff');
+    s2.setAttribute('stop-opacity',isBB?'.85':'1');
+    gr.appendChild(s1); gr.appendChild(s2); defs.appendChild(gr);
+
+    /* Circle */
+    var ci=document.createElementNS(ns,'circle');
+    ci.setAttribute('cx',n.x); ci.setAttribute('cy',n.y); ci.setAttribute('r',n.r);
+    ci.setAttribute('fill','url(#bb-g-'+n.id+')');
+    ci.setAttribute('stroke',n.c);
+    ci.setAttribute('stroke-width',isBB?'2.5':'1.5');
+    ci.classList.add('bb-ring');
+    g.appendChild(ci);
+
+    /* Labels */
+    var fs=n.r>40?13:11, fw=n.r>40?'700':'600';
+    n.l.forEach(function(line,i){
+      var t=document.createElementNS(ns,'text');
+      t.setAttribute('x',n.x);
+      t.setAttribute('y',n.y+(i-(n.l.length-1)/2)*13);
+      t.setAttribute('text-anchor','middle');
+      t.setAttribute('dominant-baseline','central');
+      t.setAttribute('fill',isBB?'#fff':n.c);
+      t.setAttribute('font-family',"'JetBrains Mono',monospace");
+      t.setAttribute('font-size',fs);
+      t.setAttribute('font-weight',fw);
+      t.setAttribute('letter-spacing','.02em');
+      t.textContent=line;
+      g.appendChild(t);
+    });
+
+    nodeG.appendChild(g);
+  });
+
+  /* Row labels — rotated vertically on the left edge */
+  function addLabel(txt,x,y){
+    var g=document.createElementNS(ns,'g');
+    g.setAttribute('transform','translate('+x+','+y+')');
+    /* Vertical line accent */
+    var line=document.createElementNS(ns,'line');
+    line.setAttribute('x1','0'); line.setAttribute('y1','-28');
+    line.setAttribute('x2','0'); line.setAttribute('y2','28');
+    line.setAttribute('stroke','rgba(122,122,230,.25)'); line.setAttribute('stroke-width','2');
+    line.setAttribute('stroke-linecap','round');
+    g.appendChild(line);
+    /* Rotated text */
+    var t=document.createElementNS(ns,'text');
+    t.setAttribute('x','0'); t.setAttribute('y','0');
+    t.setAttribute('text-anchor','middle'); t.setAttribute('dominant-baseline','central');
+    t.setAttribute('transform','rotate(-90)');
+    t.setAttribute('fill','var(--text-tertiary)');
+    t.setAttribute('font-family',"'JetBrains Mono',monospace");
+    t.setAttribute('font-size','9'); t.setAttribute('font-weight','700');
+    t.setAttribute('letter-spacing','.12em');
+    t.textContent=txt;
+    g.appendChild(t);
+    svg.insertBefore(g,connG);
+  }
+  addLabel('FIVE DIMENSIONS',40,60);
+  addLabel('THREE PHASES',40,220);
+
+  /* Hover interaction */
+  nodeG.querySelectorAll('.bb-node').forEach(function(g){
+    g.addEventListener('mouseenter',function(){
+      var id=g.dataset.id;
+      svg.classList.add('has-hover');
+      g.classList.add('is-hovered');
+      connEls.forEach(function(p){ if(p._ids.indexOf(id)>-1) p.classList.add('is-lit'); });
+    });
+    g.addEventListener('mouseleave',function(){
+      svg.classList.remove('has-hover');
+      nodeG.querySelectorAll('.is-hovered').forEach(function(e){e.classList.remove('is-hovered');});
+      connEls.forEach(function(p){p.classList.remove('is-lit');});
+    });
+  });
+})();
+
+/* ── MODULE G: Tay Chatbot (API-powered) ───────── */
+;(function(){
+  const fab = document.getElementById('tay-fab');
+  const panel = document.getElementById('tay-panel');
+  const msgs = document.getElementById('tay-messages');
+  const sugs = document.getElementById('tay-suggestions');
+  const input = document.getElementById('tay-input');
+  const sendBtn = document.getElementById('tay-send');
+  const badge = document.getElementById('tay-badge');
+  if(!fab||!panel) return;
+
+  /* ── Config ─────────────────────────────── */
+  var API_URL = 'http://localhost:3141';
+  /* For production, change to your deployed URL, e.g.:
+     var API_URL = 'https://tay-server.yourdomain.com'; */
+
+  let isOpen = false;
+  let currentSection = 'cover';
+  let hasOpened = false;
+  let conversationHistory = [];
+  let isWaiting = false;
+
+  /* ── Section-aware suggestions ──────────── */
+  const SUGGESTIONS = {
+    cover:[
+      'What is this proposal about?',
+      'Tell me about TransformAZ',
+      'What does "Digital Backbone" mean?'
+    ],
+    opportunity:[
+      'Why is this a defining moment for Taylor?',
+      'What does the $128B market mean for Taylor?',
+      'What happens if Taylor doesn\'t act now?'
+    ],
+    paradigm:[
+      'What is the difference between reactive and designed transformation?',
+      'Why do only 20-30% of AI initiatives scale?',
+      'What are Lighthouse factories?'
+    ],
+    findings:[
+      'What is the total annual friction?',
+      'Which finding has the highest dollar impact?',
+      'What is the asset management blind spot?'
+    ],
+    backbone:[
+      'How do Create, Build, Execute connect?',
+      'What are the five foundational layers?',
+      'How does the Backbone solve the findings?'
+    ],
+    transformation:[
+      'Walk me through the four phases',
+      'What is the difference between INTAKE and DISCOVERY?',
+      'When does onsite work happen?'
+    ],
+    market:[
+      'What are Taylor\'s competitors doing?',
+      'What is the AI adoption gap?',
+      'What does Taylor\'s AI journey look like?'
+    ],
+    'next-steps':[
+      'What are the two engagement options?',
+      'How is the investment structured?',
+      'What is the first step to begin?'
+    ],
+    'intake-proposal':[
+      'What exactly does INTAKE deliver?',
+      'How many interviews and process maps?',
+      'What are the engagement terms?'
+    ],
+    references:[
+      'Where does the data come from?',
+      'Which organizations are cited?',
+      'Are all sources from 2024-2026?'
+    ]
+  };
+
+  /* ── DOM helpers ────────────────────────── */
+  function addMsg(html,type){
+    var div=document.createElement('div');
+    div.className='tay-msg tay-msg--'+type;
+    div.innerHTML=html;
+    msgs.appendChild(div);
+    msgs.scrollTop=msgs.scrollHeight;
+    return div;
+  }
+
+  function showTyping(){
+    var div=document.createElement('div');
+    div.className='tay-typing';
+    div.id='tay-typing';
+    div.innerHTML='<span></span><span></span><span></span>';
+    msgs.appendChild(div);
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+
+  function removeTyping(){
+    var el=document.getElementById('tay-typing');
+    if(el) el.remove();
+  }
+
+  function renderSuggestions(){
+    var list = SUGGESTIONS[currentSection] || SUGGESTIONS.cover;
+    sugs.innerHTML='';
+    list.forEach(function(text){
+      var btn=document.createElement('button');
+      btn.className='tay-pill';
+      btn.textContent=text;
+      btn.addEventListener('click',function(){handleUserInput(text);});
+      sugs.appendChild(btn);
+    });
+  }
+
+  /* ── Format response (basic markdown→html) ── */
+  function formatResponse(text){
+    return text
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\n\n/g,'</p><p>')
+      .replace(/\n- /g,'<br>• ')
+      .replace(/\n/g,'<br>');
+  }
+
+  /* ── API call ───────────────────────────── */
+  async function callAPI(userText){
+    conversationHistory.push({role:'user',content:userText});
+
+    try{
+      var res = await fetch(API_URL+'/api/chat',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          messages:conversationHistory,
+          section:currentSection
+        })
+      });
+
+      if(!res.ok) throw new Error('API error '+res.status);
+
+      var data = await res.json();
+      var answer = data.response || 'Sorry, I couldn\'t process that.';
+      conversationHistory.push({role:'assistant',content:answer});
+      return formatResponse(answer);
+    }catch(err){
+      console.warn('Tay API error:',err);
+      return 'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.';
+    }
+  }
+
+  /* ── Chat logic ─────────────────────────── */
+  async function handleUserInput(text){
+    if(isWaiting) return;
+    isWaiting=true;
+    addMsg(text,'user');
+    sugs.innerHTML='';
+    input.disabled=true;
+
+    showTyping();
+    var answer = await callAPI(text);
+    removeTyping();
+    addMsg(answer,'bot');
+    renderSuggestions();
+
+    input.disabled=false;
+    isWaiting=false;
+    if(isOpen) input.focus();
+  }
+
+  function send(){
+    var v=input.value.trim();
+    if(!v) return;
+    input.value='';
+    handleUserInput(v);
+  }
+
+  /* ── Toggle ─────────────────────────────── */
+  function toggle(){
+    isOpen=!isOpen;
+    fab.classList.toggle('is-open',isOpen);
+    panel.classList.toggle('is-open',isOpen);
+
+    if(isOpen && !hasOpened){
+      hasOpened=true;
+      badge.classList.add('is-hidden');
+      addMsg('Hey! I\'m <strong>Tay</strong>, your AI guide through this proposal. Ask me anything about the transformation strategy, pricing, timeline, findings, or Taylor Group. I have full context on the entire proposal. What would you like to know?','bot');
+      renderSuggestions();
+    }
+
+    if(isOpen) setTimeout(function(){input.focus()},300);
+  }
+
+  /* ── Section tracking (piggybacks on Module A) ── */
+  var sections = document.querySelectorAll('section[id]');
+  var allSections = Array.from(sections);
+  function trackSection(){
+    var scrollY=window.scrollY+window.innerHeight*0.3;
+    var cur=allSections[0];
+    for(var i=0;i<allSections.length;i++){
+      if(allSections[i].offsetTop<=scrollY) cur=allSections[i];
+    }
+    if(cur && cur.id!==currentSection){
+      currentSection=cur.id;
+      if(isOpen) renderSuggestions();
+    }
+  }
+  window.addEventListener('scroll',trackSection,{passive:true});
+  trackSection();
+
+  /* ── Event listeners ────────────────────── */
+  fab.addEventListener('click',function(){
+    if(proactiveTimer){clearTimeout(proactiveTimer);proactiveTimer=null;}
+    toggle();
+  });
+  sendBtn.addEventListener('click',send);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')send();});
+
+  /* Close on Escape */
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&isOpen) toggle();
+  });
+
+  /* ── Proactive open ────────────────────── */
+  var proactiveTimer = null;
+  function scheduleProactive(){
+    if(proactiveTimer || isOpen || hasOpened) return;
+    proactiveTimer = setTimeout(function(){
+      if(!isOpen && !hasOpened) toggle();
+    }, 600);
+  }
+  function onScrollProactive(){
+    if(isOpen || hasOpened) return;
+    if(window.scrollY > window.innerHeight * 0.5) scheduleProactive();
+  }
+  window.addEventListener('scroll', onScrollProactive, {passive:true});
+  /* Auto-open after 10s idle on cover */
+  setTimeout(function(){ if(!isOpen && !hasOpened) toggle(); }, 10000);
+
 })();
 
 })();

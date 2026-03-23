@@ -6,6 +6,8 @@ const path = require('path');
     { input: 'pitch/Taylor-Group-Strategic-Pitch.html', output: 'pitch/Taylor-Group-Strategic-Pitch.pdf' },
     { input: 'benchmark/Consulting-Frameworks-Benchmark.html', output: 'benchmark/Consulting-Frameworks-Benchmark.pdf' },
     { input: 'strategy/Taylor-Group-Research-Strategy.html', output: 'strategy/Taylor-Group-Research-Strategy.pdf' },
+    { input: 'Taylor-Group-Team-Roles.html', output: 'Taylor-Group-Team-Roles.pdf' },
+    { input: 'pitch/Tech-Lead-Profile.html', output: 'pitch/Tech-Lead-Profile.pdf' },
   ];
 
   const browser = await chromium.launch();

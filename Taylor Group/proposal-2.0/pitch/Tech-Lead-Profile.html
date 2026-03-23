@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Tech Lead — Perfil de Búsqueda | Taylor Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #c0392b;
+    --accent-light: #f9eceb;
+    --accent-dark: #962d23;
+    --purple: #7A7AE6;
+    --purple-light: #EDEDFB;
+    --text: #1a1a1a;
+    --text-muted: #5c5c5c;
+    --border: #e0ddd6;
+    --bg: #f4f3f0;
+    --bg-card: #faf9f7;
+    --green: #2a7d4f;
+    --green-light: #e8f5ee;
+    --blue: #2980b9;
+    --blue-light: #eaf3fa;
+    --amber: #9a6f1e;
+    --amber-light: #fdf5e6;
+  }
+
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text);
+    background: #e8e8e8;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 28px 32px 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    position: relative;
+  }
+
+  @media print {
+    body { background: none; }
+    .page { box-shadow: none; margin: 0; padding: 24px 28px 18px; }
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 16px;
+  }
+  .header-left .logo {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.03em;
+  }
+  .header-left .logo span.light { font-weight: 300; color: var(--text-muted); }
+  .header-left .logo span.bold { font-weight: 700; color: var(--text); }
+  .header-left .doc-type {
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--accent);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+    display: inline-block;
+  }
+  .header-right { text-align: right; }
+  .header-right h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+  }
+  .header-right .subtitle {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  /* ── Context Bar ── */
+  .context-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .ctx-card {
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    padding: 8px 10px;
+    border-radius: 2px;
+  }
+  .ctx-card .label {
+    font-size: 0.52rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .ctx-card .value {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 2px;
+  }
+  .ctx-card .note {
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  /* ── Section Headers ── */
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-dark);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 3px;
+    margin-bottom: 8px;
+    margin-top: 14px;
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  /* ── Intro ── */
+  .intro {
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 14px;
+    padding: 8px 12px;
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+  }
+  .intro strong { font-weight: 600; }
+
+  /* ── Requirements Grid ── */
+  .req-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .req-card {
+    padding: 7px 10px;
+    border-radius: 3px;
+    border-left: 3px solid;
+  }
+  .req-card.tech { border-color: var(--blue); background: var(--blue-light); }
+  .req-card.exp { border-color: var(--green); background: var(--green-light); }
+  .req-card.soft { border-color: var(--amber); background: var(--amber-light); }
+  .req-card.tools { border-color: var(--purple); background: var(--purple-light); }
+  .req-card .req-title {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 3px;
+  }
+  .req-card.tech .req-title { color: var(--blue); }
+  .req-card.exp .req-title { color: var(--green); }
+  .req-card.soft .req-title { color: var(--amber); }
+  .req-card.tools .req-title { color: var(--purple); }
+  .req-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .req-card li {
+    font-size: 0.62rem;
+    line-height: 1.45;
+    color: var(--text);
+    padding-left: 10px;
+    position: relative;
+  }
+  .req-card li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: inherit;
+  }
+
+  /* ── Responsibilities ── */
+  .resp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .resp-item {
+    padding: 7px 10px;
+    background: var(--bg-card);
+    border-radius: 3px;
+    border-top: 2px solid var(--accent);
+  }
+  .resp-item .resp-title {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .resp-item .resp-desc {
+    font-size: 0.58rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  /* ── Phases ── */
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .phase-card {
+    padding: 6px 8px;
+    border-radius: 3px;
+    text-align: center;
+  }
+  .phase-card .phase-name {
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+  .phase-card .phase-date {
+    font-size: 0.52rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .phase-card .phase-tasks {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2px 0;
+  }
+  .phase-card .phase-focus {
+    font-size: 0.52rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+  }
+  .p-intake { background: #eaf3fa; }
+  .p-intake .phase-name { background: var(--blue); }
+  .p-discovery { background: var(--green-light); }
+  .p-discovery .phase-name { background: var(--green); }
+  .p-impl { background: var(--purple-light); }
+  .p-impl .phase-name { background: var(--purple); }
+  .p-stab { background: var(--amber-light); }
+  .p-stab .phase-name { background: var(--amber); }
+
+  /* ── Takeaway Box ── */
+  .takeaway {
+    background: var(--text);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 3px;
+    margin-top: 14px;
+  }
+  .takeaway .tk-label {
+    font-size: 0.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 3px;
+  }
+  .takeaway .tk-text {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  .takeaway .tk-text span { color: #f39c8b; }
+
+  /* ── Footer ── */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border);
+    font-size: 0.5rem;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo"><span class="light">transform</span><span class="bold">AZ</span></div>
+      <div class="doc-type">Perfil de Búsqueda — Interno</div>
+    </div>
+    <div class="header-right">
+      <h1>Technology &amp; Solutions Architect</h1>
+      <div class="subtitle">Taylor Group — Engagement Q2 2026 – Q2 2027 &nbsp;|&nbsp; Marzo 2026</div>
+    </div>
+  </div>
+
+  <!-- Context Bar -->
+  <div class="context-bar">
+    <div class="ctx-card">
+      <div class="label">Engagement</div>
+      <div class="value">Taylor Group</div>
+      <div class="note">Experiential marketing · $85M · 321 personas</div>
+    </div>
+    <div class="ctx-card">
+      <div class="label">Duración</div>
+      <div class="value">12 meses</div>
+      <div class="note">Mayo 2026 – Julio 2027 (parcial)</div>
+    </div>
+    <div class="ctx-card">
+      <div class="label">Tareas Asignadas</div>
+      <div class="value">38 de 138</div>
+      <div class="note">Pico en Phase 3: 16 tareas</div>
+    </div>
+    <div class="ctx-card">
+      <div class="label">Modalidad</div>
+      <div class="value">Remoto + Onsite</div>
+      <div class="note">Toronto onsite en Discovery (Jul–Ago)</div>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="intro">
+    Buscamos un <strong>Technology & Solutions Architect</strong> para liderar la capa técnica de una transformación digital integral en Taylor Group — empresa de experiential marketing con 95 años de trayectoria, presencia en 40+ países y herramientas ya adquiridas (ClickUp, Gemini, M365) pero subutilizadas. <strong>El rol construye lo que el equipo de consultoría valida: arquitectura, automatizaciones, dashboards e integraciones.</strong> No hay CTO interno — este rol es la columna vertebral técnica del engagement.
+  </div>
+
+  <!-- Core Responsibilities -->
+  <h2>Responsabilidades Principales</h2>
+  <div class="resp-grid">
+    <div class="resp-item">
+      <div class="resp-title">Auditoría Técnica</div>
+      <div class="resp-desc">Inventario completo de herramientas, licencias, integraciones y patrones de uso. Evaluación de ClickUp Brain, Gemini y M365.</div>
+    </div>
+    <div class="resp-item">
+      <div class="resp-title">Arquitectura ClickUp</div>
+      <div class="resp-desc">Diseño de Spaces, Folders, Lists, flujos de status, campos custom. Reestructuración completa del workspace.</div>
+    </div>
+    <div class="resp-item">
+      <div class="resp-title">Motor de Automatización</div>
+      <div class="resp-desc">Construcción y testing de 10-15 automatizaciones prioritarias: aprobaciones, notificaciones, auto-asignación, tareas recurrentes.</div>
+    </div>
+    <div class="resp-item">
+      <div class="resp-title">Despliegue de IA</div>
+      <div class="resp-desc">Configurar Gemini para email triage ejecutivo, resúmenes de reuniones y drafts. Activar ClickUp Brain en workspaces clave.</div>
+    </div>
+    <div class="resp-item">
+      <div class="resp-title">Dashboards & Data</div>
+      <div class="resp-desc">Dashboards ejecutivos: capacidad operativa, rentabilidad de proyectos, vista unificada. Sistema de catalogación de assets.</div>
+    </div>
+    <div class="resp-item">
+      <div class="resp-title">Training & Documentación</div>
+      <div class="resp-desc">Sesiones hands-on, video walkthroughs, guías rápidas. Office hours post-lanzamiento. Documentar todas las configuraciones.</div>
+    </div>
+  </div>
+
+  <!-- Requirements -->
+  <h2>Requisitos</h2>
+  <div class="req-grid">
+    <div class="req-card tech">
+      <div class="req-title">Conocimientos Técnicos</div>
+      <ul>
+        <li>ClickUp avanzado: workspace architecture, custom fields, automations, Brain/AI, API, templates</li>
+        <li>Google Workspace & Gemini: admin, AI features, Gmail rules, Calendar, Drive</li>
+        <li>Microsoft 365: SharePoint/Teams admin, Power Automate, Excel/Power BI</li>
+        <li>Herramientas de integración: Make, Zapier o n8n. API literacy</li>
+        <li>Dashboard design: ClickUp dashboards, Google Sheets, Power BI</li>
+      </ul>
+    </div>
+    <div class="req-card exp">
+      <div class="req-title">Experiencia</div>
+      <ul>
+        <li>3+ años implementando plataformas de project management (ClickUp, Monday, Asana)</li>
+        <li>Experiencia en transformación digital o consultoría de operaciones</li>
+        <li>Track record construyendo automatizaciones cross-platform</li>
+        <li>Haber trabajado con equipos no técnicos (change management)</li>
+        <li>Deseable: experiencia en agencias, eventos o marketing experiencial</li>
+      </ul>
+    </div>
+    <div class="req-card soft">
+      <div class="req-title">Habilidades Blandas</div>
+      <ul>
+        <li>Comunicación clara con stakeholders ejecutivos (C-suite)</li>
+        <li>Capacidad de traducir procesos en soluciones técnicas</li>
+        <li>Trabajo en equipo multidisciplinario (consultor de procesos + lead estratégico)</li>
+        <li>Autonomía para construir en sprints con demos semanales</li>
+        <li>Paciencia para entrenar usuarios con distintos niveles de adopción tecnológica</li>
+      </ul>
+    </div>
+    <div class="req-card tools">
+      <div class="req-title">Stack del Engagement</div>
+      <ul>
+        <li><strong>ClickUp</strong> — Workspace principal de operaciones (+ Brain)</li>
+        <li><strong>Google Workspace + Gemini</strong> — Email, calendar, AI tools</li>
+        <li><strong>Microsoft 365</strong> — SharePoint, Teams, Power BI (finanzas → org-wide)</li>
+        <li><strong>Make / Zapier / n8n</strong> — Middleware de automatización</li>
+        <li><strong>Comunicación:</strong> Slack/Teams interno del equipo de consultoría</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Phases -->
+  <h2>Distribución por Fase</h2>
+  <div class="phases">
+    <div class="phase-card p-intake">
+      <div class="phase-name">Intake</div>
+      <div class="phase-date">May – Jun 2026</div>
+      <div class="phase-tasks">8 tareas</div>
+      <div class="phase-focus">Auditoría de sistemas, data room, scoring de madurez técnica</div>
+    </div>
+    <div class="phase-card p-discovery">
+      <div class="phase-name">Discovery</div>
+      <div class="phase-date">Jul – Ago 2026</div>
+      <div class="phase-tasks">5 tareas</div>
+      <div class="phase-focus">Assessment de uso real, gaps de AI, specs de lighthouse projects</div>
+    </div>
+    <div class="phase-card p-impl">
+      <div class="phase-name">Implementation</div>
+      <div class="phase-date">Sep – Dic 2026</div>
+      <div class="phase-tasks">16 tareas</div>
+      <div class="phase-focus">Build completo: ClickUp, Gemini, automations, dashboards, M365</div>
+    </div>
+    <div class="phase-card p-stab">
+      <div class="phase-name">Stabilization</div>
+      <div class="phase-date">Ene – Jul 2027</div>
+      <div class="phase-tasks">7 tareas</div>
+      <div class="phase-focus">Optimización, documentación, knowledge transfer, autonomía interna</div>
+    </div>
+  </div>
+
+  <!-- Takeaway -->
+  <div class="takeaway">
+    <div class="tk-label">Lo que buscamos</div>
+    <div class="tk-text">
+      No buscamos un "IT generalist". Buscamos a alguien que <span>construya sistemas operativos</span> — que tome los procesos mapeados y las prioridades estratégicas y los convierta en automatizaciones, dashboards y flujos de trabajo reales. <span>El principio es claro: nada se construye sin un process map validado y una prioridad estratégica aprobada.</span> Si podés pensar en arquitectura, construir en sprints y entrenar equipos no técnicos, este es tu rol.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>TransformAZ — Documento interno</span>
+    <span>Taylor Group — Tech Lead Profile</span>
+    <span>Marzo 2026</span>
+  </div>
+
+</div>
+</body>
+</html>

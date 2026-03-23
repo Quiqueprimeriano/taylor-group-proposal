@@ -410,7 +410,7 @@ const makeCardShadow = () => ({ type: "outer", blur: 4, offset: 1, angle: 135, c
   });
 
   // Month headers
-  const months = ["APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const months = ["MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "JAN+"];
   months.forEach((m, i) => {
     s6.addText(m, {
       x: 1.7 + i * 0.88, y: 1.55, w: 0.88, h: 0.3,
@@ -426,9 +426,9 @@ const makeCardShadow = () => ({ type: "outer", blur: 4, offset: 1, angle: 135, c
   // Phase bars
   const timelinePhases = [
     { name: "INTAKE", sub: "CREATE", y: 2.0, startCol: 0, span: 2, color: C.blue, activities: "SOP review, tech audit, stakeholder mapping" },
-    { name: "DISCOVERY", sub: "CREATE", y: 2.65, startCol: 2, span: 1, color: C.green, activities: "Onsite Toronto: interviews, process mapping, AI vision" },
-    { name: "IMPLEMENTATION", sub: "BUILD", y: 3.3, startCol: 3, span: 4, color: C.accent, activities: "Automation builds, platform optimization, champion training" },
-    { name: "STABILIZATION", sub: "EXECUTE", y: 3.95, startCol: 7, span: 2, color: C.amber, activities: "Adoption, measurement, knowledge transfer, advisory" },
+    { name: "DISCOVERY", sub: "CREATE", y: 2.65, startCol: 2, span: 2, color: C.green, activities: "Onsite Toronto: interviews, process mapping, AI vision" },
+    { name: "IMPLEMENTATION", sub: "BUILD", y: 3.3, startCol: 4, span: 4, color: C.accent, activities: "Automation builds, platform optimization, champion training" },
+    { name: "STABILIZATION", sub: "EXECUTE", y: 3.95, startCol: 8, span: 1, color: C.amber, activities: "Adoption, measurement, knowledge transfer, advisory" },
   ];
   timelinePhases.forEach((p) => {
     // Label
@@ -573,10 +573,10 @@ const makeCardShadow = () => ({ type: "outer", blur: 4, offset: 1, angle: 135, c
 
   // Table rows
   const investRows = [
-    { phase: "INTAKE", period: "Apr \u2013 May", fee: "Fixed fee", location: "Remote", color: C.blue },
-    { phase: "DISCOVERY", period: "Jun", fee: "Fixed fee", location: "Onsite Toronto", color: C.green },
-    { phase: "IMPLEMENTATION", period: "Jul \u2013 Oct", fee: "Monthly retainer", location: "", color: C.accent },
-    { phase: "STABILIZATION", period: "Nov+", fee: "Advisory retainer", location: "", color: C.amber },
+    { phase: "INTAKE", period: "May \u2013 Jun", fee: "Fixed fee", location: "Remote", color: C.blue },
+    { phase: "DISCOVERY", period: "Jul \u2013 Aug", fee: "Fixed fee", location: "Onsite Toronto", color: C.green },
+    { phase: "IMPLEMENTATION", period: "Sep \u2013 Dec", fee: "Monthly retainer", location: "", color: C.accent },
+    { phase: "STABILIZATION", period: "Jan 2027+", fee: "Advisory retainer", location: "", color: C.amber },
   ];
   investRows.forEach((row, i) => {
     const ry = tableY + 0.35 + i * rowH;
@@ -625,7 +625,7 @@ const makeCardShadow = () => ({ type: "outer", blur: 4, offset: 1, angle: 135, c
     x: rightX, y: 2.05, w: rightW, h: 1.0,
     fill: { color: C.accent }
   });
-  s8.addText("Start with INTAKE in April 2026. Contained, fixed-fee engagement. No obligation to proceed further.", {
+  s8.addText("Start with INTAKE in May 2026. Contained, fixed-fee engagement. No obligation to proceed further.", {
     x: rightX + 0.15, y: 2.1, w: rightW - 0.3, h: 0.9,
     fontFace: "Calibri", fontSize: 11, color: C.white, bold: true, margin: 0, lineSpacingMultiple: 1.4, valign: "middle"
   });

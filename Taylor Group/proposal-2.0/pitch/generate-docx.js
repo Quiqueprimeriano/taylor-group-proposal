@@ -774,10 +774,10 @@ const tlLabelW = 2200;
 const tlDateW = 2200;
 const tlDescW = CONTENT_W - tlLabelW - tlDateW;
 const tlPhases = [
-  { name: "INTAKE", date: "April \u2013 May 2026", color: C.blue, maps: "CREATE", desc: "SOP documentation review, technology audit, stakeholder mapping, engagement preparation." },
-  { name: "DISCOVERY", date: "June 2026", color: C.green, maps: "CREATE", desc: "Onsite Toronto interviews, process mapping workshops, technology assessment, AI vision alignment." },
-  { name: "IMPLEMENTATION", date: "July \u2013 October 2026", color: C.accent, maps: "BUILD", desc: "Priority workstream execution, automation builds, platform optimization, champion training." },
-  { name: "STABILIZATION", date: "November 2026+", color: C.amber, maps: "EXECUTE", desc: "Adoption reinforcement, measurement & reporting, knowledge transfer, advisory retainer." },
+  { name: "INTAKE", date: "May \u2013 June 2026", color: C.blue, maps: "CREATE", desc: "SOP documentation review, technology audit, stakeholder mapping, engagement preparation." },
+  { name: "DISCOVERY", date: "July \u2013 August 2026", color: C.green, maps: "CREATE", desc: "Onsite Toronto interviews, process mapping workshops, technology assessment, AI vision alignment." },
+  { name: "IMPLEMENTATION", date: "September \u2013 December 2026", color: C.accent, maps: "BUILD", desc: "Priority workstream execution, automation builds, platform optimization, champion training." },
+  { name: "STABILIZATION", date: "January 2027+", color: C.amber, maps: "EXECUTE", desc: "Adoption reinforcement, measurement & reporting, knowledge transfer, advisory retainer." },
 ];
 
 // Header row
@@ -998,7 +998,7 @@ children.push(
   new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Proposed Next Step")] }),
   spacer(100),
   calloutBoxMultiParagraph("Proposed Next Step", [
-    "We propose starting with INTAKE in April 2026. This is a contained, fixed-fee engagement that delivers a comprehensive assessment \u2014 with no obligation to proceed further. At the end of INTAKE, Taylor will have:",
+    "We propose starting with INTAKE in May 2026. This is a contained, fixed-fee engagement that delivers a comprehensive assessment \u2014 with no obligation to proceed further. At the end of INTAKE, Taylor will have:",
     "1. A clear, evidence-based picture of current operations",
     "2. Quantified impact estimates replacing the ranges in this document",
     "3. A prioritized list of quick wins and strategic workstreams",
