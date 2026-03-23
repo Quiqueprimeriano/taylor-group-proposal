@@ -10,29 +10,29 @@ TransformAZ is a consulting firm's deliverable generation system. Each client ge
 
 ```bash
 # Generate PDFs from HTML
-node "Taylor Group/proposal-2.0/generate-pdf.js"    # Taylor static docs → PDF
+node "clients/taylor-group/proposal-2.0/generate-pdf.js"    # Taylor static docs → PDF
 
 # Generate DOCX
-node "Taylor Group/proposal-2.0/pitch/generate-full-pitch-docx.js"
-node "Taylor Group/proposal-2.0/pitch/generate-intake-docx.js"
-node "Taylor Group/scripts/generate-agenda-docx.js"
-python3 SME-Group/generate-onepager-docx.py
+node "clients/taylor-group/proposal-2.0/pitch/generate-full-pitch-docx.js"
+node "clients/taylor-group/proposal-2.0/pitch/generate-intake-docx.js"
+node "clients/taylor-group/scripts/generate-agenda-docx.js"
+python3 clients/sme-group/generate-onepager-docx.py
 
 # Take screenshots
-node SME-Group/take-screenshots.js
-node "Taylor Group/proposal-2.0/pitch/take-screenshots.js"
+node clients/sme-group/take-screenshots.js
+node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 ```
 
 **Dependencies:** All in root `package.json` — Playwright (chromium) for HTML→PDF, docx/pptxgenjs for DOCX/PPTX, python-docx for Python DOCX generation.
 
 ## Architecture
 
-- **Client folders:** `SME-Group/`, `Taylor Group/` — each contains HTML source documents, generation scripts, and output files (PDF/DOCX)
+- **Client folders:** `clients/sme-group/`, `clients/taylor-group/` — each contains HTML source documents, generation scripts, and output files (PDF/DOCX)
 - **HTML→PDF pipeline:** Playwright with `printBackground: true`, zero margins, `preferCSSPageSize: true`. HTML files use `@page` CSS for A4 sizing and print-specific styles
 - **DOCX generation:** Python scripts using `python-docx` with manual styling (no template files). JS DOCX scripts use `docx` npm package
 - **Dependencies:** All consolidated in root `package.json`. No inner package.json files — `require()` walks up to root `node_modules/`
 - **Tay chatbot:** Claude-powered bot embedded in the Interactive Pitch. Netlify Function (`netlify/functions/chat.js`) proxies to Claude API. Local dev server at `chat-bot/server.js`. Both share the same SYSTEM_PROMPT — keep in sync when proposal content changes
-- **Netlify deployment:** `netlify.toml` publishes `Taylor Group/proposal-2.0/pitch/` (requires `index.html` copy of main HTML). Redirect `/api/chat` → `/.netlify/functions/chat`. ANTHROPIC_API_KEY set in Netlify env vars
+- **Netlify deployment:** `netlify.toml` publishes `clients/taylor-group/proposal-2.0/pitch/` (requires `index.html` copy of main HTML). Redirect `/api/chat` → `/.netlify/functions/chat`. ANTHROPIC_API_KEY set in Netlify env vars
 
 ## Brand & Design Tokens
 
