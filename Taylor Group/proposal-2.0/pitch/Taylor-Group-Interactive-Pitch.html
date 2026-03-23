@@ -1000,6 +1000,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
   background:var(--bg-warm);color:var(--text);
   border-bottom-right-radius:4px;
 }
+.tay-msg--error{align-self:flex-start;background:var(--red-bg);color:var(--text-secondary);border:1px solid rgba(220,38,38,.15);border-bottom-left-radius:4px;font-style:italic}
 .tay-msg a{color:var(--accent);text-decoration:underline;font-weight:500}
 .tay-msg strong{font-weight:600}
 /* Typing indicator */
@@ -3017,10 +3018,10 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
       var data = await res.json();
       var answer = data.response || 'Sorry, I couldn\'t process that.';
       conversationHistory.push({role:'assistant',content:answer});
-      return formatResponse(answer);
+      return {text:formatResponse(answer),error:false};
     }catch(err){
       console.warn('Tay API error:',err);
-      return 'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.';
+      return {text:'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.',error:true};
     }
   }
 
@@ -3033,9 +3034,9 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     input.disabled=true;
 
     showTyping();
-    var answer = await callAPI(text);
+    var result = await callAPI(text);
     removeTyping();
-    addMsg(answer,'bot');
+    addMsg(result.text, result.error ? 'error' : 'bot');
     renderSuggestions();
 
     input.disabled=false;
