@@ -83,6 +83,61 @@ body{font-family:var(--sans);color:var(--text);background:var(--bg);line-height:
 .skip-link:focus{top:0}
 
 /* ═══════════════════════════════════════════════
+   ACCESS GATE
+   ═══════════════════════════════════════════════ */
+.access-gate{
+  position:fixed;inset:0;z-index:99999;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  background:var(--bg);
+  transition:opacity .5s var(--ease), visibility .5s;
+}
+.access-gate.unlocked{opacity:0;visibility:hidden;pointer-events:none}
+.access-gate__card{
+  text-align:center;max-width:380px;width:90%;
+  padding:var(--space-2xl) var(--space-xl);
+}
+.access-gate__logo{
+  font-family:var(--serif);font-size:var(--text-2xl);font-weight:700;
+  color:var(--text);margin-bottom:var(--space-xs);letter-spacing:-.02em;
+}
+.access-gate__logo span{color:var(--accent)}
+.access-gate__sub{
+  font-family:var(--sans);font-size:var(--text-sm);color:var(--text-tertiary);
+  margin-bottom:var(--space-2xl);
+}
+.access-gate__label{
+  font-family:var(--sans);font-size:var(--text-xs);font-weight:600;
+  color:var(--text-secondary);text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:var(--space-sm);text-align:left;display:block;
+}
+.access-gate__input-wrap{
+  display:flex;gap:var(--space-sm);
+}
+.access-gate__input{
+  flex:1;padding:12px 16px;
+  font-family:var(--mono);font-size:var(--text-base);letter-spacing:.12em;
+  border:1.5px solid var(--border);border-radius:var(--radius-md);
+  background:var(--bg-white);color:var(--text);
+  outline:none;transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.access-gate__input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.access-gate__input.error{border-color:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.12)}
+.access-gate__btn{
+  padding:12px 20px;
+  font-family:var(--sans);font-size:var(--text-sm);font-weight:600;
+  color:#fff;background:var(--accent);border:none;border-radius:var(--radius-md);
+  cursor:pointer;transition:background .2s var(--ease), transform .1s;
+  white-space:nowrap;
+}
+.access-gate__btn:hover{background:var(--accent-dark)}
+.access-gate__btn:active{transform:scale(.97)}
+.access-gate__error{
+  font-family:var(--sans);font-size:var(--text-xs);color:var(--red);
+  margin-top:var(--space-sm);min-height:1.2em;text-align:left;
+}
+@media print{.access-gate{display:none}}
+
+/* ═══════════════════════════════════════════════
    GRADIENT MESH BACKGROUND
    ═══════════════════════════════════════════════ */
 .gradient-mesh{
@@ -1056,6 +1111,46 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 </style>
 </head>
 <body>
+<!-- Access Gate -->
+<div class="access-gate" id="access-gate">
+  <div class="access-gate__card">
+    <div class="access-gate__logo">Transform<span>AZ</span></div>
+    <p class="access-gate__sub">Confidential proposal</p>
+    <label class="access-gate__label" for="access-code">Access code</label>
+    <div class="access-gate__input-wrap">
+      <input class="access-gate__input" id="access-code" type="password" placeholder="Enter code" autocomplete="off" spellcheck="false">
+      <button class="access-gate__btn" id="access-btn">Enter</button>
+    </div>
+    <p class="access-gate__error" id="access-error"></p>
+  </div>
+</div>
+<script>
+(function(){
+  var HASH='c2793b826cc96e7fe5bd695d00af187d2d9b5e4e0bfe7619c041d8f6f4972362';
+  if(sessionStorage.getItem('tz_access')==='1'){
+    document.getElementById('access-gate').classList.add('unlocked');
+    return;
+  }
+  document.body.style.overflow='hidden';
+  async function check(){
+    var v=document.getElementById('access-code').value;
+    var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
+    var hex=Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+    if(hex===HASH){
+      sessionStorage.setItem('tz_access','1');
+      document.getElementById('access-gate').classList.add('unlocked');
+      document.body.style.overflow='';
+    }else{
+      document.getElementById('access-code').classList.add('error');
+      document.getElementById('access-error').textContent='Invalid code. Try again.';
+      setTimeout(function(){document.getElementById('access-code').classList.remove('error')},800);
+    }
+  }
+  document.getElementById('access-btn').addEventListener('click',check);
+  document.getElementById('access-code').addEventListener('keydown',function(e){if(e.key==='Enter')check()});
+})();
+</script>
+
 <a href="#opportunity" class="skip-link">Skip to content</a>
 
 <!-- Gradient mesh bg -->
