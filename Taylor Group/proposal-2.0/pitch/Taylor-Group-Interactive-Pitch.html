@@ -291,17 +291,18 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
    ═══════════════════════════════════════════════ */
 .findings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0}
 .finding-card{
-  border:1px solid var(--border);border-radius:14px;padding:24px 24px 24px 28px;
-  background:var(--bg-white);cursor:pointer;overflow:hidden;
+  border:1px solid var(--border);border-radius:14px;padding:24px;
+  background:var(--bg-white);cursor:pointer;overflow:hidden;position:relative;
   transition:box-shadow .35s var(--ease),border-color .35s,transform .35s var(--ease);
   transform-style:preserve-3d;perspective:800px;
-  will-change:transform;border-left:3px solid var(--accent);
+  will-change:transform;
 }
-.finding-card:hover{border-color:rgba(122,122,230,.25);border-left-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
-/* Severity-based left border colors */
-.finding-card:has(.severity-tag--red){border-left-color:var(--accent)}
-.finding-card:has(.severity-tag--amber){border-left-color:var(--accent-dark)}
-.finding-card:has(.severity-tag--blue){border-left-color:var(--text-tertiary)}
+.finding-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient);border-radius:14px 14px 0 0}
+.finding-card:hover{border-color:rgba(122,122,230,.25);box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
+/* Severity-based top bar colors */
+.finding-card:has(.severity-tag--red)::after{background:linear-gradient(90deg,var(--red),var(--accent))}
+.finding-card:has(.severity-tag--amber)::after{background:linear-gradient(90deg,var(--amber),var(--accent-dark))}
+.finding-card:has(.severity-tag--blue)::after{background:linear-gradient(90deg,var(--blue),var(--text-tertiary))}
 .finding-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .finding-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px}
 .finding-header h3{margin:0;font-size:var(--text-base);line-height:1.3;color:var(--text)}
@@ -669,8 +670,8 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 
 /* Competitor cards */
 .competitor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 20px}
-.competitor-card{background:var(--bg-white);border:1px solid var(--border-light);border-left:3px solid var(--text-tertiary);border-radius:0 14px 14px 0;padding:24px;transition:all .35s var(--ease)}
-.competitor-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-2px)}
+.competitor-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:24px;transition:all .35s var(--ease)}
+.competitor-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-2px);border-color:rgba(122,122,230,.2)}
 .competitor-card h4{font-family:var(--mono);font-size:var(--text-base);font-weight:700;color:var(--text-primary);margin:0 0 10px;letter-spacing:.02em}
 .competitor-card__action{font-size:var(--text-sm);color:var(--text-secondary);margin:0 0 10px;line-height:1.55}
 .competitor-card__implication{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0}
