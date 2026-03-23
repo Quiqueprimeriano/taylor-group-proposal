@@ -613,6 +613,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
 }
 .gantt-decision-row .decision-line-left{left:0;width:calc(50% - 22px)}
 .gantt-decision-row .decision-line-right{left:calc(50% + 22px);width:calc(50% - 22px)}
+.gantt-decision-row--engagement::after{content:'Engagement decision'}
 
 /* ═══════════════════════════════════════════════
    HORIZON CARDS — 3D Tilt
@@ -1507,6 +1508,7 @@ blockquote cite{font-style:normal;font-family:var(--mono);font-size:var(--text-2
     <div class="gantt-wrapper anim" style="--d:.29s" id="gantt-chart">
       <div class="gantt-header"><span></span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan+</span></div>
       <div class="gantt-row"><span class="gantt-label" style="color:var(--text-tertiary)">0 &middot; Pre-Engagement</span><div class="gantt-bar gantt-bar--muted" style="grid-column:2/3" data-gantt-delay="0">Pre-Engagement</div></div>
+      <div class="gantt-row gantt-row--decision"><span class="gantt-label">&nbsp;</span><div class="gantt-decision-row gantt-decision-row--engagement" style="grid-column:2/4" data-gantt-delay="75"><span class="decision-line-left"></span><span class="decision-line-right"></span></div></div>
       <div class="gantt-row"><span class="gantt-label" style="color:var(--blue)">1 &middot; Intake</span><div class="gantt-bar gantt-bar--blue" style="grid-column:3/5" data-gantt-delay="150">Intake</div></div>
       <div class="gantt-row"><span class="gantt-label" style="color:var(--green)">2 &middot; Discovery</span><div class="gantt-bar gantt-bar--green" style="grid-column:5/7" data-gantt-delay="300">Discovery</div></div>
       <div class="gantt-row gantt-row--decision"><span class="gantt-label" style="color:var(--accent);font-weight:700">&nbsp;</span><div class="gantt-decision-row" style="grid-column:6/8" data-gantt-delay="450"><span class="decision-line-left"></span><span class="decision-line-right"></span></div></div>
