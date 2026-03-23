@@ -2868,9 +2868,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!fab||!panel) return;
 
   /* ── Config ─────────────────────────────── */
-  var API_URL = 'http://localhost:3141';
-  /* For production, change to your deployed URL, e.g.:
-     var API_URL = 'https://tay-server.yourdomain.com'; */
+  var API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3141' : '';
 
   let isOpen = false;
   let currentSection = 'cover';
