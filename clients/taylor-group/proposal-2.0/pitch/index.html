@@ -322,25 +322,49 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
   stroke:var(--yellow-accent);
 }
 
-/* Before / After panels — stacked grid + clip-path wipe */
+/* Before / After panels — stacked grid, opacity crossfade */
 .s04-panels{display:grid;min-height:680px}
 .s04-panels>.ba-panel{
   grid-area:1/1;
-  clip-path:inset(0 100% 0 0);
-  visibility:hidden;
-  transition:clip-path .7s var(--ease),visibility 0s .7s;
+  opacity:0;visibility:hidden;
+  transition:opacity .8s var(--ease),visibility 0s .8s;
 }
 .s04-panels>.ba-panel.is-visible{
-  clip-path:inset(0 0 0 0);
-  visibility:visible;
-  transition:clip-path .7s var(--ease),visibility 0s 0s;
+  opacity:1;visibility:visible;
+  transition:opacity .8s var(--ease),visibility 0s 0s;
 }
-/* Outgoing panel wipes out left-to-right */
-.s04-panels>.ba-panel.is-leaving{
-  clip-path:inset(0 0 0 100%);
-  visibility:visible;
-  transition:clip-path .7s var(--ease),visibility 0s .7s;
+
+/* ── Staged reveal: Before → After (5-act dramatic sequence) ── */
+/* Stage 0: Before panel "disconnection" elements fade out */
+.s04-diagram-svg .s04-backbone-line,
+.s04-diagram-svg .s04-gap-x,
+.s04-diagram-svg .s04-no-flow,
+.s04-diagram-svg .s04-drop,
+.s04-diagram-svg .s04-dim-dot{transition:opacity 1s var(--ease)}
+.s04-panels.s04-staged .s04-backbone-line,
+.s04-panels.s04-staged .s04-gap-x,
+.s04-panels.s04-staged .s04-no-flow,
+.s04-panels.s04-staged .s04-drop,
+.s04-panels.s04-staged .s04-dim-dot{opacity:0}
+
+/* Stage 1: After panel crossfades in (slow) */
+.s04-panels.s04-staged>#s04-panel-before{
+  transition:opacity 1.2s var(--ease),visibility 0s 1.2s;
 }
+.s04-panels.s04-staged>#s04-panel-after.is-visible{
+  transition:opacity 1.2s var(--ease),visibility 0s 0s;
+}
+
+/* Hub hidden by default during staged mode, scales up when revealed */
+.s04a-hub-group{
+  opacity:0;transform:scale(0);transform-origin:420px 310px;
+  transition:opacity 1.2s var(--ease),transform 1.2s cubic-bezier(.2,0,.2,1);
+}
+.s04-after-svg.stage-hub .s04a-hub-group{opacity:1;transform:scale(1)}
+
+/* Sparks hidden until flow stage */
+.s04a-sparks{opacity:0;transition:opacity 1.5s var(--ease)}
+.s04-after-svg.stage-flow .s04a-sparks{opacity:1}
 
 /* S04 Before SVG diagram */
 .s04-diagram-svg{width:100%;height:680px;display:block}
@@ -440,7 +464,7 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
   background:linear-gradient(135deg,#faf9f7,#f3f1ed);
 }
 /* Ghost editorial vertical line */
-.interstitial::before{content:'';position:absolute;left:15%;top:10%;bottom:10%;width:1px;background:rgba(84,54,255,.15)}
+.interstitial::before{content:'';position:absolute;left:15%;top:10%;bottom:10%;width:3px;background:rgba(84,54,255,.15)}
 .interstitial__text{
   font-family:var(--sans);font-size:var(--text-h2);font-weight:var(--fw-regular);
   line-height:var(--lh-heading);letter-spacing:var(--ls-heading);color:var(--text);
@@ -545,15 +569,15 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 /* ═══════════════════════════════════════════════
    BOXES & VALUE PROPS
    ═══════════════════════════════════════════════ */
-.box{padding:18px 22px;border-radius:var(--radius-md);margin:16px 0;border-left:3px solid;font-size:var(--text-sm);background:var(--bg-warm)}
+.box{padding:18px 22px;border-radius:var(--radius-md);margin:16px 0;border-left:3px solid var(--accent);font-size:var(--text-sm);background:#f7f5f3}
 .box p{margin-bottom:5px;max-width:none;color:var(--text-secondary)}
 .box p:last-child{margin-bottom:0}
 .box ul{color:var(--text-secondary);max-width:none}
 .box-label{font-family:var(--sans);font-size:var(--text-2xs);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block}
 .box--accent{background:var(--accent-light);border-color:var(--accent)}
 .box--accent .box-label{color:var(--accent)}
-.box--amber{background:var(--amber-bg);border-color:var(--amber)}
-.box--amber .box-label{color:var(--amber)}
+.box--amber{background:#f7f5f3;border-color:var(--accent)}
+.box--amber .box-label{color:var(--accent)}
 .box--blue{background:var(--blue-bg);border-color:var(--blue)}
 .box--blue .box-label{color:var(--blue)}
 .box--green{background:var(--green-bg);border-color:var(--green)}
@@ -1177,11 +1201,20 @@ h3.phase-card-v2__title{
 .insight-card__takeaway{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0;border-top:1px solid var(--border-light);padding-top:10px}
 
 /* AI Phase chart */
-.ai-phase-chart{margin:32px 0 40px;max-width:520px}
-.ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--text-secondary);margin:0 0 16px}
-.ai-phase-bar{display:flex;align-items:center;margin-bottom:6px;gap:12px}
-.ai-phase-bar__fill{height:36px;border-radius:4px;display:flex;align-items:center;justify-content:flex-start;padding-left:10px;font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:#fff;min-width:40px}
-.ai-phase-bar__label{font-family:var(--sans);font-size:var(--text-xs);color:var(--text-secondary);line-height:1.35;flex:1}
+/* AI Phase Pyramid */
+.ai-phase-chart{margin:32px 0 40px;max-width:640px;margin-left:auto;margin-right:auto}
+.ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);color:var(--text-tertiary);margin:0 0 24px;text-transform:uppercase;letter-spacing:.08em;text-align:center}
+.ai-pyramid{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ai-pyramid__tier{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 20px;border-radius:var(--radius-sm);font-family:var(--sans);position:relative;text-align:center}
+.ai-pyramid__tier:nth-child(1){width:30%;background:var(--accent-dark);color:#fff}
+.ai-pyramid__tier:nth-child(2){width:52%;background:var(--accent);color:#fff}
+.ai-pyramid__tier:nth-child(3){width:74%;background:var(--accent-mid);color:#fff}
+.ai-pyramid__tier:nth-child(4){width:96%;background:var(--accent-light);color:var(--text-primary)}
+.ai-pyramid__pct{font-size:var(--text-h3);font-weight:var(--fw-semibold);flex-shrink:0}
+.ai-pyramid__pct::after{content:'%';font-size:var(--text-sm);font-weight:var(--fw-medium);opacity:.7}
+.ai-pyramid__info{text-align:left;line-height:1.35}
+.ai-pyramid__phase{font-size:var(--text-sm);font-weight:var(--fw-semibold);display:block}
+.ai-pyramid__desc{font-size:var(--text-xs);opacity:.8;display:block}
 
 /* Timeline node details */
 .timeline-node__subtitle{font-family:var(--sans);font-size:var(--text-xs);color:var(--text-tertiary);font-style:italic;display:block;margin-top:2px}
@@ -1198,12 +1231,12 @@ h3.phase-card-v2__title{
 .competitor-card li::before{content:'\203A';position:absolute;left:0;color:var(--text-tertiary);font-weight:700}
 
 /* Transformation Reality box */
-.transformation-reality{background:var(--brown-05);border-radius:var(--radius-lg);padding:36px 40px;margin:40px 0;color:#fff}
-.transformation-reality__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--yellow-accent);margin:0 0 20px}
+.transformation-reality{background:var(--brown-04);border-radius:var(--radius-lg);padding:36px 40px;margin:40px 0;color:#fff}
+.transformation-reality__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:#fff !important;margin:0 0 20px}
 .transformation-reality__stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .transformation-reality__stat{font-size:var(--text-sm);color:#fff !important;line-height:1.55}
-.transformation-reality__stat strong{color:#fff !important;font-weight:var(--fw-semibold)}
-.transformation-reality__closing{font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--yellow-accent);margin:20px 0 0;text-align:center}
+.transformation-reality__stat strong{color:var(--yellow-accent) !important;font-weight:var(--fw-semibold)}
+.transformation-reality__closing{font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--yellow-accent) !important;margin:20px 0 0;text-align:center}
 
 /* Section pull-quote */
 .section-quote{
@@ -1605,8 +1638,10 @@ h3.phase-card-v2__title{
   .cbe-backbone-bar::before{display:none}
   .s04-toggle-wrap{display:none}
   .s04-panels{display:block!important}
-  .s04-panels>.ba-panel{clip-path:none!important;visibility:visible!important;position:relative!important}
+  .s04-panels>.ba-panel{opacity:1!important;visibility:visible!important;position:relative!important}
   .s04a-spoke{opacity:1!important}
+  .s04a-hub-group{opacity:1!important;transform:none!important}
+  .s04a-sparks{opacity:1!important}
   .section-header{grid-template-columns:1fr}
   .section-header__right{padding-top:0}
   .interstitial{min-height:auto;page-break-before:always;background:var(--bg-warm)!important}
@@ -1667,16 +1702,14 @@ h3.phase-card-v2__title{
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .horizons-grid,.competitor-grid,.insight-grid{grid-template-columns:1fr}
-  .phase-card-v2{grid-template-columns:1fr;min-height:auto}
-  .phase-card-v2__num{padding:20px 20px 0;font-size:32px}
-  .phase-card-v2__content{padding:8px 20px 70px}
-  .phase-card-v2__title{font-size:36px;margin-bottom:24px}
   .s04-diagram-svg,.s04-after-svg{height:440px}
   .s04-panels{min-height:440px}
+  .s04-annotation{display:none}
   .transformation-reality{padding:24px 20px}
   .transformation-reality__stats{grid-template-columns:1fr 1fr}
   .ai-phase-chart{max-width:100%}
-  .ai-phase-bar__label{font-size:var(--text-xs)}
+  .ai-pyramid__tier{width:100%!important;padding:10px 16px}
+  .ai-pyramid__desc{display:none}
 
   .timeline{flex-direction:column;padding:0 0 0 20px;gap:24px}
   .timeline::before{top:0;bottom:0;left:26px;right:auto;width:2px;height:100%;transform-origin:top}
@@ -1699,6 +1732,55 @@ h3.phase-card-v2__title{
   .cbe-dropdown__comparison{grid-template-columns:1fr}
   .backbone-vis{height:300px}
   #backbone-vis-disconnected{height:220px}
+
+  /* Task 1 — Phase stack: horizontal accordion → vertical stack */
+  .phase-stack{flex-direction:column;height:auto}
+  .phase-card-v2{flex:none!important;min-height:56px}
+  .phase-card-v2.is-active{min-height:auto}
+  .phase-card-v2:not(.is-active) .phase-card-v2__inner{display:none}
+  .phase-card-v2__inner{min-width:0;grid-template-columns:1fr}
+  .phase-card-v2__num{padding:16px 20px 0;font-size:var(--text-3xl)}
+  .phase-card-v2__content{padding:8px 20px 60px}
+  .phase-card-v2__title{font-size:var(--text-2xl);margin-bottom:16px}
+
+  /* Task 2 — Paradigm table: stacked card layout */
+  .paradigm-table{display:block}
+  .paradigm-table thead{display:none}
+  .paradigm-table tbody,.paradigm-table tr,.paradigm-table td{display:block;width:100%}
+  .paradigm-table tr{margin-bottom:16px;border:1px solid var(--gray-03);border-radius:var(--radius-sm);padding:12px 16px}
+  .paradigm-table td{border-bottom:none!important;padding:6px 0!important}
+  .paradigm-table td:first-child{font-weight:var(--fw-semibold);color:var(--text-primary);margin-bottom:4px}
+  .paradigm-table td:nth-child(2)::before{content:'Reactive: ';font-weight:var(--fw-medium);color:var(--text-tertiary)}
+  .paradigm-table td:nth-child(3)::before{content:'Designed: ';font-weight:var(--fw-medium);color:var(--accent)}
+  .paradigm-table td:nth-child(3){background:transparent!important;border-radius:0!important}
+
+  /* Task 3 — Service matrix: horizontal scroll wrapper */
+  .svc-matrix-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -18px;padding:0 18px}
+  .svc-matrix{min-width:640px}
+
+  /* Task 4 — Before/After toggle: tighter padding */
+  .ba-toggle__opt{padding:8px 24px;font-size:var(--text-xs)}
+
+  /* Task 5 — AI pyramid labels: font-size reduction */
+  .ai-pyramid__pct{font-size:var(--text-base)}
+  .ai-pyramid__phase{font-size:var(--text-xs)}
+
+  /* Task 6 — Card padding reduction */
+  .insight-card,.competitor-card,.horizon-card{padding:16px 18px}
+  .finding-header{padding:12px 16px}
+  .finding-body{padding:0 16px 16px}
+  .stat-card{padding:16px}
+  .box{padding:14px 16px}
+  .stats-box{padding:16px 18px;margin:20px 0}
+
+  /* Task 7 — Phase Overview accordion */
+  .po-item__header{padding:16px 0}
+  .po-item__title{font-size:var(--text-h3)}
+  .po-panel__inner{padding:20px 16px 24px}
+
+  /* Task 8 — Investment cards */
+  .invest-card__footer{flex-wrap:wrap;gap:12px}
+  .invest-card__price{margin-left:0;width:100%;text-align:center;margin-top:8px}
 }
 
 /* ═══════════════════════════════════════════════
@@ -2007,7 +2089,7 @@ h3.phase-card-v2__title{
     </div>
 
     <div class="box box--amber anim" style="--d:.3s">
-      <p>Only ~20&ndash;30% of AI initiatives move beyond pilot into scaled deployment. Most value remains trapped in isolated use cases, rather than embedded into core workflows across the business.</p>
+      <p>Only ~20 &ndash; 30% of AI initiatives move beyond pilot into scaled deployment. Most value remains trapped in isolated use cases, rather than embedded into core workflows across the business.</p>
     </div>
 
     <p class="anim scroll-reveal" style="--d:.35s">A different pattern is emerging among leading organizations.</p>
@@ -2036,10 +2118,10 @@ h3.phase-card-v2__title{
     </div>
 
     <div class="stats-grid anim" style="--d:.65s">
-      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="20" data-range-high="30" data-count-suffix="%" data-glitch>20&ndash;30%</div><div class="stat-card__label">Lower operational efficiency</div><div class="stat-card__source">&rarr; Due to fragmented systems</div></div>
-      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="30" data-range-high="50" data-count-suffix="%" data-glitch>30&ndash;50%</div><div class="stat-card__label">Slower execution cycles</div><div class="stat-card__source">&rarr; Compared to digitally enabled peers</div></div>
-      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="15" data-range-high="25" data-count-suffix="%" data-glitch>15&ndash;25%</div><div class="stat-card__label">Higher operational cost</div><div class="stat-card__source">&rarr; Due to manual processes</div></div>
-      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="2" data-range-high="3" data-count-suffix="x" data-glitch>2&ndash;3x</div><div class="stat-card__label">Growth rate for digitally mature competitors</div><div class="stat-card__source">&rarr; Compared to industry average</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="20" data-range-high="30" data-count-suffix="%" data-glitch>20 &ndash; 30%</div><div class="stat-card__label">Lower operational efficiency</div><div class="stat-card__source">&rarr; Due to fragmented systems</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="30" data-range-high="50" data-count-suffix="%" data-glitch>30 &ndash; 50%</div><div class="stat-card__label">Slower execution cycles</div><div class="stat-card__source">&rarr; Compared to digitally enabled peers</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="15" data-range-high="25" data-count-suffix="%" data-glitch>15 &ndash; 25%</div><div class="stat-card__label">Higher operational cost</div><div class="stat-card__source">&rarr; Due to manual processes</div></div>
+      <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="2" data-range-high="3" data-count-suffix="x" data-glitch>2 &ndash; 3x</div><div class="stat-card__label">Growth rate for digitally mature competitors</div><div class="stat-card__source">&rarr; Compared to industry average</div></div>
     </div>
 
     <p class="anim scroll-reveal" style="--d:.75s">The gap is no longer defined by access to technology. It is defined by how the operation itself is designed.</p>
@@ -2261,6 +2343,8 @@ h3.phase-card-v2__title{
         <path id="s04-path-p1" d="M420,365 Q405,440 420,500" fill="none" stroke="none"/>
         <path id="s04-path-p2" d="M455,353 Q550,450 589,518" fill="none" stroke="none"/>
 
+        <!-- ── Spark particles (grouped for staged reveal) ── -->
+        <g class="s04a-sparks">
         <!-- Primary outbound sparks — to dims (yellow, larger r=4) -->
         <circle r="4" fill="var(--yellow-accent)" filter="url(#s04-spark-glow)">
           <animateMotion dur="2s" repeatCount="indefinite" begin="0s"><mpath href="#s04-path-d0"/></animateMotion>
@@ -2338,8 +2422,10 @@ h3.phase-card-v2__title{
         <circle r="3" fill="var(--accent)" filter="url(#s04-spark-glow)">
           <animateMotion dur="2.3s" repeatCount="indefinite" begin="1.5s"><mpath href="#s04-path-r7"/></animateMotion>
         </circle>
+        </g><!-- /.s04a-sparks -->
 
-        <!-- ── Central hub: Digital Backbone (420,310) r=55 ── -->
+        <!-- ── Central hub: Digital Backbone (420,310) r=55 (grouped for staged reveal) ── -->
+        <g class="s04a-hub-group">
         <!-- Ripple rings expanding from hub -->
         <circle class="s04a-hub-ripple" cx="420" cy="310" r="55"/>
         <circle class="s04a-hub-ripple" cx="420" cy="310" r="55" style="animation-delay:1s"/>
@@ -2378,6 +2464,7 @@ h3.phase-card-v2__title{
         <!-- Dark pill label badge with yellow text -->
         <rect class="s04a-hub-badge" x="482" y="298" width="134" height="26" rx="13"/>
         <text class="s04a-hub-badge-label" x="549" y="315" text-anchor="middle">Digital Backbone</text>
+        </g><!-- /.s04a-hub-group -->
 
         <!-- ── Annotations ── -->
         <text class="s04-annotation" x="-90" y="14">5 dimensions</text>
@@ -2908,6 +2995,7 @@ h3.phase-card-v2__title{
       </div>
     </div>
 
+    <div class="svc-matrix-wrap">
     <div class="svc-matrix anim" style="--d:.2s">
       <!-- Header row -->
       <div class="svc-matrix__hdr">Phase</div>
@@ -2926,17 +3014,17 @@ h3.phase-card-v2__title{
 
       <!-- Row 1: Pre-alignment -->
       <div class="svc-matrix__cell" style="grid-column:1;grid-row:2"><span class="svc-phase svc-phase--0"><span class="svc-phase__num">#0</span>Pre-alignment</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:2">2&ndash;3 weeks</div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:2">2 &ndash; 3 weeks</div>
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:2"><span class="svc-badge">Remote</span></div>
 
       <!-- Row 2: Intake -->
       <div class="svc-matrix__cell" style="grid-column:1;grid-row:3"><span class="svc-phase svc-phase--1"><span class="svc-phase__num">#1</span>Intake</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:3">4&ndash;6 weeks</div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:3">4 &ndash; 6 weeks</div>
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:3"><span class="svc-badge">Remote</span></div>
 
       <!-- Row 3: Discovery -->
       <div class="svc-matrix__cell" style="grid-column:1;grid-row:4"><span class="svc-phase svc-phase--2"><span class="svc-phase__num">#2</span>Discovery</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:4">8&ndash;10 weeks</div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:4">8 &ndash; 10 weeks</div>
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:4"><span class="svc-badge">On-site</span> <span class="svc-badge">Remote</span></div>
 
       <!-- Duration "Monthly" spanning rows 4-6 -->
@@ -2955,6 +3043,7 @@ h3.phase-card-v2__title{
       <div class="svc-matrix__cell" style="grid-column:1;grid-row:7"><span class="svc-phase svc-phase--x"><span class="svc-phase__num">#X</span>Comms &amp; change</span></div>
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:7"><span class="svc-badge">Remote</span></div>
     </div>
+    </div><!-- /.svc-matrix-wrap -->
 
     <!-- Your Investment — Diagnosis -->
     <h2 class="invest-heading anim" style="--d:.25s">Diagnosis</h2>
@@ -3063,7 +3152,6 @@ h3.phase-card-v2__title{
     <div class="evidence-item evidence-item--red anim" style="--d:.35s" role="button" tabindex="0" aria-expanded="false">
       <div class="evidence-item__header">
         <span class="evidence-item__title">Asset Management Blind Spot</span>
-        <span class="severity-tag severity-tag--red">High Impact</span>
         <span class="evidence-item__impact">$500K &ndash; $1.2M / year</span>
         <span class="evidence-item__toggle">+</span>
       </div>
@@ -3071,7 +3159,7 @@ h3.phase-card-v2__title{
         <div class="evidence-panel__inner">
           <blockquote class="evidence-panel__quote"><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn&rsquo;t tell you exactly what we have.&rdquo;</p></blockquote>
           <p>Without centralized asset tracking, teams rebuild what already exists across three warehouses and 40+ countries.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>Estimated 5&ndash;10% annual inefficiency from lost, unused, or duplicated assets. Additional costs from redundant fabrication and logistics.</p></div>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>Estimated 5 &ndash; 10% annual inefficiency from lost, unused, or duplicated assets. Additional costs from redundant fabrication and logistics.</p></div>
         </div>
       </div>
     </div>
@@ -3079,7 +3167,6 @@ h3.phase-card-v2__title{
     <div class="evidence-item evidence-item--red anim" style="--d:.4s" role="button" tabindex="0" aria-expanded="false">
       <div class="evidence-item__header">
         <span class="evidence-item__title">Sales &harr; Production Disconnect</span>
-        <span class="severity-tag severity-tag--red">High Impact</span>
         <span class="evidence-item__impact">$400K &ndash; $800K / year</span>
         <span class="evidence-item__toggle">+</span>
       </div>
@@ -3090,9 +3177,9 @@ h3.phase-card-v2__title{
           <div class="box box--amber"><span class="box-label">Rationale</span>
             <p>Based on observed workflow patterns and typical cost structures in custom build environments:</p>
             <ul>
-              <li>15&ndash;30% of projects are impacted by sales &harr; production misalignment</li>
+              <li>15 &ndash; 30% of projects are impacted by sales &harr; production misalignment</li>
               <li>Each affected project incurs $10K&ndash;$25K in combined impact (redesign, rush production and logistics, margin compression)</li>
-              <li>Based on an estimated 40&ndash;80 projects per quarter</li>
+              <li>Based on an estimated 40 &ndash; 80 projects per quarter</li>
             </ul>
           </div>
         </div>
@@ -3105,7 +3192,6 @@ h3.phase-card-v2__title{
     <div class="evidence-item evidence-item--amber anim" style="--d:.5s" role="button" tabindex="0" aria-expanded="false">
       <div class="evidence-item__header">
         <span class="evidence-item__title">Executive Time Drain</span>
-        <span class="severity-tag severity-tag--amber">Medium Impact</span>
         <span class="evidence-item__impact">$225K &ndash; $300K / year</span>
         <span class="evidence-item__toggle">+</span>
       </div>
@@ -3113,7 +3199,7 @@ h3.phase-card-v2__title{
         <div class="evidence-panel__inner">
           <blockquote class="evidence-panel__quote"><p>&ldquo;I get 400 to 500 emails a day. I&rsquo;d say 70% are CCs where I don&rsquo;t really need to be included.&rdquo;</p></blockquote>
           <p>Senior leadership time is consumed by low-value communication &mdash; reducing focus on strategic decisions and operational alignment.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>400&ndash;500 emails/day with ~70% low-value or unnecessary. Estimated 2&ndash;3 hours/day of executive time lost. Based on average executive cost of $150&ndash;$250/hour.</p></div>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>400 &ndash; 500 emails/day with ~70% low-value or unnecessary. Estimated 2 &ndash; 3 hours/day of executive time lost. Based on average executive cost of $150&ndash;$250/hour.</p></div>
         </div>
       </div>
     </div>
@@ -3121,7 +3207,6 @@ h3.phase-card-v2__title{
     <div class="evidence-item evidence-item--amber anim" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
       <div class="evidence-item__header">
         <span class="evidence-item__title">Underutilized Technology Investment</span>
-        <span class="severity-tag severity-tag--amber">Medium Impact</span>
         <span class="evidence-item__impact">$75K &ndash; $200K / year</span>
         <span class="evidence-item__toggle">+</span>
       </div>
@@ -3129,7 +3214,7 @@ h3.phase-card-v2__title{
         <div class="evidence-panel__inner">
           <blockquote class="evidence-panel__quote"><p>&ldquo;We&rsquo;re paying for ClickUp Brain but nobody&rsquo;s really using it.&rdquo;</p></blockquote>
           <p>Technology investments are already in place &mdash; but without adoption, integration, and shared workflows, their value erodes over time.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>~$60K&ndash;$130K annual investment across core tools (ClickUp, M365, AI tools). Estimated 40&ndash;70% underutilization due to fragmented adoption and lack of integration. Lost productivity and coordination value typically 2&ndash;3x tool cost.</p></div>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>~$60K&ndash;$130K annual investment across core tools (ClickUp, M365, AI tools). Estimated 40 &ndash; 70% underutilization due to fragmented adoption and lack of integration. Lost productivity and coordination value typically 2 &ndash; 3x tool cost.</p></div>
         </div>
       </div>
     </div>
@@ -3140,7 +3225,6 @@ h3.phase-card-v2__title{
     <div class="evidence-item evidence-item--blue anim" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
       <div class="evidence-item__header">
         <span class="evidence-item__title">Generational Adoption Gap</span>
-        <span class="severity-tag severity-tag--blue">Strategic</span>
         <span class="evidence-item__impact">$200K &ndash; $500K / year</span>
         <span class="evidence-item__toggle">+</span>
       </div>
@@ -3148,7 +3232,7 @@ h3.phase-card-v2__title{
         <div class="evidence-panel__inner">
           <blockquote class="evidence-panel__quote"><p>&ldquo;The younger employees pick things up instantly. Some of our senior people&hellip; it&rsquo;s a harder conversation.&rdquo;</p></blockquote>
           <p>Technology adoption is inconsistent across the organization. Junior and technical teams adopt new tools quickly. But adoption at the management layer lags &mdash; creating bottlenecks in approvals, decision-making, and execution flow.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>~20&ndash;30 managers involved in approvals / decision layers. 5&ndash;10 hours/week lost per manager due to friction (tool gaps, back-and-forth, manual processes). Avg loaded cost: ~$120&ndash;150/hour.</p></div>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>~20 &ndash; 30 managers involved in approvals / decision layers. 5 &ndash; 10 hours/week lost per manager due to friction (tool gaps, back-and-forth, manual processes). Avg loaded cost: ~$120 &ndash; 150/hour.</p></div>
         </div>
       </div>
     </div>
@@ -3156,7 +3240,6 @@ h3.phase-card-v2__title{
     <div class="evidence-item evidence-item--blue anim" style="--d:.7s" role="button" tabindex="0" aria-expanded="false">
       <div class="evidence-item__header">
         <span class="evidence-item__title">Missing Strategic Tech Layer</span>
-        <span class="severity-tag severity-tag--blue">Strategic</span>
         <span class="evidence-item__impact">$200K &ndash; $400K / year</span>
         <span class="evidence-item__toggle">+</span>
       </div>
@@ -3379,7 +3462,7 @@ h3.phase-card-v2__title{
         <p class="insight-card__num">05</p>
         <h3 class="insight-card__title">Leaders operate differently, not just better</h3>
         <ul>
-          <li>2&ndash;3x more likely to capture significant value from AI</li>
+          <li>2 &ndash; 3x more likely to capture significant value from AI</li>
           <li>Operate on integrated data and technology ecosystems</li>
           <li>Embed AI directly into workflows and decision-making</li>
         </ul>
@@ -3397,24 +3480,26 @@ h3.phase-card-v2__title{
       </div>
     </div>
 
-    <!-- AI Phase Chart -->
+    <!-- AI Phase Pyramid -->
     <div class="ai-phase-chart anim" style="--d:.36s">
       <p class="ai-phase-chart__title">Phase of AI use among organizations using AI in 2025</p>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:7%;background:var(--accent-dark);min-width:36px">7</div>
-        <span class="ai-phase-bar__label"><strong>Fully scaled:</strong> AI has been fully deployed and integrated across organization</span>
-      </div>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:31%;background:var(--accent)">31</div>
-        <span class="ai-phase-bar__label"><strong>Scaling:</strong> Growing the deployment/adoption of AI across organization</span>
-      </div>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:30%;background:var(--accent-mid)">30</div>
-        <span class="ai-phase-bar__label"><strong>Piloting:</strong> Implementing AI for a first use case in the business</span>
-      </div>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:32%;background:var(--accent-light);color:var(--text-primary)">32</div>
-        <span class="ai-phase-bar__label"><strong>Experimenting:</strong> Any use or early testing of AI</span>
+      <div class="ai-pyramid">
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">7</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Fully scaled</span><span class="ai-pyramid__desc">AI fully deployed &amp; integrated across organization</span></span>
+        </div>
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">31</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Scaling</span><span class="ai-pyramid__desc">Growing AI deployment &amp; adoption across organization</span></span>
+        </div>
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">30</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Piloting</span><span class="ai-pyramid__desc">Implementing AI for a first use case</span></span>
+        </div>
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">32</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Experimenting</span><span class="ai-pyramid__desc">Any use or early testing of AI</span></span>
+        </div>
       </div>
     </div>
 
@@ -3506,17 +3591,17 @@ h3.phase-card-v2__title{
         </ul>
       </div>
       <div class="horizon-card horizon-card--amber anim tilt-card" style="--d:.45s">
-        <h3>Horizon 2: 1&ndash;3 Years</h3>
+        <h3>Horizon 2: 1 &ndash; 3 Years</h3>
         <ul>
           <li>Agentic AI replaces chatbots &mdash; Microsoft 2026 Wave 1: autonomous agents in Dynamics 365</li>
           <li>By 2026: 45% of G2000 OEMs connect field + engineering data via AI &mdash; IDC</li>
           <li>Digital twins: $24.5B market, ~75% adoption in advanced industries &mdash; McKinsey</li>
-          <li>Predictive maintenance: 300&ndash;500% ROI; computer vision QC: 200&ndash;300% ROI &mdash; Tech-Stack</li>
+          <li>Predictive maintenance: 300 &ndash; 500% ROI; computer vision QC: 200 &ndash; 300% ROI &mdash; Tech-Stack</li>
           <li>Jack Morton + Impact XM merged (Jan 2026) &mdash; competitors consolidating around data platforms</li>
         </ul>
       </div>
       <div class="horizon-card horizon-card--green anim tilt-card" style="--d:.55s">
-        <h3>Horizon 3: 5&ndash;10 Years</h3>
+        <h3>Horizon 3: 5 &ndash; 10 Years</h3>
         <p style="font-size:var(--text-xs);color:var(--text-tertiary);font-style:italic;margin:0 0 10px">Where We See Taylor Group in 2036</p>
         <ul>
           <li>AI in manufacturing: $34B &rarr; $155B by 2030 at 35% CAGR &mdash; backbone builders become leaders</li>
@@ -3659,7 +3744,7 @@ h3.phase-card-v2__title{
               <td><a href="https://www.mckinsey.com/capabilities/operations/how-we-help-clients/product-development-procurement/product-digital-twins" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
             </tr>
             <tr>
-              <td>Predictive maintenance delivers 300&ndash;500% ROI</td>
+              <td>Predictive maintenance delivers 300 &ndash; 500% ROI</td>
               <td>Deloitte &mdash; <em>Predictive Maintenance and the Smart Factory</em></td>
               <td><a href="https://www2.deloitte.com/content/dam/Deloitte/us/Documents/process-and-operations/us-cons-predictive-maintenance.pdf" target="_blank" rel="noopener" style="color:var(--accent)">deloitte.com (PDF) &nearr;</a></td>
             </tr>
@@ -3703,22 +3788,22 @@ h3.phase-card-v2__title{
           <thead><tr><th style="width:25%">Claim</th><th style="width:40%">Source</th><th style="width:35%">Link</th></tr></thead>
           <tbody>
             <tr>
-              <td>20&ndash;30% lower efficiency in low digital maturity organizations</td>
+              <td>20 &ndash; 30% lower efficiency in low digital maturity organizations</td>
               <td>McKinsey &mdash; <em>Unlocking Success in Digital Transformations</em></td>
               <td><a href="https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/Organization/Our%20Insights/Unlocking%20success%20in%20digital%20transformations/Unlocking-success-in-digital-transformations.pdf" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com (PDF) &nearr;</a></td>
             </tr>
             <tr>
-              <td>15&ndash;25% higher costs from fragmented systems and manual processes</td>
+              <td>15 &ndash; 25% higher costs from fragmented systems and manual processes</td>
               <td>BCG &mdash; <em>Flipping the Odds of Digital Transformation Success</em></td>
               <td><a href="https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation" target="_blank" rel="noopener" style="color:var(--accent)">bcg.com &nearr;</a></td>
             </tr>
             <tr>
-              <td>2&ndash;3x higher revenue growth for digitally mature organizations</td>
+              <td>2 &ndash; 3x higher revenue growth for digitally mature organizations</td>
               <td>MIT Sloan / Capgemini &mdash; <em>Leading Digital</em> (Westerman et al.)</td>
               <td><a href="https://mitsloan.mit.edu/ideas-made-to-matter/leading-digital-turning-technology-business-transformation" target="_blank" rel="noopener" style="color:var(--accent)">mitsloan.mit.edu &nearr;</a></td>
             </tr>
             <tr>
-              <td>30&ndash;50% faster execution for digitally enabled organizations</td>
+              <td>30 &ndash; 50% faster execution for digitally enabled organizations</td>
               <td>McKinsey &mdash; <em>The Case for Digital Reinvention</em></td>
               <td><a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-case-for-digital-reinvention" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
             </tr>
@@ -4108,24 +4193,66 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     });
   })();
 
-  // S04 Before/After toggle + After spoke animation
+  // S04 Before/After toggle + staged dramatic reveal
   (function(){
     const toggle = document.getElementById('s04-ba-toggle');
     if(!toggle) return;
     const opts = toggle.querySelectorAll('.ba-toggle__opt');
-    const panels = {
-      before: document.getElementById('s04-panel-before'),
-      after:  document.getElementById('s04-panel-after')
-    };
+    const container = document.querySelector('.s04-panels');
+    const beforePanel = document.getElementById('s04-panel-before');
+    const afterPanel  = document.getElementById('s04-panel-after');
+    const afterSvg    = document.getElementById('s04-after-svg');
     const spokes = document.querySelectorAll('.s04a-spoke[data-spoke]');
     let spokesAnimated = false;
+    let stageTimers = [];
 
-    function animateSpokes(){
-      if(spokesAnimated || PRM) return;
-      spokesAnimated = true;
-      spokes.forEach((s,i)=>{
-        setTimeout(()=> s.classList.add('is-live'), 120 * i);
-      });
+    function clearStages(){
+      stageTimers.forEach(t=> clearTimeout(t));
+      stageTimers = [];
+      container.classList.remove('s04-staged');
+      afterSvg.classList.remove('stage-hub','stage-flow');
+      spokes.forEach(s=> s.classList.remove('is-live'));
+      spokesAnimated = false;
+      document.querySelectorAll('.s04a-dim-glow,.s04a-phase-glow').forEach(g=> g.classList.remove('is-lit'));
+    }
+
+    function revealAfter(){
+      // ─── Stage 0 (0ms): Red line, gaps, drops fade out in Before ───
+      container.classList.add('s04-staged');
+
+      // ─── Stage 1 (1000ms): Crossfade panels ───
+      stageTimers.push(setTimeout(()=>{
+        beforePanel.classList.remove('is-visible');
+        afterPanel.classList.add('is-visible');
+      }, 1000));
+
+      // ─── Stage 2 (2200ms): Hub materializes ───
+      stageTimers.push(setTimeout(()=>{
+        afterSvg.classList.add('stage-hub');
+      }, 2200));
+
+      // ─── Stage 3 (3400ms): Spokes draw, connecting everything ───
+      stageTimers.push(setTimeout(()=>{
+        if(!PRM){
+          spokesAnimated = true;
+          spokes.forEach((s,i)=>{
+            stageTimers.push(setTimeout(()=> s.classList.add('is-live'), 180 * i));
+          });
+        }
+        // Glow halos on nodes
+        document.querySelectorAll('.s04a-dim-glow,.s04a-phase-glow').forEach(g=> g.classList.add('is-lit'));
+      }, 3400));
+
+      // ─── Stage 4 (5200ms): Information starts flowing ───
+      stageTimers.push(setTimeout(()=>{
+        afterSvg.classList.add('stage-flow');
+      }, 5200));
+    }
+
+    function revertToBefore(){
+      clearStages();
+      afterPanel.classList.remove('is-visible');
+      beforePanel.classList.add('is-visible');
     }
 
     opts.forEach(opt=>{
@@ -4133,27 +4260,8 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
         const which = opt.dataset.panel;
         toggle.dataset.active = which;
         opts.forEach(o=> o.setAttribute('aria-selected', o===opt ? 'true':'false'));
-        // Wipe transition: outgoing gets is-leaving, incoming gets is-visible
-        Object.entries(panels).forEach(([key,el])=>{
-          if(!el) return;
-          if(key===which){
-            el.classList.remove('is-leaving');
-            el.classList.add('is-visible');
-          } else {
-            el.classList.remove('is-visible');
-            el.classList.add('is-leaving');
-            // Clean up is-leaving after transition
-            setTimeout(()=> el.classList.remove('is-leaving'), 750);
-          }
-        });
-        if(which === 'after'){
-          setTimeout(animateSpokes, 400);
-          // Light up glow halos on nodes
-          document.querySelectorAll('.s04a-dim-glow,.s04a-phase-glow').forEach(g=> g.classList.add('is-lit'));
-        } else {
-          // Remove glow halos when switching back to Before
-          document.querySelectorAll('.s04a-dim-glow,.s04a-phase-glow').forEach(g=> g.classList.remove('is-lit'));
-        }
+        if(which === 'after') revealAfter();
+        else revertToBefore();
       });
     });
   })();
