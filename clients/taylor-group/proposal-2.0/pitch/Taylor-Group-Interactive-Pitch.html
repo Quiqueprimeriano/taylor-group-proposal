@@ -4096,10 +4096,21 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
       for(let i=0;i<cards.length;i++) if(cards[i].classList.contains('is-active')) return i;
       return 0;
     }
-    prev.addEventListener('click',()=>{const i=activeIdx();if(i>0) activate(i-1);});
-    next.addEventListener('click',()=>{const i=activeIdx();if(i<cards.length-1) activate(i+1);});
+    function scrollToActive(idx){
+      if(window.innerWidth<=768) setTimeout(()=>cards[idx].scrollIntoView({behavior:'smooth',block:'start'}),50);
+    }
+    prev.addEventListener('click',()=>{const i=activeIdx();if(i>0){activate(i-1);scrollToActive(i-1);}});
+    next.addEventListener('click',()=>{const i=activeIdx();if(i<cards.length-1){activate(i+1);scrollToActive(i+1);}});
     // Click on collapsed strip to expand
-    cards.forEach((c,i)=>c.addEventListener('click',()=>{if(!c.classList.contains('is-active')) activate(i);}));
+    cards.forEach((c,i)=>c.addEventListener('click',()=>{
+      if(!c.classList.contains('is-active')){
+        activate(i);
+        // On mobile, scroll so the activated card's top is visible
+        if(window.innerWidth<=768){
+          setTimeout(()=>c.scrollIntoView({behavior:'smooth',block:'start'}),50);
+        }
+      }
+    }));
   })();
 
   // 3D Tilt on cards
