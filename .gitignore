@@ -3,5 +3,6 @@ node_modules/
 .claude/
 *.pdf
 .env
+.mcp.json
 ~$*
 screenshots/

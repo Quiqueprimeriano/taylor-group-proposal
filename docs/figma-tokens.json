@@ -1,0 +1,110 @@
+{
+  "TransformAZ": {
+    "color": {
+      "gray": {
+        "00": { "value": "#ffffff", "type": "color", "figmaName": "Gray/00", "description": "Page background" },
+        "01": { "value": "#F9F9F9", "type": "color", "figmaName": "Gray/01", "description": "Subtle surface (toggle bg, card hover)" },
+        "02": { "value": "#F3F3F3", "type": "color", "figmaName": "Gray/02", "description": "Light surface" },
+        "03": { "value": "#E8E8E8", "type": "color", "figmaName": "Gray/03", "description": "Borders, dividers" },
+        "05": { "value": "#D2D1D1", "type": "color", "figmaName": "Gray/05", "description": "Muted borders" },
+        "06": { "value": "#B2B2B2", "type": "color", "figmaName": "Gray/06", "description": "Disabled text" }
+      },
+      "brown": {
+        "00": { "value": "#FFF6F2", "type": "color", "figmaName": "Brown/00", "description": "Warm tint background" },
+        "01": { "value": "#E2D4CF", "type": "color", "figmaName": "Brown/01", "description": "Dimmed/upcoming nav items" },
+        "02": { "value": "#88746D", "type": "color", "figmaName": "Brown/02", "description": "Metadata, tertiary text" },
+        "03": { "value": "#3C3336", "type": "color", "figmaName": "Brown/03", "description": "Body text, descriptions" },
+        "04": { "value": "#2F2024", "type": "color", "figmaName": "Brown/04", "description": "Primary text, headings" },
+        "05": { "value": "#170909", "type": "color", "figmaName": "Brown/05", "description": "Darkest text — hero, H0" }
+      },
+      "purple": {
+        "01": { "value": "#EBE8FF", "type": "color", "figmaName": "Purple/01", "description": "Accent background tint" },
+        "02": { "value": "#A696FF", "type": "color", "figmaName": "Purple/02", "description": "Accent mid-tone" },
+        "03": { "value": "#5436FF", "type": "color", "figmaName": "Purple/03", "description": "Primary accent" }
+      },
+      "yellow": {
+        "00": { "value": "#FCFFEA", "type": "color", "figmaName": "Yellow/00", "description": "Yellow tint background" },
+        "01": { "value": "#F8FFD4", "type": "color", "figmaName": "Yellow/01", "description": "Yellow light" },
+        "03": { "value": "#D8FF2A", "type": "color", "figmaName": "Yellow/03", "description": "Yellow accent — badge text on dark bg" }
+      },
+      "red": {
+        "value": "#FF0026", "type": "color", "figmaName": "Red", "description": "Error, destructive, high severity"
+      },
+      "semantic": {
+        "green": { "value": "#1a9959", "type": "color", "description": "People & Culture, Build phase, positive" },
+        "green-bg": { "value": "#ecfdf5", "type": "color", "description": "Green background tint" },
+        "blue": { "value": "#2563eb", "type": "color", "description": "Processes, Create phase, informational" },
+        "blue-bg": { "value": "#eff6ff", "type": "color", "description": "Blue background tint" },
+        "amber": { "value": "#b45309", "type": "color", "description": "Data, Execute phase, warnings" },
+        "amber-bg": { "value": "#fffbeb", "type": "color", "description": "Amber background tint" },
+        "internal-accent": { "value": "#c0392b", "type": "color", "description": "Internal docs accent (red)" }
+      },
+      "aliases": {
+        "bg": { "value": "{color.gray.00}", "type": "color", "description": "Page background" },
+        "bg-warm": { "value": "#f7f6f3", "type": "color", "description": "Warm surface (boxes, tab backgrounds)" },
+        "text": { "value": "{color.brown.05}", "type": "color", "description": "Darkest text" },
+        "text-primary": { "value": "{color.brown.04}", "type": "color", "description": "Primary text" },
+        "text-secondary": { "value": "{color.brown.03}", "type": "color", "description": "Body text" },
+        "text-tertiary": { "value": "{color.brown.02}", "type": "color", "description": "Metadata, hints" },
+        "text-dimmed": { "value": "{color.brown.01}", "type": "color", "description": "Dimmed nav items, upcoming sections" },
+        "accent": { "value": "{color.purple.03}", "type": "color", "description": "Brand accent" },
+        "accent-light": { "value": "{color.purple.01}", "type": "color", "description": "Accent background tint" },
+        "accent-mid": { "value": "{color.purple.02}", "type": "color", "description": "Accent mid-tone" },
+        "accent-dark": { "value": "#3d22cc", "type": "color", "description": "Accent hover/emphasis" },
+        "accent-glow": { "value": "rgba(84,54,255,0.18)", "type": "color", "description": "Radial glow effects" },
+        "yellow-accent": { "value": "{color.yellow.03}", "type": "color", "description": "Badge text on dark bg" }
+      }
+    },
+    "gradient": {
+      "brand": {
+        "value": "linear-gradient(135deg, #5436FF, #a78bfa, #60a5fa)",
+        "type": "other",
+        "description": "Progress bar, gradient accents, top bars"
+      }
+    },
+    "fontFamily": {
+      "sans": {
+        "value": "Inter",
+        "type": "fontFamilies",
+        "description": "All text. Weights: 400, 500, 600. Enable OpenType: cv01, cv02, ss01"
+      }
+    },
+    "typography": {
+      "h0": { "value": { "fontFamily": "Inter", "fontWeight": 400, "fontSize": 100, "lineHeight": 1, "letterSpacing": "-0.08em" }, "type": "typography", "description": "Cover hero" },
+      "h1": { "value": { "fontFamily": "Inter", "fontWeight": 400, "fontSize": 60, "lineHeight": 1, "letterSpacing": "-0.08em" }, "type": "typography", "description": "Section headlines" },
+      "h2": { "value": { "fontFamily": "Inter", "fontWeight": 400, "fontSize": 40, "lineHeight": 1, "letterSpacing": "-0.08em" }, "type": "typography", "description": "Sub-section headlines" },
+      "h3": { "value": { "fontFamily": "Inter", "fontWeight": 500, "fontSize": 20, "lineHeight": 1.3, "letterSpacing": "-0.02em" }, "type": "typography", "description": "Card headings, panel titles" },
+      "body": { "value": { "fontFamily": "Inter", "fontWeight": 400, "fontSize": 16, "lineHeight": 1.5, "letterSpacing": "-0.01em" }, "type": "typography", "description": "Body text" },
+      "body-highlight": { "value": { "fontFamily": "Inter", "fontWeight": 600, "fontSize": 16, "lineHeight": 1.5, "letterSpacing": "-0.01em" }, "type": "typography", "description": "Emphasized body" },
+      "button": { "value": { "fontFamily": "Inter", "fontWeight": 500, "fontSize": 14, "lineHeight": 1.1, "letterSpacing": "0" }, "type": "typography", "description": "Buttons, CTAs" },
+      "metadata": { "value": { "fontFamily": "Inter", "fontWeight": 500, "fontSize": 12, "lineHeight": 1.1, "letterSpacing": "0" }, "type": "typography", "description": "Metadata, captions" }
+    },
+    "spacing": {
+      "xs": { "value": "4", "type": "spacing" },
+      "sm": { "value": "8", "type": "spacing" },
+      "md": { "value": "16", "type": "spacing" },
+      "lg": { "value": "24", "type": "spacing" },
+      "xl": { "value": "32", "type": "spacing" },
+      "2xl": { "value": "48", "type": "spacing" },
+      "3xl": { "value": "56", "type": "spacing" }
+    },
+    "borderRadius": {
+      "sm": { "value": "8", "type": "borderRadius" },
+      "md": { "value": "10", "type": "borderRadius" },
+      "lg": { "value": "14", "type": "borderRadius" },
+      "xl": { "value": "18", "type": "borderRadius" },
+      "pill": { "value": "26", "type": "borderRadius", "description": "Pills, badges — from component frame" }
+    },
+    "boxShadow": {
+      "sm": { "value": { "x": "0", "y": "1", "blur": "3", "spread": "0", "color": "rgba(0,0,0,0.06)", "type": "dropShadow" }, "type": "boxShadow" },
+      "md": { "value": { "x": "0", "y": "4", "blur": "16", "spread": "0", "color": "rgba(0,0,0,0.06)", "type": "dropShadow" }, "type": "boxShadow" },
+      "lg": { "value": { "x": "0", "y": "8", "blur": "32", "spread": "0", "color": "rgba(0,0,0,0.08)", "type": "dropShadow" }, "type": "boxShadow" },
+      "xl": { "value": { "x": "0", "y": "16", "blur": "48", "spread": "0", "color": "rgba(0,0,0,0.07)", "type": "dropShadow" }, "type": "boxShadow" },
+      "accent": { "value": { "x": "0", "y": "8", "blur": "24", "spread": "0", "color": "rgba(84,54,255,0.3)", "type": "dropShadow" }, "type": "boxShadow" }
+    },
+    "sizing": {
+      "content-width": { "value": "960", "type": "sizing" },
+      "sidebar-width": { "value": "220", "type": "sizing" }
+    }
+  }
+}

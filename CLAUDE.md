@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-TransformAZ is a consulting firm's deliverable generation system. Each client gets a subfolder containing HTML documents (proposals, internal breakdowns, one-pagers) that are converted to PDF and DOCX formats.
+TransformAZ is a consulting firm's deliverable generation system. Each client gets a subfolder containing HTML documents (proposals, internal breakdowns, one-pagers).
 
 ## Build Commands
 
@@ -36,13 +36,13 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 
 ## Brand & Design Tokens
 
-- **Fonts (Interactive Pitch):** Source Serif 4 (headings), Inter with `font-feature-settings: 'cv01','cv02','ss01'` (body), JetBrains Mono (data/mono)
+- **Fonts (Interactive Pitch):** Inter for all text — headings (400), body (400/600), buttons (500), metadata (500). `font-feature-settings: 'cv01','cv02','ss01'` required.
 - **Fonts (Static docs):** Source Serif 4 (headings), Source Sans 3 (body); Calibri in DOCX
-- **Type scale:** 1.25 Major Third ratio with 12 CSS tokens (`--text-3xs` through `--text-5xl`). Never use hardcoded `font-size` values — always use a `--text-*` token
+- **Type scale:** Figma-sourced hierarchy: `--text-h0` (100px) through `--text-metadata` (12px). Headings use tight letter-spacing (-0.08em). Never use hardcoded `font-size` values — always use a `--text-*` token
 - **Spacing tokens:** `--space-xs` (4px) through `--space-3xl` (56px). Use for padding/margin on main components
 - **Radius tokens:** `--radius-sm` (8px), `--radius-md` (10px), `--radius-lg` (14px), `--radius-xl` (18px), `--radius-pill` (20px). `::after` top bars must use the same radius token as their parent card
 - **Shadow tokens:** `--shadow-sm` through `--shadow-xl`, `--shadow-accent` for accent glow
-- **Client-facing accent:** `#7A7AE6` (purple)
+- **Client-facing accent:** `#5436FF` (purple)
 - **Internal docs accent:** `#c0392b` (red) — visually distinguishes internal from client-facing
 - **Layout:** Single `--content-w: 960px` column for interactive pitch. No breakout widths (causes asymmetry with sidebar)
 - **CSS print essentials:** `print-color-adjust: exact`, `-webkit-print-color-adjust: exact` for background colors
@@ -69,3 +69,39 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
 - **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20–30%" not "30%"). No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
 - **Source links:** Data-heavy sections end with a "Sources & methodology → 09" button linking to the references section
+
+## Workflow Orchestration
+
+### 1. Plan Mode Default
+
+- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
+- If something goes sideways, STOP and re-plan immediately - don't keep pushing
+- Use plan mode for verification steps, not just building
+- Write detailed specs upfront to reduce ambiguity
+
+### 2. Self-Improvement Loop
+
+- After ANY correction from the user: update `tasks/lessons.md` with the pattern
+- Write rules for yourself that prevent the same mistake
+- Ruthlessly iterate on these lessons until mistake rate drops
+- Review lessons at session start for relevant project
+
+### 3. Verification Before Done
+
+- Never mark a task complete without proving it works
+- Diff behavior between main and your changes when relevant
+- Ask yourself: "Would a staff engineer approve this?"
+- Run tests, check logs, demonstrate correctness
+
+### 4. Demand Elegance (Balanced)
+
+- For non-trivial changes: pause and ask "is there a more elegant way?"
+- If a fix feels hacky: "Knowing everything I know now, implement the elegant solution"
+- Skip this for simple, obvious fixes - don't over-engineer
+- Challenge your own work before presenting it
+
+## Core Principles
+
+- **Simplicity First**: Make every change as simple as possible. Impact minimal code.
+- **No Laziness**: Find root causes. No temporary fixes. Senior developer standards.
+- **Minimal Impact**: Changes should only touch what's necessary. Avoid introducing bugs.

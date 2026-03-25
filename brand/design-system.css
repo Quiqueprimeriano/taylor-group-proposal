@@ -1,0 +1,446 @@
+/* ============================================================
+   TransformAZ Design System — Interactive Pitch
+   Source of truth: Figma (TransformAZ x Taylor)
+   Last synced: 2026-03-24
+   ============================================================ */
+
+/* --- Google Fonts import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+
+  /* ==========================================================
+     TYPOGRAPHY
+     ========================================================== */
+
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-features: 'cv01', 'cv02', 'ss01';
+
+  /* Type scale — Figma hierarchy */
+  --text-h0:              100px;   /* Cover hero, section openers      */
+  --text-h1:               60px;   /* Section headlines                 */
+  --text-h2:               40px;   /* Sub-section headlines             */
+  --text-h3:               20px;   /* Card headings, panel titles       */
+  --text-body:             16px;   /* Body text, descriptions           */
+  --text-body-highlight:   16px;   /* Same size, heavier weight         */
+  --text-button:           14px;   /* Buttons, CTAs                     */
+  --text-metadata:         12px;   /* Metadata, captions                */
+
+  /* Letter spacing */
+  --ls-heading:         -0.08em;   /* H0–H2: tight editorial look       */
+  --ls-h3:              -0.02em;   /* H3: subtle tightening             */
+  --ls-body:            -0.01em;   /* Body/highlight: slight tightening  */
+  --ls-button:                0;   /* Button/metadata: neutral           */
+
+  /* Line heights */
+  --lh-heading:              1;    /* H0–H2                             */
+  --lh-h3:                 1.3;    /* H3                                */
+  --lh-body:               1.5;    /* Body, body-highlight              */
+  --lh-ui:                 1.1;    /* Button, metadata                  */
+
+  /* Font weights */
+  --fw-regular:            400;    /* H0–H2, body                       */
+  --fw-medium:             500;    /* H3, button, metadata              */
+  --fw-semibold:           600;    /* Body highlight                    */
+
+  /* ==========================================================
+     COLORS — Full palette (Figma COMPONENTS frame, 2026-03-24)
+     ========================================================== */
+
+  /* Gray scale */
+  --gray-00:            #ffffff;   /* Page background                   */
+  --gray-01:            #F9F9F9;   /* Subtle surface (toggle bg)        */
+  --gray-02:            #F3F3F3;   /* Light surface                     */
+  --gray-03:            #E8E8E8;   /* Borders, dividers                 */
+  --gray-05:            #D2D1D1;   /* Muted borders                     */
+  --gray-06:            #B2B2B2;   /* Disabled text                     */
+
+  /* Brown scale */
+  --brown-00:           #FFF6F2;   /* Warm tint background              */
+  --brown-01:           #E2D4CF;   /* Dimmed/upcoming nav items          */
+  --brown-02:           #88746D;   /* Metadata, tertiary text            */
+  --brown-03:           #3C3336;   /* Body text, descriptions            */
+  --brown-04:           #2F2024;   /* Primary text, headings             */
+  --brown-05:           #170909;   /* Darkest text — hero, H0            */
+
+  /* Purple scale */
+  --purple-01:          #EBE8FF;   /* Accent background tint             */
+  --purple-02:          #A696FF;   /* Accent mid-tone                    */
+  --purple-03:          #5436FF;   /* Primary accent                     */
+
+  /* Yellow scale */
+  --yellow-00:          #FCFFEA;   /* Yellow tint background             */
+  --yellow-01:          #F8FFD4;   /* Yellow light                       */
+  --yellow-03:          #D8FF2A;   /* Badge text on dark bg              */
+
+  /* Red */
+  --red-brand:          #FF0026;   /* Error, destructive                 */
+
+  /* --- Semantic aliases --- */
+
+  /* Backgrounds */
+  --bg:           var(--gray-00);
+  --bg-warm:            #f7f6f3;   /* Warm surface                      */
+  --bg-subtle:    var(--gray-01);  /* Toggle bg, card hover             */
+
+  /* Text hierarchy (darkest → lightest) */
+  --text:         var(--brown-05); /* H0, darkest                       */
+  --text-primary: var(--brown-04); /* H1–H3, highlights                 */
+  --text-secondary: var(--brown-03); /* Body text                       */
+  --text-tertiary: var(--brown-02); /* Metadata, muted                  */
+  --text-dimmed:  var(--brown-01); /* Upcoming/disabled nav items        */
+
+  /* Accent */
+  --accent:       var(--purple-03);
+  --accent-light: var(--purple-01);
+  --accent-mid:   var(--purple-02);
+  --accent-dark:        #3d22cc;   /* Accent hover/emphasis             */
+  --accent-glow:  rgba(84,54,255,.18);
+
+  /* Yellow accent */
+  --yellow-accent: var(--yellow-03); /* Badge text on dark bg           */
+
+  /* Semantic */
+  --green:              #1a9959;
+  --green-bg:           #ecfdf5;
+  --blue:               #2563eb;
+  --blue-bg:            #eff6ff;
+  --amber:              #b45309;
+  --amber-bg:           #fffbeb;
+  --red:                #dc2626;
+  --red-bg:             #fef2f2;
+
+  /* Borders */
+  --border:       var(--gray-03);
+  --border-light:       #f0f0f2;
+
+  /* Gradient */
+  --gradient: linear-gradient(135deg, #5436FF, #a78bfa, #60a5fa);
+
+  /* Internal (non-client-facing) */
+  --internal-accent:    #c0392b;
+
+  /* ==========================================================
+     SPACING
+     ========================================================== */
+
+  --space-xs:     4px;
+  --space-sm:     8px;
+  --space-md:    16px;
+  --space-lg:    24px;
+  --space-xl:    32px;
+  --space-2xl:   48px;
+  --space-3xl:   56px;
+
+  /* ==========================================================
+     BORDER RADIUS
+     ========================================================== */
+
+  --radius-sm:    8px;    /* Small radius                    */
+  --radius-md:   10px;    /* Boxes, callouts                 */
+  --radius-lg:   14px;    /* Cards (default)                 */
+  --radius-xl:   18px;    /* CTA boxes                       */
+  --radius-pill: 20px;    /* Pills, tags, badges             */
+
+  /* ==========================================================
+     SHADOWS
+     ========================================================== */
+
+  --shadow-sm:   0  1px  3px rgba(0,0,0,.06);
+  --shadow-md:   0  4px 16px rgba(0,0,0,.06);
+  --shadow-lg:   0  8px 32px rgba(0,0,0,.08);
+  --shadow-xl:   0 16px 48px rgba(0,0,0,.07);
+  --shadow-accent: 0 8px 24px rgba(84,54,255,.3);
+
+  /* ==========================================================
+     LAYOUT
+     ========================================================== */
+
+  --content-w:  960px;
+  --sidebar-w:  220px;
+
+  /* ==========================================================
+     ANIMATION
+     ========================================================== */
+
+  --ease:     cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+}
+
+
+/* =============================================================
+   BASE STYLES
+   ============================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: var(--sans);
+  font-feature-settings: var(--font-features);
+  font-size: var(--text-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  color: var(--text-secondary);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================= */
+
+.t-h0 {
+  font-size: var(--text-h0);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--text);
+}
+
+.t-h1 {
+  font-size: var(--text-h1);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--text-primary);
+}
+
+.t-h2 {
+  font-size: var(--text-h2);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+  color: var(--text-primary);
+}
+
+.t-h3 {
+  font-size: var(--text-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-h3);
+  color: var(--text-primary);
+}
+
+.t-body {
+  font-size: var(--text-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  color: var(--text-secondary);
+}
+
+.t-body-highlight {
+  font-size: var(--text-body-highlight);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  color: var(--text-primary);
+}
+
+.t-button {
+  font-size: var(--text-button);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-ui);
+  letter-spacing: var(--ls-button);
+  color: var(--accent);
+}
+
+.t-metadata {
+  font-size: var(--text-metadata);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-ui);
+  letter-spacing: var(--ls-button);
+  color: var(--text-tertiary);
+}
+
+/* Accent word within headings */
+.t-accent { color: var(--accent); }
+
+
+/* =============================================================
+   SELECTION
+   ============================================================= */
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+
+/* =============================================================
+   PRINT
+   ============================================================= */
+
+@media print {
+  :root {
+    --bg: #ffffff;
+  }
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+
+/* =============================================================
+   REDUCED MOTION
+   ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* =============================================================
+   COMPONENTS — Figma COMPONENTS frame (2026-03-24)
+   ============================================================= */
+
+/* --- Before/After Toggle ---
+   HTML pattern:
+   <div class="ba-toggle" role="tablist">
+     <button class="ba-toggle__option" role="tab" aria-selected="false" data-view="before">Before</button>
+     <div class="ba-toggle__indicator"></div>
+     <button class="ba-toggle__option is-active" role="tab" aria-selected="true" data-view="after">After</button>
+   </div>
+
+   <div class="ba-panel" role="tabpanel" data-panel="before" hidden>…before content…</div>
+   <div class="ba-panel is-visible" role="tabpanel" data-panel="after">…after content…</div>
+
+   JS: toggle .is-active on options, move indicator via left calc, toggle panels.
+*/
+.ba-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--gray-01);
+  border-radius: var(--radius-md);
+  height: 44px;
+  position: relative;
+  overflow: visible;          /* indicator protrudes above track */
+  max-width: 546px;
+}
+
+.ba-toggle__option {
+  flex: 1;
+  text-align: center;
+  font-size: var(--text-button);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-ui);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 9px 16px;
+  position: relative;
+  z-index: 1;
+  transition: color .2s var(--ease);
+  user-select: none;
+  background: none;
+  border: none;
+  font-family: var(--sans);
+}
+
+/* Divider line under each option */
+.ba-toggle__option::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: var(--gray-03);
+}
+
+.ba-toggle__option.is-active {
+  color: var(--accent);
+}
+
+.ba-toggle__option:hover:not(.is-active) {
+  color: var(--text);
+}
+
+.ba-toggle__indicator {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--yellow-accent);
+  top: 50%;
+  left: calc(50% - 27px);    /* centered between options by default */
+  transform: translateY(-50%);
+  transition: left .3s var(--ease);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Move indicator to "Before" side */
+.ba-toggle[data-active="before"] .ba-toggle__indicator {
+  left: calc(25% - 27px);
+}
+
+/* Move indicator to "After" side */
+.ba-toggle[data-active="after"] .ba-toggle__indicator {
+  left: calc(75% - 27px);
+}
+
+/* --- Before/After Panels --- */
+.ba-panel {
+  display: none;
+}
+
+.ba-panel.is-visible {
+  display: block;
+  animation: fadeIn .4s var(--ease);
+}
+
+/* --- Section Badge/Pill --- */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border-radius: 26px;
+  background: var(--brown-04);
+  font-size: var(--text-button);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  color: var(--yellow-accent);
+  white-space: nowrap;
+}
+
+/* --- Sidebar Navigation --- */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  font-size: var(--text-metadata);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-ui);
+}
+
+.sidebar-nav__item {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color .2s var(--ease);
+}
+
+.sidebar-nav__item.is-active {
+  color: var(--accent);
+}
+
+.sidebar-nav__item.is-current {
+  color: var(--text);
+}
+
+.sidebar-nav__item.is-upcoming {
+  color: var(--text-dimmed);
+}
+
+.sidebar-nav__num {
+  color: var(--accent);
+  margin-right: 4px;
+}
