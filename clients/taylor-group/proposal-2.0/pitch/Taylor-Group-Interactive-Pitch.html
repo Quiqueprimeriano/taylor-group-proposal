@@ -1177,11 +1177,20 @@ h3.phase-card-v2__title{
 .insight-card__takeaway{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0;border-top:1px solid var(--border-light);padding-top:10px}
 
 /* AI Phase chart */
-.ai-phase-chart{margin:32px 0 40px;max-width:520px}
-.ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:var(--text-secondary);margin:0 0 16px}
-.ai-phase-bar{display:flex;align-items:center;margin-bottom:6px;gap:12px}
-.ai-phase-bar__fill{height:36px;border-radius:4px;display:flex;align-items:center;justify-content:flex-start;padding-left:10px;font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-semibold);color:#fff;min-width:40px}
-.ai-phase-bar__label{font-family:var(--sans);font-size:var(--text-xs);color:var(--text-secondary);line-height:1.35;flex:1}
+/* AI Phase Pyramid */
+.ai-phase-chart{margin:32px 0 40px;max-width:640px;margin-left:auto;margin-right:auto}
+.ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);color:var(--text-tertiary);margin:0 0 24px;text-transform:uppercase;letter-spacing:.08em;text-align:center}
+.ai-pyramid{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ai-pyramid__tier{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 20px;border-radius:var(--radius-sm);font-family:var(--sans);position:relative;text-align:center}
+.ai-pyramid__tier:nth-child(1){width:30%;background:var(--accent-dark);color:#fff}
+.ai-pyramid__tier:nth-child(2){width:52%;background:var(--accent);color:#fff}
+.ai-pyramid__tier:nth-child(3){width:74%;background:var(--accent-mid);color:#fff}
+.ai-pyramid__tier:nth-child(4){width:96%;background:var(--accent-light);color:var(--text-primary)}
+.ai-pyramid__pct{font-size:var(--text-h3);font-weight:var(--fw-semibold);flex-shrink:0}
+.ai-pyramid__pct::after{content:'%';font-size:var(--text-sm);font-weight:var(--fw-medium);opacity:.7}
+.ai-pyramid__info{text-align:left;line-height:1.35}
+.ai-pyramid__phase{font-size:var(--text-sm);font-weight:var(--fw-semibold);display:block}
+.ai-pyramid__desc{font-size:var(--text-xs);opacity:.8;display:block}
 
 /* Timeline node details */
 .timeline-node__subtitle{font-family:var(--sans);font-size:var(--text-xs);color:var(--text-tertiary);font-style:italic;display:block;margin-top:2px}
@@ -1198,11 +1207,11 @@ h3.phase-card-v2__title{
 .competitor-card li::before{content:'\203A';position:absolute;left:0;color:var(--text-tertiary);font-weight:700}
 
 /* Transformation Reality box */
-.transformation-reality{background:var(--brown-05);border-radius:var(--radius-lg);padding:36px 40px;margin:40px 0;color:#fff}
-.transformation-reality__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:var(--yellow-accent);margin:0 0 20px}
+.transformation-reality{background:var(--brown-04);border-radius:var(--radius-lg);padding:36px 40px;margin:40px 0;color:rgba(255,255,255,.9)}
+.transformation-reality__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:#fff;margin:0 0 20px}
 .transformation-reality__stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-.transformation-reality__stat{font-size:var(--text-sm);color:#fff !important;line-height:1.55}
-.transformation-reality__stat strong{color:#fff !important;font-weight:var(--fw-semibold)}
+.transformation-reality__stat{font-size:var(--text-sm);color:rgba(255,255,255,.85) !important;line-height:1.55}
+.transformation-reality__stat strong{color:var(--yellow-accent) !important;font-weight:var(--fw-semibold)}
 .transformation-reality__closing{font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--yellow-accent);margin:20px 0 0;text-align:center}
 
 /* Section pull-quote */
@@ -1676,7 +1685,8 @@ h3.phase-card-v2__title{
   .transformation-reality{padding:24px 20px}
   .transformation-reality__stats{grid-template-columns:1fr 1fr}
   .ai-phase-chart{max-width:100%}
-  .ai-phase-bar__label{font-size:var(--text-xs)}
+  .ai-pyramid__tier{width:100%!important;padding:10px 16px}
+  .ai-pyramid__desc{display:none}
 
   .timeline{flex-direction:column;padding:0 0 0 20px;gap:24px}
   .timeline::before{top:0;bottom:0;left:26px;right:auto;width:2px;height:100%;transform-origin:top}
@@ -3391,24 +3401,26 @@ h3.phase-card-v2__title{
       </div>
     </div>
 
-    <!-- AI Phase Chart -->
+    <!-- AI Phase Pyramid -->
     <div class="ai-phase-chart anim" style="--d:.36s">
       <p class="ai-phase-chart__title">Phase of AI use among organizations using AI in 2025</p>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:7%;background:var(--accent-dark);min-width:36px">7</div>
-        <span class="ai-phase-bar__label"><strong>Fully scaled:</strong> AI has been fully deployed and integrated across organization</span>
-      </div>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:31%;background:var(--accent)">31</div>
-        <span class="ai-phase-bar__label"><strong>Scaling:</strong> Growing the deployment/adoption of AI across organization</span>
-      </div>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:30%;background:var(--accent-mid)">30</div>
-        <span class="ai-phase-bar__label"><strong>Piloting:</strong> Implementing AI for a first use case in the business</span>
-      </div>
-      <div class="ai-phase-bar">
-        <div class="ai-phase-bar__fill" style="width:32%;background:var(--accent-light);color:var(--text-primary)">32</div>
-        <span class="ai-phase-bar__label"><strong>Experimenting:</strong> Any use or early testing of AI</span>
+      <div class="ai-pyramid">
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">7</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Fully scaled</span><span class="ai-pyramid__desc">AI fully deployed &amp; integrated across organization</span></span>
+        </div>
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">31</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Scaling</span><span class="ai-pyramid__desc">Growing AI deployment &amp; adoption across organization</span></span>
+        </div>
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">30</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Piloting</span><span class="ai-pyramid__desc">Implementing AI for a first use case</span></span>
+        </div>
+        <div class="ai-pyramid__tier">
+          <span class="ai-pyramid__pct">32</span>
+          <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Experimenting</span><span class="ai-pyramid__desc">Any use or early testing of AI</span></span>
+        </div>
       </div>
     </div>
 
