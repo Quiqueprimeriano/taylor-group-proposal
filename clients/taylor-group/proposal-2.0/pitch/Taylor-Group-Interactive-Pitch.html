@@ -1702,8 +1702,8 @@ h3.phase-card-v2__title{
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .horizons-grid,.competitor-grid,.insight-grid{grid-template-columns:1fr}
-  .s04-diagram-svg,.s04-after-svg{height:440px}
-  .s04-panels{min-height:440px}
+  .s04-diagram-svg,.s04-after-svg{height:auto;width:calc(100% + 36px);margin-left:-18px}
+  .s04-panels{min-height:auto}
   .s04-annotation{display:none}
   .transformation-reality{padding:24px 20px}
   .transformation-reality__stats{grid-template-columns:1fr 1fr}
@@ -4190,6 +4190,14 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
         items.forEach(i=> i.classList.remove('is-active'));
         if(!wasActive) item.classList.add('is-active');
       });
+    });
+  })();
+
+  // S04: crop viewBox on mobile to remove annotation padding
+  (function(){
+    if(window.innerWidth > 768) return;
+    document.querySelectorAll('.s04-diagram-svg,.s04-after-svg').forEach(function(svg){
+      svg.setAttribute('viewBox','10 0 820 680');
     });
   })();
 
