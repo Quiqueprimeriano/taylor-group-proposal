@@ -67,8 +67,11 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **Accessibility:** Skip-to-content link (visible on focus), minimum 44px touch targets, `role="tabpanel"` + `aria-labelledby` on pillar tabs, `aria-live="polite"` on chatbot messages. Chatbot error messages use `.tay-msg--error` (distinct visual style)
 - **CBE diagram:** Lives in Section 04 (Digital Backbone). CSS animated flow phases that double as navigation for expandable content panels below. Never duplicate in Section 05
 - **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
-- **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20–30%" not "30%"). No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
+- **Backbone Before→After:** 5-stage dramatic reveal (red line fade → crossfade → hub scale-in → spokes draw → particles flow). Hub and sparks wrapped in `<g class="s04a-hub-group">` / `<g class="s04a-sparks">` for staged CSS control. Forward transition ~5s cinematic, backward ~0.8s instant
+- **Mobile responsive (768px):** Phase stack → vertical accordion; paradigm table → stacked cards with `::before` labels; service matrix → phase cards with inline metadata grouped by service type via `order`; SVG viewBox cropped via JS (`10 0 820 680`) to remove annotation padding; phase card click scrolls to top on mobile
+- **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20 – 30%" not "30%"), with spaces around en-dash. No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
 - **Source links:** Data-heavy sections end with a "Sources & methodology → 09" button linking to the references section
+- **Netlify deploy:** `index.html` must be an exact copy of `Taylor-Group-Interactive-Pitch.html`. ALWAYS sync after editing: `cp ...Interactive-Pitch.html .../index.html`
 
 ## Workflow Orchestration
 
