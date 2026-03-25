@@ -276,8 +276,8 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 .section-header__right p{margin-bottom:13px;line-height:var(--lh-body)}
 
 /* Bridge text between diagrams and section-header */
-.bb-bridge{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:var(--space-3xl);margin-bottom:var(--space-xl)}
-.bb-bridge p{grid-column:2;font-size:var(--text-body);color:var(--text-secondary);line-height:var(--lh-body);padding-top:40px}
+.bb-bridge{display:flex;flex-direction:column;gap:0;margin-top:var(--space-3xl);margin-bottom:var(--space-xl);max-width:720px}
+.bb-bridge p{font-size:var(--text-body);color:var(--text-secondary);line-height:var(--lh-body)}
 
 /* Before / After toggle (Figma Components frame) */
 .s04-toggle-wrap{display:flex;justify-content:center;margin:32px 0 24px}
@@ -576,34 +576,95 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 /* ═══════════════════════════════════════════════
    FINDING CARDS — 3D Tilt + Expand
    ═══════════════════════════════════════════════ */
-.findings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0}
-.finding-card{
-  border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-lg);
-  background:var(--bg-white);cursor:pointer;overflow:hidden;position:relative;
-  transition:box-shadow .35s var(--ease),border-color .35s,transform .35s var(--ease);
-  transform-style:preserve-3d;perspective:800px;
-  will-change:transform;
+/* ── Hero stat bar ── */
+.findings-hero{
+  background:var(--accent);border-radius:var(--radius-lg);
+  padding:28px 40px;margin:28px 0 12px;text-align:center;
+  color:#fff;font-family:var(--sans);
 }
-.finding-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient);border-radius:var(--radius-lg) var(--radius-lg) 0 0}
-.finding-card:hover{border-color:rgba(84,54,255,.25);box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-2px)}
-/* Severity-based top bar colors */
-.finding-card:has(.severity-tag--red)::after{background:linear-gradient(90deg,var(--red),var(--accent))}
-.finding-card:has(.severity-tag--amber)::after{background:linear-gradient(90deg,var(--amber),var(--accent-dark))}
-.finding-card:has(.severity-tag--blue)::after{background:linear-gradient(90deg,var(--blue),var(--text-tertiary))}
-.finding-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.finding-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px}
-.finding-header h3{margin:0;font-size:var(--text-base);line-height:1.3;color:var(--text)}
+.findings-hero__amount{
+  font-size:var(--text-h2);font-weight:var(--fw-semibold);
+  letter-spacing:var(--ls-heading);line-height:var(--lh-heading);
+}
+.findings-hero__label{
+  font-size:var(--text-base);font-weight:var(--fw-regular);opacity:.85;
+}
+/* ── Evidence stack ── */
+.evidence-group-label{
+  font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-medium);
+  text-transform:uppercase;letter-spacing:.08em;
+  margin:32px 0 0;padding-bottom:0;
+}
+.evidence-group-label--red{color:var(--red)}
+.evidence-group-label--amber{color:var(--amber)}
+.evidence-group-label--blue{color:var(--blue)}
+.evidence-item{
+  border-top:1px solid var(--gray-03);
+  cursor:pointer;
+}
+.evidence-item:last-child{border-bottom:1px solid var(--gray-03)}
+.evidence-item--red{border-left:3px solid var(--red)}
+.evidence-item--amber{border-left:3px solid var(--amber)}
+.evidence-item--blue{border-left:3px solid var(--blue)}
+.evidence-item__header{
+  display:flex;align-items:center;
+  padding:20px 0 20px 20px;gap:16px;
+  user-select:none;
+}
+.evidence-item__title{
+  font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-medium);
+  color:var(--text-primary);flex:1;margin:0;line-height:1.3;
+}
 .severity-tag{font-family:var(--sans);font-size:var(--text-3xs);font-weight:var(--fw-semibold);text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:var(--radius-pill);white-space:nowrap;flex-shrink:0}
 .severity-tag--red{background:var(--red-bg);color:var(--red)}
 .severity-tag--amber{background:var(--amber-bg);color:var(--amber)}
 .severity-tag--blue{background:var(--blue-bg);color:var(--blue)}
-.finding-impact{font-family:var(--sans);font-size:var(--text-base);font-weight:600;color:var(--accent-dark);margin:8px 0 4px}
-.finding-expand-hint{font-family:var(--sans);font-size:var(--text-2xs);color:var(--text-tertiary);margin-top:8px;letter-spacing:.05em;transition:opacity .2s}
-.finding-expand-hint::before{content:'+ ';color:var(--accent)}
-.finding-detail{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .35s var(--ease),margin .3s;margin-top:0}
-.finding-card.is-expanded .finding-detail{max-height:600px;opacity:1;margin-top:16px}
-.finding-card.is-expanded .finding-expand-hint{opacity:0;height:0;margin:0}
-.finding-card.is-expanded{border-color:rgba(84,54,255,.3);box-shadow:0 8px 32px rgba(84,54,255,.08)}
+.evidence-item__impact{
+  font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-semibold);
+  color:var(--text-primary);white-space:nowrap;
+}
+.evidence-item__toggle{
+  width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-regular);
+  color:var(--text-primary);flex-shrink:0;
+  transition:transform .35s var(--ease);
+}
+.evidence-item.is-open .evidence-item__toggle{transform:rotate(45deg)}
+/* Panel — max-height + opacity (per CLAUDE.md) */
+.evidence-item__panel{
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .5s var(--ease),opacity .35s var(--ease);
+}
+.evidence-item.is-open .evidence-item__panel{max-height:600px;opacity:1}
+.evidence-panel__inner{padding:0 0 24px 20px}
+.evidence-panel__quote{
+  font-family:var(--sans);font-size:var(--text-lg);font-style:italic;
+  color:var(--text-secondary);line-height:1.5;
+  margin:0 0 16px;padding:0;border:none;
+  position:relative;padding-left:24px;
+}
+.evidence-panel__quote::before{
+  content:'\201C';position:absolute;left:0;top:-4px;
+  font-size:var(--text-h2);color:var(--accent);font-style:normal;
+  line-height:1;
+}
+.evidence-panel__body{
+  font-size:var(--text-sm);line-height:1.6;color:var(--text-secondary);
+  margin-bottom:16px;
+}
+/* Reference source cards (Section 09) */
+.finding-card{background:var(--bg-white);border:1px solid var(--gray-02);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.finding-header{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid var(--gray-02)}
+.finding-header h3{font-size:var(--text-base);font-weight:var(--fw-semibold);margin:0;flex:1}
+.finding-tag{font-family:var(--sans);font-size:var(--text-3xs);font-weight:var(--fw-medium);padding:3px 10px;border-radius:var(--radius-pill);background:color-mix(in srgb,var(--tag-color) 12%,transparent);color:var(--tag-color)}
+.finding-body{padding:0 24px 20px}
+@media(max-width:768px){
+  .evidence-item__header{flex-wrap:wrap;gap:8px}
+  .evidence-item__impact{width:100%;padding-left:0}
+  .findings-hero{padding:20px 24px}
+  .findings-hero__amount{font-size:var(--text-2xl)}
+}
 
 /* ═══════════════════════════════════════════════
    BACKBONE — Neural Network Diagram
@@ -753,7 +814,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 /* ═══════════════════════════════════════════════
    HOW BACKBONE WORKS — 3-layer accordion
    ═══════════════════════════════════════════════ */
-.hbw{text-align:center;margin-top:80px}
+.hbw{text-align:center;margin-top:160px}
 .hbw__icon{
   display:inline-flex;align-items:center;justify-content:center;
   width:54px;height:54px;border-radius:50%;
@@ -874,14 +935,14 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
    PHASE STACK — Stacked phase cards (Figma redesign)
    ═══════════════════════════════════════════════ */
 .phase-stack{
-  display:flex;gap:6px;height:627px;
+  display:flex;gap:6px;height:740px;
   position:relative;margin:36px 0;
 }
 .phase-card-v2{
   flex:0 0 56px;
   border-radius:var(--radius-lg);
   position:relative;overflow:hidden;
-  transition:flex .6s cubic-bezier(.4,0,.2,1);
+  transition:flex .7s cubic-bezier(.4,0,.2,1);
   cursor:pointer;min-width:0;
 }
 .phase-card-v2.is-active{flex:1 1 0;cursor:default}
@@ -889,27 +950,28 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .phase-card-v2__inner{
   display:grid;grid-template-columns:100px 1fr;
   min-width:600px;height:100%;
-  transform:scale(.97);opacity:0;
-  transition:opacity .15s var(--ease),transform .15s var(--ease);
+  transform:translateY(20px) scale(.96);opacity:0;filter:blur(4px);
+  transition:opacity .15s var(--ease),transform .15s var(--ease),filter .15s var(--ease);
 }
 .phase-card-v2.is-active .phase-card-v2__inner{
-  transform:scale(1);opacity:1;
-  transition:opacity .3s .45s var(--ease),transform .3s .45s var(--ease);
+  transform:translateY(0) scale(1);opacity:1;filter:blur(0);
+  transition:opacity .45s .35s var(--ease),transform .5s .3s cubic-bezier(.4,0,.2,1),filter .4s .35s var(--ease);
 }
 .phase-card-v2__num{
-  font-family:var(--sans);font-size:40px;font-weight:var(--fw-regular);
+  font-family:var(--sans);font-size:48px;font-weight:var(--fw-regular);
   letter-spacing:-3.2px;line-height:1;padding:24px 0 0 24px;
+  opacity:.4;
 }
 .phase-card-v2__content{
   padding:20px 48px 80px 24px;
 }
 .phase-card-v2__date{
   font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-medium);
-  line-height:1.1;margin-bottom:20px;
+  line-height:1.1;margin-bottom:20px;letter-spacing:.06em;text-transform:uppercase;
 }
-.phase-card-v2__title{
-  font-family:var(--sans);font-size:40px;font-weight:var(--fw-regular);
-  letter-spacing:-3.2px;line-height:1;margin:0 0 40px;
+h3.phase-card-v2__title{
+  font-family:var(--sans);font-size:64px;font-weight:var(--fw-regular);
+  letter-spacing:-4px;line-height:1;margin:0 0 32px;
 }
 .phase-card-v2__body{font-size:16px;line-height:1.5;letter-spacing:-0.16px}
 .phase-card-v2__body p{margin-bottom:12px}
@@ -927,11 +989,12 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .phase-card-v2[data-phase="3"] .phase-card-v2__detail-link,
 .phase-card-v2[data-phase="5"] .phase-card-v2__detail-link{color:#fff}
 .phase-card-v2__badges{
-  position:absolute;bottom:24px;left:24px;
-  display:flex;flex-direction:column;gap:8px;
-  opacity:0;transition:opacity .15s var(--ease);
+  position:absolute;bottom:24px;left:124px;
+  display:flex;gap:8px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .15s var(--ease),transform .15s var(--ease);
 }
-.phase-card-v2.is-active .phase-card-v2__badges{opacity:1;transition:opacity .3s .5s var(--ease)}
+.phase-card-v2.is-active .phase-card-v2__badges{opacity:1;transform:translateY(0);transition:opacity .4s .6s var(--ease),transform .4s .6s var(--ease)}
 .phase-badge{
   font-family:var(--sans);font-size:14px;font-weight:var(--fw-medium);
   background:var(--brown-04);color:var(--yellow-00);
@@ -987,7 +1050,8 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   display:flex;align-items:center;justify-content:center;
   transition:background .2s;
 }
-.phase-nav__btn:hover{background:var(--gray-02)}
+.phase-nav__btn:hover{background:var(--gray-02);transform:scale(1.1)}
+.phase-nav__btn:active{transform:scale(.95)}
 .phase-nav__btn svg{width:20px;height:20px;fill:none;stroke:var(--brown-04);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ═══════════════════════════════════════════════
@@ -1007,14 +1071,14 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .gantt-bar--purple-light{background:var(--purple-01);color:var(--text-secondary)}
 .gantt-bar--purple-mid{background:var(--accent-mid);color:#fff}
 .gantt-bar--accent{background:var(--accent);color:#fff}
-.gantt-bar--lime{background:var(--yellow-accent);color:var(--red-brand)}
+.gantt-bar--lime{background:var(--yellow-accent);color:var(--brown-05)}
 .gantt-bar--dark{background:var(--brown-05);color:#fff}
 .gantt-decision{display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;width:24px}
-.gantt-decision__line{width:2px;background:var(--red-brand);height:calc(100% - 24px);position:absolute;bottom:0;left:50%;transform:translateX(-50%)}
-.gantt-decision__icon{width:22px;height:22px;color:var(--red-brand);position:relative;z-index:1;flex-shrink:0}
-.gantt-row--ce{margin-top:12px}
+.gantt-decision__line{width:2px;background:#FF0026;height:36px;position:absolute;top:50%;left:-2px;transform:translateY(-50%)}
+.gantt-decision__icon{width:22px;height:22px;color:#FF0026;position:relative;z-index:1;flex-shrink:0}
+.gantt-row--ce{margin-top:12px;gap:8px}
 .gantt-legend{display:flex;align-items:center;gap:8px;margin-top:20px}
-.gantt-legend__icon{width:16px;height:16px;color:var(--red-brand);flex-shrink:0}
+.gantt-legend__icon{width:16px;height:16px;color:#FF0026;flex-shrink:0}
 .gantt-legend__text{font-family:var(--sans);font-size:var(--text-metadata);color:var(--text-tertiary)}
 
 /* ═══════════════════════════════════════════════
@@ -1351,8 +1415,12 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   max-height:1200px;opacity:1;
 }
 .po-panel__inner{
-  padding:0 0 56px;
+  padding:32px 40px 40px;
   display:flex;flex-direction:column;gap:0;
+  background:var(--gray-01);
+  border:1px solid var(--gray-02);
+  border-radius:var(--radius-lg);
+  margin:16px 0 48px;
 }
 /* Zone 1: Subtitle + description (full-width) */
 .po-panel__intro{
@@ -1374,6 +1442,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .po-stat{
   padding:20px 16px;border-radius:var(--radius-md);
   display:flex;flex-direction:column;gap:4px;
+  align-items:center;text-align:center;
 }
 .po-stat__value{
   font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);
@@ -1521,10 +1590,11 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   #cover{min-height:auto;padding:40px 36px;page-break-after:always}
   body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .anim,.scroll-reveal .sr-word{opacity:1!important;transform:none!important;filter:none!important}
-  .finding-detail{max-height:none!important;opacity:1!important;margin-top:12px!important}
+  .evidence-item__panel{max-height:none!important;opacity:1!important}
+  .evidence-item__toggle{display:none}
   .phase-nav{display:none}
   .phase-card-v2{min-height:auto;page-break-inside:avoid}
-  .finding-expand-hint{display:none}
+  .evidence-item{page-break-inside:avoid}
   .gantt-bar{transform:scaleX(1)!important}
 
   .cbe-dropdowns{max-height:none!important;opacity:1!important;overflow:visible!important;margin:24px 0 0!important;transform:none!important;display:block!important}
@@ -1596,11 +1666,11 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   .interstitial::before{display:none}
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
-  .findings-grid,.horizons-grid,.competitor-grid,.insight-grid{grid-template-columns:1fr}
+  .horizons-grid,.competitor-grid,.insight-grid{grid-template-columns:1fr}
   .phase-card-v2{grid-template-columns:1fr;min-height:auto}
   .phase-card-v2__num{padding:20px 20px 0;font-size:32px}
   .phase-card-v2__content{padding:8px 20px 70px}
-  .phase-card-v2__title{font-size:32px;margin-bottom:24px}
+  .phase-card-v2__title{font-size:36px;margin-bottom:24px}
   .s04-diagram-svg,.s04-after-svg{height:440px}
   .s04-panels{min-height:440px}
   .transformation-reality{padding:24px 20px}
@@ -2503,7 +2573,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 
       <div class="hbw-accordion" id="hbw-accordion">
         <!-- 01 Automation -->
-        <div class="hbw-item is-active" data-layer="1">
+        <div class="hbw-item" data-layer="1">
           <span class="hbw-item__num">01</span>
           <div>
             <span class="hbw-item__title">Automation</span>
@@ -2609,7 +2679,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
         <!-- Pre-engagement (APR–early MAY) + decision -->
         <div class="gantt-row">
           <div class="gantt-bar gantt-bar--muted" style="grid-column:1/2" data-gantt-delay="0">Pre-engagement</div>
-          <div class="gantt-decision" style="grid-column:2"><span class="gantt-decision__line"></span><svg class="gantt-decision__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.48 10.41c-.39.39-1.04.39-1.43 0l-4.47-4.24-7.05 7.04-1.06-1.06 7.76-7.75c.78-.78 2.05-.78 2.83 0l4.24 4.24 2.12-2.12 1.06 1.06-4 3.83zM11 14.17l-1.41-1.36c-.78-.78-2.05-.78-2.83 0l-2.83 2.83 1.06 1.06 2.83-2.83 1.41 1.41-3.54 3.54 1.06 1.06 4.24-4.24c.39-.39.39-1.02 0-1.41l.01-.06zM16.83 14.83l-3.54-3.54-1.41 1.41 3.54 3.54c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41z"/></svg></div>
+          <div class="gantt-decision" style="grid-column:2"><span class="gantt-decision__line"></span><svg class="gantt-decision__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
         </div>
         <!-- Intake (MAY) -->
         <div class="gantt-row">
@@ -2618,7 +2688,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
         <!-- Discovery (JUN–JUL) + decision -->
         <div class="gantt-row">
           <div class="gantt-bar gantt-bar--purple-mid" style="grid-column:3/5" data-gantt-delay="300">Discovery</div>
-          <div class="gantt-decision" style="grid-column:5"><span class="gantt-decision__line"></span><svg class="gantt-decision__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.48 10.41c-.39.39-1.04.39-1.43 0l-4.47-4.24-7.05 7.04-1.06-1.06 7.76-7.75c.78-.78 2.05-.78 2.83 0l4.24 4.24 2.12-2.12 1.06 1.06-4 3.83zM11 14.17l-1.41-1.36c-.78-.78-2.05-.78-2.83 0l-2.83 2.83 1.06 1.06 2.83-2.83 1.41 1.41-3.54 3.54 1.06 1.06 4.24-4.24c.39-.39.39-1.02 0-1.41l.01-.06zM16.83 14.83l-3.54-3.54-1.41 1.41 3.54 3.54c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41z"/></svg></div>
+          <div class="gantt-decision" style="grid-column:5"><span class="gantt-decision__line"></span><svg class="gantt-decision__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></div>
         </div>
         <!-- Implementation (AUG–OCT) -->
         <div class="gantt-row">
@@ -2636,14 +2706,14 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
       </div>
       <!-- Legend -->
       <div class="gantt-legend">
-        <svg class="gantt-legend__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.48 10.41c-.39.39-1.04.39-1.43 0l-4.47-4.24-7.05 7.04-1.06-1.06 7.76-7.75c.78-.78 2.05-.78 2.83 0l4.24 4.24 2.12-2.12 1.06 1.06-4 3.83zM11 14.17l-1.41-1.36c-.78-.78-2.05-.78-2.83 0l-2.83 2.83 1.06 1.06 2.83-2.83 1.41 1.41-3.54 3.54 1.06 1.06 4.24-4.24c.39-.39.39-1.02 0-1.41l.01-.06zM16.83 14.83l-3.54-3.54-1.41 1.41 3.54 3.54c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41z"/></svg>
+        <svg class="gantt-legend__icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
         <span class="gantt-legend__text">Re-engagement decision</span>
       </div>
     </div>
 
-    <div class="box box--accent anim" style="--d:.3s">
-      <p>This framework:</p>
-      <ul>
+    <div class="bb-bridge anim" style="--d:.3s">
+      <p class="scroll-reveal" style="--d:.3s"><strong>This framework:</strong></p>
+      <ul style="margin-top:8px;padding-left:24px;font-size:var(--text-body);color:var(--text-secondary);line-height:1.6">
         <li>Moves from fragmented understanding to validated operational clarity</li>
         <li>Ensures decisions are grounded in evidence, not assumption</li>
         <li>Connects workflows, systems, data, and decision-making</li>
@@ -2652,11 +2722,14 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
       </ul>
     </div>
 
-    <div class="value-prop anim" style="--d:.32s">
-      <p>Transformation is not introduced.<br>It is engineered &mdash; phase by phase, based on evidence.</p>
+    <div class="section-header anim" style="--d:.35s">
+      <div class="section-header__left">
+        <h2 style="--d:.35s">The <span style="color:var(--accent)">Phases</span></h2>
+      </div>
+      <div class="section-header__right" style="padding-top:0">
+        <p class="scroll-reveal" style="--d:.36s">Each phase is designed to build on the previous one &mdash; reducing ambiguity, increasing precision, and enabling confident decision-making at every stage.</p>
+      </div>
     </div>
-
-    <h3 class="anim" style="--d:.35s">The Phases</h3>
 
     <div class="phase-stack" id="phase-stack">
       <!-- Phase 0: Pre-engagement -->
@@ -2747,6 +2820,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
             <h3 class="phase-card-v2__title">Implementation</h3>
             <div class="phase-card-v2__body">
               <p>The Implementation phase activates the transformation roadmap defined during Discovery. At this stage, the Digital Backbone is built in practice &mdash; redesigning workflows, connecting systems, and embedding new ways of operating across the organization.</p>
+              <p>The exact scope, sequencing, and priorities of this phase are defined based on the validated findings and roadmap produced in Discovery.</p>
               <h4>Key Milestones</h4>
               <ul>
                 <li>Prioritized initiatives based on Discovery outputs</li>
@@ -2754,10 +2828,9 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
                 <li>Integration across tools, data, and teams</li>
                 <li>Rollout of new operating model</li>
                 <li>Governance and performance tracking established</li>
-                <li>Activated platforms</li>
-                <li>Built automations</li>
-                <li>Trained champions</li>
               </ul>
+              <h4>Outcome</h4>
+              <p>Activated platforms, built automations, and trained champions.</p>
             </div>
           </div>
         </div>
@@ -2979,32 +3052,38 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
       </div>
     </div>
 
-    <div class="value-prop anim" style="--d:.25s">
-      <p>Aggregate Estimated Impact: <strong><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="2.85" data-count-prefix="$" data-count-suffix="M" data-count-decimals="2" data-glitch>$0</span> annually</strong></p>
+    <div class="findings-hero anim" style="--d:.25s">
+      <span class="findings-hero__amount"><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="2.85" data-count-prefix="$" data-count-suffix="M" data-count-decimals="2" data-glitch>$0</span></span>
+      <span class="findings-hero__label">Aggregate estimated annual impact*</span>
     </div>
 
-    <p class="anim" style="--d:.3s;font-size:var(--text-sm);color:var(--text-secondary);font-style:italic">* Findings are based on initial conversations and directional estimates. Actual impact may vary &mdash; figures will be validated and refined as part of the diagnostic phase.</p>
+    <!-- HIGH IMPACT -->
+    <p class="evidence-group-label evidence-group-label--red anim" style="--d:.3s">High Impact</p>
 
-    <div class="findings-grid">
-      <div class="finding-card anim tilt-card" style="--d:.25s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Asset Management Blind Spot</h3><span class="severity-tag severity-tag--red">High Impact</span></div>
-        <div class="finding-impact">$500K &ndash; $1.2M / year</div>
-        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--red)">Estimated annual impact</div>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <blockquote><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn&rsquo;t tell you exactly what we have.&rdquo;</p></blockquote>
+    <div class="evidence-item evidence-item--red anim" style="--d:.35s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Asset Management Blind Spot</span>
+        <span class="evidence-item__impact">$500K &ndash; $1.2M / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn&rsquo;t tell you exactly what we have.&rdquo;</p></blockquote>
           <p>Without centralized asset tracking, teams rebuild what already exists across three warehouses and 40+ countries.</p>
           <div class="box box--amber"><span class="box-label">Rationale</span><p>Estimated 5&ndash;10% annual inefficiency from lost, unused, or duplicated assets. Additional costs from redundant fabrication and logistics.</p></div>
         </div>
       </div>
+    </div>
 
-      <div class="finding-card anim tilt-card" style="--d:.35s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Sales &harr; Production Disconnect</h3><span class="severity-tag severity-tag--red">High Impact</span></div>
-        <div class="finding-impact">$400K &ndash; $800K / year</div>
-        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--red)">Estimated annual impact</div>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <blockquote><p>&ldquo;Sales will sell something and then production finds out and goes, &lsquo;Wait, we can&rsquo;t do that in that timeline.&rsquo;&rdquo;</p></blockquote>
+    <div class="evidence-item evidence-item--red anim" style="--d:.4s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Sales &harr; Production Disconnect</span>
+        <span class="evidence-item__impact">$400K &ndash; $800K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;Sales will sell something and then production finds out and goes, &lsquo;Wait, we can&rsquo;t do that in that timeline.&rsquo;&rdquo;</p></blockquote>
           <p>Sales operates without visibility into production capacity, leading to over-promises and margin erosion.</p>
           <div class="box box--amber"><span class="box-label">Rationale</span>
             <p>Based on observed workflow patterns and typical cost structures in custom build environments:</p>
@@ -3016,56 +3095,75 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="finding-card anim tilt-card" style="--d:.45s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Executive Time Drain</h3><span class="severity-tag severity-tag--amber">Medium Impact</span></div>
-        <div class="finding-impact">$225K &ndash; $300K / year</div>
-        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--amber)">Estimated annual impact</div>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <blockquote><p>&ldquo;I get 400 to 500 emails a day. I&rsquo;d say 70% are CCs where I don&rsquo;t really need to be included.&rdquo;</p></blockquote>
+    <!-- MEDIUM IMPACT -->
+    <p class="evidence-group-label evidence-group-label--amber anim" style="--d:.45s">Medium Impact</p>
+
+    <div class="evidence-item evidence-item--amber anim" style="--d:.5s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Executive Time Drain</span>
+        <span class="evidence-item__impact">$225K &ndash; $300K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;I get 400 to 500 emails a day. I&rsquo;d say 70% are CCs where I don&rsquo;t really need to be included.&rdquo;</p></blockquote>
           <p>Senior leadership time is consumed by low-value communication &mdash; reducing focus on strategic decisions and operational alignment.</p>
           <div class="box box--amber"><span class="box-label">Rationale</span><p>400&ndash;500 emails/day with ~70% low-value or unnecessary. Estimated 2&ndash;3 hours/day of executive time lost. Based on average executive cost of $150&ndash;$250/hour.</p></div>
         </div>
       </div>
+    </div>
 
-      <div class="finding-card anim tilt-card" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Underutilized Technology Investment</h3><span class="severity-tag severity-tag--amber">Medium Impact</span></div>
-        <div class="finding-impact">$75K &ndash; $200K / year</div>
-        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--amber)">Estimated annual impact</div>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <blockquote><p>&ldquo;We&rsquo;re paying for ClickUp Brain but nobody&rsquo;s really using it.&rdquo;</p></blockquote>
+    <div class="evidence-item evidence-item--amber anim" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Underutilized Technology Investment</span>
+        <span class="evidence-item__impact">$75K &ndash; $200K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;We&rsquo;re paying for ClickUp Brain but nobody&rsquo;s really using it.&rdquo;</p></blockquote>
           <p>Technology investments are already in place &mdash; but without adoption, integration, and shared workflows, their value erodes over time.</p>
           <div class="box box--amber"><span class="box-label">Rationale</span><p>~$60K&ndash;$130K annual investment across core tools (ClickUp, M365, AI tools). Estimated 40&ndash;70% underutilization due to fragmented adoption and lack of integration. Lost productivity and coordination value typically 2&ndash;3x tool cost.</p></div>
         </div>
       </div>
+    </div>
 
-      <div class="finding-card anim tilt-card" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Generational Adoption Gap</h3><span class="severity-tag severity-tag--blue">Strategic</span></div>
-        <div class="finding-impact">$200K &ndash; $500K / year</div>
-        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--blue)">Estimated annual impact</div>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <blockquote><p>&ldquo;The younger employees pick things up instantly. Some of our senior people&hellip; it&rsquo;s a harder conversation.&rdquo;</p></blockquote>
+    <!-- STRATEGIC -->
+    <p class="evidence-group-label evidence-group-label--blue anim" style="--d:.6s">Strategic</p>
+
+    <div class="evidence-item evidence-item--blue anim" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Generational Adoption Gap</span>
+        <span class="evidence-item__impact">$200K &ndash; $500K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;The younger employees pick things up instantly. Some of our senior people&hellip; it&rsquo;s a harder conversation.&rdquo;</p></blockquote>
           <p>Technology adoption is inconsistent across the organization. Junior and technical teams adopt new tools quickly. But adoption at the management layer lags &mdash; creating bottlenecks in approvals, decision-making, and execution flow.</p>
           <div class="box box--amber"><span class="box-label">Rationale</span><p>~20&ndash;30 managers involved in approvals / decision layers. 5&ndash;10 hours/week lost per manager due to friction (tool gaps, back-and-forth, manual processes). Avg loaded cost: ~$120&ndash;150/hour.</p></div>
         </div>
       </div>
+    </div>
 
-      <div class="finding-card anim tilt-card" style="--d:.75s" role="button" tabindex="0" aria-expanded="false">
-        <div class="finding-header"><h3>Missing Strategic Tech Layer</h3><span class="severity-tag severity-tag--blue">Strategic</span></div>
-        <div class="finding-impact">$200K &ndash; $400K / year</div>
-        <div class="finding-impact" style="font-size:var(--text-sm);color:var(--blue)">Estimated annual impact</div>
-        <div class="finding-expand-hint">expand</div>
-        <div class="finding-detail">
-          <blockquote><p>&ldquo;We don&rsquo;t have a CTO. We&rsquo;ve never had someone whose job is to look at all of this holistically.&rdquo;</p></blockquote>
+    <div class="evidence-item evidence-item--blue anim" style="--d:.7s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Missing Strategic Tech Layer</span>
+        <span class="evidence-item__impact">$200K &ndash; $400K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;We don&rsquo;t have a CTO. We&rsquo;ve never had someone whose job is to look at all of this holistically.&rdquo;</p></blockquote>
           <p>Technology decisions are made in isolation &mdash; by function, by need, and in real time. Without a central owner, tools, data, and workflows evolve independently rather than as a system.</p>
           <div class="box box--amber"><span class="box-label">Rationale</span><p>Direct Waste: $15K&ndash;$60K. Workarounds: $90K&ndash;$300K. Lost leverage: $100K&ndash;$400K.</p></div>
         </div>
       </div>
-
     </div>
+
+    <p class="anim" style="--d:.75s;font-size:var(--text-sm);color:var(--text-secondary);font-style:italic;margin-top:24px">* Findings are based on initial conversations and directional estimates. Actual impact may vary &mdash; figures will be validated and refined as part of the diagnostic phase.</p>
   </section>
   <!-- INTERSTITIAL 4 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
@@ -3861,11 +3959,11 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* ── MODULE C: Interactive Elements ───────────── */
 ;(function(){
-  // Finding cards expand
-  document.querySelectorAll('.finding-card[role="button"]').forEach(card=>{
-    function toggle(){ const x=card.classList.toggle('is-expanded'); card.setAttribute('aria-expanded',x); }
-    card.addEventListener('click',toggle);
-    card.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+  // Evidence Stack accordion
+  document.querySelectorAll('.evidence-item[role="button"]').forEach(item=>{
+    function toggle(){ const open=item.classList.toggle('is-open'); item.setAttribute('aria-expanded',open); }
+    item.querySelector('.evidence-item__header').addEventListener('click',toggle);
+    item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
   });
 
   // Phase Overview accordion
