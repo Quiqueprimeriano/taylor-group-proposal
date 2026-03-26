@@ -605,6 +605,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   background:var(--accent);border-radius:var(--radius-lg);
   padding:28px 40px;margin:28px 0 12px;text-align:center;
   color:#fff;font-family:var(--sans);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
 }
 .findings-hero__amount{
   font-size:var(--text-h2);font-weight:var(--fw-semibold);
@@ -763,6 +764,73 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .cbe-bar.is-open .cbe-bar__arrow{transform:translateY(-50%) rotate(180deg)}
 .cbe-bar.is-open{border-radius:140px 140px 0 0}
 
+/* ── CBE Accordion — oversized phase titles ── */
+.cbe-accordion{margin-top:var(--space-2xl);gap:0}
+.cbe-accordion .po-item{border-top:none;border-bottom:1px solid var(--gray-03)}
+.cbe-accordion .po-item:first-child{border-top:1px solid var(--gray-03)}
+.cbe-accordion .po-item__header{
+  display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;padding:40px 0;gap:0;
+}
+.cbe-accordion .po-item__title{
+  font-size:80px;letter-spacing:-6px;line-height:.95;
+  margin:0;grid-column:1;grid-row:1;
+  transition:color .35s var(--ease);
+}
+.cbe-accordion .po-item__num{
+  font-family:var(--sans);font-size:var(--text-body);font-weight:var(--fw-regular);
+  color:var(--text-tertiary);letter-spacing:var(--ls-body);text-transform:none;
+  min-width:auto;white-space:nowrap;
+  grid-column:1;grid-row:2;padding-top:8px;
+}
+.cbe-accordion .po-item__toggle{
+  width:48px;height:48px;font-size:28px;
+  border-radius:50%;background:var(--gray-02);
+  grid-column:3;grid-row:1/3;align-self:center;
+  transition:transform .35s var(--ease),background .35s var(--ease),color .35s var(--ease);
+}
+.cbe-accordion .po-item:hover .po-item__title{color:var(--accent)}
+.cbe-accordion .po-item.is-open .po-item__title{color:var(--accent)}
+.cbe-accordion .po-item.is-open .po-item__toggle{
+  background:var(--accent);color:#fff;
+}
+.cbe-accordion .po-panel__inner{
+  padding:28px 40px 32px;
+  background:var(--bg-white);
+  border:1px solid var(--gray-02);
+  border-radius:var(--radius-xl);
+  margin:4px 0 16px;
+  box-shadow:var(--shadow-md);
+}
+.cbe-accordion .po-panel__subtitle{margin:0 0 var(--space-md)}
+/* Capability grid inside CBE panels */
+.cbe-cap-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px 40px;
+  margin-bottom:var(--space-lg);
+}
+.cbe-cap{display:flex;flex-direction:column;gap:4px}
+.cbe-cap__title{
+  font-family:var(--sans);font-size:var(--text-body);font-weight:var(--fw-semibold);
+  letter-spacing:var(--ls-body);line-height:var(--lh-h3);color:var(--text);
+}
+.cbe-cap__desc{
+  font-family:var(--sans);font-size:var(--text-sm);line-height:var(--lh-body);
+  color:var(--text-tertiary);
+}
+/* CBE comparison row */
+.cbe-comparison-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+@media(max-width:768px){
+  .cbe-accordion .po-item__header{grid-template-columns:1fr auto;padding:24px 0}
+  .cbe-accordion .po-item__title{font-size:48px;letter-spacing:-3px;grid-column:1;grid-row:1}
+  .cbe-accordion .po-item__num{grid-column:1;grid-row:2}
+  .cbe-accordion .po-item__toggle{grid-column:2;grid-row:1/3;width:40px;height:40px;font-size:22px}
+  .cbe-accordion .po-panel__inner{padding:24px 20px 28px}
+  .cbe-cap-grid{grid-template-columns:1fr;gap:24px}
+  .cbe-comparison-row{grid-template-columns:1fr}
+}
+
 /* Dropdown wrapper — stacks all panels, controls open/close */
 .cbe-dropdowns{
   display:grid;
@@ -818,7 +886,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   display:grid;grid-template-columns:1fr 1fr;gap:16px;
 }
 .cbe-compare-card{
-  border-radius:var(--radius-md);padding:24px;
+  border-radius:var(--radius-md);padding:16px 20px;
   text-align:center;
 }
 .cbe-compare-card--before{background:var(--gray-01)}
@@ -1167,7 +1235,34 @@ h3.phase-card-v2__title{
 .timeline-node:nth-child(2) .timeline-label,.timeline-node:nth-child(3) .timeline-label,.timeline-node:nth-child(4) .timeline-label{text-align:center}
 .timeline-node:nth-child(5) .timeline-label{text-align:right}
 
-/* Timeline — Taylor variant */
+/* Timeline — Taylor variant (rich labels) */
+.timeline--taylor .timeline-node{align-items:flex-start}
+.timeline--taylor .timeline-node:last-child{align-items:flex-start}
+.timeline--taylor .timeline-label{max-width:190px;text-align:left}
+.timeline--taylor .timeline-node:nth-child(2) .timeline-label,
+.timeline--taylor .timeline-node:nth-child(3) .timeline-label,
+.timeline--taylor .timeline-node:nth-child(4) .timeline-label,
+.timeline--taylor .timeline-node:nth-child(5) .timeline-label{text-align:left}
+.timeline--taylor .timeline-node__subtitle{
+  font-family:var(--sans);font-size:var(--text-2xs);color:var(--accent-mid);
+  font-style:italic;display:block;margin-top:2px;line-height:1.35;
+}
+.timeline--taylor .timeline-node__details{
+  font-family:var(--sans);font-size:var(--text-2xs);color:var(--text-secondary);
+  line-height:1.45;margin-top:6px;padding-left:0;list-style:none;
+}
+.timeline--taylor .timeline-node__details li{
+  padding-left:1em;position:relative;margin-bottom:2px;
+}
+.timeline--taylor .timeline-node__details li::before{
+  content:'\203A';position:absolute;left:0;color:var(--accent);font-weight:700;
+}
+.timeline--taylor .timeline-node__takeaway{
+  font-family:var(--sans);font-size:var(--text-2xs);font-weight:var(--fw-medium);
+  color:var(--accent-dark);display:block;margin-top:6px;
+  border-top:1px solid var(--gray-03);padding-top:6px;
+  line-height:1.35;
+}
 .timeline--taylor{margin-top:12px;margin-bottom:48px}
 .timeline--taylor::before{background:linear-gradient(90deg,var(--accent),var(--accent-dark))}
 .timeline--taylor .timeline-node__dot{background:var(--accent);box-shadow:0 0 0 2px var(--accent),0 0 12px rgba(84,54,255,.35)}
@@ -1176,7 +1271,8 @@ h3.phase-card-v2__title{
 .timeline--taylor .timeline-node:nth-child(3) .timeline-node__dot{background:linear-gradient(135deg,var(--accent),var(--accent-dark))}
 .timeline--taylor .timeline-node:nth-child(4) .timeline-node__dot{background:linear-gradient(135deg,var(--accent-dark),#5a5ad4)}
 .timeline--taylor .timeline-node:nth-child(5) .timeline-node__dot{background:linear-gradient(135deg,#5a5ad4,var(--accent))}
-.timeline--taylor .timeline-label__year{color:var(--accent)}
+.timeline--taylor .timeline-label__year{color:var(--accent);font-size:var(--text-base)}
+.timeline--taylor .timeline-label__title{font-size:var(--text-xs)}
 .timeline-pair-label{font-family:var(--sans);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.1em;color:var(--text-tertiary);margin-bottom:4px}
 .timeline-pair-label--taylor{color:var(--accent);margin-top:32px}
 
@@ -1201,20 +1297,54 @@ h3.phase-card-v2__title{
 .insight-card__takeaway{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0;border-top:1px solid var(--border-light);padding-top:10px}
 
 /* AI Phase chart */
-/* AI Phase Pyramid */
-.ai-phase-chart{margin:32px 0 40px;max-width:640px;margin-left:auto;margin-right:auto}
-.ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);color:var(--text-tertiary);margin:0 0 24px;text-transform:uppercase;letter-spacing:.08em;text-align:center}
-.ai-pyramid{display:flex;flex-direction:column;align-items:center;gap:4px}
-.ai-pyramid__tier{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 20px;border-radius:var(--radius-sm);font-family:var(--sans);position:relative;text-align:center}
-.ai-pyramid__tier:nth-child(1){width:30%;background:var(--accent-dark);color:#fff}
-.ai-pyramid__tier:nth-child(2){width:52%;background:var(--accent);color:#fff}
-.ai-pyramid__tier:nth-child(3){width:74%;background:var(--accent-mid);color:#fff}
-.ai-pyramid__tier:nth-child(4){width:96%;background:var(--accent-light);color:var(--text-primary)}
-.ai-pyramid__pct{font-size:var(--text-h3);font-weight:var(--fw-semibold);flex-shrink:0}
+/* AI Phase Pyramid — true pyramid shape */
+.ai-phase-chart{margin:32px 0 40px;max-width:720px;margin-left:auto;margin-right:auto}
+.ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);color:var(--text-tertiary);margin:0 0 28px;text-transform:uppercase;letter-spacing:.08em;text-align:center}
+.ai-pyramid{display:flex;flex-direction:column;align-items:center;gap:0;font-family:var(--sans)}
+.ai-pyramid__tier{
+  display:flex;align-items:center;width:100%;
+  position:relative;
+}
+/* Trapezoid bar via clip-path — each tier widens progressively */
+.ai-pyramid__bar{
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto;height:64px;position:relative;
+  transition:filter .3s var(--ease);
+}
+.ai-pyramid__tier:hover .ai-pyramid__bar{filter:brightness(1.1)}
+/* Tier 1: 7% — top of pyramid (narrowest) */
+.ai-pyramid__tier:nth-child(1) .ai-pyramid__bar{
+  width:100%;background:var(--accent-dark);color:#fff;
+  clip-path:polygon(42% 0%, 58% 0%, 64% 100%, 36% 100%);
+}
+/* Tier 2: 31% */
+.ai-pyramid__tier:nth-child(2) .ai-pyramid__bar{
+  width:100%;background:var(--accent);color:#fff;
+  clip-path:polygon(36% 0%, 64% 0%, 76% 100%, 24% 100%);
+}
+/* Tier 3: 30% */
+.ai-pyramid__tier:nth-child(3) .ai-pyramid__bar{
+  width:100%;background:var(--accent-mid);color:#fff;
+  clip-path:polygon(24% 0%, 76% 0%, 88% 100%, 12% 100%);
+}
+/* Tier 4: 32% — base (widest) */
+.ai-pyramid__tier:nth-child(4) .ai-pyramid__bar{
+  width:100%;background:var(--accent-light);color:var(--text-primary);
+  clip-path:polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+}
+.ai-pyramid__pct{font-size:var(--text-h3);font-weight:var(--fw-semibold);white-space:nowrap;z-index:1}
 .ai-pyramid__pct::after{content:'%';font-size:var(--text-sm);font-weight:var(--fw-medium);opacity:.7}
-.ai-pyramid__info{text-align:left;line-height:1.35}
-.ai-pyramid__phase{font-size:var(--text-sm);font-weight:var(--fw-semibold);display:block}
-.ai-pyramid__desc{font-size:var(--text-xs);opacity:.8;display:block}
+/* Labels positioned to the right */
+.ai-pyramid__info{
+  position:absolute;left:calc(88% + 16px);top:50%;transform:translateY(-50%);
+  line-height:1.3;white-space:nowrap;
+}
+.ai-pyramid__tier:nth-child(1) .ai-pyramid__info{left:calc(64% + 16px)}
+.ai-pyramid__tier:nth-child(2) .ai-pyramid__info{left:calc(76% + 16px)}
+.ai-pyramid__tier:nth-child(3) .ai-pyramid__info{left:calc(88% + 16px)}
+.ai-pyramid__tier:nth-child(4) .ai-pyramid__info{left:calc(100% + 16px)}
+.ai-pyramid__phase{font-size:var(--text-sm);font-weight:var(--fw-semibold);display:block;color:var(--text-primary)}
+.ai-pyramid__desc{font-size:var(--text-xs);display:block;color:var(--text-tertiary)}
 
 /* Timeline node details */
 .timeline-node__subtitle{font-family:var(--sans);font-size:var(--text-xs);color:var(--text-tertiary);font-style:italic;display:block;margin-top:2px}
@@ -1316,62 +1446,120 @@ h3.phase-card-v2__title{
   white-space:nowrap;
 }
 .svc-badge+.svc-badge{margin-left:6px}
-/* ── Investment cards (Diagnosis) ── */
+/* ── Diagnosis Engagement Models ── */
 .invest-heading{
   font-family:var(--sans);font-size:var(--text-h2);font-weight:var(--fw-regular);
   letter-spacing:var(--ls-heading);line-height:var(--lh-heading);
-  color:var(--text-primary);margin:56px 0 28px;
+  color:var(--text-primary);margin:40px 0 16px;
 }
-.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px}
+.invest-subtitle{
+  font-family:var(--sans);font-size:var(--text-sm);line-height:var(--lh-body);
+  color:var(--text-secondary);text-align:center;max-width:640px;margin:0 auto 24px;
+}
+.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;max-width:860px;margin-left:auto;margin-right:auto;margin-top:28px}
 .invest-card{
-  background:var(--bg-white);border:1px solid var(--gray-02);
-  border-radius:var(--radius-xl);padding:32px;
+  background:var(--bg-white);
+  border-radius:var(--radius-xl);
   display:flex;flex-direction:column;
+  position:relative;
+  border:1px solid var(--gray-03);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
 }
-.invest-card__phases{display:flex;gap:6px;margin-bottom:32px}
-.invest-card__phase{
-  flex:1;border-radius:var(--radius-md);padding:12px 16px;
-  font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-medium);
-  display:flex;flex-direction:column;gap:2px;
+.invest-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-xl);
 }
-.invest-card__phase-num{
-  font-size:var(--text-metadata);font-weight:var(--fw-medium);opacity:.6;
+/* Card top accent bar */
+.invest-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--gray-05),var(--gray-03));
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
 }
-.invest-card__phase--intake{background:var(--purple-01);color:var(--brown-05)}
-.invest-card__phase--discovery{background:var(--accent-mid);color:#fff}
-.invest-card__phase--comms{background:var(--brown-05);color:#fff}
-.invest-card__note{
-  font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-medium);
-  color:var(--accent);margin-top:auto;padding-top:16px;
+/* Card header zone */
+.invest-card__head{
+  padding:18px 20px 14px;
+  background:var(--gray-01);
+  border-bottom:1px solid var(--gray-02);
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
 }
-.invest-card h4{
-  font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-semibold);
-  color:var(--text-primary);margin:0 0 16px;
+.invest-card__title{
+  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);
+  letter-spacing:var(--ls-h3);line-height:var(--lh-h3);
+  color:var(--text-primary);margin:0 0 4px;
+}
+.invest-card__head-desc{
+  font-family:var(--sans);font-size:var(--text-xs);line-height:var(--lh-body);
+  color:var(--text-tertiary);margin:0;
+}
+/* Card body — two sections */
+.invest-card__body{padding:16px 20px 12px;flex:1}
+.invest-card__section-label{
+  font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--accent);margin:0 0 8px;display:flex;align-items:center;gap:8px;
+}
+.invest-card__section-label::before{
+  content:'';width:16px;height:2px;background:var(--accent);flex-shrink:0;
 }
 .invest-card ul{
-  list-style:disc;padding-left:20px;margin:0 0 24px;
-  font-size:var(--text-sm);line-height:1.7;color:var(--text-secondary);
+  list-style:none;padding:0;margin:0 0 14px;
 }
-.invest-card li{margin-bottom:2px}
+.invest-card li{
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.5;
+  color:var(--text-secondary);
+  padding:3px 0 3px 16px;position:relative;
+  border-bottom:1px solid var(--gray-02);
+}
+.invest-card li:last-child{border-bottom:none}
+.invest-card li::before{
+  content:'\2192';position:absolute;left:0;top:4px;
+  color:var(--accent-mid);font-size:var(--text-xs);
+}
+/* Footer — meta badges */
 .invest-card__footer{
-  display:flex;align-items:baseline;gap:32px;
-  border-top:1px solid var(--gray-02);padding-top:20px;margin-top:auto;
+  display:flex;align-items:center;gap:10px;
+  padding:10px 20px;margin-top:auto;
+  border-top:1px solid var(--gray-02);background:var(--gray-01);
+  border-radius:0 0 var(--radius-xl) var(--radius-xl);
 }
-.invest-card__meta{display:flex;flex-direction:column;gap:2px}
-.invest-card__meta-label{
-  font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-medium);
-  color:var(--text-tertiary);text-transform:capitalize;
+.invest-card__meta-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--bg-white);border:1px solid var(--gray-03);
+  border-radius:var(--radius-pill);padding:6px 12px;
+  font-family:var(--sans);font-size:var(--text-metadata);
 }
-.invest-card__meta-value{
-  font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-medium);
-  color:var(--text-primary);
+.invest-card__meta-pill strong{
+  font-weight:var(--fw-semibold);color:var(--text-primary);
 }
-.invest-card__price{
-  margin-left:auto;font-family:var(--sans);font-size:var(--text-2xl);
-  font-weight:var(--fw-semibold);color:var(--text-primary);letter-spacing:-0.5px;
+.invest-card__meta-pill span{
+  color:var(--text-tertiary);font-weight:var(--fw-medium);
+}
+/* Recommended variant — accent treatment */
+.invest-card--recommended{border:2px solid var(--accent);border-radius:var(--radius-xl)}
+.invest-card--recommended::after{
+  background:var(--gradient);height:4px;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+}
+.invest-card--recommended:hover{
+  box-shadow:var(--shadow-accent);
+}
+.invest-card--recommended .invest-card__head{
+  background:linear-gradient(135deg,var(--accent-light),var(--bg-white));
+}
+.invest-card__badge-rec{
+  position:absolute;top:0;left:24px;z-index:3;
+  transform:translateY(-50%);
+  background:var(--accent);color:#fff;
+  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
+  padding:6px 18px;border-radius:var(--radius-pill);
+  letter-spacing:.06em;text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(84,54,255,.35);
 }
 @media(max-width:768px){
   .invest-grid{grid-template-columns:1fr}
+  .invest-card__title{font-size:28px;letter-spacing:-2px}
+  .invest-card__head{padding:24px 20px 20px}
+  .invest-card__body{padding:20px 20px 16px}
+  .invest-card__footer{padding:16px 20px}
 }
 @media print{
   .invest-grid{grid-template-columns:1fr 1fr}
@@ -1708,7 +1896,9 @@ h3.phase-card-v2__title{
   .transformation-reality{padding:24px 20px}
   .transformation-reality__stats{grid-template-columns:1fr 1fr}
   .ai-phase-chart{max-width:100%}
-  .ai-pyramid__tier{width:100%!important;padding:10px 16px}
+  .ai-pyramid__bar{height:48px}
+  .ai-pyramid__info{position:static;transform:none;white-space:normal;margin-top:4px}
+  .ai-pyramid__tier{flex-direction:column;align-items:center;text-align:center;margin-bottom:8px}
   .ai-pyramid__desc{display:none}
 
   .timeline{flex-direction:column;padding:0 0 0 20px;gap:24px}
@@ -1799,9 +1989,10 @@ h3.phase-card-v2__title{
   /* Task 4 — Before/After toggle: tighter padding */
   .ba-toggle__opt{padding:8px 24px;font-size:var(--text-xs)}
 
-  /* Task 5 — AI pyramid labels: font-size reduction */
+  /* AI pyramid print */
   .ai-pyramid__pct{font-size:var(--text-base)}
   .ai-pyramid__phase{font-size:var(--text-xs)}
+  .ai-pyramid__bar{height:48px}
 
   /* Task 6 — Card padding reduction */
   .insight-card,.competitor-card,.horizon-card{padding:16px 18px}
@@ -2130,9 +2321,7 @@ h3.phase-card-v2__title{
       <p>Only ~20 &ndash; 30% of AI initiatives move beyond pilot into scaled deployment. Most value remains trapped in isolated use cases, rather than embedded into core workflows across the business.</p>
     </div>
 
-    <p class="anim scroll-reveal" style="--d:.35s">A different pattern is emerging among leading organizations.</p>
-
-    <p class="anim scroll-reveal" style="--d:.5s">They are not focused on point solutions but on <strong>Designed Transformation</strong>** &mdash; reviewing workflows alongside technology adoption, investing in data integration and cross-functional visibility, and scaling solutions across the enterprise rather than within individual teams.</p>
+    <p class="anim scroll-reveal" style="--d:.35s">A different pattern is emerging among leading organizations. They are not focused on point solutions but on <strong>Designed Transformation</strong>** &mdash; reviewing workflows alongside technology adoption, investing in data integration and cross-functional visibility, and scaling solutions across the enterprise rather than within individual teams.</p>
 
     <div class="anim" style="--d:.55s">
       <table class="paradigm-table">
@@ -2513,11 +2702,7 @@ h3.phase-card-v2__title{
     </div>
     </div><!-- /.s04-panels -->
 
-    <div class="bb-bridge anim" style="--d:.36s">
-      <p class="scroll-reveal" style="--d:.37s"><strong>Work moves across Create, Build, and Execute</strong> through a combination of tools, handoffs, and individual coordination. Information is distributed across systems. Visibility is partial. Alignment depends on people rather than structure.</p>
-    </div>
-
-    <div class="section-header anim" style="--d:.38s">
+    <div class="section-header anim" style="--d:.38s;margin-top:120px">
       <div class="section-header__left">
         <h2 style="--d:.38s"><span style="color:var(--accent)">The Digital Backbone</span><br>addresses this gap</h2>
       </div>
@@ -2527,166 +2712,148 @@ h3.phase-card-v2__title{
       </div>
     </div>
 
-    <!-- CBE Bar — Create / Build / Execute -->
-    <div class="cbe-bar anim" style="--d:.42s" id="cbe-bar">
-      <div class="cbe-bar__phases">
-        <div class="cbe-bar__phase" data-cbe="create">
-          <div class="cbe-bar__phase-row">
-            <span class="cbe-bar__dot"></span>
-            <span class="cbe-bar__name">Create</span>
-          </div>
-          <span class="cbe-bar__sub">Strategy &amp; Creative</span>
-        </div>
-        <div class="cbe-bar__phase" data-cbe="build">
-          <div class="cbe-bar__phase-row">
-            <span class="cbe-bar__dot"></span>
-            <span class="cbe-bar__name">Build</span>
-          </div>
-          <span class="cbe-bar__sub">Experiences &amp; Fabrication</span>
-        </div>
-        <div class="cbe-bar__phase" data-cbe="execute">
-          <div class="cbe-bar__phase-row">
-            <span class="cbe-bar__dot"></span>
-            <span class="cbe-bar__name">Execute</span>
-          </div>
-          <span class="cbe-bar__sub">Program Management</span>
-        </div>
-      </div>
-      <div class="cbe-bar__arrow" aria-label="Toggle details">
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-    </div>
+    <!-- CBE Accordion — Create / Build / Execute -->
+    <div class="po-accordion cbe-accordion anim" style="--d:.42s" id="cbe-accordion">
 
-    <div class="cbe-dropdowns" id="cbe-dropdowns">
-    <!-- CBE Dropdown — Create -->
-    <div class="cbe-dropdown" id="cbe-dropdown-create">
-      <div class="cbe-dropdown__inner">
-        <div class="cbe-dropdown__grid">
-          <div class="cbe-dropdown__item">
-            <h4>Strategic Intelligence</h4>
-            <p>Client history, market context, and prior work available at the start of every brief</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Proposal Acceleration</h4>
-            <p>Searchable archive of concepts, proposals, and past builds</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Creative Memory</h4>
-            <p>Faster response using reusable materials and pricing logic</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Operational Awareness</h4>
-            <p>Early visibility into production complexity and available assets</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>AI-Assisted Ideation</h4>
-            <p>Faster concept expansion and synthesis of inputs</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <div class="cbe-dropdown__summary">
-              <p>More informed. Faster.<br>Grounded in reality.</p>
+      <!-- CREATE -->
+      <div class="po-item" id="cbe-create" role="button" tabindex="0" aria-expanded="false">
+        <div class="po-item__header">
+          <span class="po-item__num">Strategy &amp; Creative</span>
+          <h3 class="po-item__title">Create</h3>
+          <span class="po-item__toggle">+</span>
+        </div>
+        <div class="po-item__panel">
+          <div class="po-panel__inner">
+            <p class="po-panel__subtitle">More informed. Faster. Grounded in reality.</p>
+            <div class="cbe-cap-grid">
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Strategic Intelligence</span>
+                <span class="cbe-cap__desc">Client history, market context, and prior work at the start of every brief</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Proposal Acceleration</span>
+                <span class="cbe-cap__desc">Searchable archive of concepts, proposals, and past builds</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Creative Memory</span>
+                <span class="cbe-cap__desc">Faster response using reusable materials and pricing logic</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Operational Awareness</span>
+                <span class="cbe-cap__desc">Early visibility into production complexity and available assets</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">AI-Assisted Ideation</span>
+                <span class="cbe-cap__desc">Faster concept expansion and synthesis of inputs</span>
+              </div>
+            </div>
+            <div class="cbe-comparison-row">
+              <div class="cbe-compare-card cbe-compare-card--before">
+                <span class="cbe-compare-card__badge">Before</span>
+                <p>Ideas start from scratch, proposals assembled manually, institutional knowledge lives in people&rsquo;s heads</p>
+              </div>
+              <div class="cbe-compare-card cbe-compare-card--after">
+                <span class="cbe-compare-card__badge">After</span>
+                <p>Institutional memory searchable, proposals accelerated, creative ambition grounded in operational reality</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="cbe-dropdown__comparison">
-          <div class="cbe-compare-card cbe-compare-card--before">
-            <span class="cbe-compare-card__badge">Before</span>
-            <p>Ideas start from scratch, proposals assembled manually, institutional knowledge lives in people&rsquo;s heads</p>
-          </div>
-          <div class="cbe-compare-card cbe-compare-card--after">
-            <span class="cbe-compare-card__badge">After</span>
-            <p>Institutional memory searchable, proposals accelerated, creative ambition grounded in operational reality</p>
-          </div>
-        </div>
       </div>
-    </div>
 
-    <!-- CBE Dropdown — Build -->
-    <div class="cbe-dropdown" id="cbe-dropdown-build">
-      <div class="cbe-dropdown__inner">
-        <div class="cbe-dropdown__grid">
-          <div class="cbe-dropdown__item">
-            <h4>Design-to-Build Continuity</h4>
-            <p>Shared context across creative, digital, and production teams</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Asset Intelligence</h4>
-            <p>Visibility into reusable builds, components, and materials</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Material Planning</h4>
-            <p>Clear view of needs, availability, and procurement</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Capacity Forecasting</h4>
-            <p>Production load and team availability visible upfront</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Cost Intelligence</h4>
-            <p>Pricing informed by historical builds and benchmarks</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <div class="cbe-dropdown__summary">
-              <p>More coordinated. Predictable.<br>Reusable.</p>
+      <!-- BUILD -->
+      <div class="po-item" id="cbe-build" role="button" tabindex="0" aria-expanded="false">
+        <div class="po-item__header">
+          <span class="po-item__num">Experiences &amp; Fabrication</span>
+          <h3 class="po-item__title">Build</h3>
+          <span class="po-item__toggle">+</span>
+        </div>
+        <div class="po-item__panel">
+          <div class="po-panel__inner">
+            <p class="po-panel__subtitle">More coordinated. Predictable. Reusable.</p>
+            <div class="cbe-cap-grid">
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Design-to-Build Continuity</span>
+                <span class="cbe-cap__desc">Shared context across creative, digital, and production teams</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Asset Intelligence</span>
+                <span class="cbe-cap__desc">Visibility into reusable builds, components, and materials</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Material Planning</span>
+                <span class="cbe-cap__desc">Clear view of needs, availability, and procurement</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Capacity Forecasting</span>
+                <span class="cbe-cap__desc">Production load and team availability visible upfront</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Cost Intelligence</span>
+                <span class="cbe-cap__desc">Pricing informed by historical builds and benchmarks</span>
+              </div>
+            </div>
+            <div class="cbe-comparison-row">
+              <div class="cbe-compare-card cbe-compare-card--before">
+                <span class="cbe-compare-card__badge">Before</span>
+                <p>Sales sells blind, assets rebuilt because nobody knows they exist, each office runs its own way</p>
+              </div>
+              <div class="cbe-compare-card cbe-compare-card--after">
+                <span class="cbe-compare-card__badge">After</span>
+                <p>Design-to-build continuity, searchable asset inventory, planned production, cost intelligence from history</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="cbe-dropdown__comparison">
-          <div class="cbe-compare-card cbe-compare-card--before">
-            <span class="cbe-compare-card__badge">Before</span>
-            <p>Sales sells blind, assets rebuilt because nobody knows they exist, each office runs its own way</p>
-          </div>
-          <div class="cbe-compare-card cbe-compare-card--after">
-            <span class="cbe-compare-card__badge">After</span>
-            <p>Design-to-build continuity, searchable asset inventory, planned production, cost intelligence from history</p>
-          </div>
-        </div>
       </div>
-    </div>
 
-    <!-- CBE Dropdown — Execute -->
-    <div class="cbe-dropdown" id="cbe-dropdown-execute">
-      <div class="cbe-dropdown__inner">
-        <div class="cbe-dropdown__grid">
-          <div class="cbe-dropdown__item">
-            <h4>Project Orchestration</h4>
-            <p>Centralized visibility across timelines, ownership, and dependencies</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Resource Allocation</h4>
-            <p>Better crew planning and cross-project visibility</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Logistics &amp; Deployment</h4>
-            <p>Clear sequencing, readiness, and delivery tracking</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Real-Time Visibility</h4>
-            <p>Project status visible without manual follow-up</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <h4>Measurement &amp; Learning</h4>
-            <p>Performance data feeds future strategy</p>
-          </div>
-          <div class="cbe-dropdown__item">
-            <div class="cbe-dropdown__summary">
-              <p>More visible. More coordinated.<br>Learning over time.</p>
+      <!-- EXECUTE -->
+      <div class="po-item" id="cbe-execute" role="button" tabindex="0" aria-expanded="false">
+        <div class="po-item__header">
+          <span class="po-item__num">Program Management</span>
+          <h3 class="po-item__title">Execute</h3>
+          <span class="po-item__toggle">+</span>
+        </div>
+        <div class="po-item__panel">
+          <div class="po-panel__inner">
+            <p class="po-panel__subtitle">More visible. More coordinated. Learning over time.</p>
+            <div class="cbe-cap-grid">
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Project Orchestration</span>
+                <span class="cbe-cap__desc">Centralized visibility across timelines, ownership, and dependencies</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Resource Allocation</span>
+                <span class="cbe-cap__desc">Better crew planning and cross-project visibility</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Logistics &amp; Deployment</span>
+                <span class="cbe-cap__desc">Clear sequencing, readiness, and delivery tracking</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Real-Time Visibility</span>
+                <span class="cbe-cap__desc">Project status visible without manual follow-up</span>
+              </div>
+              <div class="cbe-cap">
+                <span class="cbe-cap__title">Measurement &amp; Learning</span>
+                <span class="cbe-cap__desc">Performance data feeds future strategy</span>
+              </div>
+            </div>
+            <div class="cbe-comparison-row">
+              <div class="cbe-compare-card cbe-compare-card--before">
+                <span class="cbe-compare-card__badge">Before</span>
+                <p>Status via email chains, reactive fire-fighting, post-event learnings lost, no unified view</p>
+              </div>
+              <div class="cbe-compare-card cbe-compare-card--after">
+                <span class="cbe-compare-card__badge">After</span>
+                <p>Real-time visibility, connected execution, organizational learning compounds over time</p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="cbe-dropdown__comparison">
-          <div class="cbe-compare-card cbe-compare-card--before">
-            <span class="cbe-compare-card__badge">Before</span>
-            <p>Status via email chains, reactive fire-fighting, post-event learnings lost, no unified view</p>
-          </div>
-          <div class="cbe-compare-card cbe-compare-card--after">
-            <span class="cbe-compare-card__badge">After</span>
-            <p>Real-time visibility, connected execution, organizational learning compounds over time</p>
-          </div>
-        </div>
       </div>
-    </div>
-    </div><!-- /.cbe-dropdowns -->
+
+    </div><!-- /.cbe-accordion -->
 
     <!-- How Digital Backbone Works -->
     <div class="hbw anim" style="--d:.5s">
@@ -3083,79 +3250,73 @@ h3.phase-card-v2__title{
     </div>
     </div><!-- /.svc-matrix-wrap -->
 
-    <!-- Your Investment — Diagnosis -->
-    <h2 class="invest-heading anim" style="--d:.25s">Diagnosis</h2>
+    <!-- Diagnosis Engagement Models -->
+    <h2 class="invest-heading anim" style="--d:.25s">Diagnosis Engagement Models</h2>
+    <p class="invest-subtitle anim" style="--d:.28s">The following engagement models define how Taylor can access a full operational diagnosis &mdash; with or without change enablement.</p>
 
     <div class="invest-grid anim" style="--d:.3s">
-      <!-- Option 1 -->
+      <!-- Core Diagnosis -->
       <div class="invest-card">
-        <div class="invest-card__phases">
-          <div class="invest-card__phase invest-card__phase--intake">
-            <span class="invest-card__phase-num">#1</span>Intake
-          </div>
-          <div class="invest-card__phase invest-card__phase--discovery">
-            <span class="invest-card__phase-num">#2</span>Discovery
-          </div>
+        <div class="invest-card__head">
+          <h3 class="invest-card__title">Core Diagnosis</h3>
+          <p class="invest-card__head-desc">Full operational visibility across Create, Build, and Execute</p>
         </div>
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Structured Intake (Remote)</li>
-          <li>3-Week On-Site Immersion</li>
-          <li>Leadership &amp; Functional Interviews</li>
-          <li>Workflow &amp; Process Assessment</li>
-          <li>Systems &amp; Data Review</li>
-          <li>Validation Sessions</li>
-          <li>Analysis &amp; Diagnosis</li>
-          <li>Transformation Roadmap Design</li>
-        </ul>
+        <div class="invest-card__body">
+          <p class="invest-card__section-label">What Taylor receives</p>
+          <ul>
+            <li>Operational X-Ray across Create / Build / Execute workflows</li>
+            <li>Quantified breakdown of inefficiencies, friction points, and lost value</li>
+            <li>End-to-end System Map (workflows, systems, data flows, decision layers)</li>
+            <li>Prioritized Transformation Roadmap (what to change, in what order, and why)</li>
+            <li>Investment Logic to support strategic and operational decisions</li>
+          </ul>
+          <p class="invest-card__section-label">How it&rsquo;s built</p>
+          <ul>
+            <li>Structured Intake (remote)</li>
+            <li>3-week on-site operational immersion</li>
+            <li>Leadership &amp; functional interviews</li>
+            <li>Workflow &amp; systems assessment (end-to-end)</li>
+            <li>Data &amp; tools review (integration, usage, gaps)</li>
+            <li>Validation sessions with leadership</li>
+            <li>Analysis, synthesis &amp; roadmap design</li>
+          </ul>
+        </div>
         <div class="invest-card__footer">
-          <div class="invest-card__meta">
-            <span class="invest-card__meta-label">Format</span>
-            <span class="invest-card__meta-value">Hybrid</span>
-          </div>
-          <div class="invest-card__meta">
-            <span class="invest-card__meta-label">Duration</span>
-            <span class="invest-card__meta-value">3 months</span>
-          </div>
-          <span class="invest-card__price">US$XX,XX</span>
+          <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
+          <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
         </div>
       </div>
 
-      <!-- Option 2 -->
-      <div class="invest-card">
-        <div class="invest-card__phases">
-          <div class="invest-card__phase invest-card__phase--intake">
-            <span class="invest-card__phase-num">#1</span>Intake
-          </div>
-          <div class="invest-card__phase invest-card__phase--discovery">
-            <span class="invest-card__phase-num">#2</span>Discovery
-          </div>
+      <!-- Diagnosis + Change Enablement -->
+      <div class="invest-card invest-card--recommended">
+        <span class="invest-card__badge-rec">Recommended</span>
+        <div class="invest-card__head">
+          <h3 class="invest-card__title">Diagnosis + Change Enablement</h3>
+          <p class="invest-card__head-desc">Everything in Core Diagnosis, plus the strategy to make change stick</p>
         </div>
-        <div class="invest-card__phases" style="margin-top:-26px">
-          <div class="invest-card__phase invest-card__phase--comms">
-            <span class="invest-card__phase-num">#X</span>Comms &amp; change
-          </div>
+        <div class="invest-card__body">
+          <p class="invest-card__section-label">What Taylor receives</p>
+          <ul>
+            <li>Everything included in Core Diagnosis</li>
+            <li>Communication &amp; Change Strategy aligned to the roadmap</li>
+            <li>Leadership Alignment &amp; Messaging framework</li>
+            <li>Stakeholder Engagement structure (who, when, how)</li>
+            <li>Adoption Plan (behaviors, tracking, reinforcement)</li>
+            <li>Ongoing Communication Cadence across teams</li>
+          </ul>
+          <p class="invest-card__section-label">How it&rsquo;s built</p>
+          <ul>
+            <li>Integrated alongside Diagnosis (not post-phase)</li>
+            <li>Leadership alignment sessions</li>
+            <li>Stakeholder mapping &amp; engagement design</li>
+            <li>Communication planning &amp; narrative development</li>
+            <li>Adoption &amp; behavior definition</li>
+            <li>Reinforcement mechanisms design</li>
+          </ul>
         </div>
-        <h4>Deliverables</h4>
-        <ul>
-          <li>Communication &amp; Change Strategy</li>
-          <li>Leadership Alignment &amp; Messaging</li>
-          <li>Stakeholder Engagement Framework</li>
-          <li>Ongoing Communication Cadence</li>
-          <li>Change Enablement Across Teams</li>
-          <li>Adoption &amp; Reinforcement Mechanisms</li>
-        </ul>
-        <div class="invest-card__note">Includes everything in Option 1, plus Phase X</div>
         <div class="invest-card__footer">
-          <div class="invest-card__meta">
-            <span class="invest-card__meta-label">Format</span>
-            <span class="invest-card__meta-value">Hybrid</span>
-          </div>
-          <div class="invest-card__meta">
-            <span class="invest-card__meta-label">Duration</span>
-            <span class="invest-card__meta-value">3 months</span>
-          </div>
-          <span class="invest-card__price">US$XX,XX</span>
+          <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
+          <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
         </div>
       </div>
     </div>
@@ -3163,7 +3324,8 @@ h3.phase-card-v2__title{
 
   <!-- INTERSTITIAL ─────────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="Clear baseline. No assumptions &mdash; only evidence."></div>
+    <div class="interstitial__text" data-tw-text="Companies often underestimate the costs of fragmented systems and manual processes."></div>
+    <span class="interstitial__source">&mdash; Boston Consulting Group</span>
   </div>
 
   <!-- FINDINGS ───────────────────────────────── -->
@@ -3523,19 +3685,19 @@ h3.phase-card-v2__title{
       <p class="ai-phase-chart__title">Phase of AI use among organizations using AI in 2025</p>
       <div class="ai-pyramid">
         <div class="ai-pyramid__tier">
-          <span class="ai-pyramid__pct">7</span>
+          <div class="ai-pyramid__bar"><span class="ai-pyramid__pct">7</span></div>
           <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Fully scaled</span><span class="ai-pyramid__desc">AI fully deployed &amp; integrated across organization</span></span>
         </div>
         <div class="ai-pyramid__tier">
-          <span class="ai-pyramid__pct">31</span>
+          <div class="ai-pyramid__bar"><span class="ai-pyramid__pct">31</span></div>
           <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Scaling</span><span class="ai-pyramid__desc">Growing AI deployment &amp; adoption across organization</span></span>
         </div>
         <div class="ai-pyramid__tier">
-          <span class="ai-pyramid__pct">30</span>
+          <div class="ai-pyramid__bar"><span class="ai-pyramid__pct">30</span></div>
           <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Piloting</span><span class="ai-pyramid__desc">Implementing AI for a first use case</span></span>
         </div>
         <div class="ai-pyramid__tier">
-          <span class="ai-pyramid__pct">32</span>
+          <div class="ai-pyramid__bar"><span class="ai-pyramid__pct">32</span></div>
           <span class="ai-pyramid__info"><span class="ai-pyramid__phase">Experimenting</span><span class="ai-pyramid__desc">Any use or early testing of AI</span></span>
         </div>
       </div>
@@ -3698,7 +3860,6 @@ h3.phase-card-v2__title{
       </div>
       <p class="transformation-reality__closing">Everyone is buying AI tools. Almost nobody is connecting them.</p>
     </div>
-    <p class="market-closing anim" style="--d:.95s">Your competitors aren&rsquo;t waiting. Taylor&rsquo;s advantage: 95 years of institutional knowledge and a team ready to activate &mdash; but that window won&rsquo;t stay open.</p>
 
   </section>
 
@@ -4095,8 +4256,8 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
   });
 
-  // Phase Overview accordion
-  document.querySelectorAll('.po-item[role="button"]').forEach(item=>{
+  // Phase Overview accordion (exclude CBE accordion items — they have their own handler)
+  document.querySelectorAll('.po-accordion:not(.cbe-accordion) .po-item[role="button"]').forEach(item=>{
     function toggle(){
       const open=item.classList.toggle('is-open');
       item.setAttribute('aria-expanded',open);
@@ -4183,49 +4344,27 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     obs.observe(gantt);
   }
 
-  // CBE bar — click phases to switch active + toggle dropdown
+  // CBE accordion — one item open at a time
   (function(){
-    const bar = document.getElementById('cbe-bar');
-    if(!bar) return;
-    const phases = bar.querySelectorAll('.cbe-bar__phase');
-    const arrow = bar.querySelector('.cbe-bar__arrow');
-    const wrapper = document.getElementById('cbe-dropdowns');
-    const panels = wrapper.querySelectorAll('.cbe-dropdown');
-
-    function showPanel(which){
-      phases.forEach(p=> p.classList.toggle('is-active', p.dataset.cbe === which));
-      panels.forEach(d=> d.classList.toggle('is-active', d.id === 'cbe-dropdown-'+which));
-      wrapper.classList.add('is-open');
-      bar.classList.add('is-open');
-    }
-
-    function collapseAll(){
-      wrapper.classList.remove('is-open');
-      bar.classList.remove('is-open');
-    }
-
-    phases.forEach(phase=>{
-      phase.addEventListener('click',()=>{
-        const which = phase.dataset.cbe;
-        const wasActive = phase.classList.contains('is-active') && bar.classList.contains('is-open');
-        if(wasActive){
-          collapseAll();
-        } else {
-          showPanel(which);
+    const accordion = document.getElementById('cbe-accordion');
+    if(!accordion) return;
+    var items = accordion.querySelectorAll('.po-item');
+    items.forEach(function(item){
+      var header = item.querySelector('.po-item__header');
+      function handler(){
+        var wasOpen = item.classList.contains('is-open');
+        items.forEach(function(i){ i.classList.remove('is-open'); i.setAttribute('aria-expanded','false'); });
+        if(!wasOpen){
+          item.classList.add('is-open');
+          item.setAttribute('aria-expanded','true');
+          if(window.innerWidth<=768){
+            setTimeout(function(){ item.scrollIntoView({behavior:'smooth',block:'start'}); },350);
+          }
         }
-      });
+      }
+      header.addEventListener('click', handler);
+      item.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); handler(); }});
     });
-
-    if(arrow){
-      arrow.addEventListener('click',()=>{
-        if(bar.classList.contains('is-open')){
-          collapseAll();
-        } else {
-          const active = bar.querySelector('.cbe-bar__phase.is-active');
-          showPanel(active ? active.dataset.cbe : 'create');
-        }
-      });
-    }
   })();
 
   // HBW accordion — one item open at a time
@@ -4734,55 +4873,56 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   let isWaiting = false;
 
   /* ── Section-aware suggestions ──────────── */
+  var usedQuestions = {};
   const SUGGESTIONS = {
     cover:[
       'What is this proposal about?',
       'Who is TransformAZ?',
-      'What results has TransformAZ delivered before?'
+      'How does this engagement work?'
     ],
     opportunity:[
-      'Why is now a defining moment for Taylor?',
-      'How big is the experiential marketing market?',
-      'What does the cost of waiting look like?'
+      'Why is now the right moment for this?',
+      'What is the scale of the opportunity?',
+      'What happens if we wait?'
     ],
     paradigm:[
-      'What is the difference between Reactive Adoption and Designed Transformation?',
-      'How does this shift affect Taylor specifically?',
-      'What does system-level performance mean in practice?'
+      'What does Designed Transformation mean?',
+      'How is this different from what most companies do?',
+      'What does system-level performance look like?'
     ],
     findings:[
-      'What are the main operational gaps identified?',
-      'Which finding has the highest impact?',
-      'How were these findings gathered?'
+      'What are the key operational gaps?',
+      'Which areas have the highest impact?',
+      'What methodology was used?'
     ],
     backbone:[
       'What is the Digital Backbone?',
-      'How do Create, Build, and Execute connect?',
-      'What changes for Taylor\'s day-to-day operations?'
+      'How does it connect the operation?',
+      'What changes day-to-day for teams?'
     ],
     transformation:[
       'Walk me through the phases',
-      'What is the difference between INTAKE and DISCOVERY?',
-      'What happens at the re-engagement decision point?'
+      'What happens during Intake vs Discovery?',
+      'What is the re-engagement decision point?'
     ],
     market:[
-      'What are Taylor\'s competitors doing with AI?',
-      'Why do only 16% of transformations fully succeed?',
-      'What does Taylor\'s long-term AI journey look like?'
+      'What are competitors doing differently?',
+      'Why do most transformations fail?',
+      'Where does Taylor stand in this landscape?'
     ],
     'next-steps':[
-      'What are the two engagement options?',
-      'What is included in each option?',
-      'What is the first step to begin?'
+      'What are the engagement models?',
+      'What does the diagnosis include?',
+      'How do we get started?'
     ],
     'intake-proposal':[
-      'What exactly does INTAKE deliver?',
-      'What does DISCOVERY add on top?',
-      'What are the engagement terms and cancellation policy?'
+      'What does each phase deliver?',
+      'What are the engagement terms?',
+      'How can we learn more about the approach?'
     ],
     references:[
-      'Where does the data in this proposal come from?',
-      'Are all sources recent and verified?',
+      'Where does the data come from?',
+      'Are all sources recent?',
       'Which research firms are cited?'
     ]
   };
@@ -4815,10 +4955,11 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     var list = SUGGESTIONS[currentSection] || SUGGESTIONS.cover;
     sugs.innerHTML='';
     list.forEach(function(text){
+      if(usedQuestions[text]) return;
       var btn=document.createElement('button');
       btn.className='tay-pill';
       btn.textContent=text;
-      btn.addEventListener('click',function(){handleUserInput(text);});
+      btn.addEventListener('click',function(){ usedQuestions[text]=true; handleUserInput(text); });
       sugs.appendChild(btn);
     });
   }
@@ -4893,7 +5034,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     if(isOpen && !hasOpened){
       hasOpened=true;
       badge.classList.add('is-hidden');
-      addMsg('Hey! I\'m <strong>Tay</strong>, your AI guide through this proposal. Ask me anything about the transformation strategy, pricing, timeline, findings, or Taylor Group. I have full context on the entire proposal. What would you like to know?','bot');
+      addMsg('Hey! I\'m <strong>Tay</strong>, your AI guide through this proposal. Ask me anything about the transformation strategy, timeline, findings, or methodology. For detailed pricing or next steps, reach out to the TransformAZ team directly.','bot');
       renderSuggestions();
     }
 
@@ -4919,7 +5060,6 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* ── Event listeners ────────────────────── */
   fab.addEventListener('click',function(){
-    if(proactiveTimer){clearTimeout(proactiveTimer);proactiveTimer=null;}
     toggle();
   });
   sendBtn.addEventListener('click',send);
@@ -4930,21 +5070,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     if(e.key==='Escape'&&isOpen) toggle();
   });
 
-  /* ── Proactive open ────────────────────── */
-  var proactiveTimer = null;
-  function scheduleProactive(){
-    if(proactiveTimer || isOpen || hasOpened) return;
-    proactiveTimer = setTimeout(function(){
-      if(!isOpen && !hasOpened) toggle();
-    }, 600);
-  }
-  function onScrollProactive(){
-    if(isOpen || hasOpened) return;
-    if(window.scrollY > window.innerHeight * 0.5) scheduleProactive();
-  }
-  window.addEventListener('scroll', onScrollProactive, {passive:true});
-  /* Auto-open after 10s idle on cover */
-  setTimeout(function(){ if(!isOpen && !hasOpened) toggle(); }, 10000);
+  /* ── Proactive open removed — bot only opens on user click ── */
 
 })();
 
