@@ -2059,6 +2059,8 @@ h3.phase-card-v2__title{
   transition:border-color .2s;
 }
 .tay-input::placeholder{color:var(--text-tertiary)}
+.tay-input::-webkit-search-decoration,
+.tay-input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
 .tay-input:focus{border-color:var(--accent)}
 .tay-send{
   width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
@@ -3996,12 +3998,12 @@ h3.phase-card-v2__title{
   </div>
   <div class="tay-messages" id="tay-messages" aria-live="polite"></div>
   <div class="tay-suggestions" id="tay-suggestions"></div>
-  <div class="tay-input-wrap">
-    <input class="tay-input" id="tay-input" type="text" placeholder="Ask about the proposal..." autocomplete="off" maxlength="500">
-    <button class="tay-send" id="tay-send" aria-label="Send message">
+  <form class="tay-input-wrap" role="search" autocomplete="off" onsubmit="return false">
+    <input class="tay-input" id="tay-input" type="search" placeholder="Ask about the proposal..." autocomplete="one-time-code" maxlength="500" name="tay-chat-input">
+    <button class="tay-send" id="tay-send" type="button" aria-label="Send message">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
     </button>
-  </div>
+  </form>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
