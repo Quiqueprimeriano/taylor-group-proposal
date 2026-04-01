@@ -55,3 +55,23 @@ Netlify serves `index.html`, not `Taylor-Group-Interactive-Pitch.html`. Forgetti
 **Fix:** Extracted to `lib/tay-system-prompt.js` as single source of truth.
 
 **Rule:** When 2+ files share identical config (prompts, constants, validation rules), extract to a shared module immediately. Don't wait for a third consumer to force it — drift starts with the second copy.
+
+---
+
+### Symmetric stacked clip-path shapes need equal slope per tier
+
+**What happened:** The AI pyramid's tier 1 used 14% horizontal displacement per side while tiers 2-4 used 12%, creating a visible kink. The sides weren't straight lines even though each individual tier was symmetric.
+
+**Fix:** For N tiers from point to full width: `50% / N` displacement per tier per side. With 4 tiers = 12.5% each.
+
+**Rule:** Don't eyeball individual clip-path values. Calculate the per-tier slope from total geometry first, then derive each tier's coordinates.
+
+---
+
+### Don't present paraphrases as quotes
+
+**What happened:** Several interstitial quotes were editorial text presented with quotation marks and firm attributions, but weren't direct citations from any paper. Research confirmed they were unattributable.
+
+**Fix:** Replaced with real verifiable quotes from papers already in bibliography. Added paper name to all attributions.
+
+**Rule:** If it's in quotation marks with an attribution, it must be a real citation with a traceable source. Otherwise frame it as editorial text without quotes.

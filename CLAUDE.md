@@ -39,7 +39,7 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **Fonts (Interactive Pitch):** Inter for all text — headings (400), body (400/600), buttons (500), metadata (500). `font-feature-settings: 'cv01','cv02','ss01'` required.
 - **Fonts (Static docs):** Source Serif 4 (headings), Source Sans 3 (body); Calibri in DOCX
 - **Type scale:** Figma-sourced hierarchy: `--text-h0` (100px) through `--text-metadata` (12px). Headings use tight letter-spacing (-0.08em). Never use hardcoded `font-size` values — always use a `--text-*` token
-- **Spacing tokens:** `--space-xs` (4px) through `--space-3xl` (56px). Use for padding/margin on main components
+- **Spacing tokens:** `--space-xs` (4px) through `--space-3xl` (56px). Three-tier hierarchy: `--space-xl` (32px) for text↔visual components, `--space-lg` (24px) for inline elements/h2→text, `--space-md` (16px) for p→p/lists. Never hardcode structural margins — use tokens. Only exception: intentional "page break" gaps (120-160px) as inline styles
 - **Radius tokens:** `--radius-sm` (8px), `--radius-md` (10px), `--radius-lg` (14px), `--radius-xl` (18px), `--radius-pill` (20px). `::after` top bars must use the same radius token as their parent card
 - **Shadow tokens:** `--shadow-sm` through `--shadow-xl`, `--shadow-accent` for accent glow
 - **Client-facing accent:** `#5436FF` (purple)
@@ -69,6 +69,8 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
 - **Backbone Before→After:** 5-stage dramatic reveal (red line fade → crossfade → hub scale-in → spokes draw → particles flow). Hub and sparks wrapped in `<g class="s04a-hub-group">` / `<g class="s04a-sparks">` for staged CSS control. Forward transition ~5s cinematic, backward ~0.8s instant
 - **Mobile responsive (768px):** Phase stack → vertical accordion; paradigm table → stacked cards with `::before` labels; service matrix → phase cards with inline metadata grouped by service type via `order`; SVG viewBox cropped via JS (`10 0 820 680`) to remove annotation padding; phase card click scrolls to top on mobile
+- **HBW sub-accordions:** AI layer (03) in How Digital Backbone Works uses nested `.hbw-sub` accordions inside the parent `.hbw-item`. JS handler uses `stopPropagation()` to prevent closing the parent. Same `max-height` + `opacity` pattern
+- **Quote attribution:** All interstitial quotes must be real, verifiable citations. Format: paper name in `<em>` on first line, `<br>` + `&mdash; Author` on second line. Typographic curly quotes (`&ldquo;`/`&rdquo;`) required. Every quote needs a matching entry in Section 09 references table
 - **Data integrity:** All stats must have named, verified sources. Ranges preferred over rounded single numbers (e.g., "20 – 30%" not "30%"), with spaces around en-dash. No stat should appear more than once in the same section. Bibliography in Section 09 with clickable links
 - **Source links:** Data-heavy sections end with a "Sources & methodology → 09" button linking to the references section
 - **Netlify deploy:** `index.html` must be an exact copy of `Taylor-Group-Interactive-Pitch.html`. ALWAYS sync after editing: `cp ...Interactive-Pitch.html .../index.html`
