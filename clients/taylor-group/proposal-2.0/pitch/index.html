@@ -3997,7 +3997,7 @@ h3.phase-card-v2__title{
   <div class="tay-messages" id="tay-messages" aria-live="polite"></div>
   <div class="tay-suggestions" id="tay-suggestions"></div>
   <div class="tay-input-wrap">
-    <input class="tay-input" id="tay-input" type="text" placeholder="Ask about the proposal..." autocomplete="off">
+    <input class="tay-input" id="tay-input" type="text" placeholder="Ask about the proposal..." autocomplete="off" maxlength="500">
     <button class="tay-send" id="tay-send" aria-label="Send message">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
     </button>
@@ -4763,6 +4763,8 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* ── Config ─────────────────────────────── */
   var API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3141' : '';
+  var STREAM_URL = API_URL + '/api/chat-stream';
+  var FALLBACK_URL = API_URL + '/api/chat';
 
   let isOpen = false;
   let currentSection = 'cover';
@@ -4871,30 +4873,68 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
       .replace(/\n/g,'<br>');
   }
 
-  /* ── API call ───────────────────────────── */
-  async function callAPI(userText){
-    conversationHistory.push({role:'user',content:userText});
+  /* ── Streaming API call ──────────────────── */
+  async function callAPIStream(userText, msgDiv){
+    var payload = JSON.stringify({
+      messages:conversationHistory,
+      section:currentSection
+    });
 
-    try{
-      var res = await fetch(API_URL+'/api/chat',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          messages:conversationHistory,
-          section:currentSection
-        })
-      });
+    var res = await fetch(STREAM_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:payload
+    });
 
-      if(!res.ok) throw new Error('API error '+res.status);
+    if(res.status===429) throw new Error('rate-limited');
+    if(!res.ok) throw new Error('API error '+res.status);
 
-      var data = await res.json();
-      var answer = data.response || 'Sorry, I couldn\'t process that.';
-      conversationHistory.push({role:'assistant',content:answer});
-      return {text:formatResponse(answer),error:false};
-    }catch(err){
-      console.warn('Tay API error:',err);
-      return {text:'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.',error:true};
+    var reader = res.body.getReader();
+    var decoder = new TextDecoder();
+    var fullText = '';
+    var buffer = '';
+
+    while(true){
+      var chunk = await reader.read();
+      if(chunk.done) break;
+      buffer += decoder.decode(chunk.value,{stream:true});
+
+      var lines = buffer.split('\n');
+      buffer = lines.pop(); // keep incomplete line in buffer
+
+      for(var i=0;i<lines.length;i++){
+        var line = lines[i].trim();
+        if(!line || !line.startsWith('data: ')) continue;
+        var payload = line.slice(6);
+        if(payload === '[DONE]') continue;
+        try{
+          var data = JSON.parse(payload);
+          if(data.error) throw new Error(data.error);
+          if(data.text){
+            fullText += data.text;
+            msgDiv.innerHTML = formatResponse(fullText);
+            msgs.scrollTop = msgs.scrollHeight;
+          }
+        }catch(e){
+          if(e.message==='Failed to get response') throw e;
+        }
+      }
     }
+
+    return fullText;
+  }
+
+  /* ── Fallback non-streaming API call ────── */
+  async function callAPIFallback(payload){
+    var res = await fetch(FALLBACK_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:payload
+    });
+    if(res.status===429) throw new Error('rate-limited');
+    if(!res.ok) throw new Error('API error '+res.status);
+    var data = await res.json();
+    return data.response || 'Sorry, I couldn\'t process that.';
   }
 
   /* ── Chat logic ─────────────────────────── */
@@ -4904,13 +4944,48 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     addMsg(text,'user');
     sugs.innerHTML='';
     input.disabled=true;
+    conversationHistory.push({role:'user',content:text});
+
+    var payload = JSON.stringify({
+      messages:conversationHistory,
+      section:currentSection
+    });
 
     showTyping();
-    var result = await callAPI(text);
-    removeTyping();
-    addMsg(result.text, result.error ? 'error' : 'bot');
-    renderSuggestions();
 
+    try{
+      // Try streaming first
+      removeTyping();
+      var msgDiv = addMsg('','bot');
+      var fullText = await callAPIStream(text, msgDiv);
+      conversationHistory.push({role:'assistant',content:fullText});
+    }catch(streamErr){
+      // Remove empty streaming div if it exists
+      if(msgDiv && !msgDiv.textContent) msgDiv.remove();
+      removeTyping();
+
+      if(streamErr.message==='rate-limited'){
+        addMsg('You\'re sending messages too quickly. Please wait a moment and try again.','error');
+      }else{
+        // Fallback to non-streaming
+        try{
+          showTyping();
+          var answer = await callAPIFallback(payload);
+          removeTyping();
+          addMsg(formatResponse(answer),'bot');
+          conversationHistory.push({role:'assistant',content:answer});
+        }catch(fallbackErr){
+          removeTyping();
+          if(fallbackErr.message==='rate-limited'){
+            addMsg('You\'re sending messages too quickly. Please wait a moment and try again.','error');
+          }else{
+            addMsg('I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.','error');
+          }
+        }
+      }
+    }
+
+    renderSuggestions();
     input.disabled=false;
     isWaiting=false;
     if(isOpen) input.focus();
@@ -4928,11 +5003,12 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     isOpen=!isOpen;
     fab.classList.toggle('is-open',isOpen);
     panel.classList.toggle('is-open',isOpen);
+    fab.setAttribute('aria-label', isOpen ? 'Close Tay assistant' : 'Open Tay assistant');
 
     if(isOpen && !hasOpened){
       hasOpened=true;
       badge.classList.add('is-hidden');
-      addMsg('Hey! I\'m <strong>Tay</strong>, your AI guide through this proposal. Ask me anything about the transformation strategy, timeline, findings, or methodology. For detailed pricing or next steps, reach out to the TransformAZ team directly.','bot');
+      addMsg('Hey! I\'m <strong>Tay</strong>, your AI guide through this proposal. Ask me anything about the transformation strategy, timeline, findings, or methodology.','bot');
       renderSuggestions();
     }
 

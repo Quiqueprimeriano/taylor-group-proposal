@@ -5003,6 +5003,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     isOpen=!isOpen;
     fab.classList.toggle('is-open',isOpen);
     panel.classList.toggle('is-open',isOpen);
+    fab.setAttribute('aria-label', isOpen ? 'Close Tay assistant' : 'Open Tay assistant');
 
     if(isOpen && !hasOpened){
       hasOpened=true;
