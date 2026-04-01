@@ -154,4 +154,35 @@
 **Consequences:**
 - First use of Functions v2 in the project — needs production verification
 - Fallback ensures zero downtime if v2 has issues
-- `esbuild` bundler must handle `.mjs` + `createRequire` — to be verified on deploy
+- `esbuild` bundler must handle `.mjs` + `createRequire` — verified working in production
+
+---
+
+## ADR-013: Full SYSTEM_PROMPT rewrite from HTML source (2026-04-02)
+
+**Status:** Accepted
+**Supersedes:** All previous prompt content (was severely outdated)
+
+**Context:** Content audit revealed the SYSTEM_PROMPT was out of sync with the HTML proposal. Section numbering 03-08 was completely wrong, engagement models had old names ("INTAKE/DISCOVERY" vs "Core Diagnosis/Diagnosis + Change Enablement"), company was "Taylor Group" instead of "Taylor Inc.", deliverables didn't match, and dimensions were 7 instead of 5.
+
+**Decision:** Full rewrite of SYSTEM_PROMPT by extracting content directly from the live HTML. Every section (01-09) rewritten to match the actual proposal. Engagement models, deliverables, phase durations, dimensions, and company name all updated.
+
+**Consequences:**
+- Bot now gives accurate information matching what the user sees in the proposal
+- Any future changes to the HTML proposal must be reflected in `lib/tay-system-prompt.js`
+- Section references in bot responses are now clickable links that scroll to the correct section
+
+---
+
+## ADR-014: Scroll-to-section from bot responses (2026-04-02)
+
+**Status:** Accepted
+
+**Context:** The bot references sections by number ("Section 06 — Key Findings") but the user had to manually scroll to find them.
+
+**Decision:** `formatResponse()` regex detects section references and converts them to clickable `<a>` tags with `data-section` attribute. Click triggers `scrollIntoView({behavior:'smooth'})` and auto-closes the chat panel. `SECTION_MAP` maps section numbers to HTML element IDs.
+
+**Consequences:**
+- Bot responses become navigational — users can jump to any section the bot mentions
+- Chat auto-closes on section link click so user can see the content
+- `SECTION_MAP` must stay in sync with actual section order in HTML

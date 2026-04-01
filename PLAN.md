@@ -41,28 +41,43 @@
 - [x] P1: temperature:0.3, max_tokens:384
 - [x] Sincronizar SYSTEM_PROMPT entre backends (eliminado drift en objeciones)
 
-## Pendiente — Bot P2 (Robustez)
+## Completado (2026-04-01/02) — Bot P2 (Robustez)
 
-- [ ] Retry con backoff en frontend (1 retry automático antes de mostrar error)
-- [ ] Focus trap en dialog del chat (Tab cycling dentro del panel)
-- [ ] Markdown parser más robusto (links, listas numeradas)
-- [ ] AbortController con timeout 15s en fetch del frontend
+- [x] AbortController 15s timeout en todos los fetch
+- [x] Retry con 1.5s backoff en errores 500+ (solo fallback)
+- [x] Focus trap en dialog (Tab cycling input → send → pills)
+- [x] Markdown parser: inline code, links, listas numeradas
 
-## Pendiente — Bot P3 (Nice to Have)
+## Completado (2026-04-01/02) — Bot P3 (Analytics + Error UX)
 
-- [ ] Analytics básico: loggear preguntas frecuentes (sin PII)
-- [ ] Error messages diferenciados (sin internet vs API caída vs rate limited)
+- [x] Structured JSON logs en ambas Netlify Functions
+- [x] 5 error states diferenciados (offline, rate-limit, timeout, server, genérico)
+- [x] isRetryable() para evitar fallback en errores no recuperables
 
-## Pendiente — Pitch Cleanup/Visual
+## Completado (2026-04-01/02) — Bot Extras
 
-- [ ] Eliminar CSS muerto del viejo CBE bar/dropdown (`.cbe-bar`, `.cbe-dropdowns`, etc.)
-- [ ] Verificar responsive mobile de pirámide AI, Diagnosis cards, y sub-accordions AI
-- [ ] Reconciliar `--content-w` (CLAUDE.md dice 960px, `:root` tiene 1120px)
-- [ ] Decidir fuente para interstitial "Everyone is buying AI tools..." (BCG o McKinsey 2025)
-- [ ] Revisar segunda aparición de "Not a lack of capability" en findings intro (~línea 3258)
+- [x] Chrome password prompt fix (type="search" + autocomplete="one-time-code")
+- [x] SYSTEM_PROMPT reescrito completo — contenido matchea HTML actual
+- [x] Section numbering corregida (03-08 estaban cruzadas)
+- [x] Engagement models actualizados (Core Diagnosis / Diagnosis + Change Enablement)
+- [x] Company name corregido (Taylor Inc.), $85M revenue removido
+- [x] Scroll-to-section: links clickeables en respuestas del bot
+- [x] SECTION_MAP corregido en frontend
+
+## Completado (2026-04-01/02) — Pitch Cleanup
+
+- [x] CSS muerto CBE: ya no existía
+- [x] Deduplicado CSS responsive pirámide AI, removido invest-card__price dead CSS
+- [x] hbw-sub text wrap en mobile
+- [x] --content-w reconciliado (1120px)
+- [x] "Not a lack of capability": solo 1 aparición, no había duplicado
+- [x] "Everyone is buying AI tools": texto editorial sin comillas, no necesita fuente
+
+## Pendiente — Minor
+
+- [ ] Cambiar "Taylor Group Assistant" → "Taylor Inc. Assistant" en header del chat
+- [ ] Investigar 2 console errors en producción (detectados en test Playwright)
 
 ## Próximo milestone
 
-1. Verificar deploy de streaming en producción (taylor.transformaz.co)
-2. QA visual completo del pitch (responsive, cross-browser)
-3. Bot P2 improvements si el tiempo lo permite
+QA visual completo del pitch (responsive, cross-browser). El bot está completo.

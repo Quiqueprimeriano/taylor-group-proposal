@@ -75,3 +75,13 @@ Netlify serves `index.html`, not `Taylor-Group-Interactive-Pitch.html`. Forgetti
 **Fix:** Replaced with real verifiable quotes from papers already in bibliography. Added paper name to all attributions.
 
 **Rule:** If it's in quotation marks with an attribution, it must be a real citation with a traceable source. Otherwise frame it as editorial text without quotes.
+
+---
+
+### SYSTEM_PROMPT content drifts from HTML silently and catastrophically
+
+**What happened:** The bot's SYSTEM_PROMPT had section numbering 03-08 completely wrong, engagement model names from an old version ("INTAKE/DISCOVERY" instead of "Core Diagnosis"), a company name that changed ("Taylor Group" → "Taylor Inc."), deliverables that don't exist in the HTML, and 7 dimensions instead of 5. The bot was confidently giving wrong information.
+
+**Fix:** Full rewrite of SYSTEM_PROMPT by extracting content directly from the live HTML proposal. Every section verified against the actual source.
+
+**Rule:** When the proposal HTML changes (section order, content, engagement models), the SYSTEM_PROMPT in `lib/tay-system-prompt.js` MUST be updated in the same session. Treat it like `index.html` sync — never ship without it. Consider adding a "last verified" date comment in the prompt file.
