@@ -252,14 +252,14 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 }
 .section h2{
   font-family:var(--sans);font-size:var(--text-h1);font-weight:var(--fw-regular);
-  line-height:var(--lh-heading);margin-bottom:28px;letter-spacing:var(--ls-heading);color:var(--text-primary);text-align:center;
+  line-height:var(--lh-heading);margin-bottom:var(--space-lg);letter-spacing:var(--ls-heading);color:var(--text-primary);text-align:center;
 }
-.section h3{font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);line-height:var(--lh-h3);letter-spacing:var(--ls-h3);margin-top:32px;margin-bottom:12px;color:var(--text-primary)}
-.section h4{font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-medium);margin-top:20px;margin-bottom:8px;color:var(--text-primary)}
-.section p{font-size:var(--text-body);margin-bottom:13px;line-height:var(--lh-body);color:var(--text-secondary)}
+.section h3{font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);line-height:var(--lh-h3);letter-spacing:var(--ls-h3);margin-top:var(--space-xl);margin-bottom:var(--space-md);color:var(--text-primary)}
+.section h4{font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-medium);margin-top:var(--space-lg);margin-bottom:var(--space-sm);color:var(--text-primary)}
+.section p{font-size:var(--text-body);margin-bottom:var(--space-md);line-height:var(--lh-body);color:var(--text-secondary)}
 .section p:last-child{margin-bottom:0}
 .section p strong{color:var(--text-primary);font-weight:var(--fw-semibold)}
-.section ul,.section ol{padding-left:1.2rem;margin-bottom:13px;font-size:var(--text-base);color:var(--text-secondary)}
+.section ul,.section ol{padding-left:1.2rem;margin-bottom:var(--space-md);font-size:var(--text-base);color:var(--text-secondary)}
 .section li{margin-bottom:5px;line-height:1.65}
 .section li::marker{color:var(--accent-dark)}
 
@@ -272,15 +272,15 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 }
 .section-header__left .section-num{text-align:left}
 .section-header__left h2{text-align:left;margin-bottom:16px}
-.section-header__right{padding-top:40px}
-.section-header__right p{margin-bottom:13px;line-height:var(--lh-body)}
+.section-header__right{padding-top:var(--space-xl)}
+.section-header__right p{margin-bottom:var(--space-md);line-height:var(--lh-body)}
 
 /* Bridge text between diagrams and section-header */
 .bb-bridge{display:flex;flex-direction:column;gap:0;margin-top:var(--space-3xl);margin-bottom:var(--space-xl);max-width:720px}
 .bb-bridge p{font-size:var(--text-body);color:var(--text-secondary);line-height:var(--lh-body)}
 
 /* Before / After toggle (Figma Components frame) */
-.s04-toggle-wrap{display:flex;justify-content:center;margin:32px 0 24px}
+.s04-toggle-wrap{display:flex;justify-content:center;margin:var(--space-xl) 0 var(--space-lg)}
 .ba-toggle{
   display:inline-flex;align-items:center;gap:0;position:relative;
   background:var(--gray-01);border-radius:var(--radius-pill);
@@ -463,8 +463,6 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
   overflow:hidden;
   background:linear-gradient(135deg,#faf9f7,#f3f1ed);
 }
-/* Ghost editorial vertical line */
-.interstitial::before{content:'';position:absolute;left:15%;top:10%;bottom:10%;width:3px;background:rgba(84,54,255,.15)}
 .interstitial__text{
   font-family:var(--sans);font-size:var(--text-h2);font-weight:var(--fw-regular);
   line-height:var(--lh-heading);letter-spacing:var(--ls-heading);color:var(--text);
@@ -550,7 +548,7 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 /* ═══════════════════════════════════════════════
    STAT COUNTERS — Large typographic
    ═══════════════════════════════════════════════ */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:36px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:var(--space-xl) 0}
 .stat-card{
   text-align:center;padding:var(--space-xl) var(--space-md);background:var(--bg-white);
   border-radius:var(--radius-lg);border:1px solid var(--border-light);
@@ -569,7 +567,7 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 /* ═══════════════════════════════════════════════
    BOXES & VALUE PROPS
    ═══════════════════════════════════════════════ */
-.box{padding:18px 22px;border-radius:var(--radius-md);margin:16px 0;border-left:3px solid var(--accent);font-size:var(--text-sm);background:#f7f5f3}
+.box{padding:18px 22px;border-radius:var(--radius-md);margin:var(--space-lg) 0;border-left:3px solid var(--accent);font-size:var(--text-sm);background:#f7f5f3}
 .box p{margin-bottom:5px;max-width:none;color:var(--text-secondary)}
 .box p:last-child{margin-bottom:0}
 .box ul{color:var(--text-secondary);max-width:none}
@@ -587,13 +585,13 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 
 .value-prop{
   border:1px solid rgba(84,54,255,.15);border-radius:14px;
-  padding:24px 28px;margin:28px 0;background:var(--accent-light);
+  padding:24px 28px;margin:var(--space-xl) 0;background:var(--accent-light);
   font-size:var(--text-base);line-height:1.75;max-width:none;position:relative;overflow:hidden;
 }
 .value-prop::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient);opacity:.4}
 .value-prop p{font-weight:600;margin-bottom:0;max-width:none;color:var(--text)}
 
-blockquote{border-left:2px solid var(--accent);padding:14px 18px;margin:16px 0;background:var(--accent-light);border-radius:0 10px 10px 0;font-size:var(--text-sm)}
+blockquote{border-left:2px solid var(--accent);padding:14px 18px;margin:var(--space-lg) 0;background:var(--accent-light);border-radius:0 10px 10px 0;font-size:var(--text-sm)}
 blockquote p{font-style:italic;margin-bottom:3px;color:var(--text-secondary)}
 blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2xs);color:var(--text-tertiary);font-weight:600;display:block;margin-top:5px}
 
@@ -603,7 +601,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 /* ── Hero stat bar ── */
 .findings-hero{
   background:var(--accent);border-radius:var(--radius-lg);
-  padding:28px 40px;margin:28px 0 12px;text-align:center;
+  padding:28px 40px;margin:var(--space-xl) 0;text-align:center;
   color:#fff;font-family:var(--sans);
   display:flex;flex-direction:column;align-items:center;gap:8px;
 }
@@ -618,7 +616,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .evidence-group-label{
   font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-medium);
   text-transform:uppercase;letter-spacing:.08em;
-  margin:32px 0 0;padding-bottom:0;
+  margin:var(--space-xl) 0 0;padding-bottom:0;
 }
 .evidence-group-label--red{color:var(--red)}
 .evidence-group-label--amber{color:var(--amber)}
@@ -695,7 +693,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
    BACKBONE — Neural Network Diagram
    ═══════════════════════════════════════════════ */
 .backbone-vis{
-  margin:40px 0;padding:0;position:relative;
+  margin:var(--space-xl) 0;padding:0;position:relative;
   height:420px;
 }
 #backbone-vis-disconnected{height:320px}
@@ -712,57 +710,8 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 
 
 /* ═══════════════════════════════════════════════
-   CBE — Create / Build / Execute (Figma redesign)
+   CBE — Create / Build / Execute
    ═══════════════════════════════════════════════ */
-.cbe-bar{
-  background:var(--brown-05);border-radius:140px;
-  display:flex;align-items:center;
-  padding:40px 80px 56px;margin:36px 0 0;position:relative;
-  min-height:200px;overflow:hidden;
-}
-.cbe-bar__phases{
-  display:flex;align-items:flex-start;flex:1;
-  justify-content:center;gap:0;
-}
-.cbe-bar__phase{
-  display:flex;flex-direction:column;align-items:center;gap:20px;
-  cursor:pointer;user-select:none;
-  flex:1;
-}
-.cbe-bar__phase-row{
-  display:flex;align-items:center;gap:20px;
-}
-.cbe-bar__dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--brown-03);flex-shrink:0;
-  transition:background .3s var(--ease);
-}
-.cbe-bar__phase.is-active .cbe-bar__dot{background:var(--yellow-accent)}
-.cbe-bar__name{
-  font-family:var(--sans);font-size:120px;font-weight:var(--fw-regular);
-  line-height:1;letter-spacing:-9.6px;
-  color:var(--brown-03);transition:color .3s var(--ease);
-  white-space:nowrap;
-}
-.cbe-bar__phase.is-active .cbe-bar__name{color:#fff}
-.cbe-bar__sub{
-  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-medium);
-  line-height:1.1;text-align:center;
-  color:var(--brown-03);transition:color .3s var(--ease);
-  white-space:nowrap;
-}
-.cbe-bar__phase.is-active .cbe-bar__sub{color:var(--brown-01)}
-.cbe-bar__arrow{
-  position:absolute;right:32px;top:50%;transform:translateY(-50%);
-  width:54px;height:54px;border-radius:50%;
-  background:var(--brown-03);display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:background .25s var(--ease),transform .4s var(--ease);
-  flex-shrink:0;
-}
-.cbe-bar__arrow:hover{background:var(--brown-02)}
-.cbe-bar__arrow svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.cbe-bar.is-open .cbe-bar__arrow{transform:translateY(-50%) rotate(180deg)}
-.cbe-bar.is-open{border-radius:140px 140px 0 0}
 
 /* ── CBE Accordion — oversized phase titles ── */
 .cbe-accordion{margin-top:var(--space-2xl);gap:0}
@@ -831,60 +780,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   .cbe-comparison-row{grid-template-columns:1fr}
 }
 
-/* Dropdown wrapper — stacks all panels, controls open/close */
-.cbe-dropdowns{
-  display:grid;
-  border:1px solid var(--brown-01);border-top:none;
-  border-radius:0 0 var(--radius-lg) var(--radius-lg);
-  max-height:0;opacity:0;overflow:hidden;
-  transform-origin:top center;transform:scaleY(0);
-  transition:max-height .6s var(--ease),opacity .3s var(--ease),transform .5s var(--ease);
-}
-.cbe-dropdowns.is-open{
-  max-height:1200px;opacity:1;
-  transform:scaleY(1);
-}
-/* Individual panels — stacked, crossfade */
-.cbe-dropdown{
-  grid-area:1/1;
-  opacity:0;visibility:hidden;
-  transition:opacity .35s var(--ease),visibility 0s .35s;
-}
-.cbe-dropdown.is-active{
-  opacity:1;visibility:visible;
-  transition:opacity .35s var(--ease),visibility 0s 0s;
-}
-.cbe-dropdown__inner{padding:48px}
-.cbe-dropdown__grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:48px 80px;
-  margin-bottom:48px;
-}
-.cbe-dropdown__item h4{
-  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);
-  letter-spacing:var(--ls-h3);line-height:var(--lh-h3);
-  color:var(--text);margin:0 0 16px;
-}
-.cbe-dropdown__item p{
-  font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-regular);
-  line-height:var(--lh-body);letter-spacing:var(--ls-body);
-  color:var(--text-secondary);margin:0;
-}
-.cbe-dropdown__bottom{
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;
-  align-items:end;
-}
-.cbe-dropdown__summary{
-  background:var(--gray-01);border-radius:var(--radius-md);
-  padding:28px 32px;text-align:center;
-}
-.cbe-dropdown__summary p{
-  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);
-  letter-spacing:var(--ls-h3);line-height:var(--lh-h3);
-  color:var(--text);margin:0;
-}
-.cbe-dropdown__comparison{
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;
-}
+/* CBE Before/After comparison cards */
 .cbe-compare-card{
   border-radius:var(--radius-md);padding:16px 20px;
   text-align:center;
@@ -992,17 +888,33 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   color:var(--brown-04);margin:30px 0 12px;
 }
 .hbw-item__body h4:first-child{margin-top:0}
-.hbw-subsection{margin-top:30px}
+.hbw-subsection{margin-top:var(--space-lg)}
 .hbw-subsection__desc{
   font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-semibold);
   line-height:var(--lh-body);letter-spacing:var(--ls-body);
   color:var(--brown-04);margin:0 0 12px;
 }
+/* AI sub-accordion (nested inside hbw-item) */
+.hbw-sub{border-top:1px solid rgba(62,42,14,.12);padding:0;cursor:pointer}
+.hbw-sub:first-child{border-top:none}
+.hbw-sub__header{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px}
+.hbw-sub__header h4{font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--brown-04);margin:0;flex:1}
+.hbw-sub__header span{font-family:var(--sans);font-size:var(--text-sm);color:var(--brown-03);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbw-sub__toggle{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--brown-03);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s var(--ease),border-color .3s var(--ease)}
+.hbw-sub__toggle::after{content:'+';font-family:var(--sans);font-size:var(--text-sm);color:var(--brown-03);line-height:1}
+.hbw-sub.is-open .hbw-sub__toggle{border-color:var(--accent);transform:rotate(45deg)}
+.hbw-sub.is-open .hbw-sub__toggle::after{color:var(--accent)}
+.hbw-sub__panel{max-height:0;opacity:0;overflow:hidden;transition:max-height .4s var(--ease),opacity .3s var(--ease)}
+.hbw-sub.is-open .hbw-sub__panel{max-height:400px;opacity:1}
+.hbw-sub__panel__inner{padding:0 0 16px}
+.hbw-sub__panel__inner p{font-size:var(--text-sm);color:var(--brown-03);margin:0 0 8px;line-height:1.6}
+.hbw-sub__panel__inner p:last-child{margin-bottom:0}
+.hbw-sub__arrow{font-size:var(--text-sm);color:var(--accent);font-weight:var(--fw-medium)}
 
 /* ═══════════════════════════════════════════════
    TABLES
    ═══════════════════════════════════════════════ */
-.ba-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:var(--text-sm)}
+.ba-table{width:100%;border-collapse:collapse;margin:var(--space-lg) 0;font-size:var(--text-sm)}
 .ba-table thead th{text-align:left;font-family:var(--sans);font-size:var(--text-2xs);font-weight:var(--fw-semibold);text-transform:uppercase;letter-spacing:.1em;padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text-tertiary)}
 .ba-table thead th:last-child{color:var(--accent)}
 .ba-table tbody td{padding:11px 14px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--text-secondary)}
@@ -1011,7 +923,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .ba-table tbody tr:last-child td{border-bottom:none}
 .ba-table tbody td strong{color:var(--text)}
 /* Paradigm comparison table */
-.paradigm-table{width:100%;border-collapse:separate;border-spacing:0;margin:28px 0;font-size:var(--text-body)}
+.paradigm-table{width:100%;border-collapse:separate;border-spacing:0;margin:var(--space-xl) 0;font-size:var(--text-body)}
 .paradigm-table thead th{text-align:left;font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-medium);text-transform:uppercase;letter-spacing:.1em;padding:14px 16px;border-bottom:2px solid var(--gray-03)}
 .paradigm-table thead th:first-child{color:var(--text-tertiary);width:20%}
 .paradigm-table thead th:nth-child(2){color:var(--text-secondary)}
@@ -1028,7 +940,7 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
    ═══════════════════════════════════════════════ */
 .phase-stack{
   display:flex;gap:6px;height:740px;
-  position:relative;margin:36px 0;
+  position:relative;margin:var(--space-xl) 0;
 }
 .phase-card-v2{
   flex:0 0 56px;
@@ -1149,7 +1061,7 @@ h3.phase-card-v2__title{
 /* ═══════════════════════════════════════════════
    GANTT — Cascading timeline (Figma redesign)
    ═══════════════════════════════════════════════ */
-.gantt-wrapper{margin:32px 0;padding:0;overflow-x:auto;position:relative}
+.gantt-wrapper{margin:var(--space-xl) 0;padding:0;overflow-x:auto;position:relative}
 .gantt-grid{position:relative}
 .gantt-months{display:grid;grid-template-columns:repeat(9,1fr);position:absolute;inset:0;pointer-events:none;z-index:0}
 .gantt-months span{border-left:1px dashed var(--gray-03)}
@@ -1176,7 +1088,7 @@ h3.phase-card-v2__title{
 /* ═══════════════════════════════════════════════
    HORIZON CARDS — 3D Tilt
    ═══════════════════════════════════════════════ */
-.horizons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.horizons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:var(--space-xl) 0}
 .horizon-card{
   border-radius:var(--radius-lg);padding:var(--space-lg);border:1px solid var(--border-light);
   background:var(--bg-white);transition:all .35s var(--ease);
@@ -1201,7 +1113,7 @@ h3.phase-card-v2__title{
 .horizon-card li::before{content:'›';position:absolute;left:0;color:var(--text-tertiary);font-weight:var(--fw-semibold)}
 
 /* Stats box */
-.stats-box{background:var(--bg-white);border:1px solid rgba(84,54,255,.15);border-radius:14px;padding:24px 28px;margin:28px 0;position:relative;overflow:hidden}
+.stats-box{background:var(--bg-white);border:1px solid rgba(84,54,255,.15);border-radius:14px;padding:24px 28px;margin:var(--space-xl) 0;position:relative;overflow:hidden}
 .stats-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient);opacity:.3}
 .stats-box .box-label{color:var(--accent);font-family:var(--sans)}
 .stats-box ul{margin-bottom:10px;max-width:none}
@@ -1210,7 +1122,7 @@ h3.phase-card-v2__title{
 .stats-box p{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary)}
 
 /* Timeline */
-.timeline{display:flex;align-items:flex-start;position:relative;margin:40px 0 48px;padding:0 20px}
+.timeline{display:flex;align-items:flex-start;position:relative;margin:var(--space-xl) 0;padding:0 20px}
 .timeline::before{content:'';position:absolute;top:6px;left:20px;right:20px;height:2px;background:linear-gradient(90deg,var(--accent),#ec4899,var(--amber));transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ease)}
 .timeline.is-visible::before{transform:scaleX(1)}
 .timeline-node{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1}
@@ -1263,7 +1175,7 @@ h3.phase-card-v2__title{
   border-top:1px solid var(--gray-03);padding-top:6px;
   line-height:1.35;
 }
-.timeline--taylor{margin-top:12px;margin-bottom:48px}
+.timeline--taylor{margin-top:12px;margin-bottom:var(--space-2xl)}
 .timeline--taylor::before{background:linear-gradient(90deg,var(--accent),var(--accent-dark))}
 .timeline--taylor .timeline-node__dot{background:var(--accent);box-shadow:0 0 0 2px var(--accent),0 0 12px rgba(84,54,255,.35)}
 .timeline--taylor .timeline-node:nth-child(1) .timeline-node__dot{background:var(--accent)}
@@ -1277,16 +1189,16 @@ h3.phase-card-v2__title{
 .timeline-pair-label--taylor{color:var(--accent);margin-top:32px}
 
 /* Competitor cards */
-.competitor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 20px}
+.competitor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:var(--space-xl) 0}
 .competitor-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:24px;transition:all .35s var(--ease)}
 .competitor-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-2px);border-color:rgba(84,54,255,.2)}
 .competitor-card h4{font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--text-primary);margin:0 0 10px;letter-spacing:.02em}
 .competitor-card__action{font-size:var(--text-sm);color:var(--text-secondary);margin:0 0 10px;line-height:1.55}
 .competitor-card__implication{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0}
-.market-closing{font-size:var(--text-base);font-weight:600;color:var(--accent-dark);margin:20px 0 0;text-align:center}
+.market-closing{font-size:var(--text-base);font-weight:600;color:var(--accent-dark);margin:var(--space-lg) 0 0;text-align:center}
 
 /* Insight cards grid */
-.insight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:40px 0}
+.insight-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin:var(--space-xl) 0}
 .insight-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:24px 28px;transition:all .35s var(--ease)}
 .insight-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06);transform:translateY(-2px);border-color:rgba(84,54,255,.2)}
 .insight-card__num{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin:0 0 6px}
@@ -1298,7 +1210,7 @@ h3.phase-card-v2__title{
 
 /* AI Phase chart */
 /* AI Phase Pyramid — true pyramid shape */
-.ai-phase-chart{margin:32px 0 40px;max-width:720px;margin-left:auto;margin-right:auto}
+.ai-phase-chart{margin:var(--space-xl) auto;max-width:720px}
 .ai-phase-chart__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);color:var(--text-tertiary);margin:0 0 28px;text-transform:uppercase;letter-spacing:.08em;text-align:center}
 .ai-pyramid{display:flex;flex-direction:column;align-items:center;gap:0;font-family:var(--sans)}
 .ai-pyramid__tier{
@@ -1315,22 +1227,22 @@ h3.phase-card-v2__title{
 /* Tier 1: 7% — top of pyramid (narrowest) */
 .ai-pyramid__tier:nth-child(1) .ai-pyramid__bar{
   width:100%;background:var(--accent-dark);color:#fff;
-  clip-path:polygon(42% 0%, 58% 0%, 64% 100%, 36% 100%);
+  clip-path:polygon(50% 0%, 50% 0%, 62.5% 100%, 37.5% 100%);
 }
 /* Tier 2: 31% */
 .ai-pyramid__tier:nth-child(2) .ai-pyramid__bar{
   width:100%;background:var(--accent);color:#fff;
-  clip-path:polygon(36% 0%, 64% 0%, 76% 100%, 24% 100%);
+  clip-path:polygon(37.5% 0%, 62.5% 0%, 75% 100%, 25% 100%);
 }
 /* Tier 3: 30% */
 .ai-pyramid__tier:nth-child(3) .ai-pyramid__bar{
   width:100%;background:var(--accent-mid);color:#fff;
-  clip-path:polygon(24% 0%, 76% 0%, 88% 100%, 12% 100%);
+  clip-path:polygon(25% 0%, 75% 0%, 87.5% 100%, 12.5% 100%);
 }
 /* Tier 4: 32% — base (widest) */
 .ai-pyramid__tier:nth-child(4) .ai-pyramid__bar{
   width:100%;background:var(--accent-light);color:var(--text-primary);
-  clip-path:polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+  clip-path:polygon(12.5% 0%, 87.5% 0%, 100% 100%, 0% 100%);
 }
 .ai-pyramid__pct{font-size:var(--text-h3);font-weight:var(--fw-semibold);white-space:nowrap;z-index:1}
 .ai-pyramid__pct::after{content:'%';font-size:var(--text-sm);font-weight:var(--fw-medium);opacity:.7}
@@ -1339,9 +1251,9 @@ h3.phase-card-v2__title{
   position:absolute;left:calc(88% + 16px);top:50%;transform:translateY(-50%);
   line-height:1.3;white-space:nowrap;
 }
-.ai-pyramid__tier:nth-child(1) .ai-pyramid__info{left:calc(64% + 16px)}
-.ai-pyramid__tier:nth-child(2) .ai-pyramid__info{left:calc(76% + 16px)}
-.ai-pyramid__tier:nth-child(3) .ai-pyramid__info{left:calc(88% + 16px)}
+.ai-pyramid__tier:nth-child(1) .ai-pyramid__info{left:calc(62.5% + 16px)}
+.ai-pyramid__tier:nth-child(2) .ai-pyramid__info{left:calc(75% + 16px)}
+.ai-pyramid__tier:nth-child(3) .ai-pyramid__info{left:calc(87.5% + 16px)}
 .ai-pyramid__tier:nth-child(4) .ai-pyramid__info{left:calc(100% + 16px)}
 .ai-pyramid__phase{font-size:var(--text-sm);font-weight:var(--fw-semibold);display:block;color:var(--text-primary)}
 .ai-pyramid__desc{font-size:var(--text-xs);display:block;color:var(--text-tertiary)}
@@ -1361,16 +1273,16 @@ h3.phase-card-v2__title{
 .competitor-card li::before{content:'\203A';position:absolute;left:0;color:var(--text-tertiary);font-weight:700}
 
 /* Transformation Reality box */
-.transformation-reality{background:var(--brown-04);border-radius:var(--radius-lg);padding:36px 40px;margin:40px 0;color:#fff}
+.transformation-reality{background:var(--brown-04);border-radius:var(--radius-lg);padding:36px 40px;margin:var(--space-xl) 0;color:#fff}
 .transformation-reality__title{font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);letter-spacing:.1em;text-transform:uppercase;color:#fff !important;margin:0 0 20px}
 .transformation-reality__stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .transformation-reality__stat{font-size:var(--text-sm);color:#fff !important;line-height:1.55}
 .transformation-reality__stat strong{color:var(--yellow-accent) !important;font-weight:var(--fw-semibold)}
-.transformation-reality__closing{font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--yellow-accent) !important;margin:20px 0 0;text-align:center}
+.transformation-reality__closing{font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--yellow-accent) !important;margin:var(--space-lg) 0 0;text-align:center}
 
 /* Section pull-quote */
 .section-quote{
-  text-align:center;padding:56px 24px;margin:48px 0;position:relative;
+  text-align:center;padding:var(--space-3xl) var(--space-lg);margin:var(--space-2xl) 0;position:relative;
 }
 .section-quote::before,.section-quote::after{
   content:'';position:absolute;left:50%;transform:translateX(-50%);
@@ -1390,7 +1302,7 @@ h3.phase-card-v2__title{
 .section-quote__text .sr-word.is-revealed{opacity:1}
 
 /* Source attribution */
-.market-sources{font-family:var(--sans);font-size:var(--text-3xs);color:var(--text-tertiary);letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--border-light)}
+.market-sources{font-family:var(--sans);font-size:var(--text-3xs);color:var(--text-tertiary);letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-top:var(--space-xl);padding-top:var(--space-md);border-top:1px solid var(--border-light)}
 
 /* Stat source label */
 .stat-card__source{font-family:var(--sans);font-size:var(--text-3xs);color:var(--text-tertiary);letter-spacing:.04em;margin-top:4px;text-transform:uppercase}
@@ -1423,6 +1335,8 @@ h3.phase-card-v2__title{
   text-align:center;
   background:var(--gray-02);border-radius:var(--radius-sm);
 }
+/* Row tints — purple for Diagnosis + Comms, gray (default) for Execution */
+.svc-matrix__cell[style*="grid-row:3"],.svc-matrix__cell[style*="grid-row:4"],.svc-matrix__cell[style*="grid-row:7"]{background:var(--purple-01)}
 /* Phase card in col 1 — block card style */
 .svc-phase{
   display:flex;flex-direction:column;align-items:flex-start;
@@ -1450,13 +1364,13 @@ h3.phase-card-v2__title{
 .invest-heading{
   font-family:var(--sans);font-size:var(--text-h2);font-weight:var(--fw-regular);
   letter-spacing:var(--ls-heading);line-height:var(--lh-heading);
-  color:var(--text-primary);margin:40px 0 16px;
+  color:var(--text-primary);margin:var(--space-xl) 0 var(--space-md);
 }
 .invest-subtitle{
   font-family:var(--sans);font-size:var(--text-sm);line-height:var(--lh-body);
   color:var(--text-secondary);text-align:center;max-width:640px;margin:0 auto 24px;
 }
-.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;max-width:860px;margin-left:auto;margin-right:auto;margin-top:28px}
+.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:var(--space-xl) auto;max-width:860px}
 .invest-card{
   background:var(--bg-white);
   border-radius:var(--radius-xl);
@@ -1565,17 +1479,19 @@ h3.phase-card-v2__title{
   .invest-grid{grid-template-columns:1fr 1fr}
   .invest-card{page-break-inside:avoid}
 }
+
 /* Service group (dashed border spanning rows) */
 .svc-group{
   display:flex;align-items:center;justify-content:center;
-  border:1px dashed var(--gray-05);border-radius:var(--radius-md);
+  border:1px dashed var(--accent);border-radius:var(--radius-md);
   padding:16px 12px;
   font-size:var(--text-button);font-weight:var(--fw-medium);
   color:var(--accent);text-align:center;
 }
-.svc-group--diagnosis{grid-column:4;grid-row:2/5}
+.svc-group--prediag{grid-column:4;grid-row:2;border-color:var(--gray-04);color:var(--text-tertiary)}
+.svc-group--diagnosis{grid-column:4;grid-row:3/5;background:var(--purple-01)}
 .svc-group--execution{grid-column:4;grid-row:5/7}
-.svc-group--comms{grid-column:4;grid-row:7/8}
+.svc-group--comms{grid-column:4;grid-row:7/8;background:var(--purple-01)}
 /* Investment spanning groups */
 .svc-invest{
   display:flex;align-items:center;justify-content:center;
@@ -1584,9 +1500,10 @@ h3.phase-card-v2__title{
   color:var(--text-secondary);text-align:center;
   background:var(--gray-02);border-radius:var(--radius-sm);
 }
-.svc-invest--diagnosis{grid-column:5;grid-row:2/5}
+.svc-invest--prediag{grid-column:5;grid-row:2}
+.svc-invest--diagnosis{grid-column:5;grid-row:3/5;background:var(--purple-01)}
 .svc-invest--execution{grid-column:5;grid-row:5/7}
-.svc-invest--comms{grid-column:5;grid-row:7/8}
+.svc-invest--comms{grid-column:5;grid-row:7/8;background:var(--purple-01)}
 
 /* ═══════════════════════════════════════════════
    PHASE ACCORDION (Section 07)
@@ -1641,7 +1558,7 @@ h3.phase-card-v2__title{
   background:var(--gray-01);
   border:1px solid var(--gray-02);
   border-radius:var(--radius-lg);
-  margin:16px 0 48px;
+  margin:var(--space-md) 0 var(--space-2xl);
 }
 /* Zone 1: Subtitle + description (full-width) */
 .po-panel__intro{
@@ -1735,7 +1652,7 @@ h3.phase-card-v2__title{
 /* CTA */
 .cta-box{
   text-align:center;padding:52px 40px;background:var(--bg-white);
-  border:1px solid rgba(84,54,255,.2);border-radius:var(--radius-xl);margin:36px 0;
+  border:1px solid rgba(84,54,255,.2);border-radius:var(--radius-xl);margin:var(--space-xl) 0;
   position:relative;overflow:hidden;
 }
 .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--accent-glow) 0%,transparent 70%);opacity:.5;pointer-events:none;animation:ctaPulse 4s ease-in-out infinite}
@@ -1818,9 +1735,6 @@ h3.phase-card-v2__title{
   .evidence-item{page-break-inside:avoid}
   .gantt-bar{transform:scaleX(1)!important}
 
-  .cbe-dropdowns{max-height:none!important;opacity:1!important;overflow:visible!important;margin:24px 0 0!important;transform:none!important;display:block!important}
-  .cbe-dropdown{opacity:1!important;visibility:visible!important;position:static!important}
-  .cbe-bar__arrow{display:none}
   .cbe-dim-connectors{display:none}
   .arrow-pulse{display:none}
   .cbe-backbone-bar::before{display:none}
@@ -1833,7 +1747,6 @@ h3.phase-card-v2__title{
   .section-header{grid-template-columns:1fr}
   .section-header__right{padding-top:0}
   .interstitial{min-height:auto;page-break-before:always;background:var(--bg-warm)!important}
-  .interstitial::before{display:none}
   .interstitial__text{font-size:var(--text-2xl)}
 
   .typewriter-cursor{display:none}
@@ -1870,12 +1783,6 @@ h3.phase-card-v2__title{
   .section-header{grid-template-columns:1fr;gap:24px}
   .section-header__right{padding-top:0}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .cbe-bar{padding:32px 24px;min-height:140px;border-radius:80px}
-  .cbe-bar__name{font-size:60px;letter-spacing:-5px}
-  .cbe-bar__phases{gap:20px}
-  .cbe-bar__arrow{width:40px;height:40px;right:20px}
-  .cbe-dropdown__grid{gap:32px 48px}
-  .cbe-dropdown__inner{padding:32px}
   .insight-grid{grid-template-columns:1fr 1fr}
   .s04-after-svg{height:540px}
   .s04-panels{min-height:540px}
@@ -1886,7 +1793,6 @@ h3.phase-card-v2__title{
   #cover h1{font-size:var(--text-4xl)}
   .section h2{font-size:var(--text-3xl)}
   .interstitial__text{font-size:var(--text-2xl)}
-  .interstitial::before{display:none}
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .horizons-grid,.competitor-grid,.insight-grid{grid-template-columns:1fr}
@@ -1910,16 +1816,6 @@ h3.phase-card-v2__title{
   .timeline-label__desc{max-width:none}
   .gantt-bar{font-size:var(--text-metadata);padding:10px 12px}
 
-  .cbe-bar{padding:24px 16px;min-height:100px;border-radius:60px;flex-direction:column}
-  .cbe-bar__name{font-size:36px;letter-spacing:-3px}
-  .cbe-bar__phases{gap:12px}
-  .cbe-bar__sub{font-size:var(--text-2xs)}
-  .cbe-bar__arrow{position:static;transform:none;width:36px;height:36px;margin-top:12px}
-  .cbe-bar.is-open .cbe-bar__arrow{transform:rotate(180deg)}
-  .cbe-dropdown__grid{grid-template-columns:1fr}
-  .cbe-dropdown__inner{padding:20px}
-  .cbe-dropdown__bottom{grid-template-columns:1fr}
-  .cbe-dropdown__comparison{grid-template-columns:1fr}
   .backbone-vis{height:300px}
   #backbone-vis-disconnected{height:220px}
 
@@ -1954,7 +1850,6 @@ h3.phase-card-v2__title{
   .svc-matrix__cell:has(.svc-phase){
     display:block;background:transparent;padding:0;border-radius:0;
   }
-  /* Phase cards with inline metadata */
   .svc-phase{min-height:auto;padding:16px 18px;border-radius:var(--radius-md)}
   .svc-phase::after{
     display:block;margin-top:8px;
@@ -1967,15 +1862,15 @@ h3.phase-card-v2__title{
   .svc-phase--3::after{content:'Monthly · Hybrid'}
   .svc-phase--4::after{content:'Monthly · Hybrid'}
   .svc-phase--x::after{content:'Ongoing · Remote'}
-  /* Service group labels + ordering */
   .svc-group,.svc-invest{
     padding:10px 16px;font-size:var(--text-xs);
     border-radius:var(--radius-sm);
     grid-column:auto;grid-row:auto;
   }
-  .svc-group--diagnosis{order:1}
-  .svc-invest--diagnosis{order:2}
-  .svc-matrix__cell:has(.svc-phase--0){order:3}
+  .svc-group--prediag,.svc-invest--prediag{display:none}
+  .svc-matrix__cell:has(.svc-phase--0){order:1}
+  .svc-group--diagnosis{order:2}
+  .svc-invest--diagnosis{order:3}
   .svc-matrix__cell:has(.svc-phase--1){order:4}
   .svc-matrix__cell:has(.svc-phase--2){order:5}
   .svc-group--execution{order:6}
@@ -2291,9 +2186,7 @@ h3.phase-card-v2__title{
       <div class="stat-card"><div class="stat-card__value" data-count-target="128" data-count-prefix="$" data-count-suffix="B" data-glitch>0</div><div class="stat-card__label">Market Size</div></div>
     </div>
 
-    <p class="anim scroll-reveal" style="--d:.3s">The experiential marketing industry is at an inflection point representing a <strong>$128B global market</strong>. The landscape is shifting: faster execution, shorter timelines, higher expectations. The companies that will thrive are those with smarter, more efficient systems &mdash; designed to enable consistent, scalable execution.</p>
-
-    <p class="anim scroll-reveal" style="--d:.35s">Taylor stands at the edge of a meaningful opportunity &mdash; to design the system that enables its next phase of growth.</p>
+    <p class="anim scroll-reveal" style="--d:.3s">The experiential marketing industry is at an inflection point representing a $128B global market. The landscape is shifting: faster execution, shorter timelines, higher expectations. The companies that will thrive are those with smarter, more efficient systems &mdash; designed to enable consistent, scalable execution. Taylor stands at the edge of a meaningful opportunity &mdash; <strong>to design the system that enables its next phase of growth.</strong></p>
 
   </section>
 
@@ -2301,7 +2194,7 @@ h3.phase-card-v2__title{
   <div class="interstitial" data-typewriter>
     <div class="interstitial__text" data-tw-text="&ldquo;It&rsquo;s a pretty unique business. It&rsquo;s fun, it has a lot of breadth and depth, and it&rsquo;s constantly evolving. But we&rsquo;re all very busy servicing clients and staying on the business.&rdquo;">
     </div>
-    <span class="interstitial__source">&mdash; Taylor Group Leadership</span>
+    <span class="interstitial__source">&mdash; Taylor Group Leadership<br>Initial Conversation</span>
   </div>
 
   <!-- NEW OPERATING PARADIGM ────────────────── -->
@@ -2351,13 +2244,13 @@ h3.phase-card-v2__title{
       <div class="stat-card"><div class="stat-card__value anim-range" data-range-low="2" data-range-high="3" data-count-suffix="x" data-glitch>2 &ndash; 3x</div><div class="stat-card__label">Growth rate for digitally mature competitors</div><div class="stat-card__source">&rarr; Compared to industry average</div></div>
     </div>
 
-    <p class="anim scroll-reveal" style="--d:.75s">The gap is no longer defined by access to technology. It is defined by how the operation itself is designed.</p>
+    <div class="market-sources anim" style="--d:.75s"><a href="#references" style="color:var(--accent);text-decoration:none">Sources &amp; methodology &rarr; 09</a></div>
   </section>
 
   <!-- INTERSTITIAL 2 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="97% of executives believe AI will transform their company and industry. 93% say their AI investments are outperforming other strategic areas."></div>
-    <span class="interstitial__source">&mdash; Accenture</span>
+    <div class="interstitial__text" data-tw-text="&ldquo;97% of executives believe AI will transform their company and industry. 93% say their AI investments are outperforming other strategic areas.&rdquo;"></div>
+    <span class="interstitial__source"><em>Reinvent Enterprise Models with Generative AI</em><br>&mdash; Accenture</span>
   </div>
 
   <!-- BACKBONE ───────────────────────────────── -->
@@ -2901,32 +2794,56 @@ h3.phase-card-v2__title{
               <p class="hbw-item__subtitle">How the system improves</p>
               <p>AI operates across the backbone in different forms &mdash; each enhancing a specific part of the workflow.</p>
 
-              <div class="hbw-subsection">
-                <h4>AI Copilots &mdash; Assist Work in Real Time</h4>
-                <p class="hbw-subsection__desc">Embedded within tools to support day-to-day execution</p>
-                <p>Drafting proposals, briefs, and documentation<br>Assisting with planning, coordination, and communication<br>Providing contextual suggestions based on live data</p>
-                <p>&rarr; Speeds up individual productivity</p>
+              <div class="hbw-sub" data-hbw-sub>
+                <div class="hbw-sub__header">
+                  <h4>AI Copilots</h4>
+                  <span>Assist Work in Real Time</span>
+                  <div class="hbw-sub__toggle"></div>
+                </div>
+                <div class="hbw-sub__panel"><div class="hbw-sub__panel__inner">
+                  <p>Embedded within tools to support day-to-day execution.</p>
+                  <p>Drafting proposals, briefs, and documentation. Assisting with planning, coordination, and communication. Providing contextual suggestions based on live data.</p>
+                  <p class="hbw-sub__arrow">&rarr; Speeds up individual productivity</p>
+                </div></div>
               </div>
 
-              <div class="hbw-subsection">
-                <h4>Generative AI &mdash; Create &amp; Synthesize</h4>
-                <p class="hbw-subsection__desc">Transforms existing data and knowledge into usable outputs</p>
-                <p>Generates concepts, content, and structured deliverables<br>Synthesizes past projects, reports, and learnings<br>Expands ideas and connects inputs across sources</p>
-                <p>&rarr; Accelerates creation and knowledge reuse</p>
+              <div class="hbw-sub" data-hbw-sub>
+                <div class="hbw-sub__header">
+                  <h4>Generative AI</h4>
+                  <span>Create &amp; Synthesize</span>
+                  <div class="hbw-sub__toggle"></div>
+                </div>
+                <div class="hbw-sub__panel"><div class="hbw-sub__panel__inner">
+                  <p>Transforms existing data and knowledge into usable outputs.</p>
+                  <p>Generates concepts, content, and structured deliverables. Synthesizes past projects, reports, and learnings. Expands ideas and connects inputs across sources.</p>
+                  <p class="hbw-sub__arrow">&rarr; Accelerates creation and knowledge reuse</p>
+                </div></div>
               </div>
 
-              <div class="hbw-subsection">
-                <h4>Analytical AI &mdash; Understand &amp; Predict</h4>
-                <p class="hbw-subsection__desc">Turns operational data into foresight and decision support</p>
-                <p>Forecasts capacity, costs, and project risk<br>Identifies patterns across historical builds and outcomes<br>Enables proactive planning instead of reactive adjustment</p>
-                <p>&rarr; Improves decision quality across the operation</p>
+              <div class="hbw-sub" data-hbw-sub>
+                <div class="hbw-sub__header">
+                  <h4>Analytical AI</h4>
+                  <span>Understand &amp; Predict</span>
+                  <div class="hbw-sub__toggle"></div>
+                </div>
+                <div class="hbw-sub__panel"><div class="hbw-sub__panel__inner">
+                  <p>Turns operational data into foresight and decision support.</p>
+                  <p>Forecasts capacity, costs, and project risk. Identifies patterns across historical builds and outcomes. Enables proactive planning instead of reactive adjustment.</p>
+                  <p class="hbw-sub__arrow">&rarr; Improves decision quality across the operation</p>
+                </div></div>
               </div>
 
-              <div class="hbw-subsection">
-                <h4>Autonomous AI &mdash; Act &amp; Orchestrate</h4>
-                <p class="hbw-subsection__desc">Executes routine decisions and coordinates workflows independently</p>
-                <p>Routes tasks, triggers handoffs, and manages sequencing<br>Monitors live project status and flags exceptions<br>Reduces manual coordination across teams and tools</p>
-                <p>&rarr; Accelerates creation and knowledge reuse</p>
+              <div class="hbw-sub" data-hbw-sub>
+                <div class="hbw-sub__header">
+                  <h4>Autonomous AI</h4>
+                  <span>Act &amp; Orchestrate</span>
+                  <div class="hbw-sub__toggle"></div>
+                </div>
+                <div class="hbw-sub__panel"><div class="hbw-sub__panel__inner">
+                  <p>Executes routine decisions and coordinates workflows independently.</p>
+                  <p>Routes tasks, triggers handoffs, and manages sequencing. Monitors live project status and flags exceptions. Reduces manual coordination across teams and tools.</p>
+                  <p class="hbw-sub__arrow">&rarr; Frees the team from manual coordination</p>
+                </div></div>
               </div>
             </div>
           </div>
@@ -2937,8 +2854,8 @@ h3.phase-card-v2__title{
   </section>
   <!-- INTERSTITIAL 3 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="Only 16% of digital transformations fully succeed. Approach matters more than ambition."></div>
-    <span class="interstitial__source">&mdash; McKinsey</span>
+    <div class="interstitial__text" data-tw-text="&ldquo;Only 16% of digital transformations fully succeed. Approach matters more than ambition.&rdquo;"></div>
+    <span class="interstitial__source"><em>Unlocking Success in Digital Transformations</em><br>&mdash; McKinsey</span>
   </div>
 
   <!-- TRANSFORMATION ─────────────────────────── -->
@@ -3185,7 +3102,8 @@ h3.phase-card-v2__title{
 
   <!-- INTERSTITIAL — PARADIGM → FINDINGS ────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="Not a lack of capability &mdash; a lack of system-level connection."></div>
+    <div class="interstitial__text" data-tw-text="&ldquo;Surface-level digital adoption &mdash; without cultural and structural change &mdash; yields marginal improvements at best and cynicism at worst.&rdquo;"></div>
+    <span class="interstitial__source"><em>Flipping the Odds of Digital Transformation Success</em><br>&mdash; Boston Consulting Group</span>
   </div>
 
   <!-- NEXT STEPS ─────────────────────────────── -->
@@ -3210,6 +3128,8 @@ h3.phase-card-v2__title{
       <div class="svc-matrix__hdr svc-matrix__hdr--accent">Investment</div>
 
       <!-- Service groups (spanning rows) -->
+      <div class="svc-group svc-group--prediag">Pre-diagnosis</div>
+      <div class="svc-invest svc-invest--prediag">N/A</div>
       <div class="svc-group svc-group--diagnosis">Diagnosis</div>
       <div class="svc-invest svc-invest--diagnosis">Fixed project fee</div>
       <div class="svc-group svc-group--execution">Execution</div>
@@ -3232,10 +3152,10 @@ h3.phase-card-v2__title{
       <div class="svc-matrix__cell" style="grid-column:2;grid-row:4">8 &ndash; 10 weeks</div>
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:4"><span class="svc-badge">On-site</span> <span class="svc-badge">Remote</span></div>
 
-      <!-- Duration "Monthly" spanning rows 4-6 -->
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:5/8">Monthly</div>
+      <!-- Duration "Monthly" for Execution rows -->
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:5/7">Monthly</div>
 
-      <!-- Format "Hybrid" spanning rows 4-5 -->
+      <!-- Format "Hybrid" spanning Execution rows -->
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:5/7"><span class="svc-badge">Hybrid</span></div>
 
       <!-- Row 4: Implementation -->
@@ -3246,12 +3166,13 @@ h3.phase-card-v2__title{
 
       <!-- Row 6: Comms & change -->
       <div class="svc-matrix__cell" style="grid-column:1;grid-row:7"><span class="svc-phase svc-phase--x"><span class="svc-phase__num">#X</span>Comms &amp; change</span></div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:7">Ongoing</div>
       <div class="svc-matrix__cell" style="grid-column:3;grid-row:7"><span class="svc-badge">Remote</span></div>
     </div>
     </div><!-- /.svc-matrix-wrap -->
 
     <!-- Diagnosis Engagement Models -->
-    <h2 class="invest-heading anim" style="--d:.25s">Diagnosis Engagement Models</h2>
+    <h2 class="invest-heading anim" style="--d:.25s;margin-top:160px">Diagnosis Engagement Models</h2>
     <p class="invest-subtitle anim" style="--d:.28s">The following engagement models define how Taylor can access a full operational diagnosis &mdash; with or without change enablement.</p>
 
     <div class="invest-grid anim" style="--d:.3s">
@@ -3324,8 +3245,8 @@ h3.phase-card-v2__title{
 
   <!-- INTERSTITIAL ─────────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="Companies often underestimate the costs of fragmented systems and manual processes."></div>
-    <span class="interstitial__source">&mdash; Boston Consulting Group</span>
+    <div class="interstitial__text" data-tw-text="&ldquo;Companies often underestimate the costs of fragmented systems and manual processes.&rdquo;"></div>
+    <span class="interstitial__source"><em>Flipping the Odds of Digital Transformation Success</em><br>&mdash; Boston Consulting Group</span>
   </div>
 
   <!-- FINDINGS ───────────────────────────────── -->
@@ -3343,7 +3264,7 @@ h3.phase-card-v2__title{
 
     <div class="findings-hero anim" style="--d:.25s">
       <span class="findings-hero__amount"><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="2.85" data-count-prefix="$" data-count-suffix="M" data-count-decimals="2" data-glitch>$0</span></span>
-      <span class="findings-hero__label">Aggregate estimated annual impact*</span>
+      <span class="findings-hero__label">Estimated annual impact*</span>
     </div>
 
     <!-- HIGH IMPACT -->
@@ -3456,7 +3377,7 @@ h3.phase-card-v2__title{
   </section>
   <!-- INTERSTITIAL 4 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="Everyone is buying AI tools. Almost nobody is connecting them. The ones who wire it into how they actually work — they won't just compete. They'll set the rules."></div>
+    <div class="interstitial__text" data-tw-text="&ldquo;Everyone is buying AI tools. Almost nobody is connecting them. The ones who wire it into how they actually work — they won&rsquo;t just compete. They&rsquo;ll set the rules.&rdquo;"></div>
   </div>
   <!-- INTAKE PROPOSAL ──────────────────────────── -->
   <section id="intake-proposal" class="section">
@@ -3962,6 +3883,11 @@ h3.phase-card-v2__title{
               <td><a href="https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation" target="_blank" rel="noopener" style="color:var(--accent)">bcg.com &nearr;</a></td>
             </tr>
             <tr>
+              <td>Surface-level digital adoption without structural change yields marginal improvements</td>
+              <td>BCG &mdash; <em>Flipping the Odds of Digital Transformation Success</em></td>
+              <td><a href="https://www.bcg.com/publications/2020/increasing-odds-of-success-in-digital-transformation" target="_blank" rel="noopener" style="color:var(--accent)">bcg.com &nearr;</a></td>
+            </tr>
+            <tr>
               <td>2 &ndash; 3x higher revenue growth for digitally mature organizations</td>
               <td>MIT Sloan / Capgemini &mdash; <em>Leading Digital</em> (Westerman et al.)</td>
               <td><a href="https://mitsloan.mit.edu/ideas-made-to-matter/leading-digital-turning-technology-business-transformation" target="_blank" rel="noopener" style="color:var(--accent)">mitsloan.mit.edu &nearr;</a></td>
@@ -4342,6 +4268,13 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
         const wasActive = item.classList.contains('is-active');
         items.forEach(i=> i.classList.remove('is-active'));
         if(!wasActive) item.classList.add('is-active');
+      });
+    });
+    // AI sub-accordions (nested inside layer 3)
+    accordion.querySelectorAll('[data-hbw-sub]').forEach(sub=>{
+      sub.querySelector('.hbw-sub__header').addEventListener('click',e=>{
+        e.stopPropagation();
+        sub.classList.toggle('is-open');
       });
     });
   })();
