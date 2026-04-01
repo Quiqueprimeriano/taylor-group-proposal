@@ -3379,7 +3379,8 @@ h3.phase-card-v2__title{
   </section>
   <!-- INTERSTITIAL 4 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="&ldquo;Everyone is buying AI tools. Almost nobody is connecting them. The ones who wire it into how they actually work — they won&rsquo;t just compete. They&rsquo;ll set the rules.&rdquo;"></div>
+    <div class="interstitial__text" data-tw-text="&ldquo;The redesign of workflows has the biggest effect on an organization&rsquo;s ability to see EBIT impact from its use of gen AI.&rdquo;"></div>
+    <span class="interstitial__source"><em>The State of AI: How Organizations Are Rewiring to Capture Value</em><br>&mdash; McKinsey</span>
   </div>
   <!-- INTAKE PROPOSAL ──────────────────────────── -->
   <section id="intake-proposal" class="section">
@@ -3802,6 +3803,11 @@ h3.phase-card-v2__title{
               <td>Only 16% of digital transformations fully succeed</td>
               <td>McKinsey &mdash; <em>Unlocking Success in Digital Transformations</em></td>
               <td><a href="https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/Organization/Our%20Insights/Unlocking%20success%20in%20digital%20transformations/Unlocking-success-in-digital-transformations.pdf" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com (PDF) &nearr;</a></td>
+            </tr>
+            <tr>
+              <td>Workflow redesign has the biggest effect on EBIT impact from gen AI</td>
+              <td>McKinsey &mdash; <em>The State of AI: How Organizations Are Rewiring to Capture Value</em> (2025)</td>
+              <td><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value" target="_blank" rel="noopener" style="color:var(--accent)">mckinsey.com &nearr;</a></td>
             </tr>
           </tbody>
         </table>
@@ -4962,6 +4968,19 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   }
 
   /* ── Chat logic ─────────────────────────── */
+  /* ── Error messages ─────────────────────── */
+  function errorMsg(err){
+    if(!navigator.onLine) return 'You appear to be offline. Check your connection and try again.';
+    if(err.message==='rate-limited') return 'You\'re sending messages too quickly. Please wait a moment and try again.';
+    if(err.name==='AbortError') return 'The request timed out — the server may be busy. Please try again in a few seconds.';
+    if(err.message && err.message.indexOf('API error 5')===0) return 'The server is temporarily unavailable. Please try again shortly.';
+    return 'I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.';
+  }
+
+  function isRetryable(err){
+    return err.message!=='rate-limited' && err.name!=='AbortError' && navigator.onLine;
+  }
+
   async function handleUserInput(text){
     if(isWaiting) return;
     isWaiting=true;
@@ -4974,7 +4993,6 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     var msgDiv;
 
     try{
-      // Try streaming first
       removeTyping();
       msgDiv = addMsg('','bot');
       var fullText = await callAPIStream(msgDiv);
@@ -4983,10 +5001,8 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
       if(msgDiv && !msgDiv.textContent) msgDiv.remove();
       removeTyping();
 
-      if(streamErr.message==='rate-limited'){
-        addMsg('You\'re sending messages too quickly. Please wait a moment and try again.','error');
-      }else if(streamErr.name==='AbortError'){
-        addMsg('The request timed out. Please try again.','error');
+      if(!isRetryable(streamErr)){
+        addMsg(errorMsg(streamErr),'error');
       }else{
         // Fallback to non-streaming with 1 retry
         try{
@@ -4997,13 +5013,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
           conversationHistory.push({role:'assistant',content:answer});
         }catch(fallbackErr){
           removeTyping();
-          if(fallbackErr.message==='rate-limited'){
-            addMsg('You\'re sending messages too quickly. Please wait a moment and try again.','error');
-          }else if(fallbackErr.name==='AbortError'){
-            addMsg('The request timed out. Please try again.','error');
-          }else{
-            addMsg('I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.','error');
-          }
+          addMsg(errorMsg(fallbackErr),'error');
         }
       }
     }

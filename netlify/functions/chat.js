@@ -66,6 +66,15 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: validationError }) };
     }
 
+    // Analytics: structured log (visible in Netlify Functions logs)
+    const lastUserMsg = messages.filter(m => m.role === 'user').pop();
+    console.log(JSON.stringify({
+      event: 'tay_chat',
+      section: section || 'unknown',
+      question: lastUserMsg ? lastUserMsg.content.slice(0, 200) : '',
+      turn: messages.length
+    }));
+
     const response = await client.messages.create({
       model: MODEL,
       max_tokens: MAX_TOKENS,

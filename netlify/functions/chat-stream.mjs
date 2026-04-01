@@ -81,6 +81,15 @@ export default async (req) => {
     });
   }
 
+  // Analytics: structured log (visible in Netlify Functions logs)
+  const lastUserMsg = messages.filter(m => m.role === 'user').pop();
+  console.log(JSON.stringify({
+    event: 'tay_chat_stream',
+    section: section || 'unknown',
+    question: lastUserMsg ? lastUserMsg.content.slice(0, 200) : '',
+    turn: messages.length
+  }));
+
   const encoder = new TextEncoder();
 
   const readableStream = new ReadableStream({
