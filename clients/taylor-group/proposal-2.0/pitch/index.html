@@ -4866,26 +4866,36 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     });
   }
 
-  /* ── Format response (basic markdown→html) ── */
+  /* ── Format response (markdown→html) ─────── */
   function formatResponse(text){
     return text
+      .replace(/`([^`]+)`/g,'<code style="background:rgba(84,54,255,.08);padding:1px 4px;border-radius:3px;font-size:.85em">$1</code>')
       .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
       .replace(/\n\n/g,'</p><p>')
+      .replace(/\n(\d+)\. /g,'<br>$1. ')
       .replace(/\n- /g,'<br>• ')
       .replace(/\n/g,'<br>');
   }
 
-  /* ── Streaming API call ──────────────────── */
-  async function callAPIStream(userText, msgDiv){
-    var payload = JSON.stringify({
-      messages:conversationHistory,
-      section:currentSection
-    });
+  /* ── Fetch with timeout ─────────────────── */
+  var FETCH_TIMEOUT = 15000; // 15 seconds
 
-    var res = await fetch(STREAM_URL,{
+  function fetchWithTimeout(url, opts){
+    var controller = new AbortController();
+    var timer = setTimeout(function(){ controller.abort(); }, FETCH_TIMEOUT);
+    opts.signal = controller.signal;
+    return fetch(url, opts).finally(function(){ clearTimeout(timer); });
+  }
+
+  /* ── Streaming API call ──────────────────── */
+  async function callAPIStream(msgDiv){
+    var body = JSON.stringify({ messages:conversationHistory, section:currentSection });
+
+    var res = await fetchWithTimeout(STREAM_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:payload
+      body:body
     });
 
     if(res.status===429) throw new Error('rate-limited');
@@ -4902,15 +4912,15 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
       buffer += decoder.decode(chunk.value,{stream:true});
 
       var lines = buffer.split('\n');
-      buffer = lines.pop(); // keep incomplete line in buffer
+      buffer = lines.pop();
 
       for(var i=0;i<lines.length;i++){
         var line = lines[i].trim();
         if(!line || !line.startsWith('data: ')) continue;
-        var payload = line.slice(6);
-        if(payload === '[DONE]') continue;
+        var eventData = line.slice(6);
+        if(eventData === '[DONE]') continue;
         try{
-          var data = JSON.parse(payload);
+          var data = JSON.parse(eventData);
           if(data.error) throw new Error(data.error);
           if(data.text){
             fullText += data.text;
@@ -4926,15 +4936,27 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     return fullText;
   }
 
-  /* ── Fallback non-streaming API call ────── */
-  async function callAPIFallback(payload){
-    var res = await fetch(FALLBACK_URL,{
+  /* ── Fallback non-streaming with retry ──── */
+  async function callAPIFallback(attempt){
+    var body = JSON.stringify({ messages:conversationHistory, section:currentSection });
+
+    var res = await fetchWithTimeout(FALLBACK_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:payload
+      body:body
     });
+
     if(res.status===429) throw new Error('rate-limited');
-    if(!res.ok) throw new Error('API error '+res.status);
+
+    if(!res.ok){
+      // Retry once with backoff on server errors
+      if(attempt === 0 && res.status >= 500){
+        await new Promise(function(r){ setTimeout(r, 1500); });
+        return callAPIFallback(1);
+      }
+      throw new Error('API error '+res.status);
+    }
+
     var data = await res.json();
     return data.response || 'Sorry, I couldn\'t process that.';
   }
@@ -4948,31 +4970,28 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     input.disabled=true;
     conversationHistory.push({role:'user',content:text});
 
-    var payload = JSON.stringify({
-      messages:conversationHistory,
-      section:currentSection
-    });
-
     showTyping();
+    var msgDiv;
 
     try{
       // Try streaming first
       removeTyping();
-      var msgDiv = addMsg('','bot');
-      var fullText = await callAPIStream(text, msgDiv);
+      msgDiv = addMsg('','bot');
+      var fullText = await callAPIStream(msgDiv);
       conversationHistory.push({role:'assistant',content:fullText});
     }catch(streamErr){
-      // Remove empty streaming div if it exists
       if(msgDiv && !msgDiv.textContent) msgDiv.remove();
       removeTyping();
 
       if(streamErr.message==='rate-limited'){
         addMsg('You\'re sending messages too quickly. Please wait a moment and try again.','error');
+      }else if(streamErr.name==='AbortError'){
+        addMsg('The request timed out. Please try again.','error');
       }else{
-        // Fallback to non-streaming
+        // Fallback to non-streaming with 1 retry
         try{
           showTyping();
-          var answer = await callAPIFallback(payload);
+          var answer = await callAPIFallback(0);
           removeTyping();
           addMsg(formatResponse(answer),'bot');
           conversationHistory.push({role:'assistant',content:answer});
@@ -4980,6 +4999,8 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
           removeTyping();
           if(fallbackErr.message==='rate-limited'){
             addMsg('You\'re sending messages too quickly. Please wait a moment and try again.','error');
+          }else if(fallbackErr.name==='AbortError'){
+            addMsg('The request timed out. Please try again.','error');
           }else{
             addMsg('I\'m having trouble connecting right now. Please try again in a moment, or scroll through the proposal — the information you need is all here.','error');
           }
@@ -5034,6 +5055,22 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   window.addEventListener('scroll',trackSection,{passive:true});
   trackSection();
 
+  /* ── Focus trap ─────────────────────────── */
+  var focusableSelector = '.tay-input, .tay-send, .tay-pill';
+
+  function trapFocus(e){
+    if(!isOpen || e.key!=='Tab') return;
+    var focusable = Array.from(panel.querySelectorAll(focusableSelector)).filter(function(el){ return !el.disabled && el.offsetParent!==null; });
+    if(!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length-1];
+    if(e.shiftKey){
+      if(document.activeElement===first){ e.preventDefault(); last.focus(); }
+    }else{
+      if(document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  }
+
   /* ── Event listeners ────────────────────── */
   fab.addEventListener('click',function(){
     toggle();
@@ -5041,9 +5078,10 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   sendBtn.addEventListener('click',send);
   input.addEventListener('keydown',function(e){if(e.key==='Enter')send();});
 
-  /* Close on Escape */
+  /* Close on Escape + focus trap */
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape'&&isOpen) toggle();
+    trapFocus(e);
   });
 
   /* ── Proactive open removed — bot only opens on user click ── */
