@@ -324,6 +324,7 @@ body{font-family:var(--sans);color:var(--text-secondary);background:var(--bg);li
 
 /* Before / After panels — stacked grid, opacity crossfade */
 .s04-panels{display:grid;min-height:680px}
+.s04-base-svg{grid-area:1/1;width:100%;height:680px;display:block;position:relative;z-index:2;pointer-events:none}
 .s04-panels>.ba-panel{
   grid-area:1/1;
   opacity:0;visibility:hidden;
@@ -1439,6 +1440,29 @@ h3.phase-card-v2__title{
   color:var(--text-tertiary);gap:4px;
 }
 .invest-card__back-footer svg{width:14px;height:14px}
+/* "Ideal for" line in front footer */
+.invest-card__ideal{
+  font-family:var(--sans);font-size:var(--text-metadata);
+  color:var(--text-tertiary);font-style:italic;
+  padding:8px 20px 12px;border-top:1px solid var(--gray-02);
+}
+/* Investment-applied highlight on back */
+.invest-card__credit{
+  margin:12px 0 0;padding:10px 14px;
+  background:linear-gradient(135deg,var(--accent-light),rgba(84,54,255,.06));
+  border-radius:var(--radius-sm);
+  border-left:3px solid var(--accent);
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.5;
+  color:var(--text-secondary);
+}
+.invest-card__credit strong{color:var(--accent);font-weight:var(--fw-semibold)}
+/* ROI anchor line on back */
+.invest-card__roi{
+  margin:14px 0 0;padding:10px 14px;
+  background:var(--gray-01);border-radius:var(--radius-sm);
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.5;
+  color:var(--text-secondary);font-style:italic;
+}
 /* Card top accent bar — on front face */
 .invest-card__front::after{
   content:'';position:absolute;top:0;left:0;right:0;height:4px;
@@ -1841,7 +1865,7 @@ h3.phase-card-v2__title{
   .section-header__right{padding-top:0}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .insight-grid{grid-template-columns:1fr 1fr}
-  .s04-after-svg{height:540px}
+  .s04-base-svg,.s04-after-svg{height:540px}
   .s04-panels{min-height:540px}
 }
 @media(max-width:768px){
@@ -1853,7 +1877,7 @@ h3.phase-card-v2__title{
   .stats-grid{grid-template-columns:1fr 1fr;gap:10px}
   .stat-card__value{font-size:var(--text-2xl)}
   .horizons-grid,.competitor-grid,.insight-grid{grid-template-columns:1fr}
-  .s04-diagram-svg,.s04-after-svg{height:auto;width:calc(100% + 36px);margin-left:-18px}
+  .s04-base-svg,.s04-diagram-svg,.s04-after-svg{height:auto;width:calc(100% + 36px);margin-left:-18px}
   .s04-panels{min-height:auto}
   .s04-annotation{display:none}
   .transformation-reality{padding:24px 20px}
@@ -2353,26 +2377,46 @@ h3.phase-card-v2__title{
     </div>
 
     <div class="s04-panels">
-    <!-- Before panel: disconnected state -->
+
+    <!-- Persistent base layer: dims + phases stay fixed during toggle -->
+    <svg class="s04-base-svg" viewBox="-120 0 1080 680" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- ── Dimension circles (top row, y=72) ── -->
+      <circle class="s04-dim-circle" cx="100" cy="72" r="52"/>
+      <text class="s04-dim-label" x="100" y="68">People &amp;</text>
+      <text class="s04-dim-label" x="100" y="84">Culture</text>
+
+      <circle class="s04-dim-circle" cx="260" cy="72" r="52"/>
+      <text class="s04-dim-label" x="260" y="76">Processes</text>
+
+      <circle class="s04-dim-circle" cx="420" cy="72" r="52"/>
+      <text class="s04-dim-label" x="420" y="76">Tech</text>
+
+      <circle class="s04-dim-circle" cx="580" cy="72" r="52"/>
+      <text class="s04-dim-label" x="580" y="76">Data</text>
+
+      <circle class="s04-dim-circle" cx="740" cy="72" r="52"/>
+      <text class="s04-dim-label" x="740" y="76">Compliance</text>
+
+      <!-- ── Phase circles (bottom row, y=580) ── -->
+      <circle class="s04-phase-circle" cx="200" cy="580" r="80"/>
+      <text class="s04-phase-label" x="200" y="585">Create</text>
+
+      <circle class="s04-phase-circle" cx="420" cy="580" r="80"/>
+      <text class="s04-phase-label" x="420" y="585">Build</text>
+
+      <circle class="s04-phase-circle" cx="640" cy="580" r="80"/>
+      <text class="s04-phase-label" x="640" y="585">Execute</text>
+
+      <!-- ── Annotations ── -->
+      <text class="s04-annotation" x="-90" y="14">5 dimensions</text>
+      <text class="s04-annotation" x="930" y="14" text-anchor="end">5 dimensions</text>
+      <text class="s04-annotation" x="-90" y="674">3 phases</text>
+      <text class="s04-annotation" x="930" y="674" text-anchor="end">3 phases</text>
+    </svg>
+
+    <!-- Before panel: disconnected-only elements (no dims/phases — those are in base) -->
     <div class="ba-panel is-visible" id="s04-panel-before" role="tabpanel">
-      <svg class="s04-diagram-svg" viewBox="-120 0 1080 680" xmlns="http://www.w3.org/2000/svg" aria-label="Disconnected state: dimensions and phases with no data flow">
-
-        <!-- ── Dimension circles (top row, y=72) ── -->
-        <circle class="s04-dim-circle" cx="100" cy="72" r="52"/>
-        <text class="s04-dim-label" x="100" y="68">People &amp;</text>
-        <text class="s04-dim-label" x="100" y="84">Culture</text>
-
-        <circle class="s04-dim-circle" cx="260" cy="72" r="52"/>
-        <text class="s04-dim-label" x="260" y="76">Processes</text>
-
-        <circle class="s04-dim-circle" cx="420" cy="72" r="52"/>
-        <text class="s04-dim-label" x="420" y="76">Tech</text>
-
-        <circle class="s04-dim-circle" cx="580" cy="72" r="52"/>
-        <text class="s04-dim-label" x="580" y="76">Data</text>
-
-        <circle class="s04-dim-circle" cx="740" cy="72" r="52"/>
-        <text class="s04-dim-label" x="740" y="76">Compliance</text>
+      <svg class="s04-diagram-svg" viewBox="-120 0 1080 680" xmlns="http://www.w3.org/2000/svg" aria-label="Disconnected state: no data flow between dimensions and phases">
 
         <!-- Dots at bottom of each dim circle -->
         <circle class="s04-dim-dot" cx="100" cy="124" r="3.5"/>
@@ -2407,22 +2451,6 @@ h3.phase-card-v2__title{
         <line class="s04-drop" x1="200" y1="368" x2="200" y2="490"/>
         <line class="s04-drop" x1="420" y1="368" x2="420" y2="490"/>
         <line class="s04-drop" x1="640" y1="368" x2="640" y2="490"/>
-
-        <!-- ── Phase circles (faded, bottom row) ── -->
-        <circle class="s04-phase-circle" cx="200" cy="580" r="80"/>
-        <text class="s04-phase-label" x="200" y="585">Create</text>
-
-        <circle class="s04-phase-circle" cx="420" cy="580" r="80"/>
-        <text class="s04-phase-label" x="420" y="585">Build</text>
-
-        <circle class="s04-phase-circle" cx="640" cy="580" r="80"/>
-        <text class="s04-phase-label" x="640" y="585">Execute</text>
-
-        <!-- ── Annotations ── -->
-        <text class="s04-annotation" x="-90" y="14">5 dimensions</text>
-        <text class="s04-annotation" x="930" y="14" text-anchor="end">5 dimensions</text>
-        <text class="s04-annotation" x="-90" y="674">3 phases</text>
-        <text class="s04-annotation" x="930" y="674" text-anchor="end">3 phases</text>
       </svg>
     </div>
 
@@ -2473,40 +2501,16 @@ h3.phase-card-v2__title{
             Execute(640,580):hub(455,353) → phase(589,518)
         -->
 
-        <!-- ── Dimension circles (top row) — with glow halos ── -->
+        <!-- ── Glow halos (appear during staged reveal, overlay base dims/phases) ── -->
         <circle class="s04a-dim-glow" cx="100" cy="72" r="60" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-dim-circle" cx="100" cy="72" r="52"/>
-        <text class="s04a-dim-label" x="100" y="68">People &amp;</text>
-        <text class="s04a-dim-label" x="100" y="84">Culture</text>
-
         <circle class="s04a-dim-glow" cx="260" cy="72" r="60" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-dim-circle" cx="260" cy="72" r="52"/>
-        <text class="s04a-dim-label" x="260" y="76">Processes</text>
-
         <circle class="s04a-dim-glow" cx="420" cy="72" r="60" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-dim-circle" cx="420" cy="72" r="52"/>
-        <text class="s04a-dim-label" x="420" y="76">Tech</text>
-
         <circle class="s04a-dim-glow" cx="580" cy="72" r="60" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-dim-circle" cx="580" cy="72" r="52"/>
-        <text class="s04a-dim-label" x="580" y="76">Data</text>
-
         <circle class="s04a-dim-glow" cx="740" cy="72" r="60" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-dim-circle" cx="740" cy="72" r="52"/>
-        <text class="s04a-dim-label" x="740" y="76">Compliance</text>
 
-        <!-- ── Phase circles (bottom row, y=580) — gradient fill + glow halos ── -->
         <circle class="s04a-phase-glow" cx="200" cy="580" r="88" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-phase-circle" cx="200" cy="580" r="80" fill="url(#s04-phase-fill)"/>
-        <text class="s04a-phase-label" x="200" y="585">Create</text>
-
         <circle class="s04a-phase-glow" cx="420" cy="580" r="88" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-phase-circle" cx="420" cy="580" r="80" fill="url(#s04-phase-fill)"/>
-        <text class="s04a-phase-label" x="420" y="585">Build</text>
-
         <circle class="s04a-phase-glow" cx="640" cy="580" r="88" filter="url(#s04-node-glow)"/>
-        <circle class="s04a-phase-circle" cx="640" cy="580" r="80" fill="url(#s04-phase-fill)"/>
-        <text class="s04a-phase-label" x="640" y="585">Execute</text>
 
         <!-- ── Gradient spokes (hub edge → circle edge, bezier) with draw-on ── -->
         <!-- To dimensions -->
@@ -3240,7 +3244,7 @@ h3.phase-card-v2__title{
 
     <!-- Diagnosis Engagement Models -->
     <h2 class="invest-heading anim" style="--d:.25s;margin-top:160px">Diagnosis Engagement Models</h2>
-    <p class="invest-subtitle anim" style="--d:.28s">The following engagement models define how Taylor can access a full operational diagnosis &mdash; with or without change enablement.</p>
+    <p class="invest-subtitle anim" style="--d:.28s">Two paths to operational clarity &mdash; choose the depth of impact that fits Taylor&rsquo;s readiness.</p>
 
     <div class="invest-grid anim" style="--d:.3s">
       <!-- Core Diagnosis -->
@@ -3249,10 +3253,10 @@ h3.phase-card-v2__title{
           <div class="invest-card__front">
             <div class="invest-card__head">
               <h3 class="invest-card__title">Core Diagnosis</h3>
-              <p class="invest-card__head-desc">Full operational visibility across Create, Build, and Execute</p>
+              <p class="invest-card__head-desc">Know exactly what to change, in what order, and why</p>
             </div>
             <div class="invest-card__body">
-              <p class="invest-card__section-label">What Taylor receives</p>
+              <p class="invest-card__section-label">What you get</p>
               <ul>
                 <li>Operational X-Ray across Create / Build / Execute workflows</li>
                 <li>Quantified breakdown of inefficiencies, friction points, and lost value</li>
@@ -3260,7 +3264,7 @@ h3.phase-card-v2__title{
                 <li>Prioritized Transformation Roadmap (what to change, in what order, and why)</li>
                 <li>Investment Logic to support strategic and operational decisions</li>
               </ul>
-              <p class="invest-card__section-label">How it&rsquo;s built</p>
+              <p class="invest-card__section-label">How we build it</p>
               <ul>
                 <li>Structured Intake (remote)</li>
                 <li>3-week on-site operational immersion</li>
@@ -3275,6 +3279,7 @@ h3.phase-card-v2__title{
               <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
               <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
             </div>
+            <p class="invest-card__ideal">Ideal for leadership teams that need clarity before committing to execution</p>
             <span class="invest-card__flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>See investment</span>
           </div>
           <div class="invest-card__back">
@@ -3286,32 +3291,35 @@ h3.phase-card-v2__title{
             <div class="invest-card__back-body">
               <p class="invest-card__section-label">What&rsquo;s included</p>
               <ul>
-                <li>Placeholder item 1</li>
-                <li>Placeholder item 2</li>
-                <li>Placeholder item 3</li>
+                <li>Full operational assessment across all workflows</li>
+                <li>System Map &amp; Transformation Roadmap deliverables</li>
+                <li>Leadership validation sessions</li>
+                <li>Access to TransformAZ diagnostic frameworks</li>
               </ul>
               <p class="invest-card__section-label">Payment structure</p>
               <ul>
-                <li>Placeholder payment term 1</li>
-                <li>Placeholder payment term 2</li>
+                <li>50% at project kickoff</li>
+                <li>25% at mid-point delivery</li>
+                <li>25% at final report</li>
               </ul>
+              <div class="invest-card__roi">Similar engagements have identified 15 &ndash; 20% operational cost reduction opportunities within the first quarter.</div>
             </div>
             <div class="invest-card__back-footer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>Back to details</div>
           </div>
         </div>
       </div>
 
-      <!-- Diagnosis + Change Enablement -->
+      <!-- Diagnosis + Execution Pathway -->
       <div class="invest-card invest-card--recommended">
         <span class="invest-card__badge-rec">Recommended</span>
         <div class="invest-card__inner">
           <div class="invest-card__front">
             <div class="invest-card__head">
-              <h3 class="invest-card__title">Diagnosis + Change Enablement</h3>
-              <p class="invest-card__head-desc">Everything in Core Diagnosis, plus the strategy to make change stick</p>
+              <h3 class="invest-card__title">Diagnosis + Execution Pathway</h3>
+              <p class="invest-card__head-desc">A transformation roadmap with the organizational alignment to execute it</p>
             </div>
             <div class="invest-card__body">
-              <p class="invest-card__section-label">What Taylor receives</p>
+              <p class="invest-card__section-label">What you get</p>
               <ul>
                 <li>Everything included in Core Diagnosis</li>
                 <li>Communication &amp; Change Strategy aligned to the roadmap</li>
@@ -3320,7 +3328,7 @@ h3.phase-card-v2__title{
                 <li>Adoption Plan (behaviors, tracking, reinforcement)</li>
                 <li>Ongoing Communication Cadence across teams</li>
               </ul>
-              <p class="invest-card__section-label">How it&rsquo;s built</p>
+              <p class="invest-card__section-label">How we build it</p>
               <ul>
                 <li>Integrated alongside Diagnosis (not post-phase)</li>
                 <li>Leadership alignment sessions</li>
@@ -3334,26 +3342,32 @@ h3.phase-card-v2__title{
               <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
               <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
             </div>
+            <p class="invest-card__ideal">Ideal for organizations ready to move from diagnosis into action</p>
             <span class="invest-card__flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>See investment</span>
           </div>
           <div class="invest-card__back">
             <div class="invest-card__back-head">
-              <p class="invest-card__back-title">Diagnosis + Change Enablement</p>
+              <p class="invest-card__back-title">Diagnosis + Execution Pathway</p>
               <p class="invest-card__price">US$ XX,XXX</p>
-              <p class="invest-card__price-note">Fixed project fee</p>
+              <p class="invest-card__price-note">Fixed project fee &mdash; Diagnosis phase</p>
             </div>
             <div class="invest-card__back-body">
               <p class="invest-card__section-label">What&rsquo;s included</p>
               <ul>
-                <li>Everything in Core Diagnosis</li>
-                <li>Placeholder item 2</li>
-                <li>Placeholder item 3</li>
+                <li>Full operational assessment across all workflows</li>
+                <li>System Map &amp; Transformation Roadmap deliverables</li>
+                <li>Change Strategy, Leadership Alignment &amp; Adoption Plan</li>
+                <li>Stakeholder engagement design &amp; communication cadence</li>
+                <li>Access to TransformAZ diagnostic frameworks</li>
               </ul>
-              <p class="invest-card__section-label">Payment structure</p>
+              <div class="invest-card__credit"><strong>Investment applied:</strong> Your diagnosis investment is credited toward the first quarter of execution. Implementation retainer is defined by diagnosis findings.</div>
+              <p class="invest-card__section-label" style="margin-top:14px">Payment structure</p>
               <ul>
-                <li>Placeholder payment term 1</li>
-                <li>Placeholder payment term 2</li>
+                <li>50% at project kickoff</li>
+                <li>25% at mid-point delivery</li>
+                <li>25% at final report</li>
               </ul>
+              <div class="invest-card__roi">Similar engagements have identified 15 &ndash; 20% operational cost reduction opportunities within the first quarter.</div>
             </div>
             <div class="invest-card__back-footer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>Back to details</div>
           </div>
@@ -4412,7 +4426,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   // S04: crop viewBox on mobile to remove annotation padding
   (function(){
     if(window.innerWidth > 768) return;
-    document.querySelectorAll('.s04-diagram-svg,.s04-after-svg').forEach(function(svg){
+    document.querySelectorAll('.s04-base-svg,.s04-diagram-svg,.s04-after-svg').forEach(function(svg){
       svg.setAttribute('viewBox','10 0 820 680');
     });
   })();
