@@ -953,8 +953,8 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
 .phase-card-v2.is-active{flex:1 1 0;cursor:default}
 /* Inner grid — clips when card is collapsed strip */
 .phase-card-v2__inner{
-  display:grid;grid-template-columns:100px 1fr;
-  min-width:600px;height:100%;
+  display:grid;grid-template-columns:80px 1fr;
+  min-width:420px;height:100%;
   transform:translateY(20px) scale(.96);opacity:0;filter:blur(4px);
   transition:opacity .15s var(--ease),transform .15s var(--ease),filter .15s var(--ease);
 }
@@ -968,17 +968,17 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   opacity:.4;
 }
 .phase-card-v2__content{
-  padding:20px 48px 80px 24px;
+  padding:20px 24px 80px 16px;
 }
 .phase-card-v2__date{
   font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-medium);
   line-height:1.1;margin-bottom:20px;letter-spacing:.06em;text-transform:uppercase;
 }
 h3.phase-card-v2__title{
-  font-family:var(--sans);font-size:64px;font-weight:var(--fw-regular);
-  letter-spacing:-4px;line-height:1;margin:0 0 32px;
+  font-family:var(--sans);font-size:clamp(36px,5vw,64px);font-weight:var(--fw-regular);
+  letter-spacing:-3px;line-height:1;margin:0 0 24px;
 }
-.phase-card-v2__body{font-size:16px;line-height:1.5;letter-spacing:-0.16px}
+.phase-card-v2__body{font-size:var(--text-sm);line-height:1.6;letter-spacing:-0.16px}
 .phase-card-v2__body p{margin-bottom:12px}
 .phase-card-v2__body h4{font-weight:var(--fw-semibold);margin:0 0 12px}
 .phase-card-v2__body ul{list-style:disc;padding-left:24px;margin-bottom:12px}
@@ -994,7 +994,7 @@ h3.phase-card-v2__title{
 .phase-card-v2[data-phase="3"] .phase-card-v2__detail-link,
 .phase-card-v2[data-phase="5"] .phase-card-v2__detail-link{color:#fff}
 .phase-card-v2__badges{
-  position:absolute;bottom:24px;left:124px;
+  position:absolute;bottom:24px;left:96px;
   display:flex;gap:8px;
   opacity:0;transform:translateY(8px);
   transition:opacity .15s var(--ease),transform .15s var(--ease);
@@ -1634,63 +1634,77 @@ h3.phase-card-v2__title{
   transition:transform .3s var(--ease),box-shadow .3s var(--ease);
 }
 .tcell-role:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.tcell-role__icon{
+  width:40px;height:40px;color:var(--accent);margin-bottom:12px;
+}
 .tcell-role__title{
   font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
   color:var(--accent);margin:0 0 8px;
 }
-.tcell-role__desc{
-  font-family:var(--sans);font-size:var(--text-xs);line-height:1.6;
-  color:var(--text-secondary);margin:0;
+.tcell-role__list{list-style:none;padding:0;margin:0}
+.tcell-role__list li{
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.5;
+  color:var(--text-secondary);padding:4px 0 4px 24px;position:relative;
 }
-/* Outcomes accordion */
+.tcell-role__list li::before{
+  content:'';position:absolute;left:0;top:6px;
+  width:14px;height:14px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235436FF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+/* Outcomes — HBW-style accordion */
+.tcell-outcomes{display:flex;flex-direction:column;gap:6px}
 .tcell-outcome{
-  border:1px solid var(--gray-03);border-radius:var(--radius-md);
-  margin-bottom:8px;overflow:hidden;
-  transition:box-shadow .3s var(--ease);
+  border-radius:var(--radius-md);
+  padding:0 20px;
+  display:grid;grid-template-columns:auto 1fr;align-items:center;
+  min-height:110px;cursor:pointer;user-select:none;
+  transition:background .35s var(--ease),min-height .5s var(--ease);
+  overflow:hidden;
+  background:var(--yellow-00);
 }
-.tcell-outcome:hover{box-shadow:var(--shadow-sm)}
-.tcell-outcome__header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 20px;cursor:pointer;
-  background:var(--bg-white);
-}
+.tcell-outcome:first-child{background:var(--yellow-accent)}
+.tcell-outcome.is-open{background:var(--yellow-accent);align-items:start;padding-top:22px}
+.tcell-outcome.is-open + .tcell-outcome{background:var(--yellow-01)}
 .tcell-outcome__num{
-  font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);
-  color:var(--accent);margin-right:12px;
-  background:var(--purple-01);border-radius:var(--radius-sm);
-  padding:4px 10px;
+  font-family:var(--sans);font-size:80px;font-weight:var(--fw-regular);
+  line-height:1;letter-spacing:-6px;
+  color:var(--yellow-accent);
+  transition:color .35s var(--ease);
+  padding-right:32px;
 }
+.tcell-outcome:first-child .tcell-outcome__num{color:var(--brown-04)}
+.tcell-outcome.is-open .tcell-outcome__num{color:var(--brown-04)}
 .tcell-outcome__title{
-  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
-  color:var(--text-primary);flex:1;
+  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-regular);
+  letter-spacing:var(--ls-h3);line-height:1;
+  color:var(--brown-02);
+  transition:color .35s var(--ease);
 }
-.tcell-outcome__toggle{
-  font-size:20px;color:var(--text-tertiary);
-  transition:transform .3s var(--ease);font-weight:300;
-}
-.tcell-outcome.is-open .tcell-outcome__toggle{transform:rotate(45deg)}
-.tcell-outcome__panel{
+.tcell-outcome.is-open .tcell-outcome__title{color:var(--brown-04)}
+.tcell-outcome__body{
+  grid-column:2;
   max-height:0;opacity:0;overflow:hidden;
-  transition:max-height .4s var(--ease),opacity .3s var(--ease);
+  transition:max-height .5s var(--ease),opacity .35s var(--ease),margin .4s var(--ease);
+  margin-top:0;
 }
-.tcell-outcome.is-open .tcell-outcome__panel{max-height:400px;opacity:1}
-.tcell-outcome__inner{
-  padding:0 20px 20px;
+.tcell-outcome.is-open .tcell-outcome__body{
+  max-height:600px;opacity:1;margin-top:8px;padding-bottom:24px;
 }
 .tcell-outcome__desc{
-  font-family:var(--sans);font-size:var(--text-xs);line-height:1.6;
-  color:var(--text-secondary);margin:0 0 12px;font-style:italic;
+  font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-regular);
+  line-height:var(--lh-body);color:var(--text-secondary);margin:0 0 14px;font-style:italic;
 }
-.tcell-outcome__inner ul{
+.tcell-outcome__body ul{
   list-style:none;padding:0;margin:0;
 }
-.tcell-outcome__inner li{
-  font-family:var(--sans);font-size:var(--text-xs);line-height:1.5;
-  color:var(--text-secondary);padding:4px 0 4px 18px;position:relative;
+.tcell-outcome__body li{
+  font-family:var(--sans);font-size:var(--text-sm);line-height:1.6;
+  color:var(--brown-04);padding:4px 0 4px 20px;position:relative;
 }
-.tcell-outcome__inner li::before{
-  content:'\2192';position:absolute;left:0;top:5px;color:var(--accent-mid);font-size:var(--text-xs);
+.tcell-outcome__body li::before{
+  content:'\2192';position:absolute;left:0;top:6px;color:var(--brown-03);font-size:var(--text-sm);
 }
+.tcell-outcome__desc{color:var(--brown-04)}
 @media(max-width:768px){
   .tcell-roles{grid-template-columns:1fr}
 }
@@ -3316,7 +3330,7 @@ h3.phase-card-v2__title{
       <div class="svc-group svc-group--prediag">Pre-diagnosis</div>
       <div class="svc-group svc-group--diagnosis">Diagnosis</div>
       <div class="svc-group svc-group--execution">Execution</div>
-      <div class="svc-group svc-group--comms">Diagnosis and/<br>or execution</div>
+      <div class="svc-group svc-group--comms">Change<br>enablement</div>
 
       <!-- Investment groups (col 5, spanning rows) -->
       <div class="svc-invest svc-invest--prediag">N/A</div>
@@ -3359,71 +3373,77 @@ h3.phase-card-v2__title{
     </div><!-- /.svc-matrix-wrap -->
 
     <!-- Transformation Cell -->
-    <h2 class="invest-heading anim" style="--d:.22s;margin-top:160px">Diagnosis <span style="color:var(--accent)">Engagement</span></h2>
-
-    <h3 class="tcell-heading anim" style="--d:.25s">Transformation Cell</h3>
+    <h2 class="invest-heading anim" style="--d:.25s;margin-top:160px">Diagnosis Engagement &mdash; <span style="color:var(--accent)">Team</span></h2>
     <p class="tcell-subtitle anim" style="--d:.28s">A compact unit deployed to analyze, map, and diagnose how the organization truly operates &mdash; beyond assumptions, into evidence.</p>
 
     <div class="tcell-roles anim" style="--d:.3s">
       <div class="tcell-role">
+        <svg class="tcell-role__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <p class="tcell-role__title">Lead Strategist</p>
-        <p class="tcell-role__desc">Frames the diagnostic lens and key hypotheses. Aligns leadership on what matters, connects findings to business impact, and ensures clarity on where value is being lost and why.</p>
+        <ul class="tcell-role__list">
+          <li>Frames the diagnostic lens and key hypotheses</li>
+          <li>Aligns leadership on what matters</li>
+          <li>Connects findings to business impact</li>
+          <li>Ensures clarity on where value is being lost and why</li>
+        </ul>
       </div>
       <div class="tcell-role">
+        <svg class="tcell-role__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
         <p class="tcell-role__title">Transformation Specialist</p>
-        <p class="tcell-role__desc">Leads the operational deep dive. Maps workflows across Create / Build / Execute, surfaces inefficiencies, dependencies, and gaps, and structures findings into clear, actionable insights.</p>
+        <ul class="tcell-role__list">
+          <li>Leads the operational deep dive</li>
+          <li>Maps workflows across Create / Build / Execute</li>
+          <li>Surfaces inefficiencies, dependencies, and gaps</li>
+          <li>Structures findings into clear, actionable insights</li>
+        </ul>
       </div>
       <div class="tcell-role">
+        <svg class="tcell-role__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
         <p class="tcell-role__title">Transformation Architect</p>
-        <p class="tcell-role__desc">Analyzes the system layer &mdash; tools, data flows, and integrations. Identifies fragmentation, automation gaps, and architectural limitations impacting scalability and performance.</p>
+        <ul class="tcell-role__list">
+          <li>Analyzes the system layer &mdash; tools, data flows, and integrations</li>
+          <li>Identifies fragmentation and automation gaps</li>
+          <li>Assesses architectural limitations impacting scalability</li>
+          <li>Maps performance bottlenecks across the tech stack</li>
+        </ul>
       </div>
     </div>
 
     <!-- Transformation Outcomes -->
-    <h3 class="tcell-heading anim" style="--d:.35s;margin-top:var(--space-xl)">Transformation Outcomes</h3>
+    <h2 class="invest-heading anim" style="--d:.35s;margin-top:160px;margin-bottom:var(--space-xl)">Diagnosis Engagement &mdash; <span style="color:var(--accent)">Outcomes</span></h2>
 
-    <div class="anim" style="--d:.38s">
+    <div class="tcell-outcomes anim" style="--d:.38s">
       <div class="tcell-outcome" role="button" tabindex="0" aria-expanded="false">
-        <div class="tcell-outcome__header">
-          <span class="tcell-outcome__num">1</span>
-          <span class="tcell-outcome__title">Operational X-Ray</span>
-          <span class="tcell-outcome__toggle">+</span>
-        </div>
-        <div class="tcell-outcome__panel">
-          <div class="tcell-outcome__inner">
-            <p class="tcell-outcome__desc">A complete, evidence-based view of how Taylor actually operates.</p>
-            <ul>
-              <li>End-to-end mapping (Create / Build / Execute)</li>
-              <li>Friction points, redundancies, and bottlenecks</li>
-              <li>System fragmentation (tools, data, workflows)</li>
-              <li>Where time, margin, and capacity are being lost</li>
-            </ul>
-          </div>
+        <span class="tcell-outcome__num">01</span>
+        <span class="tcell-outcome__title">Operational X-Ray</span>
+        <div class="tcell-outcome__body">
+          <p class="tcell-outcome__desc">A complete, evidence-based view of how Taylor actually operates.</p>
+          <ul>
+            <li>End-to-end mapping (Create / Build / Execute)</li>
+            <li>Friction points, redundancies, and bottlenecks</li>
+            <li>System fragmentation (tools, data, workflows)</li>
+            <li>Where time, margin, and capacity are being lost</li>
+          </ul>
         </div>
       </div>
 
       <div class="tcell-outcome" role="button" tabindex="0" aria-expanded="false">
-        <div class="tcell-outcome__header">
-          <span class="tcell-outcome__num">2</span>
-          <span class="tcell-outcome__title">Transformation Blueprint</span>
-          <span class="tcell-outcome__toggle">+</span>
-        </div>
-        <div class="tcell-outcome__panel">
-          <div class="tcell-outcome__inner">
-            <p class="tcell-outcome__desc">A structured path forward &mdash; prioritized, sequenced, and tied to impact.</p>
-            <ul>
-              <li>Key opportunities (quick wins + structural changes)</li>
-              <li>Defined initiatives across processes, data, automation, and AI</li>
-              <li>Prioritization by impact vs effort</li>
-              <li>Clear roadmap to build the Digital Backbone</li>
-            </ul>
-          </div>
+        <span class="tcell-outcome__num">02</span>
+        <span class="tcell-outcome__title">Transformation Blueprint</span>
+        <div class="tcell-outcome__body">
+          <p class="tcell-outcome__desc">A structured path forward &mdash; prioritized, sequenced, and tied to impact.</p>
+          <ul>
+            <li>Key opportunities (quick wins + structural changes)</li>
+            <li>Defined initiatives across processes, data, automation, and AI</li>
+            <li>Prioritization by impact vs effort</li>
+            <li>Clear roadmap to build the Digital Backbone</li>
+          </ul>
         </div>
       </div>
     </div>
 
     <!-- Transformation Models -->
-    <h3 class="tcell-heading anim" style="--d:.25s;margin-top:var(--space-xl)">Transformation Models</h3>
+    <h2 class="invest-heading anim" style="--d:.25s;margin-top:160px">Diagnosis Engagement &mdash; <span style="color:var(--accent)">Models</span></h2>
     <p class="invest-subtitle anim" style="--d:.28s">Two paths to operational clarity &mdash; choose the depth of impact that fits Taylor&rsquo;s readiness.</p>
 
     <div class="invest-grid anim" style="--d:.3s">
@@ -3457,10 +3477,6 @@ h3.phase-card-v2__title{
               <h3 class="invest-card__title">Core Diagnosis</h3>
               <p class="invest-card__head-desc">Full operational visibility across Create, Build, and Execute</p>
             </div>
-            <div class="invest-card__price-block">
-              <p class="invest-card__price">US$150,000</p>
-              <p class="invest-card__price-note">Fixed project fee &mdash; US$50,000/month</p>
-            </div>
             <div class="invest-card__back-body">
               <p class="invest-card__section-label">How we build it</p>
               <ul>
@@ -3472,6 +3488,12 @@ h3.phase-card-v2__title{
                 <li>Validation sessions with leadership</li>
                 <li>Analysis, synthesis &amp; roadmap design</li>
               </ul>
+            </div>
+            <div class="invest-card__price-block">
+              <p class="invest-card__price">US$150,000</p>
+              <p class="invest-card__price-note">Fixed project fee &mdash; US$50,000/month</p>
+            </div>
+            <div class="invest-card__back-body">
               <p class="invest-card__section-label">Payment structure</p>
               <ul>
                 <li>50% at project kickoff</li>
@@ -3516,10 +3538,6 @@ h3.phase-card-v2__title{
               <h3 class="invest-card__title">Diagnosis + Change Enablement</h3>
               <p class="invest-card__head-desc">Everything in Core Diagnosis, plus the strategy to make change stick</p>
             </div>
-            <div class="invest-card__price-block">
-              <p class="invest-card__price">US$195,000</p>
-              <p class="invest-card__price-note">Fixed project fee &mdash; US$65,000/month</p>
-            </div>
             <div class="invest-card__back-body">
               <p class="invest-card__section-label">How we build it</p>
               <ul>
@@ -3530,6 +3548,12 @@ h3.phase-card-v2__title{
                 <li>Adoption &amp; behavior definition</li>
                 <li>Reinforcement mechanisms design</li>
               </ul>
+            </div>
+            <div class="invest-card__price-block">
+              <p class="invest-card__price">US$195,000</p>
+              <p class="invest-card__price-note">Fixed project fee &mdash; US$65,000/month</p>
+            </div>
+            <div class="invest-card__back-body">
               <p class="invest-card__section-label">Payment structure</p>
               <ul>
                 <li>50% at project kickoff</li>
@@ -4457,7 +4481,7 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   // Transformation Outcomes accordion
   document.querySelectorAll('.tcell-outcome[role="button"]').forEach(item=>{
     function toggle(){ const open=item.classList.toggle('is-open'); item.setAttribute('aria-expanded',open); }
-    item.querySelector('.tcell-outcome__header').addEventListener('click',toggle);
+    item.addEventListener('click',toggle);
     item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
   });
 
