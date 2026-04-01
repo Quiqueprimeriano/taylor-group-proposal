@@ -35,3 +35,23 @@
 ### Always sync index.html after editing the pitch
 
 Netlify serves `index.html`, not `Taylor-Group-Interactive-Pitch.html`. Forgetting to `cp` means the deploy shows stale content. This was done correctly throughout this session but remains a perennial risk.
+
+## 2026-04-01
+
+### "Don't say X" is not the same as "doesn't know X"
+
+**What happened:** The bot had pricing data ($18K, $42K, per-finding costs) embedded in its SYSTEM_PROMPT, with instructions to never share them. This is a semantic-only defense — a prompt injection could extract the data since the model has access to it.
+
+**Fix:** Removed all dollar amounts from the prompt. The bot still describes engagement options qualitatively but has no access to specific figures.
+
+**Rule:** For sensitive data in LLM prompts, prefer structural defense (don't include the data) over semantic defense (include it but say "don't share"). If the model doesn't need specific numbers to do its job, remove them.
+
+---
+
+### Duplicated config drifts silently
+
+**What happened:** The SYSTEM_PROMPT was copy-pasted between `netlify/functions/chat.js` and `chat-bot/server.js`. The objeciones section had drifted — server.js was more detailed with different wording. Neither was "wrong" but they were inconsistent.
+
+**Fix:** Extracted to `lib/tay-system-prompt.js` as single source of truth.
+
+**Rule:** When 2+ files share identical config (prompts, constants, validation rules), extract to a shared module immediately. Don't wait for a third consumer to force it — drift starts with the second copy.

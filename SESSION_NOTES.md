@@ -4,57 +4,46 @@
 
 ### Qué se hizo
 
-**Pirámide AI (Sección 08):**
-- Punta de pirámide: clip-path del tier 1 ahora converge en `50% 0%` (triángulo)
-- Simetría corregida: todos los tiers usan 12.5% de desplazamiento por lado para lados perfectamente rectos
-- Labels reposicionados al borde derecho correcto (62.5%, 75%, 87.5%, 100%)
+**Auditoría completa del Tay chatbot:**
+- Auditoría en 3 frentes paralelos: frontend (UI/UX/a11y), backend Netlify (chat.js), backend dev (server.js)
+- Reporte de hallazgos organizado en 6 categorías: seguridad, prompt engineering, UX, accesibilidad, reliability, código
+- Plan de mejora priorizado P0–P3
 
-**Interstitials / Quotes:**
-- Eliminada línea violeta decorativa (`::before` del `.interstitial`) y reglas mobile que la ocultaban
-- Todas las quotes ahora tienen comillas tipográficas `" "`
-- Atribuciones actualizadas con nombre de paper en itálica + autor abajo:
-  - Taylor Group Leadership → + "Initial Conversation"
-  - Accenture → + "Reinvent Enterprise Models with Generative AI"
-  - McKinsey → + "Unlocking Success in Digital Transformations"
-  - BCG → + "Flipping the Odds of Digital Transformation Success"
-- Quote "Not a lack of capability" reemplazada por cita real de BCG: "Surface-level digital adoption — without cultural and structural change — yields marginal improvements at best and cynicism at worst."
-- Nueva cita agregada a tabla de references (sección 09)
+**P0 — Seguridad:**
+- Removidos todos los datos de pricing del SYSTEM_PROMPT (montos $18K/$42K, costos por finding $500K–$1.2M, friction estimates $1.6M–$2.85M) — el bot no necesita estos datos para redirigir a fermin@aztransform.com
+- CORS restringido de `*` a allowlist: `taylor.transformaz.co` + localhost + `*.netlify.app` (preview deploys)
+- Rate limiting in-memory: 10 req/min por IP en Netlify function, con cleanup cada 5min
+- Input validation: formato de mensajes (role/content), max 1000 chars por mensaje
 
-**Spacing normalización (todo el pitch):**
-- Reglas base tokenizadas: h2→`--space-lg`, h3→`--space-xl`/`--space-md`, h4→`--space-lg`/`--space-sm`, p→`--space-md`
-- Componentes grandes (grids, charts, tables): `--space-xl` (32px)
-- Elementos inline (box, blockquote, ba-table): `--space-lg` (24px)
-- ul/ol, section-header__right p, section-header__right padding-top: tokenizados
-- Componentes específicos normalizados: stats-grid, insight-grid, horizons-grid, competitor-grid, timeline, phase-stack, findings-hero, transformation-reality, stats-box, value-prop, paradigm-table, ai-phase-chart, gantt-wrapper, cta-box, invest-grid, s04-toggle-wrap, evidence-group-label, market-closing, market-sources, section-quote, po-panel__inner
+**P1 — UX:**
+- Creado endpoint de streaming SSE (`netlify/functions/chat-stream.mjs`) usando Netlify Functions v2
+- Frontend reescrito: intenta streaming primero, fallback a non-streaming si falla
+- Greeting limpiado: removida mención a pricing que incentivaba preguntas sobre precios
+- `maxlength="500"` en input del chat
+- `aria-label` dinámico en FAB (Open/Close Tay assistant)
+- `temperature: 0.3` y `max_tokens: 384` para respuestas más consistentes
 
-**Contenido:**
-- Dos párrafos sobre $128B fusionados en uno, con "to design the system that enables its next phase of growth" en negrita
-- Frase "The gap is no longer defined by access to technology..." eliminada, reemplazada por link "Sources & methodology → 09"
-- "Aggregate estimated annual impact*" cambiado a "Estimated annual impact*"
-- 160px margin-top entre "Defining the Path Forward" y "Diagnosis Engagement Models" (efecto cambio de página)
-
-**HBW — AI Sub-accordions (Sección 04):**
-- 4 subsections de "Artificial Intelligence" convertidas en mini-accordions colapsables
-- CSS: `.hbw-sub`, `.hbw-sub__header`, `.hbw-sub__panel`, toggle circular con `+` que rota a `×`
-- JS: handler con `stopPropagation()` para no cerrar el padre HBW
-- Contenido reorganizado: h4 + descripción corta siempre visibles, detalle expandible
+**Arquitectura:**
+- SYSTEM_PROMPT extraído a módulo compartido (`lib/tay-system-prompt.js`) — single source of truth
+- Ambos backends (chat.js, server.js) refactorizados para importar de shared module
+- Eliminado drift en sección de objeciones entre backends
+- Config compartida: MODEL, MAX_TOKENS, TEMPERATURE, ALLOWED_ORIGINS, validateMessages(), buildSystemPrompt()
 
 ### Dónde quedamos
-- Archivo principal: `clients/taylor-group/proposal-2.0/pitch/Taylor-Group-Interactive-Pitch.html` (~4950 líneas)
-- index.html sincronizado
-- Todo funcional, no pusheado a main aún
+- Commit `3b60712` pushed a main, Netlify debería hacer deploy automático
+- **VERIFICAR**: que la función v2 `chat-stream.mjs` se despliegue correctamente en Netlify (es el primer uso de Functions v2 en el proyecto)
+- **VERIFICAR**: que el streaming funcione end-to-end en producción (taylor.transformaz.co)
+- Si streaming falla, el frontend cae al endpoint non-streaming automáticamente
 
 ### Problemas abiertos
-- CSS muerto del viejo CBE bar/dropdown (`.cbe-bar`, `.cbe-dropdowns`) sigue sin limpiar
-- `--content-w` sin reconciliar (CLAUDE.md dice 960px en un lado pero `:root` tiene 1120px)
-- QA mobile pendiente (pirámide, diagnosis cards, sub-accordions AI)
-- Interstitial "Everyone is buying AI tools..." sin fuente — research hecho (McKinsey 2025 "The State of AI" y BCG "Where's the Value in AI?" son candidatos), decisión diferida
-- Segunda aparición de "Not a lack of capability" en línea ~3258 (dentro del findings intro) podría necesitar actualización por consistencia
+- **Streaming no testeado en producción**: la función v2 (.mjs) puede requerir ajustes de config de Netlify. Si no funciona, el fallback a `/api/chat` (v1) cubre
+- **`createRequire` en chat-stream.mjs**: usa `createRequire(import.meta.url)` para importar el módulo CJS compartido — verificar que esbuild lo bundle correctamente
+- **Focus trap**: el chat panel tiene `role="dialog"` pero no trap de foco — Tab puede salir del chat
+- **Markdown parser básico**: `formatResponse()` solo maneja bold, paragraphs, bullets. No links ni listas numeradas
 
 ### Para la próxima sesión
-- Decidir fuente para la quote "Everyone is buying AI tools..." (ver research de BCG/McKinsey)
-- Limpiar CSS muerto del viejo CBE
-- Reconciliar `--content-w`
-- QA mobile de los componentes nuevos (sub-accordions, pirámide con punta, spacing)
-- Verificar visualmente el pitch completo tras los cambios de spacing
-- Commit y push cuando esté validado
+- Empezar por: verificar en taylor.transformaz.co que el bot funciona con streaming. Si no, debuggear la función v2
+- P2 pendiente: retry con backoff (frontend), focus trap en dialog, markdown parser más robusto, AbortController timeout
+- P3 pendiente: analytics de preguntas (sin PII), error messages diferenciados
+- CSS muerto del viejo CBE (`cbe-bar`, `cbe-dropdowns`) sigue pendiente de limpieza
+- Verificar responsive mobile de pirámide AI y diagnosis cards (pendiente de sesiones anteriores)

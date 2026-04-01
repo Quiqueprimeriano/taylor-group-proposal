@@ -31,7 +31,7 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **HTML→PDF pipeline:** Playwright with `printBackground: true`, zero margins, `preferCSSPageSize: true`. HTML files use `@page` CSS for A4 sizing and print-specific styles
 - **DOCX generation:** Python scripts using `python-docx` with manual styling (no template files). JS DOCX scripts use `docx` npm package
 - **Dependencies:** All consolidated in root `package.json`. No inner package.json files — `require()` walks up to root `node_modules/`
-- **Tay chatbot:** Claude-powered bot embedded in the Interactive Pitch. Netlify Function (`netlify/functions/chat.js`) proxies to Claude API. Local dev server at `chat-bot/server.js`. Both share the same SYSTEM_PROMPT — keep in sync when proposal content changes
+- **Tay chatbot:** Claude-powered bot embedded in the Interactive Pitch. SYSTEM_PROMPT and config live in `lib/tay-system-prompt.js` (single source of truth). Three consumers: `netlify/functions/chat.js` (non-streaming fallback), `netlify/functions/chat-stream.mjs` (SSE streaming, Functions v2), `chat-bot/server.js` (local dev). Edit `lib/tay-system-prompt.js` to change bot behavior — never edit the prompt inline in consumer files
 - **Netlify deployment:** `netlify.toml` publishes `clients/taylor-group/proposal-2.0/pitch/` (requires `index.html` copy of main HTML). Redirect `/api/chat` → `/.netlify/functions/chat`. ANTHROPIC_API_KEY set in Netlify env vars
 
 ## Brand & Design Tokens
@@ -44,7 +44,7 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **Shadow tokens:** `--shadow-sm` through `--shadow-xl`, `--shadow-accent` for accent glow
 - **Client-facing accent:** `#5436FF` (purple)
 - **Internal docs accent:** `#c0392b` (red) — visually distinguishes internal from client-facing
-- **Layout:** Single `--content-w: 960px` column for interactive pitch. No breakout widths (causes asymmetry with sidebar)
+- **Layout:** Single `--content-w: 1120px` column for interactive pitch. No breakout widths (causes asymmetry with sidebar)
 - **CSS print essentials:** `print-color-adjust: exact`, `-webkit-print-color-adjust: exact` for background colors
 - **Full design system:** See `DESIGN.md` for complete token reference, component catalog, and accessibility specs
 
@@ -65,7 +65,7 @@ node "clients/taylor-group/proposal-2.0/pitch/take-screenshots.js"
 - **Card accent diversity:** Three distinct treatments to avoid AI-slop monoculture: (1) `::after` top gradient bar for finding-cards and stat-cards, (2) `border-left` / `::before` left bar for boxes, CBE cards, and pillar cards, (3) neutral border with hover accent for competitor cards. Never use the same accent pattern on all card types
 - **Card hover effects:** `translateY(-2px)` + elevated `box-shadow`. Gradient top borders via `::after` pseudo-elements (not `border-image`, which breaks `border-radius`)
 - **Accessibility:** Skip-to-content link (visible on focus), minimum 44px touch targets, `role="tabpanel"` + `aria-labelledby` on pillar tabs, `aria-live="polite"` on chatbot messages. Chatbot error messages use `.tay-msg--error` (distinct visual style)
-- **CBE diagram:** Lives in Section 04 (Digital Backbone). CSS animated flow phases that double as navigation for expandable content panels below. Never duplicate in Section 05
+- **CBE accordion:** Lives in Section 04 (Digital Backbone). Uses `.po-item` classes with `.cbe-accordion` overrides (80px titles, cap grid, Before/After cards). JS handler scoped to `#cbe-accordion` — separate from the Phase Overview accordion. Old bar+dropdown CSS (`.cbe-bar`, `.cbe-dropdowns`) is dead code pending cleanup
 - **Backbone visualization:** SVG (not Canvas) — bezier curves, gradient nodes, `<animateMotion>` particles, hover highlighting via CSS classes. Printable, accessible
 - **Backbone Before→After:** 5-stage dramatic reveal (red line fade → crossfade → hub scale-in → spokes draw → particles flow). Hub and sparks wrapped in `<g class="s04a-hub-group">` / `<g class="s04a-sparks">` for staged CSS control. Forward transition ~5s cinematic, backward ~0.8s instant
 - **Mobile responsive (768px):** Phase stack → vertical accordion; paradigm table → stacked cards with `::before` labels; service matrix → phase cards with inline metadata grouped by service type via `order`; SVG viewBox cropped via JS (`10 0 820 680`) to remove annotation padding; phase card click scrolls to top on mobile

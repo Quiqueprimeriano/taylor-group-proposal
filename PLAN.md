@@ -27,7 +27,33 @@
 - [x] Comillas tipográficas en todas las quotes
 - [x] "Estimated annual impact*" (sin "Aggregate")
 
-## Pendiente — Cleanup
+## Completado (2026-04-01) — Bot Hardening
+
+- [x] P0: Remover datos de pricing del SYSTEM_PROMPT (ambos backends)
+- [x] P0: Restringir CORS a allowlist (taylor.transformaz.co + localhost + *.netlify.app)
+- [x] P0: Rate limiting 10 req/min por IP en Netlify function
+- [x] P0: Input validation (formato, 1000 chars max)
+- [x] P1: Extraer SYSTEM_PROMPT a módulo compartido (lib/tay-system-prompt.js)
+- [x] P1: Crear endpoint de streaming SSE (chat-stream.mjs, Functions v2)
+- [x] P1: Frontend streaming con fallback a non-streaming
+- [x] P1: Greeting sin mención a pricing
+- [x] P1: maxlength=500 en input, aria-label dinámico en FAB
+- [x] P1: temperature:0.3, max_tokens:384
+- [x] Sincronizar SYSTEM_PROMPT entre backends (eliminado drift en objeciones)
+
+## Pendiente — Bot P2 (Robustez)
+
+- [ ] Retry con backoff en frontend (1 retry automático antes de mostrar error)
+- [ ] Focus trap en dialog del chat (Tab cycling dentro del panel)
+- [ ] Markdown parser más robusto (links, listas numeradas)
+- [ ] AbortController con timeout 15s en fetch del frontend
+
+## Pendiente — Bot P3 (Nice to Have)
+
+- [ ] Analytics básico: loggear preguntas frecuentes (sin PII)
+- [ ] Error messages diferenciados (sin internet vs API caída vs rate limited)
+
+## Pendiente — Pitch Cleanup/Visual
 
 - [ ] Eliminar CSS muerto del viejo CBE bar/dropdown (`.cbe-bar`, `.cbe-dropdowns`, etc.)
 - [ ] Verificar responsive mobile de pirámide AI, Diagnosis cards, y sub-accordions AI
@@ -37,4 +63,6 @@
 
 ## Próximo milestone
 
-QA visual completa post-spacing, decidir fuente de la última quote sin atribuir, cleanup CSS muerto, commit y push.
+1. Verificar deploy de streaming en producción (taylor.transformaz.co)
+2. QA visual completo del pitch (responsive, cross-browser)
+3. Bot P2 improvements si el tiempo lo permite
