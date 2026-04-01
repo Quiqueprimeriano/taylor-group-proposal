@@ -1082,6 +1082,16 @@ h3.phase-card-v2__title{
 .gantt-decision__line{width:2px;background:#FF0026;height:36px;position:absolute;top:50%;left:-2px;transform:translateY(-50%)}
 .gantt-decision__icon{width:22px;height:22px;color:#FF0026;position:relative;z-index:1;flex-shrink:0}
 .gantt-row--ce{margin-top:12px;gap:8px}
+/* Phase group headers above timeline */
+.gantt-phases{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-bottom:16px;position:relative;z-index:1}
+.gantt-phase-label{
+  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--accent);text-align:center;
+  padding:10px 16px;
+  border:1.5px solid var(--accent);border-radius:var(--radius-md);
+  background:var(--purple-01);
+}
 .gantt-legend{display:flex;align-items:center;gap:8px;margin-top:20px}
 .gantt-legend__icon{width:16px;height:16px;color:#FF0026;flex-shrink:0}
 .gantt-legend__text{font-family:var(--sans);font-size:var(--text-metadata);color:var(--text-tertiary)}
@@ -1311,7 +1321,7 @@ h3.phase-card-v2__title{
 /* SERVICE MATRIX — Section 05 */
 .svc-matrix{
   display:grid;
-  grid-template-columns:140px 1fr 1fr 1fr 1fr;
+  grid-template-columns:1.4fr 140px 1fr 1fr 1fr;
   gap:8px 12px;
   margin-top:var(--space-xl);
   font-family:var(--sans);
@@ -1338,6 +1348,8 @@ h3.phase-card-v2__title{
 }
 /* Row tints — purple for Diagnosis + Comms, gray (default) for Execution */
 .svc-matrix__cell[style*="grid-row:3"],.svc-matrix__cell[style*="grid-row:4"],.svc-matrix__cell[style*="grid-row:7"]{background:var(--purple-01)}
+/* Phase column (col 2) — slightly stronger tint than siblings */
+.svc-matrix__cell:has(.svc-phase--1),.svc-matrix__cell:has(.svc-phase--2),.svc-matrix__cell:has(.svc-phase--x){background:#DDD8FF}
 /* Phase card in col 1 — block card style */
 .svc-phase{
   display:flex;flex-direction:column;align-items:center;text-align:center;
@@ -1380,7 +1392,7 @@ h3.phase-card-v2__title{
   transition:transform .6s var(--ease);
   transform-style:preserve-3d;
   display:flex;flex-direction:column;
-  min-height:100%;
+  height:100%;
 }
 .invest-card.flipped .invest-card__inner{transform:rotateY(180deg)}
 .invest-card__front,.invest-card__back{
@@ -1392,7 +1404,7 @@ h3.phase-card-v2__title{
   display:flex;flex-direction:column;
   transition:box-shadow .4s var(--ease);
 }
-.invest-card__front{position:relative}
+.invest-card__front{position:relative;height:100%}
 .invest-card__back{
   position:absolute;top:0;left:0;width:100%;height:100%;
   transform:rotateY(180deg);
@@ -1410,28 +1422,44 @@ h3.phase-card-v2__title{
 }
 .invest-card:hover .invest-card__flip-hint{opacity:1}
 .invest-card__flip-hint svg{width:14px;height:14px}
-/* Back face content */
-.invest-card__back-head{
-  padding:24px 24px 16px;
+/* Back face — pricing hero */
+.invest-card__price-block{
+  padding:24px 24px 20px;
+  background:linear-gradient(135deg,var(--gray-01),var(--purple-01));
   border-bottom:1px solid var(--gray-02);
-  background:var(--gray-01);
-  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+  text-align:center;
 }
-.invest-card__back-title{
-  font-family:var(--sans);font-size:var(--text-h4);font-weight:var(--fw-semibold);
-  color:var(--text-primary);margin:0 0 4px;
+.invest-card--recommended .invest-card__price-block{
+  background:linear-gradient(135deg,var(--accent-light),var(--purple-01));
 }
 .invest-card__price{
-  font-family:var(--sans);font-size:var(--text-h2);font-weight:700;
-  letter-spacing:var(--ls-heading);line-height:1.1;
-  color:var(--accent);margin:8px 0 0;
+  font-family:var(--sans);font-size:var(--text-h1);font-weight:700;
+  letter-spacing:var(--ls-heading);line-height:1;
+  color:var(--accent);margin:0;
 }
 .invest-card__price-note{
-  font-family:var(--sans);font-size:var(--text-xs);
-  color:var(--text-tertiary);margin:4px 0 0;
+  font-family:var(--sans);font-size:var(--text-sm);font-weight:var(--fw-medium);
+  color:var(--text-secondary);margin:6px 0 0;
 }
 .invest-card__back-body{padding:20px 24px;flex:1}
 .invest-card__back-body .invest-card__section-label{margin-top:0}
+/* CTA button */
+.invest-card__cta{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:20px 24px 0;padding:14px 24px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-pill);cursor:pointer;
+  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
+  letter-spacing:.04em;
+  transition:background .3s var(--ease),transform .2s var(--ease),box-shadow .3s var(--ease);
+  box-shadow:0 4px 16px rgba(84,54,255,.3);
+  text-decoration:none;
+}
+.invest-card__cta:hover{
+  background:var(--accent-mid);transform:translateY(-1px);
+  box-shadow:0 6px 24px rgba(84,54,255,.4);
+}
+.invest-card__cta svg{width:16px;height:16px;flex-shrink:0}
 .invest-card__back-footer{
   display:flex;align-items:center;justify-content:center;
   padding:14px 24px;margin-top:auto;
@@ -1564,15 +1592,16 @@ h3.phase-card-v2__title{
 /* Service group (dashed border spanning rows) */
 .svc-group{
   display:flex;align-items:center;justify-content:center;
-  background:var(--gray-02);border-radius:var(--radius-md);
-  padding:16px 12px;
-  font-size:var(--text-button);font-weight:var(--fw-medium);
+  background:var(--purple-01);border-radius:var(--radius-md);
+  border-left:3px solid var(--accent);
+  padding:16px 14px;
+  font-size:var(--text-sm);font-weight:var(--fw-semibold);
   color:var(--accent);text-align:center;
 }
-.svc-group--prediag{grid-column:4;grid-row:2;color:var(--text-tertiary)}
-.svc-group--diagnosis{grid-column:4;grid-row:3/5;background:var(--purple-01)}
-.svc-group--execution{grid-column:4;grid-row:5/7}
-.svc-group--comms{grid-column:4;grid-row:7/8;background:var(--purple-01)}
+.svc-group--prediag{grid-column:1;grid-row:2;background:var(--gray-02);border-left-color:var(--gray-05);color:var(--text-tertiary)}
+.svc-group--diagnosis{grid-column:1;grid-row:3/5}
+.svc-group--execution{grid-column:1;grid-row:5/7;background:var(--gray-02);border-left-color:var(--accent)}
+.svc-group--comms{grid-column:1;grid-row:7/8}
 /* Investment spanning groups */
 .svc-invest{
   display:flex;align-items:center;justify-content:center;
@@ -1585,6 +1614,86 @@ h3.phase-card-v2__title{
 .svc-invest--diagnosis{grid-column:5;grid-row:3/5;background:var(--purple-01)}
 .svc-invest--execution{grid-column:5;grid-row:5/7}
 .svc-invest--comms{grid-column:5;grid-row:7/8;background:var(--purple-01)}
+
+/* TRANSFORMATION CELL — roles + outcomes */
+.tcell-heading{
+  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);
+  letter-spacing:var(--ls-h3);line-height:var(--lh-h3);
+  color:var(--accent);margin:0 0 var(--space-md);
+}
+.tcell-subtitle{
+  font-family:var(--sans);font-size:var(--text-sm);line-height:var(--lh-body);
+  color:var(--text-secondary);max-width:720px;margin:0 0 var(--space-xl);
+}
+/* Role cards */
+.tcell-roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcell-role{
+  background:var(--bg-white);border:1px solid var(--gray-03);border-radius:var(--radius-lg);
+  padding:24px 20px;position:relative;
+  border-top:3px solid var(--accent);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.tcell-role:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.tcell-role__title{
+  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
+  color:var(--accent);margin:0 0 8px;
+}
+.tcell-role__desc{
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.6;
+  color:var(--text-secondary);margin:0;
+}
+/* Outcomes accordion */
+.tcell-outcome{
+  border:1px solid var(--gray-03);border-radius:var(--radius-md);
+  margin-bottom:8px;overflow:hidden;
+  transition:box-shadow .3s var(--ease);
+}
+.tcell-outcome:hover{box-shadow:var(--shadow-sm)}
+.tcell-outcome__header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;cursor:pointer;
+  background:var(--bg-white);
+}
+.tcell-outcome__num{
+  font-family:var(--sans);font-size:var(--text-metadata);font-weight:var(--fw-semibold);
+  color:var(--accent);margin-right:12px;
+  background:var(--purple-01);border-radius:var(--radius-sm);
+  padding:4px 10px;
+}
+.tcell-outcome__title{
+  font-family:var(--sans);font-size:var(--text-button);font-weight:var(--fw-semibold);
+  color:var(--text-primary);flex:1;
+}
+.tcell-outcome__toggle{
+  font-size:20px;color:var(--text-tertiary);
+  transition:transform .3s var(--ease);font-weight:300;
+}
+.tcell-outcome.is-open .tcell-outcome__toggle{transform:rotate(45deg)}
+.tcell-outcome__panel{
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .4s var(--ease),opacity .3s var(--ease);
+}
+.tcell-outcome.is-open .tcell-outcome__panel{max-height:400px;opacity:1}
+.tcell-outcome__inner{
+  padding:0 20px 20px;
+}
+.tcell-outcome__desc{
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.6;
+  color:var(--text-secondary);margin:0 0 12px;font-style:italic;
+}
+.tcell-outcome__inner ul{
+  list-style:none;padding:0;margin:0;
+}
+.tcell-outcome__inner li{
+  font-family:var(--sans);font-size:var(--text-xs);line-height:1.5;
+  color:var(--text-secondary);padding:4px 0 4px 18px;position:relative;
+}
+.tcell-outcome__inner li::before{
+  content:'\2192';position:absolute;left:0;top:5px;color:var(--accent-mid);font-size:var(--text-xs);
+}
+@media(max-width:768px){
+  .tcell-roles{grid-template-columns:1fr}
+}
 
 /* ═══════════════════════════════════════════════
    PHASE ACCORDION (Section 07)
@@ -2955,6 +3064,11 @@ h3.phase-card-v2__title{
     <div class="gantt-wrapper anim" style="--d:.29s" id="gantt-chart">
       <div class="gantt-grid">
         <div class="gantt-months"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <!-- Phase group headers -->
+        <div class="gantt-phases">
+          <div class="gantt-phase-label" style="grid-column:1/5">Diagnosis</div>
+          <div class="gantt-phase-label" style="grid-column:5/10">Execution</div>
+        </div>
         <div class="gantt-header"><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span></div>
         <!-- Pre-engagement (APR–early MAY) + decision -->
         <div class="gantt-row">
@@ -2980,7 +3094,7 @@ h3.phase-card-v2__title{
         </div>
         <!-- Change enablement — two dark bars -->
         <div class="gantt-row gantt-row--ce">
-          <div class="gantt-bar gantt-bar--dark" style="grid-column:1/5" data-gantt-delay="900">Change enablement</div>
+          <div class="gantt-bar gantt-bar--dark" style="grid-column:2/5" data-gantt-delay="900">Change enablement</div>
           <div class="gantt-bar gantt-bar--dark" style="grid-column:5/10" data-gantt-delay="1000">Change enablement</div>
         </div>
       </div>
@@ -3192,58 +3306,124 @@ h3.phase-card-v2__title{
     <div class="svc-matrix-wrap">
     <div class="svc-matrix anim" style="--d:.2s">
       <!-- Header row -->
+      <div class="svc-matrix__hdr svc-matrix__hdr--accent">TransformAZ Service</div>
       <div class="svc-matrix__hdr">Phase</div>
       <div class="svc-matrix__hdr">Duration</div>
       <div class="svc-matrix__hdr">Format</div>
-      <div class="svc-matrix__hdr">TransformAZ service</div>
       <div class="svc-matrix__hdr svc-matrix__hdr--accent">Investment</div>
 
-      <!-- Service groups (spanning rows) -->
+      <!-- Service groups (col 1, spanning rows) -->
       <div class="svc-group svc-group--prediag">Pre-diagnosis</div>
-      <div class="svc-invest svc-invest--prediag">N/A</div>
       <div class="svc-group svc-group--diagnosis">Diagnosis</div>
-      <div class="svc-invest svc-invest--diagnosis">Fixed project fee</div>
       <div class="svc-group svc-group--execution">Execution</div>
-      <div class="svc-invest svc-invest--execution">Monthly retainer</div>
       <div class="svc-group svc-group--comms">Diagnosis and/<br>or execution</div>
+
+      <!-- Investment groups (col 5, spanning rows) -->
+      <div class="svc-invest svc-invest--prediag">N/A</div>
+      <div class="svc-invest svc-invest--diagnosis">Fixed project fee</div>
+      <div class="svc-invest svc-invest--execution">Monthly retainer</div>
       <div class="svc-invest svc-invest--comms">Fixed project fee or monthly retainer</div>
 
-      <!-- Row 1: Pre-alignment -->
-      <div class="svc-matrix__cell" style="grid-column:1;grid-row:2"><span class="svc-phase svc-phase--0"><span class="svc-phase__num">#0</span>Pre-alignment</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:2">2 &ndash; 3 weeks</div>
-      <div class="svc-matrix__cell" style="grid-column:3;grid-row:2"><span class="svc-badge">Remote</span></div>
+      <!-- Row 1: Pre-engagement -->
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:2"><span class="svc-phase svc-phase--0"><span class="svc-phase__num">#0</span>Pre-engagement</span></div>
+      <div class="svc-matrix__cell" style="grid-column:3;grid-row:2">2 &ndash; 3 weeks</div>
+      <div class="svc-matrix__cell" style="grid-column:4;grid-row:2"><span class="svc-badge">Remote</span></div>
 
       <!-- Row 2: Intake -->
-      <div class="svc-matrix__cell" style="grid-column:1;grid-row:3"><span class="svc-phase svc-phase--1"><span class="svc-phase__num">#1</span>Intake</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:3">4 &ndash; 6 weeks</div>
-      <div class="svc-matrix__cell" style="grid-column:3;grid-row:3"><span class="svc-badge">Remote</span></div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:3"><span class="svc-phase svc-phase--1"><span class="svc-phase__num">#1</span>Intake</span></div>
+      <div class="svc-matrix__cell" style="grid-column:3;grid-row:3">4 &ndash; 6 weeks</div>
+      <div class="svc-matrix__cell" style="grid-column:4;grid-row:3"><span class="svc-badge">Remote</span></div>
 
       <!-- Row 3: Discovery -->
-      <div class="svc-matrix__cell" style="grid-column:1;grid-row:4"><span class="svc-phase svc-phase--2"><span class="svc-phase__num">#2</span>Discovery</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:4">8 &ndash; 10 weeks</div>
-      <div class="svc-matrix__cell" style="grid-column:3;grid-row:4"><span class="svc-badge">On-site</span> <span class="svc-badge">Remote</span></div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:4"><span class="svc-phase svc-phase--2"><span class="svc-phase__num">#2</span>Discovery</span></div>
+      <div class="svc-matrix__cell" style="grid-column:3;grid-row:4">8 &ndash; 10 weeks</div>
+      <div class="svc-matrix__cell" style="grid-column:4;grid-row:4"><span class="svc-badge">On-site</span> <span class="svc-badge">Remote</span></div>
 
       <!-- Duration "Monthly" for Execution rows -->
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:5/7">Monthly</div>
+      <div class="svc-matrix__cell" style="grid-column:3;grid-row:5/7">Monthly</div>
 
       <!-- Format "Hybrid" spanning Execution rows -->
-      <div class="svc-matrix__cell" style="grid-column:3;grid-row:5/7"><span class="svc-badge">Hybrid</span></div>
+      <div class="svc-matrix__cell" style="grid-column:4;grid-row:5/7"><span class="svc-badge">Hybrid</span></div>
 
       <!-- Row 4: Implementation -->
-      <div class="svc-matrix__cell" style="grid-column:1;grid-row:5"><span class="svc-phase svc-phase--3"><span class="svc-phase__num">#3</span>Implementation</span></div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:5"><span class="svc-phase svc-phase--3"><span class="svc-phase__num">#3</span>Implementation</span></div>
 
       <!-- Row 5: Stabilization -->
-      <div class="svc-matrix__cell" style="grid-column:1;grid-row:6"><span class="svc-phase svc-phase--4"><span class="svc-phase__num">#4</span>Stabilization &amp;<br>optimization</span></div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:6"><span class="svc-phase svc-phase--4"><span class="svc-phase__num">#4</span>Stabilization &amp;<br>optimization</span></div>
 
       <!-- Row 6: Comms & change -->
-      <div class="svc-matrix__cell" style="grid-column:1;grid-row:7"><span class="svc-phase svc-phase--x"><span class="svc-phase__num">#X</span>Comms &amp; change</span></div>
-      <div class="svc-matrix__cell" style="grid-column:2;grid-row:7">Ongoing</div>
-      <div class="svc-matrix__cell" style="grid-column:3;grid-row:7"><span class="svc-badge">Remote</span></div>
+      <div class="svc-matrix__cell" style="grid-column:2;grid-row:7"><span class="svc-phase svc-phase--x"><span class="svc-phase__num">#X</span>Comms &amp; change</span></div>
+      <div class="svc-matrix__cell" style="grid-column:3;grid-row:7">Ongoing</div>
+      <div class="svc-matrix__cell" style="grid-column:4;grid-row:7"><span class="svc-badge">Remote</span></div>
     </div>
     </div><!-- /.svc-matrix-wrap -->
 
-    <!-- Diagnosis Engagement Models -->
-    <h2 class="invest-heading anim" style="--d:.25s;margin-top:160px">Diagnosis Engagement Models</h2>
+    <!-- Transformation Cell -->
+    <h2 class="invest-heading anim" style="--d:.22s;margin-top:160px">Diagnosis <span style="color:var(--accent)">Engagement</span></h2>
+
+    <h3 class="tcell-heading anim" style="--d:.25s">Transformation Cell</h3>
+    <p class="tcell-subtitle anim" style="--d:.28s">A compact unit deployed to analyze, map, and diagnose how the organization truly operates &mdash; beyond assumptions, into evidence.</p>
+
+    <div class="tcell-roles anim" style="--d:.3s">
+      <div class="tcell-role">
+        <p class="tcell-role__title">Lead Strategist</p>
+        <p class="tcell-role__desc">Frames the diagnostic lens and key hypotheses. Aligns leadership on what matters, connects findings to business impact, and ensures clarity on where value is being lost and why.</p>
+      </div>
+      <div class="tcell-role">
+        <p class="tcell-role__title">Transformation Specialist</p>
+        <p class="tcell-role__desc">Leads the operational deep dive. Maps workflows across Create / Build / Execute, surfaces inefficiencies, dependencies, and gaps, and structures findings into clear, actionable insights.</p>
+      </div>
+      <div class="tcell-role">
+        <p class="tcell-role__title">Transformation Architect</p>
+        <p class="tcell-role__desc">Analyzes the system layer &mdash; tools, data flows, and integrations. Identifies fragmentation, automation gaps, and architectural limitations impacting scalability and performance.</p>
+      </div>
+    </div>
+
+    <!-- Transformation Outcomes -->
+    <h3 class="tcell-heading anim" style="--d:.35s;margin-top:var(--space-xl)">Transformation Outcomes</h3>
+
+    <div class="anim" style="--d:.38s">
+      <div class="tcell-outcome" role="button" tabindex="0" aria-expanded="false">
+        <div class="tcell-outcome__header">
+          <span class="tcell-outcome__num">1</span>
+          <span class="tcell-outcome__title">Operational X-Ray</span>
+          <span class="tcell-outcome__toggle">+</span>
+        </div>
+        <div class="tcell-outcome__panel">
+          <div class="tcell-outcome__inner">
+            <p class="tcell-outcome__desc">A complete, evidence-based view of how Taylor actually operates.</p>
+            <ul>
+              <li>End-to-end mapping (Create / Build / Execute)</li>
+              <li>Friction points, redundancies, and bottlenecks</li>
+              <li>System fragmentation (tools, data, workflows)</li>
+              <li>Where time, margin, and capacity are being lost</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcell-outcome" role="button" tabindex="0" aria-expanded="false">
+        <div class="tcell-outcome__header">
+          <span class="tcell-outcome__num">2</span>
+          <span class="tcell-outcome__title">Transformation Blueprint</span>
+          <span class="tcell-outcome__toggle">+</span>
+        </div>
+        <div class="tcell-outcome__panel">
+          <div class="tcell-outcome__inner">
+            <p class="tcell-outcome__desc">A structured path forward &mdash; prioritized, sequenced, and tied to impact.</p>
+            <ul>
+              <li>Key opportunities (quick wins + structural changes)</li>
+              <li>Defined initiatives across processes, data, automation, and AI</li>
+              <li>Prioritization by impact vs effort</li>
+              <li>Clear roadmap to build the Digital Backbone</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transformation Models -->
+    <h3 class="tcell-heading anim" style="--d:.25s;margin-top:var(--space-xl)">Transformation Models</h3>
     <p class="invest-subtitle anim" style="--d:.28s">Two paths to operational clarity &mdash; choose the depth of impact that fits Taylor&rsquo;s readiness.</p>
 
     <div class="invest-grid anim" style="--d:.3s">
@@ -3253,7 +3433,7 @@ h3.phase-card-v2__title{
           <div class="invest-card__front">
             <div class="invest-card__head">
               <h3 class="invest-card__title">Core Diagnosis</h3>
-              <p class="invest-card__head-desc">Know exactly what to change, in what order, and why</p>
+              <p class="invest-card__head-desc">Full operational visibility across Create, Build, and Execute</p>
             </div>
             <div class="invest-card__body">
               <p class="invest-card__section-label">What you get</p>
@@ -3264,6 +3444,24 @@ h3.phase-card-v2__title{
                 <li>Prioritized Transformation Roadmap (what to change, in what order, and why)</li>
                 <li>Investment Logic to support strategic and operational decisions</li>
               </ul>
+            </div>
+            <div class="invest-card__footer">
+              <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
+              <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
+            </div>
+            <p class="invest-card__ideal">Ideal for leadership teams that need clarity before committing to execution</p>
+            <span class="invest-card__flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>See investment</span>
+          </div>
+          <div class="invest-card__back">
+            <div class="invest-card__head">
+              <h3 class="invest-card__title">Core Diagnosis</h3>
+              <p class="invest-card__head-desc">Full operational visibility across Create, Build, and Execute</p>
+            </div>
+            <div class="invest-card__price-block">
+              <p class="invest-card__price">US$150,000</p>
+              <p class="invest-card__price-note">Fixed project fee &mdash; US$50,000/month</p>
+            </div>
+            <div class="invest-card__back-body">
               <p class="invest-card__section-label">How we build it</p>
               <ul>
                 <li>Structured Intake (remote)</li>
@@ -3274,49 +3472,26 @@ h3.phase-card-v2__title{
                 <li>Validation sessions with leadership</li>
                 <li>Analysis, synthesis &amp; roadmap design</li>
               </ul>
-            </div>
-            <div class="invest-card__footer">
-              <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
-              <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
-            </div>
-            <p class="invest-card__ideal">Ideal for leadership teams that need clarity before committing to execution</p>
-            <span class="invest-card__flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>See investment</span>
-          </div>
-          <div class="invest-card__back">
-            <div class="invest-card__back-head">
-              <p class="invest-card__back-title">Core Diagnosis</p>
-              <p class="invest-card__price">US$ XX,XXX</p>
-              <p class="invest-card__price-note">Fixed project fee</p>
-            </div>
-            <div class="invest-card__back-body">
-              <p class="invest-card__section-label">What&rsquo;s included</p>
-              <ul>
-                <li>Full operational assessment across all workflows</li>
-                <li>System Map &amp; Transformation Roadmap deliverables</li>
-                <li>Leadership validation sessions</li>
-                <li>Access to TransformAZ diagnostic frameworks</li>
-              </ul>
               <p class="invest-card__section-label">Payment structure</p>
               <ul>
                 <li>50% at project kickoff</li>
                 <li>25% at mid-point delivery</li>
                 <li>25% at final report</li>
               </ul>
-              <div class="invest-card__roi">Similar engagements have identified 15 &ndash; 20% operational cost reduction opportunities within the first quarter.</div>
             </div>
             <div class="invest-card__back-footer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>Back to details</div>
           </div>
         </div>
       </div>
 
-      <!-- Diagnosis + Execution Pathway -->
+      <!-- Diagnosis + Change Enablement -->
       <div class="invest-card invest-card--recommended">
         <span class="invest-card__badge-rec">Recommended</span>
         <div class="invest-card__inner">
           <div class="invest-card__front">
             <div class="invest-card__head">
-              <h3 class="invest-card__title">Diagnosis + Execution Pathway</h3>
-              <p class="invest-card__head-desc">A transformation roadmap with the organizational alignment to execute it</p>
+              <h3 class="invest-card__title">Diagnosis + Change Enablement</h3>
+              <p class="invest-card__head-desc">Everything in Core Diagnosis, plus the strategy to make change stick</p>
             </div>
             <div class="invest-card__body">
               <p class="invest-card__section-label">What you get</p>
@@ -3328,15 +3503,6 @@ h3.phase-card-v2__title{
                 <li>Adoption Plan (behaviors, tracking, reinforcement)</li>
                 <li>Ongoing Communication Cadence across teams</li>
               </ul>
-              <p class="invest-card__section-label">How we build it</p>
-              <ul>
-                <li>Integrated alongside Diagnosis (not post-phase)</li>
-                <li>Leadership alignment sessions</li>
-                <li>Stakeholder mapping &amp; engagement design</li>
-                <li>Communication planning &amp; narrative development</li>
-                <li>Adoption &amp; behavior definition</li>
-                <li>Reinforcement mechanisms design</li>
-              </ul>
             </div>
             <div class="invest-card__footer">
               <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
@@ -3346,28 +3512,30 @@ h3.phase-card-v2__title{
             <span class="invest-card__flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>See investment</span>
           </div>
           <div class="invest-card__back">
-            <div class="invest-card__back-head">
-              <p class="invest-card__back-title">Diagnosis + Execution Pathway</p>
-              <p class="invest-card__price">US$ XX,XXX</p>
-              <p class="invest-card__price-note">Fixed project fee &mdash; Diagnosis phase</p>
+            <div class="invest-card__head">
+              <h3 class="invest-card__title">Diagnosis + Change Enablement</h3>
+              <p class="invest-card__head-desc">Everything in Core Diagnosis, plus the strategy to make change stick</p>
+            </div>
+            <div class="invest-card__price-block">
+              <p class="invest-card__price">US$195,000</p>
+              <p class="invest-card__price-note">Fixed project fee &mdash; US$65,000/month</p>
             </div>
             <div class="invest-card__back-body">
-              <p class="invest-card__section-label">What&rsquo;s included</p>
+              <p class="invest-card__section-label">How we build it</p>
               <ul>
-                <li>Full operational assessment across all workflows</li>
-                <li>System Map &amp; Transformation Roadmap deliverables</li>
-                <li>Change Strategy, Leadership Alignment &amp; Adoption Plan</li>
-                <li>Stakeholder engagement design &amp; communication cadence</li>
-                <li>Access to TransformAZ diagnostic frameworks</li>
+                <li>Integrated alongside Diagnosis (not post-phase)</li>
+                <li>Leadership alignment sessions</li>
+                <li>Stakeholder mapping &amp; engagement design</li>
+                <li>Communication planning &amp; narrative development</li>
+                <li>Adoption &amp; behavior definition</li>
+                <li>Reinforcement mechanisms design</li>
               </ul>
-              <div class="invest-card__credit"><strong>Investment applied:</strong> Your diagnosis investment is credited toward the first quarter of execution. Implementation retainer is defined by diagnosis findings.</div>
-              <p class="invest-card__section-label" style="margin-top:14px">Payment structure</p>
+              <p class="invest-card__section-label">Payment structure</p>
               <ul>
                 <li>50% at project kickoff</li>
                 <li>25% at mid-point delivery</li>
                 <li>25% at final report</li>
               </ul>
-              <div class="invest-card__roi">Similar engagements have identified 15 &ndash; 20% operational cost reduction opportunities within the first quarter.</div>
             </div>
             <div class="invest-card__back-footer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>Back to details</div>
           </div>
@@ -3396,7 +3564,7 @@ h3.phase-card-v2__title{
     </div>
 
     <div class="findings-hero anim" style="--d:.25s">
-      <span class="findings-hero__amount"><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="2.85" data-count-prefix="$" data-count-suffix="M" data-count-decimals="2" data-glitch>$0</span></span>
+      <span class="findings-hero__amount"><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="3.4" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span></span>
       <span class="findings-hero__label">Estimated annual impact*</span>
     </div>
 
@@ -4286,9 +4454,16 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
   });
 
+  // Transformation Outcomes accordion
+  document.querySelectorAll('.tcell-outcome[role="button"]').forEach(item=>{
+    function toggle(){ const open=item.classList.toggle('is-open'); item.setAttribute('aria-expanded',open); }
+    item.querySelector('.tcell-outcome__header').addEventListener('click',toggle);
+    item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+  });
+
   // Engagement model flip cards
   document.querySelectorAll('.invest-card').forEach(card=>{
-    card.addEventListener('click',()=>card.classList.toggle('flipped'));
+    card.addEventListener('click',(e)=>{ if(e.target.closest('.invest-card__cta')) return; card.classList.toggle('flipped'); });
   });
 
   // Phase Overview accordion (exclude CBE accordion items — they have their own handler)
