@@ -661,6 +661,28 @@ blockquote cite{font-style:normal;font-family:var(--sans);font-size:var(--text-2
   transition:max-height .5s var(--ease),opacity .35s var(--ease);
 }
 .evidence-item.is-open .evidence-item__panel{max-height:600px;opacity:1}
+/* Competitor section in Paradigm */
+.competitors-section{margin:var(--space-2xl) 0 var(--space-xl)}
+h2.competitors-section__title{
+  font-family:var(--sans);font-size:var(--text-h2);font-weight:var(--fw-regular);
+  letter-spacing:-3.2px;line-height:1;
+  color:var(--text);margin:0 0 var(--space-lg);text-align:left;
+}
+/* Expandable competitor cards */
+.competitor-card{cursor:pointer;position:relative}
+.competitor-card__toggle{
+  position:absolute;top:20px;right:20px;
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-regular);
+  color:var(--text-tertiary);transition:transform .35s var(--ease);
+}
+.competitor-card.is-open .competitor-card__toggle{transform:rotate(45deg)}
+.competitor-card__panel{
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .5s var(--ease),opacity .35s var(--ease);
+}
+.competitor-card.is-open .competitor-card__panel{max-height:1200px;opacity:1}
+.competitor-card__panel-inner{padding-top:12px;border-top:1px solid var(--border-light);margin-top:12px}
 .evidence-panel__inner{padding:0 0 24px 20px}
 .evidence-panel__quote{
   font-family:var(--sans);font-size:var(--text-lg);font-style:italic;
@@ -1203,7 +1225,7 @@ h3.phase-card-v2__title{
 .competitor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:var(--space-xl) 0}
 .competitor-card{background:var(--bg-white);border:1px solid var(--border-light);border-radius:14px;padding:24px;transition:all .35s var(--ease)}
 .competitor-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateY(-2px);border-color:rgba(84,54,255,.2)}
-.competitor-card h4{font-family:var(--sans);font-size:var(--text-base);font-weight:var(--fw-semibold);color:var(--text-primary);margin:0 0 10px;letter-spacing:.02em}
+.competitor-card h4{font-family:var(--sans);font-size:var(--text-h3);font-weight:var(--fw-medium);color:var(--text-primary);margin:0 0 10px;letter-spacing:var(--ls-h3);padding-right:36px}
 .competitor-card__action{font-size:var(--text-sm);color:var(--text-secondary);margin:0 0 10px;line-height:1.55}
 .competitor-card__implication{font-size:var(--text-sm);font-style:italic;color:var(--text-tertiary);margin:0}
 .market-closing{font-size:var(--text-base);font-weight:600;color:var(--accent-dark);margin:var(--space-lg) 0 0;text-align:center}
@@ -1537,6 +1559,10 @@ h3.phase-card-v2__title{
   content:'\2192';position:absolute;left:0;top:4px;
   color:var(--accent-mid);font-size:var(--text-xs);
 }
+.invest-card li.invest-card__inherited{color:var(--text-tertiary);font-style:italic;border-bottom:1px dashed var(--gray-03);padding-bottom:8px;margin-bottom:4px}
+.invest-card li.invest-card__inherited::before{content:'\2713';color:var(--green)}
+.invest-card li.invest-card__added{font-weight:var(--fw-medium);color:var(--text-primary)}
+.invest-card li.invest-card__added::before{content:'+';color:var(--accent);font-weight:var(--fw-semibold)}
 /* Footer — meta badges */
 .invest-card__footer{
   display:flex;align-items:center;gap:10px;
@@ -1934,6 +1960,8 @@ h3.phase-card-v2__title{
   .anim,.scroll-reveal .sr-word{opacity:1!important;transform:none!important;filter:none!important}
   .evidence-item__panel{max-height:none!important;opacity:1!important}
   .evidence-item__toggle{display:none}
+  .competitor-card__toggle{display:none}
+  .competitor-card__panel{max-height:none!important;opacity:1!important}
   .phase-nav{display:none}
   .phase-card-v2{min-height:auto;page-break-inside:avoid}
   .evidence-item{page-break-inside:avoid}
@@ -2349,11 +2377,11 @@ h3.phase-card-v2__title{
   <ul class="sidebar__nav" role="list">
     <li><a href="#cover"><span class="nav-num">00</span> Cover</a></li>
     <li><a href="#opportunity"><span class="nav-num">01</span> The Opportunity</a></li>
-    <li><a href="#paradigm"><span class="nav-num">02</span> The New Operating Paradigm</a></li>
-    <li><a href="#backbone"><span class="nav-num">03</span> The Digital Backbone</a></li>
-    <li><a href="#transformation"><span class="nav-num">04</span> The Transformation Approach</a></li>
-    <li><a href="#next-steps"><span class="nav-num">05</span> Services &amp; Investment</a></li>
-    <li><a href="#findings"><span class="nav-num">06</span> Key Findings</a></li>
+    <li><a href="#findings"><span class="nav-num">02</span> Key Findings</a></li>
+    <li><a href="#paradigm"><span class="nav-num">03</span> The New Operating Paradigm</a></li>
+    <li><a href="#backbone"><span class="nav-num">04</span> The Digital Backbone</a></li>
+    <li><a href="#transformation"><span class="nav-num">05</span> The Transformation Approach</a></li>
+    <li><a href="#next-steps"><span class="nav-num">06</span> Services &amp; Investment</a></li>
     <li><a href="#intake-proposal"><span class="nav-num">07</span> Phase Overview</a></li>
     <li><a href="#market"><span class="nav-num">08</span> Market Insights</a></li>
     <li><a href="#references"><span class="nav-num">09</span> References</a></li>
@@ -2411,11 +2439,144 @@ h3.phase-card-v2__title{
     <span class="interstitial__source">&mdash; Taylor Group Leadership<br>Initial Conversation</span>
   </div>
 
+  <!-- FINDINGS ───────────────────────────────── -->
+  <section id="findings" class="section">
+    <div class="section-header anim">
+      <div class="section-header__left">
+        <span class="section-num">02 &mdash; Key Findings</span>
+        <h2 style="--d:.1s">What Initial Interviews <span style="color:var(--accent)">Revealed</span></h2>
+      </div>
+      <div class="section-header__right">
+        <p class="scroll-reveal" style="--d:.15s">The new paradigm is not theoretical. It is already playing out across Taylor&rsquo;s day-to-day operations.</p>
+        <p class="scroll-reveal" style="--d:.2s">Initial conversations point to a clear pattern: Not a lack of capability &mdash; but a lack of system-level connection.</p>
+      </div>
+    </div>
+
+    <div class="findings-hero anim" style="--d:.25s">
+      <span class="findings-hero__amount"><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="3.4" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span></span>
+      <span class="findings-hero__label">Estimated annual impact*</span>
+    </div>
+
+    <!-- HIGH IMPACT -->
+    <p class="evidence-group-label evidence-group-label--red anim" style="--d:.3s">High Impact</p>
+
+    <div class="evidence-item evidence-item--red anim" style="--d:.35s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Asset Management Blind Spot</span>
+        <span class="evidence-item__impact">$500K &ndash; $1.2M / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn&rsquo;t tell you exactly what we have.&rdquo;</p></blockquote>
+          <p>Without centralized asset tracking, teams rebuild what already exists across three warehouses and 40+ countries.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>Estimated 5 &ndash; 10% annual inefficiency from lost, unused, or duplicated assets. Additional costs from redundant fabrication and logistics.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-item evidence-item--red anim" style="--d:.4s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Sales &harr; Production Disconnect</span>
+        <span class="evidence-item__impact">$400K &ndash; $800K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;Sales will sell something and then production finds out and goes, &lsquo;Wait, we can&rsquo;t do that in that timeline.&rsquo;&rdquo;</p></blockquote>
+          <p>Sales operates without visibility into production capacity, leading to over-promises and margin erosion.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span>
+            <p>Based on observed workflow patterns and typical cost structures in custom build environments:</p>
+            <ul>
+              <li>15 &ndash; 30% of projects are impacted by sales &harr; production misalignment</li>
+              <li>Each affected project incurs $10K&ndash;$25K in combined impact (redesign, rush production and logistics, margin compression)</li>
+              <li>Based on an estimated 40 &ndash; 80 projects per quarter</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDIUM IMPACT -->
+    <p class="evidence-group-label evidence-group-label--amber anim" style="--d:.45s">Medium Impact</p>
+
+    <div class="evidence-item evidence-item--amber anim" style="--d:.5s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Executive Time Drain</span>
+        <span class="evidence-item__impact">$225K &ndash; $300K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;I get 400 to 500 emails a day. I&rsquo;d say 70% are CCs where I don&rsquo;t really need to be included.&rdquo;</p></blockquote>
+          <p>Senior leadership time is consumed by low-value communication &mdash; reducing focus on strategic decisions and operational alignment.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>400 &ndash; 500 emails/day with ~70% low-value or unnecessary. Estimated 2 &ndash; 3 hours/day of executive time lost. Based on average executive cost of $150&ndash;$250/hour.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-item evidence-item--amber anim" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Underutilized Technology Investment</span>
+        <span class="evidence-item__impact">$75K &ndash; $200K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;We&rsquo;re paying for ClickUp Brain but nobody&rsquo;s really using it.&rdquo;</p></blockquote>
+          <p>Technology investments are already in place &mdash; but without adoption, integration, and shared workflows, their value erodes over time.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>~$60K&ndash;$130K annual investment across core tools (ClickUp, M365, AI tools). Estimated 40 &ndash; 70% underutilization due to fragmented adoption and lack of integration. Lost productivity and coordination value typically 2 &ndash; 3x tool cost.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STRATEGIC -->
+    <p class="evidence-group-label evidence-group-label--blue anim" style="--d:.6s">Strategic</p>
+
+    <div class="evidence-item evidence-item--blue anim" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Generational Adoption Gap</span>
+        <span class="evidence-item__impact">$200K &ndash; $500K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;The younger employees pick things up instantly. Some of our senior people&hellip; it&rsquo;s a harder conversation.&rdquo;</p></blockquote>
+          <p>Technology adoption is inconsistent across the organization. Junior and technical teams adopt new tools quickly. But adoption at the management layer lags &mdash; creating bottlenecks in approvals, decision-making, and execution flow.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>~20 &ndash; 30 managers involved in approvals / decision layers. 5 &ndash; 10 hours/week lost per manager due to friction (tool gaps, back-and-forth, manual processes). Avg loaded cost: ~$120 &ndash; 150/hour.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="evidence-item evidence-item--blue anim" style="--d:.7s" role="button" tabindex="0" aria-expanded="false">
+      <div class="evidence-item__header">
+        <span class="evidence-item__title">Missing Strategic Tech Layer</span>
+        <span class="evidence-item__impact">$200K &ndash; $400K / year</span>
+        <span class="evidence-item__toggle">+</span>
+      </div>
+      <div class="evidence-item__panel">
+        <div class="evidence-panel__inner">
+          <blockquote class="evidence-panel__quote"><p>&ldquo;We don&rsquo;t have a CTO. We&rsquo;ve never had someone whose job is to look at all of this holistically.&rdquo;</p></blockquote>
+          <p>Technology decisions are made in isolation &mdash; by function, by need, and in real time. Without a central owner, tools, data, and workflows evolve independently rather than as a system.</p>
+          <div class="box box--amber"><span class="box-label">Rationale</span><p>Direct Waste: $15K&ndash;$60K. Workarounds: $90K&ndash;$300K. Lost leverage: $100K&ndash;$400K.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="anim" style="--d:.75s;font-size:var(--text-sm);color:var(--text-secondary);font-style:italic;margin-top:24px">* Findings are based on initial conversations and directional estimates. Actual impact may vary &mdash; figures will be validated and refined as part of the diagnostic phase.</p>
+  </section>
+
+  <!-- INTERSTITIAL — FINDINGS → PARADIGM ────── -->
+  <div class="interstitial" data-typewriter>
+    <div class="interstitial__text" data-tw-text="&ldquo;Companies often underestimate the costs of fragmented systems and manual processes.&rdquo;"></div>
+    <span class="interstitial__source"><em>Flipping the Odds of Digital Transformation Success</em><br>&mdash; Boston Consulting Group</span>
+  </div>
+
   <!-- NEW OPERATING PARADIGM ────────────────── -->
   <section id="paradigm" class="section">
     <div class="section-header anim">
       <div class="section-header__left">
-        <span class="section-num">02 &mdash; The New Operating Paradigm</span>
+        <span class="section-num">03 &mdash; The New Operating Paradigm</span>
         <h2 style="--d:.1s">From Technology Adoption<br>to <span style="color:var(--accent)">System-Level</span> Performance</h2>
       </div>
       <div class="section-header__right">
@@ -2446,6 +2607,56 @@ h3.phase-card-v2__title{
       </table>
     </div>
 
+    <div class="competitors-section anim" style="--d:.58s">
+      <h2 class="competitors-section__title">What <span style="color:var(--accent)">Competitors</span> Are Doing</h2>
+      <div class="competitor-grid">
+        <div class="competitor-card" role="button" tabindex="0" aria-expanded="false">
+          <h4>Jack Morton + Impact XM</h4>
+          <p class="competitor-card__implication">They&rsquo;re not just getting bigger &mdash; they&rsquo;re preparing for an AI-shaped industry.</p>
+          <span class="competitor-card__toggle">+</span>
+          <div class="competitor-card__panel">
+            <div class="competitor-card__panel-inner">
+              <p class="competitor-card__action">Merged in January 2026 to create a larger, end-to-end experiential platform. Beyond scale, the intent is explicit:</p>
+              <blockquote class="competitor-card__quote">&ldquo;This is a pivotal moment. Together, we&rsquo;re building an agency ready for a marketing landscape reshaped by AI &mdash; one that keeps real, human experience at the center.&rdquo;<cite>&mdash; Craig Millon, CEO</cite></blockquote>
+              <ul>
+                <li>Consolidating capabilities across the full lifecycle</li>
+                <li>Strengthening data and measurement to prove impact</li>
+                <li>Positioning the organization for an AI-driven marketing landscape</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="competitor-card" role="button" tabindex="0" aria-expanded="false">
+          <h4>Freeman</h4>
+          <p class="competitor-card__implication">They&rsquo;re not experimenting &mdash; they&rsquo;re operating with AI today.</p>
+          <span class="competitor-card__toggle">+</span>
+          <div class="competitor-card__panel">
+            <div class="competitor-card__panel-inner">
+              <p class="competitor-card__action">Freeman is actively embedding AI across its operating model &mdash; from event execution and audience insights to content intelligence and digital marketing capabilities.</p>
+              <ul>
+                <li>AI Solutions powering real-time audience behavior mapping and engagement analytics</li>
+                <li>Key Takeaways &mdash; a generative AI tool that transforms live sessions into structured insights and post-event content</li>
+                <li>Zenus partnership enabling AI-driven behavioral data (dwell time, sentiment, engagement) at scale</li>
+                <li>Tag Digital acquisition expanding AI-driven digital marketing capabilities globally</li>
+              </ul>
+              <blockquote class="competitor-card__quote">&ldquo;Key Takeaways uses generative AI to capture, summarize and extend content from live sessions, improving engagement, learning and retention.&rdquo;</blockquote>
+            </div>
+          </div>
+        </div>
+        <div class="competitor-card" role="button" tabindex="0" aria-expanded="false">
+          <h4>George P. Johnson (GPJ)</h4>
+          <p class="competitor-card__implication">They&rsquo;re embedding tech into every step, not just the final event.</p>
+          <span class="competitor-card__toggle">+</span>
+          <div class="competitor-card__panel">
+            <div class="competitor-card__panel-inner">
+              <p class="competitor-card__action">Part of Project Worldwide, GPJ is building integrated experience capabilities across the full lifecycle &mdash; from strategy and design to production and delivery.</p>
+              <blockquote class="competitor-card__quote">&ldquo;We bring together data, creativity, technology and production to create connected brand experiences.&rdquo;<cite>&mdash; Project Worldwide</cite></blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="box box--amber anim" style="--d:.6s">
       <span class="box-label">The Cost of Waiting</span>
       <p>Every quarter without a unified digital strategy compounds inefficiencies, increases cost, and widens the competitive gap.</p>
@@ -2472,7 +2683,7 @@ h3.phase-card-v2__title{
     <!-- S04 Header: 2-column grid -->
     <div class="section-header anim">
       <div class="section-header__left">
-        <span class="section-num">03 &mdash; The Digital Backbone</span>
+        <span class="section-num">04 &mdash; The Digital Backbone</span>
         <h2 style="--d:.1s">One <span style="color:var(--accent)">connected</span> operation</h2>
       </div>
       <div class="section-header__right">
@@ -3056,7 +3267,7 @@ h3.phase-card-v2__title{
   <section id="transformation" class="section">
     <div class="section-header anim">
       <div class="section-header__left">
-        <span class="section-num">04 &mdash; The Transformation Approach</span>
+        <span class="section-num">05 &mdash; The Transformation Approach</span>
         <h2 style="--d:.1s">An Engineered<br><span style="color:var(--accent)">Transformation</span></h2>
       </div>
       <div class="section-header__right">
@@ -3299,7 +3510,7 @@ h3.phase-card-v2__title{
   </section>
 
 
-  <!-- INTERSTITIAL — PARADIGM → FINDINGS ────── -->
+  <!-- INTERSTITIAL — TRANSFORMATION → SERVICES ── -->
   <div class="interstitial" data-typewriter>
     <div class="interstitial__text" data-tw-text="&ldquo;Surface-level digital adoption &mdash; without cultural and structural change &mdash; yields marginal improvements at best and cynicism at worst.&rdquo;"></div>
     <span class="interstitial__source"><em>Flipping the Odds of Digital Transformation Success</em><br>&mdash; Boston Consulting Group</span>
@@ -3309,7 +3520,7 @@ h3.phase-card-v2__title{
   <section id="next-steps" class="section">
     <div class="section-header anim">
       <div class="section-header__left">
-        <span class="section-num">05 &mdash; Services &amp; Investment</span>
+        <span class="section-num">06 &mdash; Services &amp; Investment</span>
         <h2>Defining the <span style="color:var(--accent)">Path Forward</span></h2>
       </div>
       <div class="section-header__right">
@@ -3333,7 +3544,7 @@ h3.phase-card-v2__title{
       <div class="svc-group svc-group--comms">Change<br>enablement</div>
 
       <!-- Investment groups (col 5, spanning rows) -->
-      <div class="svc-invest svc-invest--prediag">N/A</div>
+      <div class="svc-invest svc-invest--prediag">No investment required</div>
       <div class="svc-invest svc-invest--diagnosis">Fixed project fee</div>
       <div class="svc-invest svc-invest--execution">Monthly retainer</div>
       <div class="svc-invest svc-invest--comms">Fixed project fee or monthly retainer</div>
@@ -3518,19 +3729,19 @@ h3.phase-card-v2__title{
             <div class="invest-card__body">
               <p class="invest-card__section-label">What you get</p>
               <ul>
-                <li>Everything included in Core Diagnosis</li>
-                <li>Communication &amp; Change Strategy aligned to the roadmap</li>
-                <li>Leadership Alignment &amp; Messaging framework</li>
-                <li>Stakeholder Engagement structure (who, when, how)</li>
-                <li>Adoption Plan (behaviors, tracking, reinforcement)</li>
-                <li>Ongoing Communication Cadence across teams</li>
+                <li class="invest-card__inherited">Everything included in Core Diagnosis</li>
+                <li class="invest-card__added">Communication &amp; Change Strategy aligned to the roadmap</li>
+                <li class="invest-card__added">Leadership Alignment &amp; Messaging framework</li>
+                <li class="invest-card__added">Stakeholder Engagement structure (who, when, how)</li>
+                <li class="invest-card__added">Adoption Plan (behaviors, tracking, reinforcement)</li>
+                <li class="invest-card__added">Ongoing Communication Cadence across teams</li>
               </ul>
             </div>
             <div class="invest-card__footer">
               <div class="invest-card__meta-pill"><span>Format</span> <strong>Hybrid</strong></div>
               <div class="invest-card__meta-pill"><span>Duration</span> <strong>3 months</strong></div>
             </div>
-            <p class="invest-card__ideal">Ideal for organizations ready to move from diagnosis into action</p>
+            <p class="invest-card__ideal">Organizations that invest in change management are 6&times; more likely to meet project objectives &mdash; Prosci Best Practices</p>
             <span class="invest-card__flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>See investment</span>
           </div>
           <div class="invest-card__back">
@@ -3566,139 +3777,6 @@ h3.phase-card-v2__title{
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- INTERSTITIAL ─────────────────────────────── -->
-  <div class="interstitial" data-typewriter>
-    <div class="interstitial__text" data-tw-text="&ldquo;Companies often underestimate the costs of fragmented systems and manual processes.&rdquo;"></div>
-    <span class="interstitial__source"><em>Flipping the Odds of Digital Transformation Success</em><br>&mdash; Boston Consulting Group</span>
-  </div>
-
-  <!-- FINDINGS ───────────────────────────────── -->
-  <section id="findings" class="section">
-    <div class="section-header anim">
-      <div class="section-header__left">
-        <span class="section-num">06 &mdash; Key Findings</span>
-        <h2 style="--d:.1s">What Initial Interviews <span style="color:var(--accent)">Revealed</span></h2>
-      </div>
-      <div class="section-header__right">
-        <p class="scroll-reveal" style="--d:.15s">The new paradigm is not theoretical. It is already playing out across Taylor&rsquo;s day-to-day operations.</p>
-        <p class="scroll-reveal" style="--d:.2s">Initial conversations point to a clear pattern: Not a lack of capability &mdash; but a lack of system-level connection.</p>
-      </div>
-    </div>
-
-    <div class="findings-hero anim" style="--d:.25s">
-      <span class="findings-hero__amount"><span data-count-target="1.6" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span> &ndash; <span data-count-target="3.4" data-count-prefix="$" data-count-suffix="M" data-count-decimals="1" data-glitch>$0</span></span>
-      <span class="findings-hero__label">Estimated annual impact*</span>
-    </div>
-
-    <!-- HIGH IMPACT -->
-    <p class="evidence-group-label evidence-group-label--red anim" style="--d:.3s">High Impact</p>
-
-    <div class="evidence-item evidence-item--red anim" style="--d:.35s" role="button" tabindex="0" aria-expanded="false">
-      <div class="evidence-item__header">
-        <span class="evidence-item__title">Asset Management Blind Spot</span>
-        <span class="evidence-item__impact">$500K &ndash; $1.2M / year</span>
-        <span class="evidence-item__toggle">+</span>
-      </div>
-      <div class="evidence-item__panel">
-        <div class="evidence-panel__inner">
-          <blockquote class="evidence-panel__quote"><p>&ldquo;We probably have somewhere between $20 and $30 million worth of assets in our warehouses. And honestly, I couldn&rsquo;t tell you exactly what we have.&rdquo;</p></blockquote>
-          <p>Without centralized asset tracking, teams rebuild what already exists across three warehouses and 40+ countries.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>Estimated 5 &ndash; 10% annual inefficiency from lost, unused, or duplicated assets. Additional costs from redundant fabrication and logistics.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="evidence-item evidence-item--red anim" style="--d:.4s" role="button" tabindex="0" aria-expanded="false">
-      <div class="evidence-item__header">
-        <span class="evidence-item__title">Sales &harr; Production Disconnect</span>
-        <span class="evidence-item__impact">$400K &ndash; $800K / year</span>
-        <span class="evidence-item__toggle">+</span>
-      </div>
-      <div class="evidence-item__panel">
-        <div class="evidence-panel__inner">
-          <blockquote class="evidence-panel__quote"><p>&ldquo;Sales will sell something and then production finds out and goes, &lsquo;Wait, we can&rsquo;t do that in that timeline.&rsquo;&rdquo;</p></blockquote>
-          <p>Sales operates without visibility into production capacity, leading to over-promises and margin erosion.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span>
-            <p>Based on observed workflow patterns and typical cost structures in custom build environments:</p>
-            <ul>
-              <li>15 &ndash; 30% of projects are impacted by sales &harr; production misalignment</li>
-              <li>Each affected project incurs $10K&ndash;$25K in combined impact (redesign, rush production and logistics, margin compression)</li>
-              <li>Based on an estimated 40 &ndash; 80 projects per quarter</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MEDIUM IMPACT -->
-    <p class="evidence-group-label evidence-group-label--amber anim" style="--d:.45s">Medium Impact</p>
-
-    <div class="evidence-item evidence-item--amber anim" style="--d:.5s" role="button" tabindex="0" aria-expanded="false">
-      <div class="evidence-item__header">
-        <span class="evidence-item__title">Executive Time Drain</span>
-        <span class="evidence-item__impact">$225K &ndash; $300K / year</span>
-        <span class="evidence-item__toggle">+</span>
-      </div>
-      <div class="evidence-item__panel">
-        <div class="evidence-panel__inner">
-          <blockquote class="evidence-panel__quote"><p>&ldquo;I get 400 to 500 emails a day. I&rsquo;d say 70% are CCs where I don&rsquo;t really need to be included.&rdquo;</p></blockquote>
-          <p>Senior leadership time is consumed by low-value communication &mdash; reducing focus on strategic decisions and operational alignment.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>400 &ndash; 500 emails/day with ~70% low-value or unnecessary. Estimated 2 &ndash; 3 hours/day of executive time lost. Based on average executive cost of $150&ndash;$250/hour.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="evidence-item evidence-item--amber anim" style="--d:.55s" role="button" tabindex="0" aria-expanded="false">
-      <div class="evidence-item__header">
-        <span class="evidence-item__title">Underutilized Technology Investment</span>
-        <span class="evidence-item__impact">$75K &ndash; $200K / year</span>
-        <span class="evidence-item__toggle">+</span>
-      </div>
-      <div class="evidence-item__panel">
-        <div class="evidence-panel__inner">
-          <blockquote class="evidence-panel__quote"><p>&ldquo;We&rsquo;re paying for ClickUp Brain but nobody&rsquo;s really using it.&rdquo;</p></blockquote>
-          <p>Technology investments are already in place &mdash; but without adoption, integration, and shared workflows, their value erodes over time.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>~$60K&ndash;$130K annual investment across core tools (ClickUp, M365, AI tools). Estimated 40 &ndash; 70% underutilization due to fragmented adoption and lack of integration. Lost productivity and coordination value typically 2 &ndash; 3x tool cost.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- STRATEGIC -->
-    <p class="evidence-group-label evidence-group-label--blue anim" style="--d:.6s">Strategic</p>
-
-    <div class="evidence-item evidence-item--blue anim" style="--d:.65s" role="button" tabindex="0" aria-expanded="false">
-      <div class="evidence-item__header">
-        <span class="evidence-item__title">Generational Adoption Gap</span>
-        <span class="evidence-item__impact">$200K &ndash; $500K / year</span>
-        <span class="evidence-item__toggle">+</span>
-      </div>
-      <div class="evidence-item__panel">
-        <div class="evidence-panel__inner">
-          <blockquote class="evidence-panel__quote"><p>&ldquo;The younger employees pick things up instantly. Some of our senior people&hellip; it&rsquo;s a harder conversation.&rdquo;</p></blockquote>
-          <p>Technology adoption is inconsistent across the organization. Junior and technical teams adopt new tools quickly. But adoption at the management layer lags &mdash; creating bottlenecks in approvals, decision-making, and execution flow.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>~20 &ndash; 30 managers involved in approvals / decision layers. 5 &ndash; 10 hours/week lost per manager due to friction (tool gaps, back-and-forth, manual processes). Avg loaded cost: ~$120 &ndash; 150/hour.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="evidence-item evidence-item--blue anim" style="--d:.7s" role="button" tabindex="0" aria-expanded="false">
-      <div class="evidence-item__header">
-        <span class="evidence-item__title">Missing Strategic Tech Layer</span>
-        <span class="evidence-item__impact">$200K &ndash; $400K / year</span>
-        <span class="evidence-item__toggle">+</span>
-      </div>
-      <div class="evidence-item__panel">
-        <div class="evidence-panel__inner">
-          <blockquote class="evidence-panel__quote"><p>&ldquo;We don&rsquo;t have a CTO. We&rsquo;ve never had someone whose job is to look at all of this holistically.&rdquo;</p></blockquote>
-          <p>Technology decisions are made in isolation &mdash; by function, by need, and in real time. Without a central owner, tools, data, and workflows evolve independently rather than as a system.</p>
-          <div class="box box--amber"><span class="box-label">Rationale</span><p>Direct Waste: $15K&ndash;$60K. Workarounds: $90K&ndash;$300K. Lost leverage: $100K&ndash;$400K.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <p class="anim" style="--d:.75s;font-size:var(--text-sm);color:var(--text-secondary);font-style:italic;margin-top:24px">* Findings are based on initial conversations and directional estimates. Actual impact may vary &mdash; figures will be validated and refined as part of the diagnostic phase.</p>
   </section>
   <!-- INTERSTITIAL 4 ─────────────────────────── -->
   <div class="interstitial" data-typewriter>
@@ -4029,40 +4107,7 @@ h3.phase-card-v2__title{
       <p class="section-quote__text scroll-reveal">The gap isn&rsquo;t between companies that use AI and those that don&rsquo;t. It&rsquo;s between those that <strong>connected their AI into a backbone</strong> &mdash; and those still running pilots.</p>
     </div>
 
-    <!-- Competitive Landscape -->
-    <h3 class="anim" style="--d:.65s;font-family:var(--sans);letter-spacing:.02em">What Your Competitors Are Doing</h3>
-    <div class="competitor-grid">
-      <div class="competitor-card anim" style="--d:.7s">
-        <h4>Jack Morton + Impact XM</h4>
-        <p class="competitor-card__action">Merged in January 2026 to create a larger, end-to-end experiential platform. Beyond scale, the intent is explicit:</p>
-        <blockquote class="competitor-card__quote">&ldquo;This is a pivotal moment. Together, we&rsquo;re building an agency ready for a marketing landscape reshaped by AI &mdash; one that keeps real, human experience at the center.&rdquo;<cite>&mdash; Craig Millon, CEO</cite></blockquote>
-        <ul>
-          <li>Consolidating capabilities across the full lifecycle</li>
-          <li>Strengthening data and measurement to prove impact</li>
-          <li>Positioning the organization for an AI-driven marketing landscape</li>
-        </ul>
-        <p class="competitor-card__implication">They&rsquo;re not just getting bigger &mdash; they&rsquo;re preparing for an AI-shaped industry.</p>
-      </div>
-      <div class="competitor-card anim" style="--d:.8s">
-        <h4>Freeman</h4>
-        <p class="competitor-card__action">Freeman is actively embedding AI across its operating model &mdash; from event execution and audience insights to content intelligence and digital marketing capabilities.</p>
-        <ul>
-          <li>AI Solutions powering real-time audience behavior mapping and engagement analytics</li>
-          <li>Key Takeaways &mdash; a generative AI tool that transforms live sessions into structured insights and post-event content</li>
-          <li>Zenus partnership enabling AI-driven behavioral data (dwell time, sentiment, engagement) at scale</li>
-          <li>Tag Digital acquisition expanding AI-driven digital marketing capabilities globally</li>
-        </ul>
-        <blockquote class="competitor-card__quote">&ldquo;Key Takeaways uses generative AI to capture, summarize and extend content from live sessions, improving engagement, learning and retention.&rdquo;</blockquote>
-        <p class="competitor-card__implication">They&rsquo;re not experimenting &mdash; they&rsquo;re operating with AI today.</p>
-      </div>
-      <div class="competitor-card anim" style="--d:.9s">
-        <h4>George P. Johnson (GPJ)</h4>
-        <p class="competitor-card__action">Part of Project Worldwide, GPJ is building integrated experience capabilities across the full lifecycle &mdash; from strategy and design to production and delivery. Their model connects physical and digital environments, combining data, creativity, technology, and execution into a unified experience layer.</p>
-        <blockquote class="competitor-card__quote">&ldquo;We bring together data, creativity, technology and production to create connected brand experiences.&rdquo;<cite>&mdash; Project Worldwide</cite></blockquote>
-        <p class="competitor-card__implication">They&rsquo;re embedding tech into every step, not just the final event.</p>
-      </div>
-    </div>
-    <div class="transformation-reality anim" style="--d:.92s">
+    <div class="transformation-reality anim" style="--d:.65s">
       <p class="transformation-reality__title">The Transformation Reality</p>
       <div class="transformation-reality__stats">
         <p class="transformation-reality__stat"><strong>Only 16%</strong> of digital transformations fully succeed &mdash; McKinsey 2025</p>
@@ -4475,6 +4520,13 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   document.querySelectorAll('.evidence-item[role="button"]').forEach(item=>{
     function toggle(){ const open=item.classList.toggle('is-open'); item.setAttribute('aria-expanded',open); }
     item.querySelector('.evidence-item__header').addEventListener('click',toggle);
+    item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
+  });
+
+  /* Competitor card expand/collapse */
+  document.querySelectorAll('.competitor-card[role="button"]').forEach(item=>{
+    function toggle(){ const open=item.classList.toggle('is-open'); item.setAttribute('aria-expanded',open); }
+    item.addEventListener('click',toggle);
     item.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();} });
   });
 
@@ -5209,8 +5261,8 @@ const PRM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* ── Section map for scroll-to links ─────── */
   var SECTION_MAP = {
-    '01':'opportunity', '02':'paradigm', '03':'backbone',
-    '04':'transformation', '05':'next-steps', '06':'findings',
+    '01':'opportunity', '02':'findings', '03':'paradigm',
+    '04':'backbone', '05':'transformation', '06':'next-steps',
     '07':'intake-proposal', '08':'market', '09':'references'
   };
 

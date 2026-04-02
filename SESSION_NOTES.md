@@ -1,72 +1,39 @@
 # Session Notes
 
-## Sesión 2026-04-01 / 2026-04-02
+## Sesión 2026-04-02 / 2026-04-03
 
 ### Qué se hizo
 
-**Auditoría completa del Tay chatbot** — 3 agentes paralelos auditaron frontend, backend Netlify, y backend dev. Reporte de hallazgos en 6 categorías. Plan P0–P3 priorizado y ejecutado completo.
+**Auditoría profesional completa del pitch** como consultora — evaluación de contenido, propuesta, diseño, storytelling, pricing, target, credibilidad. Score: 8.5/10. Se identificaron ~12 mejoras, de las cuales 4 se priorizaron con Agus y se compartieron con Fermín por WhatsApp.
 
-**P0 — Seguridad:**
-- Removidos datos de pricing del SYSTEM_PROMPT ($18K/$42K, costos por finding, friction estimates)
-- CORS restringido de `*` a allowlist: `taylor.transformaz.co` + localhost + `*.netlify.app`
-- Rate limiting 10 req/min por IP en Netlify function (in-memory Map con cleanup)
-- Input validation: formato de mensajes (role/content string), max 1000 chars
+**4 cambios estratégicos implementados en el pitch:**
 
-**P1 — UX + Arquitectura:**
-- SYSTEM_PROMPT extraído a módulo compartido `lib/tay-system-prompt.js` (single source of truth)
-- Endpoint SSE streaming `netlify/functions/chat-stream.mjs` (Netlify Functions v2)
-- Frontend reescrito: streaming con fallback a non-streaming
-- Greeting limpiado (sin mención a pricing), `temperature:0.3`, `max_tokens:384`
-- `maxlength="500"` en input, `aria-label` dinámico en FAB
+1. **Key Findings movido a sección 02** (era 06) — El lector ahora siente el dolor ($1.6M–$3.4M/año de impacto) antes de ver la solución y el precio. Interstitial BCG reubicado entre findings y paradigm. Renumeración completa: sidebar nav, section-num spans, JS SECTION_MAP, tay-system-prompt.js.
 
-**P2 — Robustez:**
-- AbortController 15s timeout en todos los fetch
-- Retry con 1.5s backoff en errores 500+ (solo fallback endpoint)
-- Focus trap en chat dialog (Tab cycles input → send → pills)
-- Markdown parser mejorado: inline code, links, listas numeradas
+2. **Competidores movidos a sección Paradigm (03)** — Jack Morton, Freeman y GPJ ahora aparecen como tarjetas expandibles dentro de la sección de paradigma, justo antes del "Cost of Waiting". Formato: 3 tarjetas visibles (nombre + implicación), click expande detalle con quotes y bullets. CSS nuevo para `.competitor-card__panel` + `.competitor-card__toggle`. JS handler nuevo para expand/collapse.
 
-**P3 — Analytics + Error UX:**
-- Structured JSON logs en ambas Netlify Functions (section, question truncada, turn count)
-- `errorMsg()` helper con 5 estados: offline, rate-limited, timeout, server error, genérico
-- `isRetryable()` evita fallback en errores no recuperables
+3. **Prosci quote en invest card de Change Enablement** — Reemplazó "Ideal for organizations ready to move from diagnosis into action" por "Organizations that invest in change management are 6× more likely to meet project objectives — Prosci Best Practices".
 
-**Chrome password prompt fix:**
-- Input cambiado a `type="search"` + `autocomplete="one-time-code"` + `<form role="search">`
+4. **Pre-engagement "No investment required"** — Reemplazó "N/A" en la service matrix para hacer explícito que la fase 0 es sin costo.
 
-**SYSTEM_PROMPT reescrito completo (CRÍTICO):**
-- Contenido estaba totalmente desactualizado vs HTML actual
-- Numeración de secciones 03-08 estaba cruzada
-- Engagement models decían "INTAKE/DISCOVERY" pero el HTML dice "Core Diagnosis/Diagnosis + Change Enablement"
-- Company name "Taylor Group" → "Taylor Inc.", $85M revenue removido (no existe en HTML)
-- Deliverables actualizados, dimensiones corregidas (5, no 7), títulos de secciones actualizados
-
-**Scroll-to-section:**
-- `SECTION_MAP` mapeando números de sección a IDs de HTML
-- `formatResponse()` convierte "Section 06 — Key Findings" en links clickeables
-- Click en link → `scrollIntoView` suave + auto-close del chat
-- CSS `.tay-section-link` con pill style purple
-- Event delegation en `msgs` container
-- Testeado end-to-end en producción con Playwright
-
-**Pitch cleanup:**
-- CSS muerto del viejo CBE: ya no existía (limpiado en sesión anterior)
-- Deduplicado CSS responsive de pirámide AI
-- Removido `invest-card__price` dead CSS
-- `hbw-sub` description text wrap en mobile
-- `--content-w` ya reconciliado (1120px en ambos)
+**Archivos modificados:**
+- `clients/taylor-group/proposal-2.0/pitch/Taylor-Group-Interactive-Pitch.html` — reorder de secciones, competitors accordion, invest card text, service matrix text, CSS nuevo
+- `clients/taylor-group/proposal-2.0/pitch/index.html` — sync
+- `lib/tay-system-prompt.js` — secciones renumeradas y reordenadas, competitors en S03, "no investment required" en pre-engagement, Prosci quote en change enablement
 
 ### Dónde quedamos
-- Commit `4fba6c2` pushed a main, todo deployado en taylor.transformaz.co
-- Bot testeado en producción: streaming funciona, scroll-to-section funciona
-- Toda la auditoría P0–P3 + cleanup completada
+- Cambios sin commitear — pendiente revisión visual por Agus
+- Nuevo orden de secciones: 00 Cover, 01 Opportunity, 02 Key Findings, 03 Paradigm, 04 Backbone, 05 Transformation, 06 Services, 07 Phase Overview, 08 Market, 09 References
+- Los section IDs no cambiaron (opportunity, findings, paradigm, etc.) — solo los números visibles
 
 ### Problemas abiertos
-- Header del chat dice "Taylor Group Assistant" — debería decir "Taylor Inc. Assistant" para consistencia (cambio menor en HTML)
-- La función streaming `chat-stream.mjs` usa `createRequire` para importar CJS — funciona pero es un patrón frágil. Si se migra `lib/tay-system-prompt.js` a ESM en el futuro, simplificar
-- Los console errors en producción (2 en el test de Playwright) no se investigaron — podrían ser benignos o no
+- CSS muerto: las clases `.competitor-accordion-item*` y las viejas `.competitor-grid`/`.competitor-card` originales quedan como dead code (inofensivo, limpieza menor)
+- Header del chat sigue diciendo "Taylor Group Assistant" (pendiente de sesión anterior)
+- 2 console errors en producción sin investigar (pendiente de sesión anterior)
+- Auditoría identificó más mejoras no implementadas: ROI explícito junto al precio, comparar con gasto actual en tools, Intake como landing zone separada, rango indicativo para Execution retainer, About TransformAZ / bios de equipo, executive summary one-pager
 
 ### Para la próxima sesión
-- Empezar por: verificar los 2 console errors en producción
-- Opcional: cambiar "Taylor Group Assistant" → "Taylor Inc. Assistant" en el header del chat
-- El bot está completo — no hay más items pendientes de la auditoría
-- Quedan pendientes de pitch visual: responsive mobile de pirámide AI y diagnosis cards (verificación visual), fuente de la quote "Everyone is buying AI tools"
+- Empezar por: verificación visual del pitch completo con el nuevo orden (especialmente findings en S02, competitors en S03, transiciones entre secciones)
+- Verificar que el chatbot responda correctamente con la nueva numeración
+- Decidir si implementar más cambios de la auditoría (ROI junto al precio, Intake standalone, rango de Execution)
+- Pendiente: diseño del "Why Now" one-pager (se comenzó brainstorming pero se pausó para priorizar los cambios al pitch)

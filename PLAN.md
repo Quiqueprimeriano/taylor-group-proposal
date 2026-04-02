@@ -73,11 +73,32 @@
 - [x] "Not a lack of capability": solo 1 aparición, no había duplicado
 - [x] "Everyone is buying AI tools": texto editorial sin comillas, no necesita fuente
 
+## Completado (2026-04-02/03) — Pitch Audit & Strategic Restructure
+
+- [x] Auditoría profesional completa del pitch (contenido, propuesta, diseño, storytelling, pricing, target, credibilidad)
+- [x] Key Findings movido de S06 a S02 (antes de paradigm y precio)
+- [x] Competidores (Jack Morton, Freeman, GPJ) movidos de Market (S08) a Paradigm (S03) como tarjetas expandibles
+- [x] Prosci quote en invest card Change Enablement ("6× more likely to meet project objectives")
+- [x] Pre-engagement: "N/A" → "No investment required" en service matrix
+- [x] Renumeración completa: sidebar, section-num, SECTION_MAP, tay-system-prompt.js
+- [x] Interstitial BCG reubicado entre Findings (S02) y Paradigm (S03)
+- [x] Mensaje para Fermín con las 4 recomendaciones + 6 estrategias de reframing de precio
+
+## Pendiente — Pitch Audit (no implementado)
+
+- [ ] ROI explícito junto al precio ("less than 10% of estimated annual recoverable value")
+- [ ] Comparar inversión con gasto actual en tools ($60K–$130K que no rinden)
+- [ ] Intake como landing zone separada (precio propio ~$35K–$45K, "land and expand")
+- [ ] Rango indicativo para Execution retainer ($25K–$45K/month)
+- [ ] About TransformAZ / bios del equipo con credenciales
+- [ ] Executive summary one-pager ("Why Now")
+
 ## Pendiente — Minor
 
 - [ ] Cambiar "Taylor Group Assistant" → "Taylor Inc. Assistant" en header del chat
 - [ ] Investigar 2 console errors en producción (detectados en test Playwright)
+- [ ] Limpiar dead CSS: `.competitor-accordion-item*` classes
 
 ## Próximo milestone
 
-QA visual completo del pitch (responsive, cross-browser). El bot está completo.
+Verificación visual del pitch con nuevo orden de secciones. Decisión con Fermín sobre cuáles de las mejoras pendientes de la auditoría implementar.

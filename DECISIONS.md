@@ -186,3 +186,36 @@
 - Bot responses become navigational — users can jump to any section the bot mentions
 - Chat auto-closes on section link click so user can see the content
 - `SECTION_MAP` must stay in sync with actual section order in HTML
+
+---
+
+## ADR-015: Key Findings moved to Section 02 (2026-04-02)
+
+**Status:** Accepted
+
+**Context:** Professional audit of the pitch identified that Key Findings (with $1.6M–$3.4M/year impact quotes from Taylor leadership) was at Section 06, after the pricing section. By the time the reader reached the findings, they had already emotionally reacted to the price without feeling the urgency.
+
+**Decision:** Move Key Findings from position 06 to position 02, right after The Opportunity. The BCG interstitial ("Companies often underestimate...") moves between Findings (02) and Paradigm (03). All subsequent sections renumbered: Paradigm→03, Backbone→04, Transformation→05, Services→06. Sections 07-09 unchanged.
+
+**Consequences:**
+- Section IDs remain unchanged (findings, paradigm, backbone, etc.) — only visible numbers change
+- Sidebar nav reordered to match
+- JS SECTION_MAP updated
+- tay-system-prompt.js fully reordered and renumbered
+- Narrative arc becomes: Opportunity → Pain (Findings) → Framework (Paradigm) → Solution → Price
+
+---
+
+## ADR-016: Competitors moved into Paradigm section as expandable cards (2026-04-02)
+
+**Status:** Accepted
+
+**Context:** Competitor data (Jack Morton merger, Freeman AI ops, GPJ integration) was in Section 08 (Market Insights) — too late to create urgency before the pricing section. Moving them earlier amplifies the "your competitors are already moving" message at the right moment.
+
+**Decision:** Move the 3 competitor cards from Market Insights into the Paradigm section (now 03), between the paradigm comparison table and the "Cost of Waiting" box. Each card shows company name + implication (always visible), with full detail (quotes, bullet points) expandable via click. Uses `max-height + opacity` transition pattern per CLAUDE.md.
+
+**Consequences:**
+- Market Insights section retains stats, insights, AI pyramid, timeline, and transformation reality — only competitors removed
+- New JS handler for `.competitor-card[role="button"]` expand/collapse
+- Print styles force panels open
+- Old `.competitor-grid` 3-column layout preserved for the visible card layout

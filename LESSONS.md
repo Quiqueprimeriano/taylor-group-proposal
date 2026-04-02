@@ -85,3 +85,23 @@ Netlify serves `index.html`, not `Taylor-Group-Interactive-Pitch.html`. Forgetti
 **Fix:** Full rewrite of SYSTEM_PROMPT by extracting content directly from the live HTML proposal. Every section verified against the actual source.
 
 **Rule:** When the proposal HTML changes (section order, content, engagement models), the SYSTEM_PROMPT in `lib/tay-system-prompt.js` MUST be updated in the same session. Treat it like `index.html` sync — never ship without it. Consider adding a "last verified" date comment in the prompt file.
+
+## 2026-04-02
+
+### Edit large HTML files bottom-up when moving sections
+
+**What happened:** Moving Key Findings from line ~3578 to line ~2414 while also renumbering section-num spans across the file. Edits higher up shift line numbers for everything below.
+
+**Fix:** Execute all edits bottom-up: start with the highest line numbers (JS SECTION_MAP, competitor removal from Market), then work upward (invest card text, service matrix, section-num spans), and finally paste the moved section at the top. This way completed edits don't shift the line numbers of pending ones.
+
+**Rule:** When a task involves moving HTML blocks + multiple scattered edits in a large monolithic file, plan the edit order from bottom to top. Same principle as deleting array elements by reverse index.
+
+---
+
+### Reuse existing UI patterns — don't invent new component systems
+
+**What happened:** Initially built a custom accordion system (`.competitor-accordion-item` with header/hint/toggle) for the competitors section. User feedback: "me gustaban las tarjetas de antes" — wanted the original card layout with expandable content inside each card.
+
+**Fix:** Reverted to original `.competitor-card` within `.competitor-grid`, added `__panel` + `__toggle` to each card. Reused the same `max-height + opacity` transition pattern. Less CSS, more familiar visual.
+
+**Rule:** When moving content to a new location, default to keeping its existing visual format. Only change the interaction model (static → expandable) without changing the visual container. The user chose the original card design for a reason.
